@@ -22,8 +22,19 @@ final class BlobStoreService: @unchecked Sendable {
 
     func save(data: Data) throws -> String {
         let blobId = UUID().uuidString
-        try write(data: data, blobId: blobId)
+        try writeAtomically(data: data, blobId: blobId)
         return blobId
+    }
+
+    func write(data: Data, blobId: String) throws {
+        try writeAtomically(data: data, blobId: blobId)
+    }
+
+    func copy(id: String) throws -> String {
+        guard let data = try load(id: id) else {
+            throw BlobStoreError.blobNotFound
+        }
+        return try save(data: data)
     }
 
     func load(id: String) throws -> Data? {
@@ -46,7 +57,7 @@ final class BlobStoreService: @unchecked Sendable {
         rootDirectory.appendingPathComponent("\(id).blob")
     }
 
-    private func write(data: Data, blobId: String) throws {
+    private func writeAtomically(data: Data, blobId: String) throws {
         let destinationURL = fileURL(for: blobId)
         let temporaryURL = rootDirectory.appendingPathComponent("\(blobId).tmp")
 

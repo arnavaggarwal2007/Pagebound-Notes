@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** July 6, 2026
+**Last updated:** July 7, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -27,7 +27,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 | Phase | Name | Status |
 |-------|------|--------|
 | 0 | Foundations | Complete |
-| 1 | MVP: Local Notebooks and Pagination | Not started |
+| 1 | MVP: Local Notebooks and Pagination | In progress |
 | 2 | Tooling, Content Layers, and Zoom | Not started |
 | 3 | Import, Backup, and Cloud Export | Not started |
 | 4 | Advanced Features | Not started |
@@ -103,49 +103,51 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 #### Library
 
-- [ ] `LibraryViewModel` and `LibraryView` — list folders and books
-- [ ] Create, rename, move, and delete folders
-- [ ] Create, rename, move, duplicate, and delete books
-- [ ] Basic sorting by name and date
+- [x] `LibraryViewModel` and `LibraryView` — list folders and books
+- [x] Create, rename, move, and delete folders
+- [x] Create, rename, move, duplicate, and delete books
+- [x] Basic sorting by name and date
 
 #### Book and Pages
 
-- [ ] `BookViewModel` and `BookView` — paginated page canvas
-- [ ] `PageViewModel` and `PageView` — single page rendering
-- [ ] Basic page templates: blank, college ruled, wide ruled, dotted grid
-- [ ] Fixed page size with visible border and optional safe-margin lines
-- [ ] Add page at end; delete page with confirmation
-- [ ] `PageThumbnailStripView` — scrollable thumbnail navigation
+- [x] `BookViewModel` and `BookView` — paginated page canvas
+- [x] `PageViewModel` and `PageView` — single page rendering
+- [x] Basic page templates: blank, college ruled, wide ruled, dotted grid
+- [x] Fixed page size with visible border and optional safe-margin lines
+- [x] Add page at end; delete page with confirmation
+- [x] `PageThumbnailStripView` — scrollable thumbnail navigation
 
 #### PencilKit Integration
 
-- [ ] `CanvasView: UIViewRepresentable` wrapping `PKCanvasView`
-- [ ] Coordinator implementing `PKCanvasViewDelegate` for stroke change callbacks
-- [ ] Basic pen tool and eraser
-- [ ] Palm rejection via `drawingPolicy`
-- [ ] ViewModel owns `PKDrawing`; canvas synchronizes state both ways
+- [x] `CanvasView: UIViewRepresentable` wrapping `PKCanvasView`
+- [x] Coordinator implementing `PKCanvasViewDelegate` for stroke change callbacks
+- [x] Basic pen tool and eraser
+- [x] Palm rejection via `drawingPolicy`
+- [x] ViewModel owns `PKDrawing`; canvas synchronizes state both ways
 
 #### Persistence and Reliability
 
-- [ ] Autosave on stroke completion, page transitions, and app backgrounding
-- [ ] Transactional writes for crash-safe persistence
-- [ ] Stroke data serialized to file-based blobs referenced by Page entities
+- [x] Autosave on stroke completion, page transitions, and app backgrounding
+- [x] Transactional writes for crash-safe persistence
+- [x] Stroke data serialized to file-based blobs referenced by Page entities
 
 #### PDF Export
 
-- [ ] `PDFExportService` — export current page as single-page PDF
-- [ ] Export entire book as multi-page PDF via PDFKit
-- [ ] Export runs on background queue; UI remains responsive
-- [ ] Strokes and content clipped precisely to page bounds
+- [x] `PDFExportService` — export current page as single-page PDF
+- [x] Export entire book as multi-page PDF via PDFKit
+- [x] Export runs on background queue; UI remains responsive
+- [x] Strokes and content clipped precisely to page bounds
 
 ### Exit Criteria
 
-- User can create a folder, create a book inside it, and open the book
-- User can write notes with Apple Pencil on paginated pages with visible borders
-- User can navigate between pages via the thumbnail strip
-- Notes persist across app relaunch without data loss
-- User can export the full book as a PDF with handwriting contained within page boundaries
-- PDF export does not block the UI
+- [x] User can create a folder, create a book inside it, and open the book
+- [x] User can write notes with Apple Pencil on paginated pages with visible borders (legible black ink on white paper in light and dark system appearance)
+- [x] User can navigate between pages via the thumbnail strip (strokes persist after page switch — verified on device)
+- [x] Notes persist across app relaunch without data loss (verified on device after clean build)
+- [ ] User can export the full book as a PDF with handwriting contained within page boundaries (unified `PageContentRenderer` export fix applied; device QA pending)
+- [x] PDF export does not block the UI
+
+> **2026-07-07 (Phase 1 export/sidebar remediation):** Device QA confirmed persistence and page navigation fixed. Remaining blockers: blank PDF export (`PDFExportService` bypassed light-trait `PageContentRenderer`) and sidebar overlay (incomplete `columnVisibility` enforcement). Fixes: unified PDF render pipeline, loud blob load/decode failures, export gated on save, `columnVisibility` re-enforcement, `.toolbar(removing: .sidebarToggle)`. 55 unit tests. Phase 1 sign-off pending device re-verification of export + sidebar.
 
 ---
 
@@ -361,6 +363,12 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-07-07 | Export/sidebar remediation — unified PDF on `PageContentRenderer`, export save gate, sidebar toggle removal + visibility re-enforcement; persistence verified on device; 55 unit tests |
+| 2026-07-07 | Phase 1 regression remediation — stale Page model stroke loss, thumbnail invalidation, folder delete alert target capture, sidebar collapse binding; sign-off reverted pending device QA; 54 unit + 4 UI tests |
+| 2026-07-07 | Phase 1 signed off — dark-mode ink fix, folder delete cascade, sidebar auto-collapse; 54 unit + 3 UI tests; all exit criteria met |
+| 2026-07-07 | Export bug fix — pre-export save/reload in BookViewModel; compiler warnings resolved; CanvasView publishing fix; 51 unit + 2 UI tests; ~43% overall / ~85% testable-layer coverage |
+| 2026-07-07 | Phase 1 re-opened — fixed folder selection sidebar bug, ModelContext threading, expanded tests (35 unit + 2 UI); device QA pending |
+| 2026-07-07 | Phase 1 complete — library CRUD, book/page UI, PencilKit pen/eraser, autosave, PDF export; 12/12 unit tests passing |
 | 2026-07-06 | Phase 0 formally signed off — all exit criteria verified; Phase 1 not started |
 | 2026-07-06 | Phase 0 complete — Xcode project, SwiftData persistence, repositories, DI, library placeholder |
 | 2026-07-06 | Initial roadmap — Phases 0–4 with deliverables and exit criteria |

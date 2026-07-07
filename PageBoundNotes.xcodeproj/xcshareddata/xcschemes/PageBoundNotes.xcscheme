@@ -27,6 +27,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
       shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
@@ -37,6 +38,17 @@
                BlueprintIdentifier = "T10000000000000000000002"
                BuildableName = "PageBoundNotesTests.xctest"
                BlueprintName = "PageBoundNotesTests"
+               ReferencedContainer = "container:PageBoundNotes.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "T10000000000000000000003"
+               BuildableName = "PageBoundNotesUITests.xctest"
+               BlueprintName = "PageBoundNotesUITests"
                ReferencedContainer = "container:PageBoundNotes.xcodeproj">
             </BuildableReference>
          </TestableReference>

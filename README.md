@@ -4,7 +4,7 @@
 
 PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can import lecture slides, annotate them, and organize content in unlimited folders and books—all without a subscription or custom backend.
 
-**Status:** Phase 0 complete — signed off. App shell, domain models, SwiftData persistence, repositories, and dependency injection are implemented. Phase 1 not started.
+**Status:** Phase 1 in progress — persistence verified on device; export and sidebar fixes applied (July 7, 2026). Device re-verification of export + sidebar pending. 55 unit tests. Phase 2 not started.
 
 ---
 
@@ -193,18 +193,19 @@ PageBoundNotes/
 |----------|---------|
 | [Pagebound Notes Project Spec](Documents/Pagebound%20Notes%20Project%20Spec.md) | Canonical requirements, architecture, data model, and integrations |
 | [Development Roadmap](Documents/Development%20Roadmap.md) | Phased deliverables, exit criteria, and contributor workflow |
+| [UI Guidelines](Documents/UI%20Guidelines.md) | Visual identity, layout, interaction patterns, and component behavior |
 | [Notes KB Guidelines](Documents/Notes%20KB%20Guidelines.md) | Optional — Obsidian vault conventions for extended project notes |
 
 ---
 
 ## Development Status
 
-**Current phase:** Phase 0 complete — signed off. Phase 1 not started.
+**Current phase:** Phase 1 in progress (regression fixes applied; device QA pending). Phase 2 not started.
 
 | Phase | Summary |
 |-------|---------|
 | **Phase 0** | App shell, domain models, SwiftData persistence, repositories, DI — **complete** |
-| **Phase 1** | MVP: library, paginated pages, basic PencilKit, PDF export |
+| **Phase 1** | MVP: library, paginated pages, basic PencilKit, PDF export — **in progress** |
 | **Phase 2** | Full tooling, zoom window with auto-advance, text/images/shapes |
 | **Phase 3** | PDF import, local backup/restore, cloud export |
 | **Phase 4** | Search, handwriting OCR, split view, accessibility |

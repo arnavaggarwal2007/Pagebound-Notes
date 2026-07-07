@@ -77,8 +77,14 @@ final class SwiftDataPageRepository: PageRepositoryProtocol, @unchecked Sendable
             throw RepositoryError.notFound
         }
 
-        let blobId = try blobStore.save(data: data)
-        entity.strokeBlobId = blobId
+        let blobId: String
+        if let existingBlobId = entity.strokeBlobId {
+            try blobStore.write(data: data, blobId: existingBlobId)
+            blobId = existingBlobId
+        } else {
+            blobId = try blobStore.save(data: data)
+            entity.strokeBlobId = blobId
+        }
         entity.updatedAt = Date()
         try modelContext.save()
         return blobId
@@ -93,8 +99,14 @@ final class SwiftDataPageRepository: PageRepositoryProtocol, @unchecked Sendable
             throw RepositoryError.notFound
         }
 
-        let blobId = try blobStore.save(data: data)
-        entity.objectsBlobId = blobId
+        let blobId: String
+        if let existingBlobId = entity.objectsBlobId {
+            try blobStore.write(data: data, blobId: existingBlobId)
+            blobId = existingBlobId
+        } else {
+            blobId = try blobStore.save(data: data)
+            entity.objectsBlobId = blobId
+        }
         entity.updatedAt = Date()
         try modelContext.save()
         return blobId

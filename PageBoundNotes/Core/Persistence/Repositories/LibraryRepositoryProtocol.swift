@@ -13,4 +13,5 @@ protocol LibraryRepositoryProtocol: Sendable {
     func createBook(_ book: Book) async throws -> Book
     func updateBook(_ book: Book) async throws -> Book
     func deleteBook(id: UUID) async throws
+    func duplicateBook(id: UUID, toFolderId: UUID) async throws -> Book
 }

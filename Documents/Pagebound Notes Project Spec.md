@@ -214,6 +214,8 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 - VoiceOver support for library and book navigation.
 - Respect Dynamic Type and high‑contrast modes for UI components.
 
+Visual and interaction details for accessibility and UI chrome are specified in [UI Guidelines](UI%20Guidelines.md).
+
 ***
 
 ## 6. Architecture: SwiftUI + MVVM

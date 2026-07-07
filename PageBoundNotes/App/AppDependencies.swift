@@ -6,16 +6,20 @@ struct AppDependencies {
     let libraryRepository: LibraryRepositoryProtocol
     let bookRepository: BookRepositoryProtocol
     let pageRepository: PageRepositoryProtocol
+    let pdfExportService: PDFExportService
 
     static func live(container: ModelContainer) throws -> AppDependencies {
         let context = ModelContext(container)
         let blobStore = try BlobStoreService()
 
+        let pageRepository = SwiftDataPageRepository(modelContext: context, blobStore: blobStore)
+
         return AppDependencies(
             modelContainer: container,
-            libraryRepository: SwiftDataLibraryRepository(modelContext: context),
+            libraryRepository: SwiftDataLibraryRepository(modelContext: context, blobStore: blobStore),
             bookRepository: SwiftDataBookRepository(modelContext: context),
-            pageRepository: SwiftDataPageRepository(modelContext: context, blobStore: blobStore)
+            pageRepository: pageRepository,
+            pdfExportService: PDFExportService(pageRepository: pageRepository)
         )
     }
 
@@ -27,11 +31,13 @@ struct AppDependencies {
     static func test(container: ModelContainer, blobRoot: URL? = nil) throws -> AppDependencies {
         let context = ModelContext(container)
         let blobStore = try BlobStoreService(rootDirectory: blobRoot)
+        let pageRepository = SwiftDataPageRepository(modelContext: context, blobStore: blobStore)
         return AppDependencies(
             modelContainer: container,
-            libraryRepository: SwiftDataLibraryRepository(modelContext: context),
+            libraryRepository: SwiftDataLibraryRepository(modelContext: context, blobStore: blobStore),
             bookRepository: SwiftDataBookRepository(modelContext: context),
-            pageRepository: SwiftDataPageRepository(modelContext: context, blobStore: blobStore)
+            pageRepository: pageRepository,
+            pdfExportService: PDFExportService(pageRepository: pageRepository)
         )
     }
 }

@@ -24,8 +24,12 @@ final class PageRepositoryTests: XCTestCase {
         let blobId = try await pageRepository.saveStrokeData(forPageId: savedPage.id, data: strokePayload)
         XCTAssertFalse(blobId.isEmpty)
 
+        let updatedPayload = Data("updated-stroke-bytes".utf8)
+        let secondBlobId = try await pageRepository.saveStrokeData(forPageId: savedPage.id, data: updatedPayload)
+        XCTAssertEqual(secondBlobId, blobId)
+
         let loadedStroke = try pageRepository.loadStrokeData(blobId: blobId)
-        XCTAssertEqual(loadedStroke, strokePayload)
+        XCTAssertEqual(loadedStroke, updatedPayload)
 
         let fetchedPage = try pageRepository.fetchPage(id: savedPage.id)
         XCTAssertEqual(fetchedPage?.strokeBlobId, blobId)

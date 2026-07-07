@@ -38,10 +38,47 @@
 		B1000000000000000000001D /* LibraryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001D /* LibraryRepositoryTests.swift */; };
 		B1000000000000000000001E /* PageRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001E /* PageRepositoryTests.swift */; };
 		B1000000000000000000001F /* BlobStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001F /* BlobStoreTests.swift */; };
+		B10000000000000000000020 /* PageSize+Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000022 /* PageSize+Dimensions.swift */; };
+		B10000000000000000000021 /* StrokeSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000023 /* StrokeSerialization.swift */; };
+		B10000000000000000000022 /* BlobStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000024 /* BlobStoreError.swift */; };
+		B10000000000000000000023 /* PageContentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000025 /* PageContentRenderer.swift */; };
+		B10000000000000000000024 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000026 /* PDFExportService.swift */; };
+		B10000000000000000000025 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000027 /* LibraryViewModel.swift */; };
+		B10000000000000000000026 /* BookCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000028 /* BookCardView.swift */; };
+		B10000000000000000000027 /* BookCreationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000029 /* BookCreationSheet.swift */; };
+		B10000000000000000000028 /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000002A /* BookViewModel.swift */; };
+		B10000000000000000000029 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000002B /* BookView.swift */; };
+		B1000000000000000000002A /* PageThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000002C /* PageThumbnailView.swift */; };
+		B1000000000000000000002B /* PageThumbnailStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000002D /* PageThumbnailStripView.swift */; };
+		B1000000000000000000002C /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000002E /* PageViewModel.swift */; };
+		B1000000000000000000002D /* TemplateBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000002F /* TemplateBackgroundView.swift */; };
+		B1000000000000000000002E /* PageFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000030 /* PageFrameView.swift */; };
+		B1000000000000000000002F /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000031 /* CanvasView.swift */; };
+		B10000000000000000000030 /* ToolPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000032 /* ToolPaletteView.swift */; };
+		B10000000000000000000031 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000033 /* PageView.swift */; };
+		B10000000000000000000032 /* StrokeSerializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000034 /* StrokeSerializationTests.swift */; };
+		B10000000000000000000033 /* DuplicateBookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000035 /* DuplicateBookTests.swift */; };
+		B10000000000000000000034 /* PDFExportServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000036 /* PDFExportServiceTests.swift */; };
+		B10000000000000000000035 /* LibraryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000037 /* LibraryViewModelTests.swift */; };
+		B10000000000000000000037 /* BookWritingSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000039 /* BookWritingSurface.swift */; };
+		B10000000000000000000038 /* PageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000038 /* PageViewModelTests.swift */; };
+		B10000000000000000000039 /* BookViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000003C /* BookViewModelTests.swift */; };
+		B1000000000000000000003A /* SwiftDataBookRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000003D /* SwiftDataBookRepositoryTests.swift */; };
+		B1000000000000000000003B /* PageContentRendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000003E /* PageContentRendererTests.swift */; };
+		B1000000000000000000003C /* LibraryNavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000003B /* LibraryNavigationUITests.swift */; };
+		B1000000000000000000003D /* EntityMappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000003F /* EntityMappersTests.swift */; };
+		B1000000000000000000003E /* TemplateCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000040 /* TemplateCatalogTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		C10000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P10000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = T10000000000000000000001;
+			remoteInfo = PageBoundNotes;
+		};
+		C10000000000000000000002 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = P10000000000000000000001 /* Project object */;
 			proxyType = 1;
@@ -84,6 +121,37 @@
 		F1000000000000000000001F /* BlobStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobStoreTests.swift; sourceTree = "<group>"; };
 		F10000000000000000000020 /* PageBoundNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PageBoundNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F10000000000000000000021 /* PageBoundNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PageBoundNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10000000000000000000022 /* PageSize+Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageSize+Dimensions.swift"; sourceTree = "<group>"; };
+		F10000000000000000000023 /* StrokeSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeSerialization.swift; sourceTree = "<group>"; };
+		F10000000000000000000024 /* BlobStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobStoreError.swift; sourceTree = "<group>"; };
+		F10000000000000000000025 /* PageContentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentRenderer.swift; sourceTree = "<group>"; };
+		F10000000000000000000026 /* PDFExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportService.swift; sourceTree = "<group>"; };
+		F10000000000000000000027 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		F10000000000000000000028 /* BookCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCardView.swift; sourceTree = "<group>"; };
+		F10000000000000000000029 /* BookCreationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCreationSheet.swift; sourceTree = "<group>"; };
+		F1000000000000000000002A /* BookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModel.swift; sourceTree = "<group>"; };
+		F1000000000000000000002B /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		F1000000000000000000002C /* PageThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageThumbnailView.swift; sourceTree = "<group>"; };
+		F1000000000000000000002D /* PageThumbnailStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageThumbnailStripView.swift; sourceTree = "<group>"; };
+		F1000000000000000000002E /* PageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
+		F1000000000000000000002F /* TemplateBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateBackgroundView.swift; sourceTree = "<group>"; };
+		F10000000000000000000030 /* PageFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageFrameView.swift; sourceTree = "<group>"; };
+		F10000000000000000000031 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		F10000000000000000000032 /* ToolPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPaletteView.swift; sourceTree = "<group>"; };
+		F10000000000000000000033 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		F10000000000000000000034 /* StrokeSerializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeSerializationTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000035 /* DuplicateBookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateBookTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000036 /* PDFExportServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportServiceTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000037 /* LibraryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModelTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000038 /* PageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModelTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000039 /* BookWritingSurface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookWritingSurface.swift; sourceTree = "<group>"; };
+		F1000000000000000000003A /* PageBoundNotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PageBoundNotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1000000000000000000003B /* LibraryNavigationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryNavigationUITests.swift; sourceTree = "<group>"; };
+		F1000000000000000000003C /* BookViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModelTests.swift; sourceTree = "<group>"; };
+		F1000000000000000000003D /* SwiftDataBookRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataBookRepositoryTests.swift; sourceTree = "<group>"; };
+		F1000000000000000000003E /* PageContentRendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentRendererTests.swift; sourceTree = "<group>"; };
+		F1000000000000000000003F /* EntityMappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMappersTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000040 /* TemplateCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCatalogTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +169,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		X10000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -109,6 +184,7 @@
 			children = (
 				G10000000000000000000002 /* PageBoundNotes */,
 				G10000000000000000000003 /* PageBoundNotesTests */,
+				G10000000000000000000011 /* PageBoundNotesUITests */,
 				G10000000000000000000004 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,8 +207,26 @@
 				F1000000000000000000001D /* LibraryRepositoryTests.swift */,
 				F1000000000000000000001E /* PageRepositoryTests.swift */,
 				F1000000000000000000001F /* BlobStoreTests.swift */,
+				F10000000000000000000034 /* StrokeSerializationTests.swift */,
+				F10000000000000000000035 /* DuplicateBookTests.swift */,
+				F10000000000000000000036 /* PDFExportServiceTests.swift */,
+				F10000000000000000000037 /* LibraryViewModelTests.swift */,
+				F10000000000000000000038 /* PageViewModelTests.swift */,
+				F1000000000000000000003C /* BookViewModelTests.swift */,
+				F1000000000000000000003D /* SwiftDataBookRepositoryTests.swift */,
+				F1000000000000000000003E /* PageContentRendererTests.swift */,
+				F1000000000000000000003F /* EntityMappersTests.swift */,
+				F10000000000000000000040 /* TemplateCatalogTests.swift */,
 			);
 			path = PageBoundNotesTests;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000011 /* PageBoundNotesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000003B /* LibraryNavigationUITests.swift */,
+			);
+			path = PageBoundNotesUITests;
 			sourceTree = "<group>";
 		};
 		G10000000000000000000004 /* Products */ = {
@@ -140,6 +234,7 @@
 			children = (
 				F10000000000000000000020 /* PageBoundNotes.app */,
 				F10000000000000000000021 /* PageBoundNotesTests.xctest */,
+				F1000000000000000000003A /* PageBoundNotesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +252,8 @@
 			isa = PBXGroup;
 			children = (
 				G10000000000000000000008 /* Library */,
+				G1000000000000000000000F /* Book */,
+				G10000000000000000000010 /* Page */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -175,8 +272,36 @@
 			isa = PBXGroup;
 			children = (
 				F10000000000000000000003 /* LibraryView.swift */,
+				F10000000000000000000027 /* LibraryViewModel.swift */,
+				F10000000000000000000028 /* BookCardView.swift */,
+				F10000000000000000000029 /* BookCreationSheet.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		G1000000000000000000000F /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000002A /* BookViewModel.swift */,
+				F1000000000000000000002B /* BookView.swift */,
+				F1000000000000000000002C /* PageThumbnailView.swift */,
+				F1000000000000000000002D /* PageThumbnailStripView.swift */,
+				F10000000000000000000039 /* BookWritingSurface.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000010 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000002E /* PageViewModel.swift */,
+				F10000000000000000000033 /* PageView.swift */,
+				F1000000000000000000002F /* TemplateBackgroundView.swift */,
+				F10000000000000000000030 /* PageFrameView.swift */,
+				F10000000000000000000031 /* CanvasView.swift */,
+				F10000000000000000000032 /* ToolPaletteView.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		G10000000000000000000009 /* Models */ = {
@@ -184,6 +309,7 @@
 			children = (
 				F10000000000000000000004 /* CoverStyle.swift */,
 				F10000000000000000000005 /* PageSize.swift */,
+				F10000000000000000000022 /* PageSize+Dimensions.swift */,
 				F10000000000000000000006 /* PageOrientation.swift */,
 				F10000000000000000000007 /* TemplateType.swift */,
 				F10000000000000000000008 /* ColorComponents.swift */,
@@ -212,6 +338,10 @@
 			isa = PBXGroup;
 			children = (
 				F1000000000000000000001A /* BlobStoreService.swift */,
+				F10000000000000000000024 /* BlobStoreError.swift */,
+				F10000000000000000000023 /* StrokeSerialization.swift */,
+				F10000000000000000000025 /* PageContentRenderer.swift */,
+				F10000000000000000000026 /* PDFExportService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -284,6 +414,23 @@
 			productReference = F10000000000000000000021 /* PageBoundNotesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		T10000000000000000000003 /* PageBoundNotesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L10000000000000000000004 /* Build configuration list for PBXNativeTarget "PageBoundNotesUITests" */;
+			buildPhases = (
+				S10000000000000000000003 /* Sources */,
+				X10000000000000000000003 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D10000000000000000000002 /* PBXTargetDependency */,
+			);
+			name = PageBoundNotesUITests;
+			productName = PageBoundNotesUITests;
+			productReference = F1000000000000000000003A /* PageBoundNotesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -298,6 +445,10 @@
 						CreatedOnToolsVersion = 15.0;
 					};
 					T10000000000000000000002 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = T10000000000000000000001;
+					};
+					T10000000000000000000003 = {
 						CreatedOnToolsVersion = 15.0;
 						TestTargetID = T10000000000000000000001;
 					};
@@ -318,6 +469,7 @@
 			targets = (
 				T10000000000000000000001 /* PageBoundNotes */,
 				T10000000000000000000002 /* PageBoundNotesTests */,
+				T10000000000000000000003 /* PageBoundNotesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -364,6 +516,25 @@
 				B10000000000000000000018 /* PageRepositoryProtocol.swift in Sources */,
 				B10000000000000000000019 /* SwiftDataPageRepository.swift in Sources */,
 				B1000000000000000000001A /* BlobStoreService.swift in Sources */,
+				B10000000000000000000020 /* PageSize+Dimensions.swift in Sources */,
+				B10000000000000000000021 /* StrokeSerialization.swift in Sources */,
+				B10000000000000000000022 /* BlobStoreError.swift in Sources */,
+				B10000000000000000000023 /* PageContentRenderer.swift in Sources */,
+				B10000000000000000000024 /* PDFExportService.swift in Sources */,
+				B10000000000000000000025 /* LibraryViewModel.swift in Sources */,
+				B10000000000000000000026 /* BookCardView.swift in Sources */,
+				B10000000000000000000027 /* BookCreationSheet.swift in Sources */,
+				B10000000000000000000028 /* BookViewModel.swift in Sources */,
+				B10000000000000000000029 /* BookView.swift in Sources */,
+				B1000000000000000000002A /* PageThumbnailView.swift in Sources */,
+				B1000000000000000000002B /* PageThumbnailStripView.swift in Sources */,
+				B10000000000000000000037 /* BookWritingSurface.swift in Sources */,
+				B1000000000000000000002C /* PageViewModel.swift in Sources */,
+				B1000000000000000000002D /* TemplateBackgroundView.swift in Sources */,
+				B1000000000000000000002E /* PageFrameView.swift in Sources */,
+				B1000000000000000000002F /* CanvasView.swift in Sources */,
+				B10000000000000000000030 /* ToolPaletteView.swift in Sources */,
+				B10000000000000000000031 /* PageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +546,24 @@
 				B1000000000000000000001D /* LibraryRepositoryTests.swift in Sources */,
 				B1000000000000000000001E /* PageRepositoryTests.swift in Sources */,
 				B1000000000000000000001F /* BlobStoreTests.swift in Sources */,
+				B10000000000000000000032 /* StrokeSerializationTests.swift in Sources */,
+				B10000000000000000000033 /* DuplicateBookTests.swift in Sources */,
+				B10000000000000000000034 /* PDFExportServiceTests.swift in Sources */,
+				B10000000000000000000035 /* LibraryViewModelTests.swift in Sources */,
+				B10000000000000000000038 /* PageViewModelTests.swift in Sources */,
+				B10000000000000000000039 /* BookViewModelTests.swift in Sources */,
+				B1000000000000000000003A /* SwiftDataBookRepositoryTests.swift in Sources */,
+				B1000000000000000000003B /* PageContentRendererTests.swift in Sources */,
+				B1000000000000000000003D /* EntityMappersTests.swift in Sources */,
+				B1000000000000000000003E /* TemplateCatalogTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S10000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1000000000000000000003C /* LibraryNavigationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +574,11 @@
 			isa = PBXTargetDependency;
 			target = T10000000000000000000001 /* PageBoundNotes */;
 			targetProxy = C10000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		D10000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = T10000000000000000000001 /* PageBoundNotes */;
+			targetProxy = C10000000000000000000002 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -442,6 +636,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2A9J24774;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "PageBound Notes";
@@ -472,6 +667,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2A9J24774;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "PageBound Notes";
@@ -501,6 +697,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2A9J24774;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1.0;
@@ -519,6 +716,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2A9J24774;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1.0;
@@ -528,6 +726,42 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PageBoundNotes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PageBoundNotes";
+			};
+			name = Release;
+		};
+		C20000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2A9J24774;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pagebound.notes.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_TARGET_NAME = PageBoundNotes;
+			};
+			name = Debug;
+		};
+		C20000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2A9J24774;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pagebound.notes.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_TARGET_NAME = PageBoundNotes;
 			};
 			name = Release;
 		};
@@ -548,6 +782,15 @@
 			buildConfigurations = (
 				C20000000000000000000005 /* Debug */,
 				C20000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L10000000000000000000004 /* Build configuration list for PBXNativeTarget "PageBoundNotesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C20000000000000000000007 /* Debug */,
+				C20000000000000000000008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

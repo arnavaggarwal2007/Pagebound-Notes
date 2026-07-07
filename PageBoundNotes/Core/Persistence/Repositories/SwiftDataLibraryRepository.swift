@@ -3,9 +3,11 @@ import SwiftData
 
 final class SwiftDataLibraryRepository: LibraryRepositoryProtocol, @unchecked Sendable {
     private let modelContext: ModelContext
+    private let blobStore: BlobStoreService
 
-    init(modelContext: ModelContext) {
+    init(modelContext: ModelContext, blobStore: BlobStoreService) {
         self.modelContext = modelContext
+        self.blobStore = blobStore
     }
 
     func fetchRootFolders() throws -> [Folder] {
@@ -67,11 +69,17 @@ final class SwiftDataLibraryRepository: LibraryRepositoryProtocol, @unchecked Se
     }
 
     func deleteFolder(id: UUID) async throws {
-        guard let entity = try fetchFolderEntity(id: id) else {
+        guard try fetchFolderEntity(id: id) != nil else {
             throw RepositoryError.notFound
         }
-        modelContext.delete(entity)
-        try modelContext.save()
+        try await deleteFolderRecursive(id: id)
+    }
+
+    func deleteBook(id: UUID) async throws {
+        guard try fetchBookEntity(id: id) != nil else {
+            throw RepositoryError.notFound
+        }
+        try await deleteBookWithContents(id: id)
     }
 
     func fetchBooks(inFolder folderId: UUID) throws -> [Book] {
@@ -116,12 +124,66 @@ final class SwiftDataLibraryRepository: LibraryRepositoryProtocol, @unchecked Se
         return EntityMappers.toDomain(entity)
     }
 
-    func deleteBook(id: UUID) async throws {
-        guard let entity = try fetchBookEntity(id: id) else {
+    func duplicateBook(id: UUID, toFolderId: UUID) async throws -> Book {
+        guard let sourceBook = try fetchBookEntity(id: id) else {
             throw RepositoryError.notFound
         }
-        modelContext.delete(entity)
+        guard try fetchFolderEntity(id: toFolderId) != nil else {
+            throw RepositoryError.invalidParentFolder
+        }
+
+        let now = Date()
+        let copiedBook = BookEntity(
+            id: UUID(),
+            folderId: toFolderId,
+            title: "\(sourceBook.title) (Copy)",
+            coverStyleRaw: sourceBook.coverStyleRaw,
+            pageSizeRaw: sourceBook.pageSizeRaw,
+            defaultTemplateId: sourceBook.defaultTemplateId,
+            autoAdvanceEnabled: sourceBook.autoAdvanceEnabled,
+            createdAt: now,
+            updatedAt: now
+        )
+        if let folderEntity = try fetchFolderEntity(id: toFolderId) {
+            copiedBook.folder = folderEntity
+        }
+        modelContext.insert(copiedBook)
+
+        let sourceBookId = sourceBook.id
+        let pageDescriptor = FetchDescriptor<PageEntity>(
+            predicate: #Predicate { $0.bookId == sourceBookId },
+            sortBy: [SortDescriptor(\.index)]
+        )
+        let sourcePages = try modelContext.fetch(pageDescriptor)
+
+        for sourcePage in sourcePages {
+            var strokeBlobId: String?
+            if let sourceStrokeBlobId = sourcePage.strokeBlobId {
+                strokeBlobId = try blobStore.copy(id: sourceStrokeBlobId)
+            }
+
+            var objectsBlobId: String?
+            if let sourceObjectsBlobId = sourcePage.objectsBlobId {
+                objectsBlobId = try blobStore.copy(id: sourceObjectsBlobId)
+            }
+
+            let copiedPage = PageEntity(
+                id: UUID(),
+                bookId: copiedBook.id,
+                index: sourcePage.index,
+                templateId: sourcePage.templateId,
+                orientationRaw: sourcePage.orientationRaw,
+                strokeBlobId: strokeBlobId,
+                objectsBlobId: objectsBlobId,
+                createdAt: now,
+                updatedAt: now
+            )
+            copiedPage.book = copiedBook
+            modelContext.insert(copiedPage)
+        }
+
         try modelContext.save()
+        return EntityMappers.toDomain(copiedBook)
     }
 
     private func fetchFolderEntity(id: UUID) throws -> FolderEntity? {
@@ -138,5 +200,43 @@ final class SwiftDataLibraryRepository: LibraryRepositoryProtocol, @unchecked Se
         )
         descriptor.fetchLimit = 1
         return try modelContext.fetch(descriptor).first
+    }
+
+    private func deleteFolderRecursive(id: UUID) async throws {
+        let childFolders = try fetchFolders(inParent: id)
+        for child in childFolders {
+            try await deleteFolderRecursive(id: child.id)
+        }
+
+        let books = try fetchBooks(inFolder: id)
+        for book in books {
+            try await deleteBookWithContents(id: book.id)
+        }
+
+        guard let entity = try fetchFolderEntity(id: id) else { return }
+        modelContext.delete(entity)
+        try modelContext.save()
+    }
+
+    private func deleteBookWithContents(id: UUID) async throws {
+        guard let entity = try fetchBookEntity(id: id) else { return }
+
+        let bookId = id
+        let pageDescriptor = FetchDescriptor<PageEntity>(
+            predicate: #Predicate { $0.bookId == bookId }
+        )
+        let pages = try modelContext.fetch(pageDescriptor)
+        for page in pages {
+            if let strokeBlobId = page.strokeBlobId {
+                try blobStore.delete(id: strokeBlobId)
+            }
+            if let objectsBlobId = page.objectsBlobId {
+                try blobStore.delete(id: objectsBlobId)
+            }
+            modelContext.delete(page)
+        }
+
+        modelContext.delete(entity)
+        try modelContext.save()
     }
 }

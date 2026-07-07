@@ -37,6 +37,49 @@ final class LibraryRepositoryTests: XCTestCase {
         XCTAssertTrue(try repository.fetchRootFolders().isEmpty)
     }
 
+    func testDeleteFolderWithBooksCascades() async throws {
+        let (dependencies, tempDirectory) = try TestSupport.makeTestDependencies()
+        defer { TestSupport.cleanup(tempDirectory) }
+
+        let repository = dependencies.libraryRepository
+        let pageRepository = dependencies.pageRepository
+
+        let folder = try await repository.createFolder(Folder(name: "School"))
+        let book = try await repository.createBook(Book(folderId: folder.id, title: "Math"))
+        let page = try await pageRepository.createPage(
+            Page(bookId: book.id, index: 0, templateId: TemplateCatalog.blank.id)
+        )
+        _ = try await pageRepository.saveStrokeData(
+            forPageId: page.id,
+            data: StrokeSerialization.encode(StrokeSerialization.emptyDrawing())
+        )
+
+        let pages = try pageRepository.fetchPages(forBook: book.id)
+        XCTAssertEqual(pages.count, 1)
+
+        try await repository.deleteFolder(id: folder.id)
+
+        XCTAssertTrue(try repository.fetchRootFolders().isEmpty)
+        XCTAssertTrue(try repository.fetchBooks(inFolder: folder.id).isEmpty)
+        XCTAssertTrue(try pageRepository.fetchPages(forBook: book.id).isEmpty)
+    }
+
+    func testDeleteFolderWithChildFoldersCascades() async throws {
+        let (dependencies, tempDirectory) = try TestSupport.makeTestDependencies()
+        defer { TestSupport.cleanup(tempDirectory) }
+
+        let repository = dependencies.libraryRepository
+
+        let parent = try await repository.createFolder(Folder(name: "Parent"))
+        _ = try await repository.createFolder(
+            Folder(name: "Child", parentFolderId: parent.id)
+        )
+
+        try await repository.deleteFolder(id: parent.id)
+
+        XCTAssertTrue(try repository.fetchRootFolders().isEmpty)
+    }
+
     func testPersistenceSurvivesNewContainerOnSameStore() async throws {
         let storeDirectory = try TestSupport.makeTemporaryStoreDirectory()
         defer { TestSupport.cleanup(storeDirectory) }
