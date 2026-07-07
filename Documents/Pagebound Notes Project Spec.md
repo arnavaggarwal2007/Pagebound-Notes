@@ -6,7 +6,7 @@ This is a finalized, MVVM‑with‑SwiftUI product spec you can treat as the sou
 
 **Working Name:** PageBound Notes
 **Platform:** iPadOS (Apple Pencil–centric, iPad only)
-**Architecture:** SwiftUI + MVVM + Apple frameworks (PencilKit, PDFKit, Core Data/SwiftData)
+**Architecture:** SwiftUI + MVVM + Apple frameworks (PencilKit, PDFKit, SwiftData)
 
 PageBound Notes is a handwriting‑first note‑taking app that combines the page‑oriented power of GoodNotes with the simplicity and Markup tools of Apple Notes, while remaining completely free and primarily local‑storage based. The app provides unlimited books and folders, clear paginated pages aligned to assignment‑ready PDFs, rich pen tools via PencilKit, a GoodNotes‑style zoom window with auto‑advance, PDF import/export, and optional user‑initiated cloud backup (e.g., Google Drive) with no subscription or custom backend.[^1][^2][^3][^4][^5][^6]
 
@@ -36,7 +36,7 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 ### 2.3 Constraints
 
 - Target iPad devices with Apple Pencil support (Pencil 1/2 and later).
-- Target iPadOS 16+ baseline, with enhanced Markup tools (fountain pen, reed pen) available on newer releases like iPadOS 26.[^8][^11][^3]
+- Target iPadOS 17+ baseline (SwiftData persistence), with enhanced Markup tools (fountain pen, reed pen) feature-detected on newer releases like iPadOS 26.[^8][^11][^3]
 - Must adhere to Apple’s App Store guidelines, PencilKit and PDFKit usage guidelines, and Google Drive API usage limits.[^5][^3][^4]
 
 ***
@@ -161,7 +161,7 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 
 **Requirements:**
 
-- Primary storage: on‑device app sandbox with persistent store (Core Data or SwiftData backed by SQLite) plus file‑based blobs for drawings and assets.
+- Primary storage: on‑device app sandbox with persistent SwiftData store (SQLite) plus file‑based blobs for drawings and assets.
 - Local backup/export:
     - “Export backup” operation creating a compressed archive (e.g., `.pbn` bundle) containing metadata and serialized content (books, pages, strokes, templates).
     - Backup restore operation reading `.pbn` and reconstructing folders, books, and pages.
@@ -195,7 +195,7 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 ### 5.2 Reliability
 
 - Autosave on stroke completion, page transitions, and app backgrounding.
-- Crash‑safe persistence via transactional writes (e.g., Core Data transactions, safe file rewrites).
+- Crash‑safe persistence via transactional writes (e.g., SwiftData transactions, safe file rewrites).
 
 
 ### 5.3 Security \& Privacy
@@ -310,9 +310,9 @@ ViewModel owns the `PKDrawing` or serialized representation; SwiftUI view binds 
 
 ### 7.2 Persistence Layer
 
-- Use Core Data or SwiftData with SQLite for structured entities (`Folder`, `Book`, `Page`).
+- Use SwiftData with SQLite for structured entities (`Folder`, `Book`, `Page`). See [ADR – Choose Persistence Layer](ADR%20–%20Choose%20Persistence%20Layer.md).
 - Store large binary objects (stroke archives, images) separately:
-    - Binary blobs in Core Data or files with external storage references.
+    - Binary blobs stored as files with external storage references.
 - Repositories:
     - `LibraryRepository` (CRUD for folders/books).
     - `BookRepository` (book‑level operations).
@@ -353,7 +353,7 @@ ViewModel owns the `PKDrawing` or serialized representation; SwiftUI view binds 
 
 - Set up project structure: base modules (Library, Book, Page, ZoomWindow, ExportImport, CloudBackup).
 - Implement domain models and persistence schema.
-- Wire Core Data/SwiftData repositories and dependency injection into ViewModels (e.g., initializer injection).[^26][^24][^25]
+- Wire SwiftData repositories and dependency injection into ViewModels (e.g., initializer injection).[^26][^24][^25]
 
 
 ### 9.2 Phase 1 – MVP: Local Notebooks and Pagination

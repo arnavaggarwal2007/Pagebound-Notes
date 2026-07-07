@@ -26,7 +26,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 
 | Phase | Name | Status |
 |-------|------|--------|
-| 0 | Foundations | Not started |
+| 0 | Foundations | Complete |
 | 1 | MVP: Local Notebooks and Pagination | Not started |
 | 2 | Tooling, Content Layers, and Zoom | Not started |
 | 3 | Import, Backup, and Cloud Export | Not started |
@@ -62,30 +62,30 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 ### Deliverables
 
-- [ ] Create Xcode project targeting iPad only (iPadOS 16+ deployment target)
-- [ ] Set up module folder structure per architecture spec:
+- [x] Create Xcode project targeting iPad only (iPadOS 17+ deployment target)
+- [x] Set up module folder structure per architecture spec:
   - `App/`
   - `Modules/` (Library, Book, Page, ZoomWindow, ExportImport, CloudBackup)
   - `Core/Models/`, `Core/Persistence/`, `Core/Services/`
-- [ ] Implement domain models:
+- [x] Implement domain models:
   - `Folder` — id, name, parentFolderId, createdAt, updatedAt
   - `Book` — id, folderId, title, coverStyle, pageSize, defaultTemplateId, autoAdvanceEnabled, timestamps
   - `Page` — id, bookId, index, templateId, orientation, strokeBlobId, objectsBlobId, timestamps
   - `Template` — id, type, lineSpacing, gridSize, backgroundColor
-- [ ] Choose and implement persistence layer (Core Data or SwiftData with SQLite)
-- [ ] Implement repositories:
+- [x] Choose and implement persistence layer (SwiftData with SQLite — see ADR)
+- [x] Implement repositories:
   - `LibraryRepository` — CRUD for folders and books
   - `BookRepository` — book-level operations
   - `PageRepository` — page-level reads/writes, stroke serialization stubs
-- [ ] Set up dependency injection container or factory for ViewModel initialization
-- [ ] Create minimal app entry point that launches to an empty library view placeholder
+- [x] Set up dependency injection container or factory for ViewModel initialization
+- [x] Create minimal app entry point that launches to an empty library view placeholder
 
 ### Exit Criteria
 
-- App builds and launches on iPad simulator or device
-- Domain models persist to local storage
-- Empty library state survives app relaunch (kill and reopen)
-- Module folder structure matches the planned layout in the README
+- [x] App builds and launches on iPad simulator or device
+- [x] Domain models persist to local storage
+- [x] Empty library state survives app relaunch (kill and reopen)
+- [x] Module folder structure matches the planned layout in the README
 
 ---
 
@@ -361,4 +361,6 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-07-06 | Phase 0 formally signed off — all exit criteria verified; Phase 1 not started |
+| 2026-07-06 | Phase 0 complete — Xcode project, SwiftData persistence, repositories, DI, library placeholder |
 | 2026-07-06 | Initial roadmap — Phases 0–4 with deliverables and exit criteria |

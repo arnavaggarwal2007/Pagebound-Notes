@@ -4,7 +4,7 @@
 
 PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can import lecture slides, annotate them, and organize content in unlimited folders and books—all without a subscription or custom backend.
 
-**Status:** Pre-implementation — currently in [Phase 0 (Foundations)](Documents/Development%20Roadmap.md#phase-0--foundations).
+**Status:** Phase 0 complete — signed off. App shell, domain models, SwiftData persistence, repositories, and dependency injection are implemented. Phase 1 not started.
 
 ---
 
@@ -107,7 +107,7 @@ flowchart TB
         Drive[DriveBackupService]
     end
     subgraph persistence [Persistence]
-        SwiftData[Core Data or SwiftData]
+        SwiftData[SwiftData SQLite store]
         Blobs[File-based stroke and asset blobs]
     end
     views --> viewmodels
@@ -128,7 +128,7 @@ For full module definitions, data model, and integration patterns, see the [Prod
 
 ## Project Structure
 
-The repository is in a pre-implementation phase. The target source layout follows the MVVM module structure defined in the product spec:
+The repository includes an Xcode project for Phase 0 foundations.
 
 ```
 PageBoundNotes/
@@ -154,9 +154,9 @@ PageBoundNotes/
 | Category | Requirement |
 |----------|-------------|
 | **Hardware** | iPad with Apple Pencil support (Pencil 1, Pencil 2, or later) |
-| **Operating System** | iPadOS 16+ baseline; newer Markup tools (e.g., reed pen) are feature-detected on supported OS versions |
+| **Operating System** | iPadOS 17+ baseline; newer Markup tools (e.g., reed pen) are feature-detected on supported OS versions |
 | **Development** | Xcode (latest stable recommended), Apple Developer account for on-device testing |
-| **Frameworks** | SwiftUI, PencilKit, PDFKit, Core Data or SwiftData |
+| **Frameworks** | SwiftUI, PencilKit, PDFKit, SwiftData |
 
 ---
 
@@ -173,11 +173,17 @@ PageBoundNotes/
 
 3. **Read the development roadmap** — [Documents/Development Roadmap.md](Documents/Development%20Roadmap.md) defines phased deliverables, exit criteria, and contributor workflow. Start at Phase 0.
 
-4. **Build and run** — *Coming soon.* An Xcode project will be added in Phase 0.
+4. **Configure signing** — Open `PageBoundNotes.xcodeproj` in Xcode and confirm **Signing & Capabilities** has a Development Team selected at the project level (applies to both the app and test targets). Team selection is per-developer in Xcode and is not committed to the repository.
 
-5. **Running tests** — *Coming soon.*
+5. **Open and build** — Select an iPad simulator and run (⌘R). Requires iPadOS 17+ deployment target.
 
-6. **Google Drive setup** — *Coming in Phase 3.* Requires OAuth client configuration and Keychain storage for tokens.
+6. **Running tests** — Run unit tests with ⌘U in Xcode, or:
+
+   ```bash
+   xcodebuild -project PageBoundNotes.xcodeproj -scheme PageBoundNotes -destination 'platform=iOS Simulator,name=iPad (A16)' test
+   ```
+
+7. **Google Drive setup** — *Coming in Phase 3.* Requires OAuth client configuration and Keychain storage for tokens.
 
 ---
 
@@ -193,11 +199,11 @@ PageBoundNotes/
 
 ## Development Status
 
-**Current phase:** Phase 0 — Foundations
+**Current phase:** Phase 0 complete — signed off. Phase 1 not started.
 
 | Phase | Summary |
 |-------|---------|
-| **Phase 0** | App shell, domain models, persistence, dependency injection |
+| **Phase 0** | App shell, domain models, SwiftData persistence, repositories, DI — **complete** |
 | **Phase 1** | MVP: library, paginated pages, basic PencilKit, PDF export |
 | **Phase 2** | Full tooling, zoom window with auto-advance, text/images/shapes |
 | **Phase 3** | PDF import, local backup/restore, cloud export |

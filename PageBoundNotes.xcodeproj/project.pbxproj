@@ -1,0 +1,567 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B10000000000000000000001 /* PageBoundNotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000001 /* PageBoundNotesApp.swift */; };
+		B10000000000000000000002 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000002 /* AppDependencies.swift */; };
+		B10000000000000000000003 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000003 /* LibraryView.swift */; };
+		B10000000000000000000004 /* CoverStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000004 /* CoverStyle.swift */; };
+		B10000000000000000000005 /* PageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000005 /* PageSize.swift */; };
+		B10000000000000000000006 /* PageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000006 /* PageOrientation.swift */; };
+		B10000000000000000000007 /* TemplateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000007 /* TemplateType.swift */; };
+		B10000000000000000000008 /* ColorComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000008 /* ColorComponents.swift */; };
+		B10000000000000000000009 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000009 /* Folder.swift */; };
+		B1000000000000000000000A /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000A /* Book.swift */; };
+		B1000000000000000000000B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000B /* Page.swift */; };
+		B1000000000000000000000C /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000C /* Template.swift */; };
+		B1000000000000000000000D /* TemplateCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000D /* TemplateCatalog.swift */; };
+		B1000000000000000000000E /* FolderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000E /* FolderEntity.swift */; };
+		B1000000000000000000000F /* BookEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000000F /* BookEntity.swift */; };
+		B10000000000000000000010 /* PageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000010 /* PageEntity.swift */; };
+		B10000000000000000000011 /* EntityMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000011 /* EntityMappers.swift */; };
+		B10000000000000000000012 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000012 /* PersistenceController.swift */; };
+		B10000000000000000000013 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000013 /* RepositoryError.swift */; };
+		B10000000000000000000014 /* LibraryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000014 /* LibraryRepositoryProtocol.swift */; };
+		B10000000000000000000015 /* SwiftDataLibraryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000015 /* SwiftDataLibraryRepository.swift */; };
+		B10000000000000000000016 /* BookRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000016 /* BookRepositoryProtocol.swift */; };
+		B10000000000000000000017 /* SwiftDataBookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000017 /* SwiftDataBookRepository.swift */; };
+		B10000000000000000000018 /* PageRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000018 /* PageRepositoryProtocol.swift */; };
+		B10000000000000000000019 /* SwiftDataPageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000019 /* SwiftDataPageRepository.swift */; };
+		B1000000000000000000001A /* BlobStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001A /* BlobStoreService.swift */; };
+		B1000000000000000000001B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001B /* Assets.xcassets */; };
+		B1000000000000000000001C /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001C /* TestSupport.swift */; };
+		B1000000000000000000001D /* LibraryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001D /* LibraryRepositoryTests.swift */; };
+		B1000000000000000000001E /* PageRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001E /* PageRepositoryTests.swift */; };
+		B1000000000000000000001F /* BlobStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000001F /* BlobStoreTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C10000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P10000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = T10000000000000000000001;
+			remoteInfo = PageBoundNotes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F10000000000000000000001 /* PageBoundNotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBoundNotesApp.swift; sourceTree = "<group>"; };
+		F10000000000000000000002 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		F10000000000000000000003 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		F10000000000000000000004 /* CoverStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverStyle.swift; sourceTree = "<group>"; };
+		F10000000000000000000005 /* PageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSize.swift; sourceTree = "<group>"; };
+		F10000000000000000000006 /* PageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOrientation.swift; sourceTree = "<group>"; };
+		F10000000000000000000007 /* TemplateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateType.swift; sourceTree = "<group>"; };
+		F10000000000000000000008 /* ColorComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponents.swift; sourceTree = "<group>"; };
+		F10000000000000000000009 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		F1000000000000000000000A /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		F1000000000000000000000B /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		F1000000000000000000000C /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
+		F1000000000000000000000D /* TemplateCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCatalog.swift; sourceTree = "<group>"; };
+		F1000000000000000000000E /* FolderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEntity.swift; sourceTree = "<group>"; };
+		F1000000000000000000000F /* BookEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookEntity.swift; sourceTree = "<group>"; };
+		F10000000000000000000010 /* PageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageEntity.swift; sourceTree = "<group>"; };
+		F10000000000000000000011 /* EntityMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMappers.swift; sourceTree = "<group>"; };
+		F10000000000000000000012 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		F10000000000000000000013 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
+		F10000000000000000000014 /* LibraryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRepositoryProtocol.swift; sourceTree = "<group>"; };
+		F10000000000000000000015 /* SwiftDataLibraryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataLibraryRepository.swift; sourceTree = "<group>"; };
+		F10000000000000000000016 /* BookRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepositoryProtocol.swift; sourceTree = "<group>"; };
+		F10000000000000000000017 /* SwiftDataBookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataBookRepository.swift; sourceTree = "<group>"; };
+		F10000000000000000000018 /* PageRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageRepositoryProtocol.swift; sourceTree = "<group>"; };
+		F10000000000000000000019 /* SwiftDataPageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPageRepository.swift; sourceTree = "<group>"; };
+		F1000000000000000000001A /* BlobStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobStoreService.swift; sourceTree = "<group>"; };
+		F1000000000000000000001B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1000000000000000000001C /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
+		F1000000000000000000001D /* LibraryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRepositoryTests.swift; sourceTree = "<group>"; };
+		F1000000000000000000001E /* PageRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageRepositoryTests.swift; sourceTree = "<group>"; };
+		F1000000000000000000001F /* BlobStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobStoreTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000020 /* PageBoundNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PageBoundNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10000000000000000000021 /* PageBoundNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PageBoundNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		X10000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		X10000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				G10000000000000000000002 /* PageBoundNotes */,
+				G10000000000000000000003 /* PageBoundNotesTests */,
+				G10000000000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G10000000000000000000002 /* PageBoundNotes */ = {
+			isa = PBXGroup;
+			children = (
+				G10000000000000000000005 /* App */,
+				G10000000000000000000006 /* Modules */,
+				G10000000000000000000007 /* Core */,
+				F1000000000000000000001B /* Assets.xcassets */,
+			);
+			path = PageBoundNotes;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000003 /* PageBoundNotesTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000001C /* TestSupport.swift */,
+				F1000000000000000000001D /* LibraryRepositoryTests.swift */,
+				F1000000000000000000001E /* PageRepositoryTests.swift */,
+				F1000000000000000000001F /* BlobStoreTests.swift */,
+			);
+			path = PageBoundNotesTests;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000020 /* PageBoundNotes.app */,
+				F10000000000000000000021 /* PageBoundNotesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000005 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000001 /* PageBoundNotesApp.swift */,
+				F10000000000000000000002 /* AppDependencies.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000006 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				G10000000000000000000008 /* Library */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000007 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				G10000000000000000000009 /* Models */,
+				G1000000000000000000000A /* Persistence */,
+				G1000000000000000000000B /* Services */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000008 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000003 /* LibraryView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000009 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000004 /* CoverStyle.swift */,
+				F10000000000000000000005 /* PageSize.swift */,
+				F10000000000000000000006 /* PageOrientation.swift */,
+				F10000000000000000000007 /* TemplateType.swift */,
+				F10000000000000000000008 /* ColorComponents.swift */,
+				F10000000000000000000009 /* Folder.swift */,
+				F1000000000000000000000A /* Book.swift */,
+				F1000000000000000000000B /* Page.swift */,
+				F1000000000000000000000C /* Template.swift */,
+				F1000000000000000000000D /* TemplateCatalog.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G1000000000000000000000A /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				G1000000000000000000000C /* Entities */,
+				G1000000000000000000000D /* Mappers */,
+				G1000000000000000000000E /* Repositories */,
+				F10000000000000000000012 /* PersistenceController.swift */,
+				F10000000000000000000013 /* RepositoryError.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		G1000000000000000000000B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000001A /* BlobStoreService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		G1000000000000000000000C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000000E /* FolderEntity.swift */,
+				F1000000000000000000000F /* BookEntity.swift */,
+				F10000000000000000000010 /* PageEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		G1000000000000000000000D /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000011 /* EntityMappers.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		G1000000000000000000000E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000014 /* LibraryRepositoryProtocol.swift */,
+				F10000000000000000000015 /* SwiftDataLibraryRepository.swift */,
+				F10000000000000000000016 /* BookRepositoryProtocol.swift */,
+				F10000000000000000000017 /* SwiftDataBookRepository.swift */,
+				F10000000000000000000018 /* PageRepositoryProtocol.swift */,
+				F10000000000000000000019 /* SwiftDataPageRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T10000000000000000000001 /* PageBoundNotes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L10000000000000000000001 /* Build configuration list for PBXNativeTarget "PageBoundNotes" */;
+			buildPhases = (
+				S10000000000000000000001 /* Sources */,
+				R10000000000000000000001 /* Resources */,
+				X10000000000000000000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PageBoundNotes;
+			productName = PageBoundNotes;
+			productReference = F10000000000000000000020 /* PageBoundNotes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		T10000000000000000000002 /* PageBoundNotesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L10000000000000000000002 /* Build configuration list for PBXNativeTarget "PageBoundNotesTests" */;
+			buildPhases = (
+				S10000000000000000000002 /* Sources */,
+				X10000000000000000000002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D10000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = PageBoundNotesTests;
+			productName = PageBoundNotesTests;
+			productReference = F10000000000000000000021 /* PageBoundNotesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P10000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					T10000000000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					T10000000000000000000002 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = T10000000000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = L10000000000000000000003 /* Build configuration list for PBXProject "PageBoundNotes" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = G10000000000000000000001;
+			productRefGroup = G10000000000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				T10000000000000000000001 /* PageBoundNotes */,
+				T10000000000000000000002 /* PageBoundNotesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		R10000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1000000000000000000001B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		S10000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10000000000000000000001 /* PageBoundNotesApp.swift in Sources */,
+				B10000000000000000000002 /* AppDependencies.swift in Sources */,
+				B10000000000000000000003 /* LibraryView.swift in Sources */,
+				B10000000000000000000004 /* CoverStyle.swift in Sources */,
+				B10000000000000000000005 /* PageSize.swift in Sources */,
+				B10000000000000000000006 /* PageOrientation.swift in Sources */,
+				B10000000000000000000007 /* TemplateType.swift in Sources */,
+				B10000000000000000000008 /* ColorComponents.swift in Sources */,
+				B10000000000000000000009 /* Folder.swift in Sources */,
+				B1000000000000000000000A /* Book.swift in Sources */,
+				B1000000000000000000000B /* Page.swift in Sources */,
+				B1000000000000000000000C /* Template.swift in Sources */,
+				B1000000000000000000000D /* TemplateCatalog.swift in Sources */,
+				B1000000000000000000000E /* FolderEntity.swift in Sources */,
+				B1000000000000000000000F /* BookEntity.swift in Sources */,
+				B10000000000000000000010 /* PageEntity.swift in Sources */,
+				B10000000000000000000011 /* EntityMappers.swift in Sources */,
+				B10000000000000000000012 /* PersistenceController.swift in Sources */,
+				B10000000000000000000013 /* RepositoryError.swift in Sources */,
+				B10000000000000000000014 /* LibraryRepositoryProtocol.swift in Sources */,
+				B10000000000000000000015 /* SwiftDataLibraryRepository.swift in Sources */,
+				B10000000000000000000016 /* BookRepositoryProtocol.swift in Sources */,
+				B10000000000000000000017 /* SwiftDataBookRepository.swift in Sources */,
+				B10000000000000000000018 /* PageRepositoryProtocol.swift in Sources */,
+				B10000000000000000000019 /* SwiftDataPageRepository.swift in Sources */,
+				B1000000000000000000001A /* BlobStoreService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S10000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1000000000000000000001C /* TestSupport.swift in Sources */,
+				B1000000000000000000001D /* LibraryRepositoryTests.swift in Sources */,
+				B1000000000000000000001E /* PageRepositoryTests.swift in Sources */,
+				B1000000000000000000001F /* BlobStoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D10000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = T10000000000000000000001 /* PageBoundNotes */;
+			targetProxy = C10000000000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C20000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C20000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C20000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "PageBound Notes";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pagebound.notes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		C20000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "PageBound Notes";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pagebound.notes;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		C20000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pagebound.notes.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PageBoundNotes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PageBoundNotes";
+			};
+			name = Debug;
+		};
+		C20000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pagebound.notes.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PageBoundNotes.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PageBoundNotes";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		L10000000000000000000001 /* Build configuration list for PBXNativeTarget "PageBoundNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C20000000000000000000003 /* Debug */,
+				C20000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L10000000000000000000002 /* Build configuration list for PBXNativeTarget "PageBoundNotesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C20000000000000000000005 /* Debug */,
+				C20000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L10000000000000000000003 /* Build configuration list for PBXProject "PageBoundNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C20000000000000000000001 /* Debug */,
+				C20000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = P10000000000000000000001 /* Project object */;
+}

@@ -1,0 +1,50 @@
+
+Showing All Messages
+
+Prepare build
+
+ComputePackagePrebuildTargetDependencyGraph
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'PageBoundNotes' in project 'PageBoundNotes' (no dependencies)
+
+Building targets in dependency order
+
+Target dependency graph (1 target)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+Build description signature: e79ae13150e8a06a9d70cd6f175887ff
+Build description path: /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/XCBuildData/e79ae13150e8a06a9d70cd6f175887ff.xcbuilddata
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+
+Build target PageBoundNotes of project PageBoundNotes with configuration Debug
+/Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj: error: Signing for "PageBoundNotes" requires a development team. Select a development team in the Signing & Capabilities editor. (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+
+/Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj: Signing for "PageBoundNotes" requires a development team. Select a development team in the Signing & Capabilities editor.
+
+
+
+Build failed    7/6/26, 6:17 PM    1.9 seconds

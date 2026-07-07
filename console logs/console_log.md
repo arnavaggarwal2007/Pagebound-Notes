@@ -1,0 +1,2 @@
+Update the Info.plist: `UIRequiresFullScreen` will soon be ignored.
+Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
