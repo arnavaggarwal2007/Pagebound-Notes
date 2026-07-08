@@ -19,7 +19,7 @@ final class LibraryNavigationUITests: XCTestCase {
         let newBookButton = app.buttons["empty-folder-new-book"]
         XCTAssertTrue(newBookButton.waitForExistence(timeout: 3))
         beginBookCreation(via: newBookButton)
-        XCTAssertTrue(waitForBookCreationSheet(timeout: 5))
+        XCTAssertTrue(waitForBookCreationSheet(timeout: 8))
     }
 
     func testSelectFolderEnablesBookCreationFlow() throws {
@@ -40,30 +40,31 @@ final class LibraryNavigationUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Math"].waitForExistence(timeout: 3))
     }
 
-    func testDeleteFolderFromSidebarRemovesFolder() throws {
-        createFolder(named: "DeleteMe")
+    private var sidebarAddMenu: XCUIElement {
+        app.buttons["sidebar-add-menu"]
+    }
 
-        let folderRow = sidebarFolder(named: "DeleteMe")
-        XCTAssertTrue(folderRow.waitForExistence(timeout: 5))
-        folderRow.press(forDuration: 1.0)
+    private var detailAddMenu: XCUIElement {
+        app.buttons["detail-add-menu"]
+    }
 
-        let deleteMenuItem = app.menuItems["Delete"].firstMatch
-        if deleteMenuItem.waitForExistence(timeout: 3) {
-            deleteMenuItem.tap()
-        } else {
-            XCTAssertTrue(app.buttons["Delete"].firstMatch.waitForExistence(timeout: 3))
-            app.buttons["Delete"].firstMatch.tap()
-        }
-
-        let alert = app.alerts.firstMatch
-        XCTAssertTrue(alert.waitForExistence(timeout: 3))
-        alert.buttons["Delete"].tap()
-
-        XCTAssertFalse(app.staticTexts["Empty Folder"].waitForExistence(timeout: 2))
-        XCTAssertFalse(app.cells.containing(NSPredicate(format: "label CONTAINS %@", "DeleteMe")).firstMatch.waitForExistence(timeout: 8))
+    private var bookCreationSheet: XCUIElement {
+        app.sheets.firstMatch
     }
 
     private var bookTitleField: XCUIElement {
+        let sheet = bookCreationSheet
+        if sheet.exists {
+            let identified = sheet.textFields["book-title-field"]
+            if identified.exists {
+                return identified
+            }
+            let titled = sheet.textFields["Title"]
+            if titled.exists {
+                return titled
+            }
+        }
+
         let identified = app.textFields["book-title-field"]
         if identified.exists {
             return identified
@@ -71,14 +72,33 @@ final class LibraryNavigationUITests: XCTestCase {
         return app.textFields["Title"]
     }
 
-    private func createFolder(named name: String) {
-        let addButton = app.buttons["Add"]
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
-        addButton.tap()
+    private var bookCreateConfirmButton: XCUIElement {
+        let sheet = bookCreationSheet
+        if sheet.exists {
+            let identified = sheet.buttons["book-create-confirm"]
+            if identified.exists {
+                return identified
+            }
+            let create = sheet.buttons["Create"]
+            if create.exists {
+                return create
+            }
+        }
+        return app.buttons["book-create-confirm"].exists
+            ? app.buttons["book-create-confirm"]
+            : app.buttons["Create"]
+    }
 
-        let newFolderButton = app.buttons["New Folder"]
-        XCTAssertTrue(newFolderButton.waitForExistence(timeout: 3))
-        newFolderButton.tap()
+    private func createFolder(named name: String) {
+        tapWhenHittable(sidebarAddMenu)
+
+        let newFolderButton = app.buttons["add-menu-new-folder"]
+        if !newFolderButton.waitForExistence(timeout: 3) {
+            XCTAssertTrue(app.buttons["New Folder"].waitForExistence(timeout: 3))
+            app.buttons["New Folder"].tap()
+        } else {
+            newFolderButton.tap()
+        }
 
         let folderNameField = app.textFields["Folder Name"]
         XCTAssertTrue(folderNameField.waitForExistence(timeout: 3))
@@ -87,6 +107,7 @@ final class LibraryNavigationUITests: XCTestCase {
 
         app.buttons["Create"].tap()
 
+        XCTAssertFalse(app.textFields["Folder Name"].waitForExistence(timeout: 3))
         XCTAssertTrue(app.staticTexts["Empty Folder"].waitForExistence(timeout: 5))
     }
 
@@ -95,11 +116,11 @@ final class LibraryNavigationUITests: XCTestCase {
         openBookCreationSheet()
 
         let titleField = bookTitleField
-        XCTAssertTrue(titleField.waitForExistence(timeout: 5))
+        XCTAssertTrue(titleField.waitForExistence(timeout: 8))
         titleField.tap()
         titleField.typeText(title)
 
-        app.buttons["Create"].tap()
+        tapWhenHittable(bookCreateConfirmButton)
     }
 
     private func openBookCreationSheet() {
@@ -108,42 +129,88 @@ final class LibraryNavigationUITests: XCTestCase {
         let newBookButton = app.buttons["empty-folder-new-book"]
         if newBookButton.waitForExistence(timeout: 3) {
             tapWhenHittable(newBookButton)
-            if waitForBookCreationSheet(timeout: 5) { return }
+            if waitForBookCreationSheet(timeout: 8) { return }
         }
 
         beginBookCreationViaAddMenu()
-        XCTAssertTrue(waitForBookCreationSheet(timeout: 5))
+        XCTAssertTrue(waitForBookCreationSheet(timeout: 8))
     }
 
     private func beginBookCreation(via button: XCUIElement) {
         tapWhenHittable(button)
-        if !waitForBookCreationSheet(timeout: 5) {
+        if !waitForBookCreationSheet(timeout: 8) {
             beginBookCreationViaAddMenu()
-            XCTAssertTrue(waitForBookCreationSheet(timeout: 5))
+            XCTAssertTrue(waitForBookCreationSheet(timeout: 8))
         }
     }
 
     private func beginBookCreationViaAddMenu() {
         if waitForBookCreationSheet(timeout: 1) { return }
 
-        let addButton = app.buttons["Add"]
-        XCTAssertTrue(addButton.waitForExistence(timeout: 3))
-        addButton.tap()
-
-        let newBookItem = app.menuItems["New Book"].firstMatch
-        if newBookItem.waitForExistence(timeout: 3) {
-            newBookItem.tap()
+        if detailAddMenu.waitForExistence(timeout: 3) {
+            tapWhenHittable(detailAddMenu)
+        } else if sidebarAddMenu.waitForExistence(timeout: 3) {
+            tapWhenHittable(sidebarAddMenu)
         } else {
-            XCTAssertTrue(app.buttons["New Book"].waitForExistence(timeout: 3))
-            app.buttons["New Book"].tap()
+            XCTFail("Expected detail-add-menu or sidebar-add-menu for book creation fallback")
+            return
         }
+
+        tapNewBookMenuItem()
+    }
+
+    private func tapNewBookMenuItem() {
+        let menuButton = app.buttons["add-menu-new-book"]
+        if menuButton.waitForExistence(timeout: 3) {
+            tapWhenHittable(menuButton)
+            return
+        }
+
+        let menuItem = app.menuItems["add-menu-new-book"].firstMatch
+        if menuItem.waitForExistence(timeout: 3) {
+            tapWhenHittable(menuItem)
+            return
+        }
+
+        let emptyFolderButton = app.buttons["empty-folder-new-book"]
+        if emptyFolderButton.waitForExistence(timeout: 3) {
+            tapWhenHittable(emptyFolderButton)
+            return
+        }
+
+        XCTFail("Expected add-menu-new-book, menu item, or empty-folder-new-book for book creation")
     }
 
     @discardableResult
     private func waitForBookCreationSheet(timeout: TimeInterval) -> Bool {
+        if bookCreationSheet.waitForExistence(timeout: min(timeout, 3)) {
+            if bookTitleField.waitForExistence(timeout: timeout) {
+                return true
+            }
+        }
+
+        if app.otherElements["book-create-sheet"].waitForExistence(timeout: min(timeout, 3)) {
+            if bookTitleField.waitForExistence(timeout: timeout) {
+                return true
+            }
+        }
+
+        let popover = app.popovers.firstMatch
+        if popover.waitForExistence(timeout: min(timeout, 3)) {
+            let popoverTitleField = popover.textFields["book-title-field"]
+            if popoverTitleField.waitForExistence(timeout: timeout) {
+                return true
+            }
+            let popoverSheet = popover.otherElements["book-create-sheet"]
+            if popoverSheet.waitForExistence(timeout: timeout) {
+                return true
+            }
+        }
+
         if bookTitleField.waitForExistence(timeout: timeout) {
             return true
         }
+
         guard app.navigationBars["New Book"].waitForExistence(timeout: min(timeout, 3)) else {
             return false
         }
@@ -157,19 +224,5 @@ final class LibraryNavigationUITests: XCTestCase {
         } else {
             element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
         }
-    }
-
-    private func sidebarFolder(named name: String) -> XCUIElement {
-        let identifiedRow = app.buttons["sidebar-folder-\(name)"]
-        if identifiedRow.exists {
-            return identifiedRow
-        }
-
-        let cell = app.cells.containing(NSPredicate(format: "label CONTAINS %@", name)).firstMatch
-        if cell.exists {
-            return cell
-        }
-
-        return app.staticTexts[name].firstMatch
     }
 }

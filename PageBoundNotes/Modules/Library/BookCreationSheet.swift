@@ -52,10 +52,12 @@ struct BookCreationSheet: View {
                             dismiss()
                         }
                     }
+                    .accessibilityIdentifier("book-create-confirm")
                     .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }
+        .accessibilityIdentifier("book-create-sheet")
     }
 }
 

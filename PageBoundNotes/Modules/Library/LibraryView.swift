@@ -23,14 +23,21 @@ struct LibraryView: View {
         }
         .navigationSplitViewStyle(.prominentDetail)
         .onChange(of: navigationPath) { _, path in
-            columnVisibility = path.isEmpty ? .doubleColumn : .detailOnly
+            if path.isEmpty {
+                columnVisibility = viewModel.selectedFolderId == nil ? .doubleColumn : .detailOnly
+            } else {
+                columnVisibility = .detailOnly
+            }
         }
         .onChange(of: columnVisibility) { _, visibility in
             if !navigationPath.isEmpty, visibility != .detailOnly {
                 columnVisibility = .detailOnly
             }
         }
-        .onChange(of: viewModel.selectedFolderId) { _, _ in
+        .onChange(of: viewModel.selectedFolderId) { _, folderId in
+            if navigationPath.isEmpty {
+                columnVisibility = folderId == nil ? .doubleColumn : .detailOnly
+            }
             Task { await viewModel.load() }
         }
         .task {
@@ -107,24 +114,40 @@ struct LibraryView: View {
             }
 
             ToolbarItem(placement: .topBarTrailing) {
-                Menu {
-                    Button {
-                        viewModel.activeSheet = .createFolder
-                    } label: {
-                        Label(String(localized: "New Folder"), systemImage: "folder.badge.plus")
-                    }
-
-                    Button {
-                        viewModel.activeSheet = .createBook
-                    } label: {
-                        Label(String(localized: "New Book"), systemImage: "book.closed")
-                    }
-                    .disabled(viewModel.selectedFolderId == nil)
-                } label: {
-                    Label(String(localized: "Add"), systemImage: "plus")
-                }
+                sidebarAddMenu
             }
         }
+    }
+
+    private var addMenu: some View {
+        Menu {
+            Button {
+                viewModel.activeSheet = .createFolder
+            } label: {
+                Label(String(localized: "New Folder"), systemImage: "folder.badge.plus")
+            }
+            .accessibilityIdentifier("add-menu-new-folder")
+
+            Button {
+                viewModel.activeSheet = .createBook
+            } label: {
+                Label(String(localized: "New Book"), systemImage: "book.closed")
+            }
+            .accessibilityIdentifier("add-menu-new-book")
+            .disabled(viewModel.selectedFolderId == nil)
+        } label: {
+            Label(String(localized: "Add"), systemImage: "plus")
+        }
+    }
+
+    private var sidebarAddMenu: some View {
+        addMenu
+            .accessibilityIdentifier("sidebar-add-menu")
+    }
+
+    private var detailAddMenu: some View {
+        addMenu
+            .accessibilityIdentifier("detail-add-menu")
     }
 
     @ViewBuilder
@@ -195,6 +218,11 @@ struct LibraryView: View {
                 }
             }
             .navigationTitle(viewModel.navigationTitle)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    detailAddMenu
+                }
+            }
             .navigationDestination(for: UUID.self) { bookId in
                 BookView(
                     bookId: bookId,
@@ -243,6 +271,7 @@ struct LibraryView: View {
                     templateId: templateId
                 )
             }
+            .presentationDetents([.medium, .large])
 
         case .renameFolder(let folder):
             renameSheet(title: String(localized: "Rename Folder"), initial: folder.name) { newName in
@@ -342,6 +371,7 @@ struct LibraryView: View {
         } label: {
             Label(String(localized: "Delete"), systemImage: "trash")
         }
+        .accessibilityIdentifier("folder-context-delete")
     }
 
     @ViewBuilder
