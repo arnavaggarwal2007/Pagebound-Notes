@@ -112,6 +112,10 @@ final class LibraryViewModel: ObservableObject {
         selectedFolderId = folder?.id
     }
 
+    func goToLibraryRoot() {
+        selectedFolderId = nil
+    }
+
     func setSortOption(_ option: LibrarySortOption) {
         sortOption = option
         applySort()

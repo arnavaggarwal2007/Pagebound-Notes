@@ -62,10 +62,18 @@ struct LibraryView: View {
     private var sidebar: some View {
         List(selection: $viewModel.selectedFolderId) {
             Section(String(localized: "Folders")) {
-                if viewModel.selectedFolderId != nil {
+                Button {
+                    goToLibraryRoot()
+                } label: {
                     Label(String(localized: "All Folders"), systemImage: "house")
-                        .tag(Optional<UUID>.none)
                 }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("library-home-button")
+                .listRowBackground(
+                    viewModel.selectedFolderId == nil
+                        ? Color.accentColor.opacity(0.15)
+                        : Color.clear
+                )
 
                 ForEach(viewModel.sidebarFolders) { folder in
                     Label(folder.name, systemImage: "folder")
@@ -154,12 +162,22 @@ struct LibraryView: View {
     private var detailContent: some View {
         NavigationStack(path: $navigationPath) {
             Group {
-                if viewModel.selectedFolderId == nil {
-                    ContentUnavailableView(
-                        String(localized: "Select a Folder"),
-                        systemImage: "folder",
-                        description: Text(String(localized: "Choose a folder from the sidebar to view its books."))
-                    )
+                if viewModel.sidebarFolders.isEmpty {
+                    VStack(spacing: 24) {
+                        ContentUnavailableView(
+                            String(localized: "No Folders Yet"),
+                            systemImage: "folder.badge.plus",
+                            description: Text(String(localized: "Create your first folder to organize books."))
+                        )
+                        Button(String(localized: "New Folder")) {
+                            viewModel.activeSheet = .createFolder
+                        }
+                        .accessibilityIdentifier("empty-library-new-folder")
+                        .buttonStyle(.borderedProminent)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else if viewModel.selectedFolderId == nil {
+                    folderGrid(folders: viewModel.sidebarFolders)
                 } else if viewModel.books.isEmpty && viewModel.subfolders.isEmpty {
                     VStack(spacing: 24) {
                         ContentUnavailableView(
@@ -175,50 +193,22 @@ struct LibraryView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 180), spacing: 16)], spacing: 16) {
-                            ForEach(viewModel.subfolders) { folder in
-                                Button {
-                                    viewModel.selectFolder(folder)
-                                } label: {
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        Image(systemName: "folder.fill")
-                                            .font(.largeTitle)
-                                            .foregroundStyle(.secondary)
-                                        Text(folder.name)
-                                            .font(.headline)
-                                            .multilineTextAlignment(.leading)
-                                    }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(12)
-                                    .background(.background, in: RoundedRectangle(cornerRadius: 12))
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .strokeBorder(.quaternary, lineWidth: 1)
-                                    }
-                                }
-                                .buttonStyle(.plain)
-                                .contextMenu {
-                                    folderContextMenu(for: folder)
-                                }
-                            }
-
-                            ForEach(viewModel.books) { book in
-                                NavigationLink(value: book.id) {
-                                    BookCardView(book: book)
-                                }
-                                .buttonStyle(.plain)
-                                .contextMenu {
-                                    bookContextMenu(for: book)
-                                }
-                            }
-                        }
-                        .padding()
-                    }
+                    folderAndBookGrid
                 }
             }
             .navigationTitle(viewModel.navigationTitle)
             .toolbar {
+                if viewModel.selectedFolderId != nil, navigationPath.isEmpty {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            goToLibraryRoot()
+                        } label: {
+                            Label(String(localized: "All Folders"), systemImage: "house")
+                        }
+                        .accessibilityIdentifier("library-home-button")
+                    }
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     detailAddMenu
                 }
@@ -229,6 +219,72 @@ struct LibraryView: View {
                     dependencies: dependencies
                 )
             }
+        }
+    }
+
+    private var folderAndBookGrid: some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 180), spacing: 16)], spacing: 16) {
+                ForEach(viewModel.subfolders) { folder in
+                    folderCard(for: folder)
+                }
+
+                ForEach(viewModel.books) { book in
+                    NavigationLink(value: book.id) {
+                        BookCardView(book: book)
+                    }
+                    .buttonStyle(.plain)
+                    .contextMenu {
+                        bookContextMenu(for: book)
+                    }
+                }
+            }
+            .padding()
+        }
+    }
+
+    private func folderGrid(folders: [Folder]) -> some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 180), spacing: 16)], spacing: 16) {
+                ForEach(folders) { folder in
+                    folderCard(for: folder)
+                }
+            }
+            .padding()
+        }
+    }
+
+    private func folderCard(for folder: Folder) -> some View {
+        Button {
+            viewModel.selectFolder(folder)
+        } label: {
+            VStack(alignment: .leading, spacing: 8) {
+                Image(systemName: "folder.fill")
+                    .font(.largeTitle)
+                    .foregroundStyle(.secondary)
+                Text(folder.name)
+                    .font(.headline)
+                    .multilineTextAlignment(.leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(12)
+            .background(.background, in: RoundedRectangle(cornerRadius: 12))
+            .overlay {
+                RoundedRectangle(cornerRadius: 12)
+                    .strokeBorder(.quaternary, lineWidth: 1)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("folder-card-\(folder.name)")
+        .contextMenu {
+            folderContextMenu(for: folder)
+        }
+    }
+
+    private func goToLibraryRoot() {
+        viewModel.goToLibraryRoot()
+        if navigationPath.isEmpty {
+            columnVisibility = .doubleColumn
         }
     }
 

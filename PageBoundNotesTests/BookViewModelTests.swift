@@ -228,4 +228,26 @@ final class BookViewModelTests: XCTestCase {
         XCTAssertNotNil(persistedPages.first?.strokeBlobId, "Page 1 should have saved stroke data")
         XCTAssertNotNil(persistedPages.last?.strokeBlobId, "Page 3 should have saved stroke data")
     }
+
+    func testPageSwitchPreservesToolSession() async throws {
+        let folder = try await dependencies.libraryRepository.createFolder(Folder(name: "School"))
+        let book = try await dependencies.libraryRepository.createBook(
+            Book(folderId: folder.id, title: "Math", pageSize: .letter)
+        )
+
+        let viewModel = BookViewModel(bookId: book.id, dependencies: dependencies)
+        await viewModel.load()
+
+        viewModel.toolSession.selectInk(.marker)
+        viewModel.toolSession.strokeStyle.width = 18
+        viewModel.toolSession.selectLasso()
+        viewModel.toolSession.isRulerActive = true
+
+        await viewModel.addPage()
+
+        XCTAssertEqual(viewModel.toolSession.selectedTool, .lasso)
+        XCTAssertEqual(viewModel.toolSession.strokeStyle.width, 18)
+        XCTAssertTrue(viewModel.toolSession.isRulerActive)
+        XCTAssertEqual(viewModel.pageViewModel?.toolSession.selectedTool, .lasso)
+    }
 }

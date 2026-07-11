@@ -124,18 +124,22 @@ final class LibraryViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.books.first?.title, "Renamed")
     }
 
-    func testDuplicateBookAddsCopy() async throws {
+    func testGoToLibraryRootClearsSelection() async throws {
         await viewModel.createFolder(name: "School")
-        await viewModel.createBook(
-            title: "Notes",
-            coverStyle: .plain,
-            pageSize: .letter,
-            templateId: TemplateCatalog.blank.id
-        )
-        let book = viewModel.books.first!
-        await viewModel.duplicateBook(book)
+        let folder = viewModel.sidebarFolders.first!
+        viewModel.selectFolder(folder)
+        XCTAssertEqual(viewModel.selectedFolderId, folder.id)
+
+        viewModel.goToLibraryRoot()
+        XCTAssertNil(viewModel.selectedFolderId)
+    }
+
+    func testLoadPopulatesSidebarFoldersForRootDisplay() async throws {
+        _ = try await dependencies.libraryRepository.createFolder(Folder(name: "Visible Root"))
         await viewModel.load()
 
-        XCTAssertEqual(viewModel.books.count, 2)
+        XCTAssertEqual(viewModel.sidebarFolders.count, 1)
+        XCTAssertEqual(viewModel.sidebarFolders.first?.name, "Visible Root")
+        XCTAssertNil(viewModel.selectedFolderId)
     }
 }

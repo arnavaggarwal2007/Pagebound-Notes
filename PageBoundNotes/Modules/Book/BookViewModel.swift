@@ -33,6 +33,7 @@ final class BookViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var saveStatusMessage: String?
     @Published private(set) var thumbnailRevision = 0
+    @Published var toolSession = ToolSessionState()
 
     let bookId: UUID
     let dependencies: AppDependencies
@@ -175,7 +176,9 @@ final class BookViewModel: ObservableObject {
         let viewModel = PageViewModel(
             page: page,
             book: book,
-            pageRepository: dependencies.pageRepository
+            pageRepository: dependencies.pageRepository,
+            toolPresetStore: dependencies.toolPresetStore,
+            toolSession: toolSession
         )
         await viewModel.load()
         pageViewModel = viewModel

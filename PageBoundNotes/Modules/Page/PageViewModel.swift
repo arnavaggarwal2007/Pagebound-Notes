@@ -2,29 +2,32 @@ import Combine
 import Foundation
 import PencilKit
 
-enum DrawingTool: Equatable {
-    case pen
-    case eraser
-}
-
 @MainActor
 final class PageViewModel: ObservableObject {
     @Published var drawing = StrokeSerialization.emptyDrawing()
-    @Published var selectedTool: DrawingTool = .pen
-    @Published var isPencilOnly = true
     @Published private(set) var isDirty = false
     @Published private(set) var isSaving = false
 
+    let toolSession: ToolSessionState
     private(set) var page: Page
     let book: Book
 
     private let pageRepository: PageRepositoryProtocol
+    private let toolPresetStore: ToolPresetStore
     private var autosaveTask: Task<Void, Never>?
 
-    init(page: Page, book: Book, pageRepository: PageRepositoryProtocol) {
+    init(
+        page: Page,
+        book: Book,
+        pageRepository: PageRepositoryProtocol,
+        toolPresetStore: ToolPresetStore,
+        toolSession: ToolSessionState
+    ) {
         self.page = page
         self.book = book
         self.pageRepository = pageRepository
+        self.toolPresetStore = toolPresetStore
+        self.toolSession = toolSession
     }
 
     deinit {
@@ -37,6 +40,10 @@ final class PageViewModel: ObservableObject {
 
     var pageDimensions: CGSize {
         book.pageSize.dimensions(in: page.orientation)
+    }
+
+    var allPresets: [ToolPreset] {
+        ToolStyleDefaults.builtInPresets + toolPresetStore.loadUserPresets()
     }
 
     func load() async {
@@ -61,6 +68,52 @@ final class PageViewModel: ObservableObject {
         drawing = newDrawing
         isDirty = true
         scheduleAutosave()
+    }
+
+    func appendShapeStrokes(from start: CGPoint, to end: CGPoint) {
+        guard case .shapes(let kind) = toolSession.selectedTool else { return }
+        guard case .ink(let inkKind) = lastInkTool else {
+            appendShapeStrokes(kind: kind, ink: .pen, from: start, to: end)
+            return
+        }
+        appendShapeStrokes(kind: kind, ink: inkKind, from: start, to: end)
+    }
+
+    func appendShapeStrokes(kind: ShapeKind, ink: InkKind, from start: CGPoint, to end: CGPoint) {
+        let strokes = ShapeStrokeBuilder.makeStrokes(
+            kind: kind,
+            start: start,
+            end: end,
+            inkKind: ink,
+            style: toolSession.strokeStyle
+        )
+        guard !strokes.isEmpty else { return }
+
+        var updated = drawing.strokes
+        updated.append(contentsOf: strokes)
+        drawing = PKDrawing(strokes: updated)
+        isDirty = true
+        scheduleAutosave()
+    }
+
+    func applyPreset(_ preset: ToolPreset) {
+        toolSession.applyPreset(preset)
+    }
+
+    func saveCurrentStyleAsPreset(named name: String) throws {
+        guard case .ink(let ink) = toolSession.selectedTool else { return }
+        var userPresets = toolPresetStore.loadUserPresets()
+        let preset = ToolPreset(name: name, ink: ink, style: toolSession.strokeStyle)
+        userPresets.append(preset)
+        try toolPresetStore.saveUserPresets(userPresets)
+        objectWillChange.send()
+    }
+
+    func deleteUserPreset(id: UUID) throws {
+        var userPresets = toolPresetStore.loadUserPresets()
+        userPresets.removeAll { $0.id == id }
+        try toolPresetStore.saveUserPresets(userPresets)
+        objectWillChange.send()
     }
 
     func scheduleAutosave() {
@@ -88,5 +141,12 @@ final class PageViewModel: ObservableObject {
         page = fetched
         isDirty = false
         return fetched
+    }
+
+    private var lastInkTool: DrawingTool {
+        if case .ink = toolSession.selectedTool {
+            return toolSession.selectedTool
+        }
+        return .ink(.pen)
     }
 }

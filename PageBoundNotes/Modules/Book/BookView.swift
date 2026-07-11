@@ -69,7 +69,10 @@ private struct BookViewBody: View {
         } else if let book = viewModel.book {
             VStack(spacing: 0) {
                 if let pageViewModel = viewModel.pageViewModel {
-                    BookWritingSurface(pageViewModel: pageViewModel)
+                    BookWritingSurface(
+                        pageViewModel: pageViewModel,
+                        toolSession: viewModel.toolSession
+                    )
                 } else {
                     ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
                 }

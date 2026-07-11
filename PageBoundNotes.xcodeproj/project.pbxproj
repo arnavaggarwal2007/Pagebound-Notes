@@ -68,6 +68,18 @@
 		B1000000000000000000003C /* LibraryNavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000003B /* LibraryNavigationUITests.swift */; };
 		B1000000000000000000003D /* EntityMappersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000003F /* EntityMappersTests.swift */; };
 		B1000000000000000000003E /* TemplateCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000040 /* TemplateCatalogTests.swift */; };
+		B1000000000000000000004F /* DrawingTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000041 /* DrawingTools.swift */; };
+		B10000000000000000000050 /* ToolPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000042 /* ToolPreset.swift */; };
+		B10000000000000000000051 /* ToolPresetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000043 /* ToolPresetStore.swift */; };
+		B10000000000000000000052 /* InkKind+PKMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000044 /* InkKind+PKMapping.swift */; };
+		B10000000000000000000053 /* ShapeStrokeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000045 /* ShapeStrokeBuilder.swift */; };
+		B10000000000000000000054 /* ToolOverlays.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000046 /* ToolOverlays.swift */; };
+		B10000000000000000000055 /* ToolParameterPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000047 /* ToolParameterPopover.swift */; };
+		B10000000000000000000058 /* InkPickerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000004A /* InkPickerPopover.swift */; };
+		B10000000000000000000059 /* LaserTrailTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000004B /* LaserTrailTiming.swift */; };
+		B1000000000000000000005A /* LaserPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000004C /* LaserPathBuilder.swift */; };
+		B10000000000000000000056 /* DrawingToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000048 /* DrawingToolsTests.swift */; };
+		B10000000000000000000057 /* ToolPresetStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000049 /* ToolPresetStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +164,18 @@
 		F1000000000000000000003E /* PageContentRendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContentRendererTests.swift; sourceTree = "<group>"; };
 		F1000000000000000000003F /* EntityMappersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityMappersTests.swift; sourceTree = "<group>"; };
 		F10000000000000000000040 /* TemplateCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCatalogTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000041 /* DrawingTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTools.swift; sourceTree = "<group>"; };
+		F10000000000000000000042 /* ToolPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPreset.swift; sourceTree = "<group>"; };
+		F10000000000000000000043 /* ToolPresetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPresetStore.swift; sourceTree = "<group>"; };
+		F10000000000000000000044 /* InkKind+PKMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InkKind+PKMapping.swift"; sourceTree = "<group>"; };
+		F10000000000000000000045 /* ShapeStrokeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeStrokeBuilder.swift; sourceTree = "<group>"; };
+		F10000000000000000000046 /* ToolOverlays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOverlays.swift; sourceTree = "<group>"; };
+		F10000000000000000000047 /* ToolParameterPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolParameterPopover.swift; sourceTree = "<group>"; };
+		F1000000000000000000004A /* InkPickerPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkPickerPopover.swift; sourceTree = "<group>"; };
+		F1000000000000000000004B /* LaserTrailTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserTrailTiming.swift; sourceTree = "<group>"; };
+		F1000000000000000000004C /* LaserPathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserPathBuilder.swift; sourceTree = "<group>"; };
+		F10000000000000000000048 /* DrawingToolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingToolsTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000049 /* ToolPresetStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPresetStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +241,8 @@
 				F1000000000000000000003E /* PageContentRendererTests.swift */,
 				F1000000000000000000003F /* EntityMappersTests.swift */,
 				F10000000000000000000040 /* TemplateCatalogTests.swift */,
+				F10000000000000000000048 /* DrawingToolsTests.swift */,
+				F10000000000000000000049 /* ToolPresetStoreTests.swift */,
 			);
 			path = PageBoundNotesTests;
 			sourceTree = "<group>";
@@ -300,6 +326,12 @@
 				F10000000000000000000030 /* PageFrameView.swift */,
 				F10000000000000000000031 /* CanvasView.swift */,
 				F10000000000000000000032 /* ToolPaletteView.swift */,
+				F10000000000000000000044 /* InkKind+PKMapping.swift */,
+				F10000000000000000000045 /* ShapeStrokeBuilder.swift */,
+				F10000000000000000000046 /* ToolOverlays.swift */,
+				F1000000000000000000004C /* LaserPathBuilder.swift */,
+				F10000000000000000000047 /* ToolParameterPopover.swift */,
+				F1000000000000000000004A /* InkPickerPopover.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -318,6 +350,9 @@
 				F1000000000000000000000B /* Page.swift */,
 				F1000000000000000000000C /* Template.swift */,
 				F1000000000000000000000D /* TemplateCatalog.swift */,
+				F10000000000000000000041 /* DrawingTools.swift */,
+				F10000000000000000000042 /* ToolPreset.swift */,
+				F1000000000000000000004B /* LaserTrailTiming.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -342,6 +377,7 @@
 				F10000000000000000000023 /* StrokeSerialization.swift */,
 				F10000000000000000000025 /* PageContentRenderer.swift */,
 				F10000000000000000000026 /* PDFExportService.swift */,
+				F10000000000000000000043 /* ToolPresetStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -535,6 +571,16 @@
 				B1000000000000000000002F /* CanvasView.swift in Sources */,
 				B10000000000000000000030 /* ToolPaletteView.swift in Sources */,
 				B10000000000000000000031 /* PageView.swift in Sources */,
+				B1000000000000000000004F /* DrawingTools.swift in Sources */,
+				B10000000000000000000050 /* ToolPreset.swift in Sources */,
+				B10000000000000000000051 /* ToolPresetStore.swift in Sources */,
+				B10000000000000000000052 /* InkKind+PKMapping.swift in Sources */,
+				B10000000000000000000053 /* ShapeStrokeBuilder.swift in Sources */,
+				B10000000000000000000054 /* ToolOverlays.swift in Sources */,
+				B10000000000000000000055 /* ToolParameterPopover.swift in Sources */,
+				B10000000000000000000058 /* InkPickerPopover.swift in Sources */,
+				B10000000000000000000059 /* LaserTrailTiming.swift in Sources */,
+				B1000000000000000000005A /* LaserPathBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +602,8 @@
 				B1000000000000000000003B /* PageContentRendererTests.swift in Sources */,
 				B1000000000000000000003D /* EntityMappersTests.swift in Sources */,
 				B1000000000000000000003E /* TemplateCatalogTests.swift in Sources */,
+				B10000000000000000000056 /* DrawingToolsTests.swift in Sources */,
+				B10000000000000000000057 /* ToolPresetStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

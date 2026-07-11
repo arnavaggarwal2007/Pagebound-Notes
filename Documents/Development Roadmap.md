@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** July 8, 2026
+**Last updated:** July 10, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -28,7 +28,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 |-------|------|--------|
 | 0 | Foundations | Complete |
 | 1 | MVP: Local Notebooks and Pagination | Complete |
-| 2 | Tooling, Content Layers, and Zoom | Not started |
+| 2 | Tooling, Content Layers, and Zoom | In progress (Part 1 complete) |
 | 3 | Import, Backup, and Cloud Export | Not started |
 | 4 | Advanced Features | Not started |
 
@@ -161,11 +161,30 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 **Dependencies:** Phase 1 complete
 
+> **2026-07-10 (Phase 2 Part 1 closeout):** Full Tool Catalog signed off after remediation and device re-QA. All Part 1 deliverables and exit criteria met — 84 unit tests; pixel eraser (`fixedWidthBitmap`), laser lifecycle/polish, library home + root grid verified on iPad. **Phase 2 remains in progress** (Content Overlays, Zoom Window, Page Management next).
+
+### Phase 2 Part 1 — Full Tool Catalog (Complete)
+
+**Signed off:** 2026-07-10 (device re-QA confirmed after remediation + library polish)
+
+#### Part 1 Exit Criteria
+
+- [x] All Markup-style pen tools are functional with adjustable width, opacity, and color
+- [x] User presets and built-in swatches apply correctly; saved presets survive relaunch
+- [x] Pixel eraser and object eraser work on canvas; pixel eraser width adjustable via popover
+- [x] Lasso selection, stroke-committed shapes, ruler, and laser pointer work correctly
+- [x] Laser trail fades after pen lift; does not persist to drawing or PDF export
+- [x] Reed pen gated by OS; palm-rejection toggle preserved
+- [x] Tool switch, color, and width changes apply immediately (observation + apply guard)
+- [x] Apple Pencil double-tap honors system Settings
+- [x] Unit tests: 84/84 passing
+- [x] Device QA on physical iPad complete (see vault `Area – QA`)
+
 ### Deliverables
 
 #### Full Tool Catalog
 
-- [ ] Expand pen tools to match Apple Markup catalog:
+- [x] Expand pen tools to match Apple Markup catalog:
   - Pen / monoline
   - Marker / highlighter (semi-transparent)
   - Pencil (sketch texture)
@@ -173,10 +192,11 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
   - Fountain pen (pressure-sensitive)
   - Reed pen (angle-dependent; feature-detect iPadOS 26+)
   - Watercolor brush (soft, blended strokes)
-- [ ] Adjustable stroke width, opacity, and color
-- [ ] Preset sizes and color swatches; user-saved presets
-- [ ] Bitmap and vector eraser modes
-- [ ] Lasso selection, shapes tool, ruler, and laser pointer
+- [x] Adjustable stroke width, opacity, and color
+- [x] Preset sizes and color swatches; user-saved presets
+- [x] Pixel and object eraser modes (user-facing labels; PencilKit bitmap/vector)
+- [x] Adjustable pixel eraser width
+- [x] Lasso selection, shapes tool, ruler, and laser pointer
 
 #### Content Overlays
 
@@ -204,10 +224,12 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 - [ ] Global pinch-to-zoom and pan on page canvas
 - [ ] Fit-page-to-screen gesture
 
-### Exit Criteria
+### Exit Criteria (Phase 2 overall — not yet complete)
 
-- All Markup-style pen tools are functional with adjustable parameters
-- Eraser, lasso, shapes, and ruler work correctly on the canvas
+The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Catalog) satisfies the first two bullets only.
+
+- All Markup-style pen tools are functional with adjustable parameters — **Part 1 complete**
+- Eraser, lasso, shapes, and ruler work correctly on the canvas — **Part 1 complete**
 - Text boxes and images can be placed, moved, and resized on pages
 - Zoom window provides magnified writing with miniature page context
 - Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates
@@ -363,7 +385,10 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
-| 2026-07-08 | Deferred delete-folder UI test (`testDeleteFolderFromSidebarRemovesFolder`); 56 unit + 3 UI tests; sidebar UX unchanged |
+| 2026-07-10 | **Phase 2 Part 1 officially signed off** — remediation + library polish re-QA complete; 84 unit tests; all Part 1 exit criteria met; Phase 2 in progress |
+| 2026-07-10 | Phase 2 Part 1 remediation — pixel eraser `fixedWidthBitmap`, laser render fix; sign-off pending re-QA |
+| 2026-07-10 | Phase 2 Part 1 (Full Tool Catalog) signed off — closeout polish (eraser labels, pixel eraser width, laser fade); 75 unit tests, ~72% coverage; Phase 2 status In progress |
+| 2026-07-10 | Phase 2 Part 1 (Full Tool Catalog) implemented — Markup ink catalog, parameters, presets, erasers, lasso, ruler, laser, stroke-committed shapes; Phase 2 status In progress |
 | 2026-07-08 | Phase 1 signed off — all exit criteria met; sidebar-on-back UX fix; 56 unit + 4 UI tests, ~87% coverage |
 | 2026-07-07 | Export/sidebar remediation — unified PDF on `PageContentRenderer`, export save gate, sidebar toggle removal + visibility re-enforcement; persistence verified on device; 55 unit tests |
 | 2026-07-07 | Phase 1 regression remediation — stale Page model stroke loss, thumbnail invalidation, folder delete alert target capture, sidebar collapse binding; sign-off reverted pending device QA; 54 unit + 4 UI tests |
