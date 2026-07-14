@@ -164,7 +164,7 @@ final class SwiftDataLibraryRepository: LibraryRepositoryProtocol, @unchecked Se
 
             var objectsBlobId: String?
             if let sourceObjectsBlobId = sourcePage.objectsBlobId {
-                objectsBlobId = try blobStore.copy(id: sourceObjectsBlobId)
+                objectsBlobId = try ObjectBlobLifecycle.copyObjectsBlob(sourceObjectsBlobId, blobStore: blobStore)
             }
 
             let copiedPage = PageEntity(
@@ -231,7 +231,7 @@ final class SwiftDataLibraryRepository: LibraryRepositoryProtocol, @unchecked Se
                 try blobStore.delete(id: strokeBlobId)
             }
             if let objectsBlobId = page.objectsBlobId {
-                try blobStore.delete(id: objectsBlobId)
+                try ObjectBlobLifecycle.deleteObjectsBlob(objectsBlobId, blobStore: blobStore)
             }
             modelContext.delete(page)
         }

@@ -136,18 +136,32 @@ enum ShapeKind: String, CaseIterable, Codable, Sendable {
     }
 }
 
+enum ShapeCommitMode: String, Codable, Sendable, CaseIterable {
+    case ink
+    case object
+
+    var displayName: String {
+        switch self {
+        case .ink: String(localized: "Ink")
+        case .object: String(localized: "Object")
+        }
+    }
+}
+
 enum DrawingTool: Equatable, Sendable {
     case ink(InkKind)
     case eraser(EraserMode)
     case lasso
     case shapes(ShapeKind)
     case laser
+    case text
+    case image
 
     var isDrawingTool: Bool {
         switch self {
         case .ink, .eraser, .lasso:
             true
-        case .shapes, .laser:
+        case .shapes, .laser, .text, .image:
             false
         }
     }
@@ -156,7 +170,16 @@ enum DrawingTool: Equatable, Sendable {
         switch self {
         case .ink, .eraser, .lasso:
             true
-        case .shapes, .laser:
+        case .shapes, .laser, .text, .image:
+            false
+        }
+    }
+
+    var isContentOverlayTool: Bool {
+        switch self {
+        case .text, .image:
+            true
+        default:
             false
         }
     }
@@ -196,6 +219,7 @@ final class ToolSessionState: ObservableObject {
     @Published var isPencilOnly = true
     @Published var pixelEraserWidth: CGFloat = EraserMode.defaultPixelWidth
     @Published private(set) var selectedShapeKind: ShapeKind = .rectangle
+    @Published private(set) var shapeCommitMode: ShapeCommitMode = .object
 
     private(set) var lastInkTool: DrawingTool = .ink(.pen)
     private(set) var lastEraserMode: EraserMode = .bitmap
@@ -244,9 +268,45 @@ final class ToolSessionState: ObservableObject {
         setSelectedTool(.laser)
     }
 
-    func selectShape(_ kind: ShapeKind) {
+    func selectText() {
+        setSelectedTool(.text)
+    }
+
+    func selectImage() {
+        setSelectedTool(.image)
+    }
+
+    func selectShape(_ kind: ShapeKind, mode: ShapeCommitMode? = nil) {
         selectedShapeKind = kind
+        if let mode {
+            shapeCommitMode = mode
+        }
         setSelectedTool(.shapes(kind))
+    }
+
+    func setShapeCommitMode(_ mode: ShapeCommitMode) {
+        shapeCommitMode = mode
+        if case .shapes(let kind) = selectedTool {
+            setSelectedTool(.shapes(kind))
+        }
+    }
+
+    var isObjectShapeMode: Bool {
+        shapeCommitMode == .object && {
+            if case .shapes = selectedTool { return true }
+            return false
+        }()
+    }
+
+    var allowsObjectInteraction: Bool {
+        switch selectedTool {
+        case .text, .image:
+            true
+        case .shapes:
+            shapeCommitMode == .object
+        default:
+            false
+        }
     }
 
     func toggleRuler() {
@@ -290,6 +350,7 @@ final class ToolSessionState: ObservableObject {
             isRulerActive: isRulerActive,
             isPencilOnly: isPencilOnly,
             selectedShapeKind: selectedShapeKind,
+            shapeCommitMode: shapeCommitMode,
             lastInkTool: lastInkTool,
             lastEraserMode: lastEraserMode,
             pixelEraserWidth: pixelEraserWidth
@@ -302,6 +363,7 @@ final class ToolSessionState: ObservableObject {
         isRulerActive = snapshot.isRulerActive
         isPencilOnly = snapshot.isPencilOnly
         selectedShapeKind = snapshot.selectedShapeKind
+        shapeCommitMode = snapshot.shapeCommitMode
         lastInkTool = snapshot.lastInkTool
         lastEraserMode = snapshot.lastEraserMode
         pixelEraserWidth = snapshot.pixelEraserWidth
@@ -325,6 +387,7 @@ struct ToolSessionSnapshot: Equatable, Sendable {
     var isRulerActive: Bool
     var isPencilOnly: Bool
     var selectedShapeKind: ShapeKind
+    var shapeCommitMode: ShapeCommitMode
     var lastInkTool: DrawingTool
     var lastEraserMode: EraserMode
     var pixelEraserWidth: CGFloat

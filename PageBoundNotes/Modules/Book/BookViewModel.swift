@@ -155,7 +155,8 @@ final class BookViewModel: ObservableObject {
                 book: book,
                 scope: scope,
                 currentPageId: currentPage?.id,
-                currentPageDrawingOverride: pageViewModel?.drawing
+                currentPageDrawingOverride: pageViewModel?.drawing,
+                currentPageObjectsOverride: pageViewModel?.objectsDocument
             )
             let filename = scope == .currentPage
                 ? "\(book.title)-page-\(currentPageIndex + 1).pdf"

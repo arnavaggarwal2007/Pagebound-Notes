@@ -40,6 +40,8 @@ final class DrawingToolsTests: XCTestCase {
         XCTAssertTrue(DrawingTool.lasso.usesCanvasInput)
         XCTAssertFalse(DrawingTool.shapes(.rectangle).usesCanvasInput)
         XCTAssertFalse(DrawingTool.laser.usesCanvasInput)
+        XCTAssertFalse(DrawingTool.text.usesCanvasInput)
+        XCTAssertFalse(DrawingTool.image.usesCanvasInput)
     }
 
     func testShapeStrokeBuilderProducesStrokesForRectangle() {
@@ -149,6 +151,19 @@ final class ToolSessionStateTests: XCTestCase {
         XCTAssertEqual(state.selectedTool, .ink(.marker))
         XCTAssertEqual(state.strokeStyle.width, 12)
         XCTAssertTrue(state.isDrawingEnabled)
+    }
+
+    func testObjectShapeModeDisablesCanvasInput() {
+        let session = ToolSessionState()
+        session.setShapeCommitMode(.object)
+        session.selectShape(.rectangle)
+        XCTAssertTrue(session.isObjectShapeMode)
+        XCTAssertFalse(session.applicationState.isDrawingEnabled)
+    }
+
+    func testDefaultShapeCommitModeIsObject() {
+        let session = ToolSessionState()
+        XCTAssertEqual(session.shapeCommitMode, .object)
     }
 
     func testToolChangeUpdatesApplicationStateWithoutDrawing() {

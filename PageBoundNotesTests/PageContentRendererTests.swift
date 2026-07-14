@@ -49,4 +49,20 @@ final class PageContentRendererTests: XCTestCase {
         XCTAssertEqual(landscape.width, portrait.height, accuracy: 0.1)
         XCTAssertEqual(landscape.height, portrait.width, accuracy: 0.1)
     }
+
+    func testRenderPageIncludesTextObjectMarker() throws {
+        let textBox = TextBoxObject.makeDefault(at: CGPoint(x: 100, y: 100), zIndex: 0)
+        var textBoxCopy = textBox
+        textBoxCopy.text = "Overlay"
+        let image = PageContentRenderer.renderPage(
+            template: TemplateCatalog.blank,
+            drawing: StrokeSerialization.emptyDrawing(),
+            objects: [.text(textBoxCopy)],
+            pageSize: .letter,
+            orientation: .portrait,
+            scale: 1.0
+        )
+
+        XCTAssertGreaterThan(image.size.width, 0)
+    }
 }

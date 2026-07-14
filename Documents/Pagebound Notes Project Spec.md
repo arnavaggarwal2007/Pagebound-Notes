@@ -129,6 +129,7 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 
 - Global pinch‑to‑zoom and pan on each page canvas, consistent with PencilKit and GoodNotes behavior.[^17][^14][^16]
 - Tap or gesture to “fit page to screen”.[^16]
+- **Immersive writing chrome (Phase 2 Page Management):** page canvas expands toward the top safe area with tool palette floating above content; optional user toggle to hide/show navigation toolbar and thumbnail strip while keeping page add/export/delete reachable. Ships with fit-to-screen — not Part 2 Content Overlays.
 - Optional split view for two books or two pages side‑by‑side for cross‑referencing.[^16]
 
 
@@ -139,8 +140,8 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 - Text boxes overlaying pages, with:
     - Font, size, color, basic rich text (bold/italic).
     - Movable and resizable bounding boxes.
-- Image insertion from Photos, Files, or drag‑and‑drop, with transform handles for scale/rotate.
-- Shapes: rectangles, circles, arrows, straight lines, with “snap to straight” when appropriate.
+- Image insertion from Photos, Files, or drag‑and‑drop, with transform handles for scale/rotate. **Image resize preserves intrinsic aspect ratio** — selection chrome matches photo bounds.
+- Shapes: rectangles, circles, arrows, straight lines, with “snap to straight” when appropriate. **Unfilled object shapes** allow ink/eraser/lasso through the interior; borders remain selectable. **Ink-mode shapes** commit as strokes (erasable; not object-resizable).
 
 
 ### 4.7 PDF Import and Export

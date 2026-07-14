@@ -11,4 +11,9 @@ protocol PageRepositoryProtocol: Sendable {
     func loadStrokeData(blobId: String) throws -> Data?
     func saveObjectsData(forPageId pageId: UUID, data: Data) async throws -> String
     func loadObjectsData(blobId: String) throws -> Data?
+
+    func saveImageAsset(data: Data) throws -> String
+    func loadImageAsset(blobId: String) throws -> Data?
+    func deleteObjectsBlob(_ blobId: String) throws
+    func copyObjectsBlob(_ sourceBlobId: String) throws -> String
 }

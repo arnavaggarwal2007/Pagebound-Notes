@@ -65,7 +65,7 @@ final class SwiftDataPageRepository: PageRepositoryProtocol, @unchecked Sendable
             try blobStore.delete(id: strokeBlobId)
         }
         if let objectsBlobId = entity.objectsBlobId {
-            try blobStore.delete(id: objectsBlobId)
+            try ObjectBlobLifecycle.deleteObjectsBlob(objectsBlobId, blobStore: blobStore)
         }
 
         modelContext.delete(entity)
@@ -114,6 +114,22 @@ final class SwiftDataPageRepository: PageRepositoryProtocol, @unchecked Sendable
 
     func loadObjectsData(blobId: String) throws -> Data? {
         try blobStore.load(id: blobId)
+    }
+
+    func saveImageAsset(data: Data) throws -> String {
+        try blobStore.save(data: data)
+    }
+
+    func loadImageAsset(blobId: String) throws -> Data? {
+        try blobStore.load(id: blobId)
+    }
+
+    func deleteObjectsBlob(_ blobId: String) throws {
+        try ObjectBlobLifecycle.deleteObjectsBlob(blobId, blobStore: blobStore)
+    }
+
+    func copyObjectsBlob(_ sourceBlobId: String) throws -> String {
+        try ObjectBlobLifecycle.copyObjectsBlob(sourceBlobId, blobStore: blobStore)
     }
 
     private func fetchPageEntity(id: UUID) throws -> PageEntity? {

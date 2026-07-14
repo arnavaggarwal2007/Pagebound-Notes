@@ -244,7 +244,8 @@ Tools are grouped logically:
 
 - PencilKit provides responsive, low-latency drawing; the app preserves the natural feel of handwriting as expected on iPad.
 - Tap, long-press, and drag interactions follow iPadOS conventions, including context menus and drag-and-drop for pages and books.
-- When `drawingPolicy` restricts input to Apple Pencil only, provide a subtle toolbar indicator so users understand why finger input is ignored.
+- When `drawingPolicy` restricts input to Apple Pencil only, provide a subtle toolbar indicator so users understand why finger input is ignored. **Pencil-only mode applies to the stroke canvas only** — content objects (text, images, shapes) remain fully manipulable with finger tap, drag, and transform handles.
+- Object move gestures attach to the **object body** in page canvas space, not a thin selection border; finger and Apple Pencil have parity for object transforms.
 
 ### 9.2 Visual Feedback
 

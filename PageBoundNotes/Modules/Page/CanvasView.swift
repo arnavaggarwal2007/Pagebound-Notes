@@ -38,7 +38,7 @@ struct CanvasView: UIViewRepresentable {
 
         if context.coordinator.boundPageId != pageId {
             context.coordinator.boundPageId = pageId
-            canvas.drawing = drawing
+            context.coordinator.lastAppliedDrawingData = nil
         }
 
         context.coordinator.sync(canvas: canvas, drawing: drawing, toolState: toolState)
@@ -48,6 +48,7 @@ struct CanvasView: UIViewRepresentable {
         var parent: CanvasView
         var boundPageId: UUID?
         var lastAppliedToolState: ToolApplicationState?
+        var lastAppliedDrawingData: Data?
         weak var pencilInteraction: UIPencilInteraction?
 
         init(parent: CanvasView) {
@@ -59,6 +60,12 @@ struct CanvasView: UIViewRepresentable {
             canvas.drawingPolicy = toolState.isPencilOnly ? .pencilOnly : .anyInput
             canvas.isUserInteractionEnabled = toolState.isDrawingEnabled
             canvas.isRulerActive = toolState.isRulerActive
+
+            let drawingData = drawing.dataRepresentation()
+            if drawingData != lastAppliedDrawingData {
+                canvas.drawing = drawing
+                lastAppliedDrawingData = drawingData
+            }
 
             if lastAppliedToolState != toolState {
                 applyTool(toolState, to: canvas)

@@ -8,12 +8,14 @@ struct PageRenderSnapshot: Sendable {
     let templateId: String
     let orientation: PageOrientation
     let strokeData: Data?
+    let objectsData: Data?
 
-    init(page: Page, strokeData: Data?) {
+    init(page: Page, strokeData: Data?, objectsData: Data? = nil) {
         pageId = page.id
         templateId = page.templateId
         orientation = page.orientation
         self.strokeData = strokeData
+        self.objectsData = objectsData
     }
 
     var drawing: PKDrawing {
@@ -22,6 +24,16 @@ struct PageRenderSnapshot: Sendable {
             let decoded = try? StrokeSerialization.decode(strokeData)
         else {
             return StrokeSerialization.emptyDrawing()
+        }
+        return decoded
+    }
+
+    var objectsDocument: PageObjectsDocument {
+        guard
+            let objectsData,
+            let decoded = try? ObjectSerialization.decode(objectsData)
+        else {
+            return .empty
         }
         return decoded
     }
@@ -83,6 +95,8 @@ enum PageContentRenderer {
     static func renderPage(
         template: Template,
         drawing: PKDrawing,
+        objects: [PageObject] = [],
+        imageLoader: ((String) -> UIImage?) = { _ in nil },
         pageSize: PageSize,
         orientation: PageOrientation,
         scale: CGFloat = 2.0
@@ -99,6 +113,13 @@ enum PageContentRenderer {
 
             let strokeImage = strokeImage(from: drawing, bounds: bounds, scale: scale)
             strokeImage.draw(in: bounds)
+
+            ObjectRenderer.draw(
+                objects: objects,
+                imageLoader: imageLoader,
+                in: context.cgContext,
+                pageSize: dimensions
+            )
         }
     }
 
@@ -111,11 +132,17 @@ enum PageContentRenderer {
         return image
     }
 
-    static func renderThumbnail(snapshot: PageRenderSnapshot, book: Book) -> UIImage? {
+    static func renderThumbnail(
+        snapshot: PageRenderSnapshot,
+        book: Book,
+        imageLoader: ((String) -> UIImage?) = { _ in nil }
+    ) -> UIImage? {
         let template = TemplateCatalog.template(for: snapshot.templateId) ?? TemplateCatalog.blank
         let fullImage = renderPage(
             template: template,
             drawing: snapshot.drawing,
+            objects: snapshot.objectsDocument.sortedObjects,
+            imageLoader: imageLoader,
             pageSize: book.pageSize,
             orientation: snapshot.orientation,
             scale: 1.0

@@ -128,7 +128,7 @@ struct ShapeDrawingOverlay: View {
         .frame(width: pageSize.width, height: pageSize.height)
         .contentShape(Rectangle())
         .gesture(
-            DragGesture(minimumDistance: 2, coordinateSpace: .local)
+            DragGesture(minimumDistance: 2, coordinateSpace: .named(ContentObjectsOverlay.pageCanvasCoordinateSpace))
                 .onChanged { value in
                     if startPoint == nil {
                         startPoint = value.startLocation
@@ -138,7 +138,11 @@ struct ShapeDrawingOverlay: View {
                 .onEnded { value in
                     let start = startPoint ?? value.startLocation
                     let end = value.location
-                    onCommit(start, end)
+                    let dx = end.x - start.x
+                    let dy = end.y - start.y
+                    if hypot(dx, dy) >= ObjectTransformSession.minimumShapeDragDistance {
+                        onCommit(start, end)
+                    }
                     startPoint = nil
                     currentPoint = nil
                 }

@@ -1,0 +1,663 @@
+
+Showing All Messages
+
+Prepare build
+
+ComputePackagePrebuildTargetDependencyGraph
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+
+note: Building targets in dependency order
+note: Target dependency graph (1 target)
+    Target 'PageBoundNotes' in project 'PageBoundNotes' (no dependencies)
+
+Building targets in dependency order
+
+Target dependency graph (1 target)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+Build description signature: 3b42bc0538070e798e69b239d10ee7c7
+Build description path: /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/XCBuildData/3b42bc0538070e798e69b239d10ee7c7.xcbuilddata
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk /Users/arnev/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -o /Users/arnev/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache
+
+CreateBuildDirectory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    builtin-create-build-directory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products
+
+CreateBuildDirectory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    builtin-create-build-directory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex
+
+CreateBuildDirectory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    builtin-create-build-directory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    builtin-create-build-directory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos
+
+CreateBuildDirectory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/ExplicitPrecompiledModules
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    builtin-create-build-directory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    builtin-create-build-directory /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes-6399c928af16edc6109d8881be022508-VFS-iphoneos/all-product-headers.yaml
+    cd /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes.xcodeproj
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes-6399c928af16edc6109d8881be022508-VFS-iphoneos/all-product-headers.yaml
+
+
+Build target PageBoundNotes of project PageBoundNotes with configuration Debug
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.hmap (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.hmap
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/empty-PageBoundNotes.plist (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/empty-PageBoundNotes.plist
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-project-headers.hmap (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-project-headers.hmap
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-all-target-headers.hmap (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-all-non-framework-target-headers.hmap (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.DependencyStaticMetadataFileList (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-own-target-headers.hmap (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-generated-files.hmap (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-generated-files.hmap
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.DependencyMetadataFileList (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-DebugDylibPath-normal-arm64.txt (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-DebugDylibInstallName-normal-arm64.txt (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_const_extract_protocols.json (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftFileList (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftFileList
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftConstValuesFileList (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.LinkFileList (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.LinkFileList
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-OutputFileMap.json (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-OutputFileMap.json
+
+MkDir /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /bin/mkdir -p /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app
+
+WriteAuxiliaryFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/Entitlements.plist (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    write-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/Entitlements.plist
+
+ProcessProductPackaging /Users/arnev/Library/Developer/Xcode/UserData/Provisioning\ Profiles/ecb3f04b-02bb-4d6f-b008-dc68ffef9a35.mobileprovision /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/embedded.mobileprovision (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-productPackagingUtility /Users/arnev/Library/Developer/Xcode/UserData/Provisioning\ Profiles/ecb3f04b-02bb-4d6f-b008-dc68ffef9a35.mobileprovision -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/embedded.mobileprovision
+
+ProcessProductPackaging "" /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.app.xcent (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "W2A9J24774.com.pagebound.notes";
+    "com.apple.developer.team-identifier" = W2A9J24774;
+    "get-task-allow" = 1;
+}
+    
+    builtin-productPackagingUtility -entitlements -format xml -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.app.xcent
+
+ProcessProductPackagingDER /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.app.xcent /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.app.xcent.der (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /usr/bin/derq query -f xml -i /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.app.xcent -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.app.xcent.der --raw
+
+Ld /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/__preview.dylib normal (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -O0 -L/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -F/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -install_name @rpath/PageBoundNotes.debug.dylib -Xlinker -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_dependency_info.dat -Xlinker -no_adhoc_codesign -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/__preview.dylib
+
+MkDir /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/thinned (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /bin/mkdir -p /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/thinned
+
+MkDir /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/unthinned (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /bin/mkdir -p /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/unthinned
+
+GenerateAssetSymbols /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Assets.xcassets (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Assets.xcassets --compile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_dependencies --output-partial-info-plist /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_generated_info.plist --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --development-region en --target-device ipad --minimum-deployment-target 17.0 --platform iphoneos --bundle-identifier com.pagebound.notes --generate-swift-asset-symbols /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+
+/* com.apple.actool.compilation-results */
+/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+CompileAssetCatalogVariant thinned /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Assets.xcassets (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Assets.xcassets --compile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_generated_info.plist_thinned --app-icon AppIcon --accent-color AccentColor --compress-pngs --enable-on-demand-resources YES --filter-for-thinning-device-configuration iPad13,1 --filter-for-device-os-version 26.5.2 --development-region en --target-device ipad --minimum-deployment-target 17.0 --platform iphoneos
+
+/* com.apple.actool.compilation-results */
+/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_generated_info.plist_thinned
+/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/thinned/AppIcon60x60@2x.png
+/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/thinned/AppIcon76x76@2x~ipad.png
+/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/thinned/Assets.car
+
+
+SwiftDriver PageBoundNotes normal arm64 com.apple.xcode.tools.swift.compiler (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name PageBoundNotes -Onone @/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -F /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64 -c -j12 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache -output-file-map /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_const_extract_protocols.json -Xcc -iquote -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-generated-files.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-own-target-headers.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-all-target-headers.hmap -Xcc -iquote -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-project-headers.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/include -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources-normal/arm64 -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/arm64 -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-Swift.h -working-directory /Users/arnev/Desktop/Pagebound-Notes -experimental-emit-module-separately -disable-cmo
+
+SwiftCompile normal arm64 Compiling\ PageBoundNotesApp.swift,\ AppDependencies.swift,\ LibraryView.swift,\ CoverStyle.swift,\ PageSize.swift,\ PageOrientation.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/App/PageBoundNotesApp.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/App/AppDependencies.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/LibraryView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/CoverStyle.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageSize.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageOrientation.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/App/PageBoundNotesApp.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/App/AppDependencies.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/LibraryView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/CoverStyle.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageSize.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageOrientation.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ TemplateCatalog.swift,\ FolderEntity.swift,\ BookEntity.swift,\ PageEntity.swift,\ EntityMappers.swift,\ PersistenceController.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/TemplateCatalog.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Entities/FolderEntity.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Entities/BookEntity.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Entities/PageEntity.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Mappers/EntityMappers.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/PersistenceController.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/TemplateCatalog.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Entities/FolderEntity.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Entities/BookEntity.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Entities/PageEntity.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Mappers/EntityMappers.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/PersistenceController.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ RepositoryError.swift,\ LibraryRepositoryProtocol.swift,\ SwiftDataLibraryRepository.swift,\ BookRepositoryProtocol.swift,\ SwiftDataBookRepository.swift,\ PageRepositoryProtocol.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/RepositoryError.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/LibraryRepositoryProtocol.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/SwiftDataLibraryRepository.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/BookRepositoryProtocol.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/SwiftDataBookRepository.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/PageRepositoryProtocol.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/RepositoryError.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/LibraryRepositoryProtocol.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/SwiftDataLibraryRepository.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/BookRepositoryProtocol.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/SwiftDataBookRepository.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/PageRepositoryProtocol.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ PDFExportService.swift,\ LibraryViewModel.swift,\ BookCardView.swift,\ BookCreationSheet.swift,\ BookViewModel.swift,\ BookView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/PDFExportService.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/LibraryViewModel.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/BookCardView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/BookCreationSheet.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/BookViewModel.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/BookView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/PDFExportService.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/LibraryViewModel.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/BookCardView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Library/BookCreationSheet.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/BookViewModel.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/BookView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ InkPickerPopover.swift,\ LaserTrailTiming.swift,\ LaserPathBuilder.swift,\ PageObject.swift,\ ObjectSerialization.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/InkPickerPopover.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/LaserTrailTiming.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/LaserPathBuilder.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageObject.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ObjectSerialization.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/InkPickerPopover.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/LaserTrailTiming.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/LaserPathBuilder.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageObject.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ObjectSerialization.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ PageThumbnailView.swift,\ PageThumbnailStripView.swift,\ BookWritingSurface.swift,\ PageViewModel.swift,\ TemplateBackgroundView.swift,\ PageFrameView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/PageThumbnailView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/PageThumbnailStripView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/BookWritingSurface.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageViewModel.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/TemplateBackgroundView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageFrameView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/PageThumbnailView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/PageThumbnailStripView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Book/BookWritingSurface.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageViewModel.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+/Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageViewModel.swift:277:13: warning: result of 'try?' is unused
+            try? pageRepository.loadImageAsset(blobId: imageObject.imageBlobId)
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageViewModel.swift:365:13: warning: result of 'try?' is unused
+            try? await saveImmediately()
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageViewModel.swift:277:13: Result of 'try?' is unused
+
+/Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageViewModel.swift:365:13: Result of 'try?' is unused
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/TemplateBackgroundView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageFrameView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ ToolPresetStore.swift,\ InkKind+PKMapping.swift,\ ShapeStrokeBuilder.swift,\ ToolOverlays.swift,\ ToolParameterPopover.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ToolPresetStore.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/InkKind+PKMapping.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ShapeStrokeBuilder.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ToolOverlays.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ToolParameterPopover.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ToolPresetStore.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/InkKind+PKMapping.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ShapeStrokeBuilder.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ToolOverlays.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ToolParameterPopover.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ CanvasView.swift,\ ToolPaletteView.swift,\ PageView.swift,\ DrawingTools.swift,\ ToolPreset.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/CanvasView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ToolPaletteView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageView.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/DrawingTools.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/ToolPreset.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/CanvasView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ToolPaletteView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/DrawingTools.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/ToolPreset.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ SwiftDataPageRepository.swift,\ BlobStoreService.swift,\ PageSize+Dimensions.swift,\ StrokeSerialization.swift,\ BlobStoreError.swift,\ PageContentRenderer.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/SwiftDataPageRepository.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/BlobStoreService.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageSize+Dimensions.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/StrokeSerialization.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/BlobStoreError.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/PageContentRenderer.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Persistence/Repositories/SwiftDataPageRepository.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/BlobStoreService.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageSize+Dimensions.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/StrokeSerialization.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/BlobStoreError.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/PageContentRenderer.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ TemplateType.swift,\ ColorComponents.swift,\ Folder.swift,\ Book.swift,\ Page.swift,\ Template.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/TemplateType.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/ColorComponents.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Folder.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Book.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Page.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Template.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/TemplateType.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/ColorComponents.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Folder.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Book.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Page.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/Template.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ PageBoundNotes (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+EmitSwiftModule normal arm64 (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 Compiling\ ObjectBlobLifecycle.swift,\ ObjectRenderer.swift,\ ContentObjectsOverlay.swift,\ ObjectTransformSession.swift,\ CanvasTextField.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ObjectBlobLifecycle.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ObjectRenderer.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ContentObjectsOverlay.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/ObjectTransformSession.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/CanvasTextField.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ObjectBlobLifecycle.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Services/ObjectRenderer.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/ContentObjectsOverlay.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/ObjectTransformSession.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/CanvasTextField.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling TemplateType.swift, ColorComponents.swift, Folder.swift, Book.swift, Page.swift, Template.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 Compiling\ TextStyleBar.swift,\ PageInteractionPolicy.swift,\ UIImage+NormalizedSize.swift,\ PageTextEditingOverlay.swift,\ GeneratedAssetSymbols.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/TextStyleBar.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageInteractionPolicy.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/UIImage+NormalizedSize.swift /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageTextEditingOverlay.swift /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/TextStyleBar.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/PageInteractionPolicy.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Core/Models/UIImage+NormalizedSize.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Modules/Page/PageTextEditingOverlay.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftCompile normal arm64 /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling SwiftDataPageRepository.swift, BlobStoreService.swift, PageSize+Dimensions.swift, StrokeSerialization.swift, BlobStoreError.swift, PageContentRenderer.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling InkPickerPopover.swift, LaserTrailTiming.swift, LaserPathBuilder.swift, PageObject.swift, ObjectSerialization.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling RepositoryError.swift, LibraryRepositoryProtocol.swift, SwiftDataLibraryRepository.swift, BookRepositoryProtocol.swift, SwiftDataBookRepository.swift, PageRepositoryProtocol.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for PageBoundNotes (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriver\ Compilation\ Requirements PageBoundNotes normal arm64 com.apple.xcode.tools.swift.compiler (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name PageBoundNotes -Onone @/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -F /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64 -c -j12 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache -output-file-map /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_const_extract_protocols.json -Xcc -iquote -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-generated-files.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-own-target-headers.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-all-target-headers.hmap -Xcc -iquote -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-project-headers.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/include -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources-normal/arm64 -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/arm64 -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-Swift.h -working-directory /Users/arnev/Desktop/Pagebound-Notes -experimental-emit-module-separately -disable-cmo
+
+SwiftMergeGeneratedHeaders /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/PageBoundNotes-Swift.h /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-Swift.h (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-swiftHeaderTool -arch arm64 /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-Swift.h -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/PageBoundNotes-Swift.h
+
+Copy /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/arm64-apple-ios.swiftmodule /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftmodule (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftmodule /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/arm64-apple-ios.swiftmodule
+
+Copy /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/arm64-apple-ios.swiftdoc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftdoc (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftdoc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/arm64-apple-ios.swiftdoc
+
+Copy /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/arm64-apple-ios.abi.json /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.abi.json (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.abi.json /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/arm64-apple-ios.abi.json
+
+Copy /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftsourceinfo (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftsourceinfo /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling TemplateCatalog.swift, FolderEntity.swift, BookEntity.swift, PageEntity.swift, EntityMappers.swift, PersistenceController.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PageThumbnailView.swift, PageThumbnailStripView.swift, BookWritingSurface.swift, PageViewModel.swift, TemplateBackgroundView.swift, PageFrameView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ToolPresetStore.swift, InkKind+PKMapping.swift, ShapeStrokeBuilder.swift, ToolOverlays.swift, ToolParameterPopover.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PageBoundNotesApp.swift, AppDependencies.swift, LibraryView.swift, CoverStyle.swift, PageSize.swift, PageOrientation.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling PDFExportService.swift, LibraryViewModel.swift, BookCardView.swift, BookCreationSheet.swift, BookViewModel.swift, BookView.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling TextStyleBar.swift, PageInteractionPolicy.swift, UIImage+NormalizedSize.swift, PageTextEditingOverlay.swift, GeneratedAssetSymbols.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling CanvasView.swift, ToolPaletteView.swift, PageView.swift, DrawingTools.swift, ToolPreset.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ObjectBlobLifecycle.swift, ObjectRenderer.swift, ContentObjectsOverlay.swift, ObjectTransformSession.swift, CanvasTextField.swift (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+SwiftDriver\ Compilation PageBoundNotes normal arm64 com.apple.xcode.tools.swift.compiler (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name PageBoundNotes -Onone @/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -target arm64-apple-ios17.0 -g -module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -F /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -emit-localized-strings -emit-localized-strings-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64 -c -j12 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphoneos26.5-23F81a-32daed1954a7d5dd0789fcaf2a9bb78b.sdkstatcache -output-file-map /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/arnev/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_const_extract_protocols.json -Xcc -iquote -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-generated-files.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-own-target-headers.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-all-target-headers.hmap -Xcc -iquote -Xcc /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-project-headers.hmap -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/include -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources-normal/arm64 -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources/arm64 -Xcc -I/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-Swift.h -working-directory /Users/arnev/Desktop/Pagebound-Notes -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes.debug.dylib normal (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -O0 -L/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -L/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -F/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphoneos -F/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -filelist /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.LinkFileList -install_name @rpath/PageBoundNotes.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_dependency_info.dat -fobjc-link-runtime -fprofile-instr-generate -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.swiftmodule @/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes-linker-args.resp -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes.debug.dylib
+
+ConstructStubExecutorLinkFileList /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-ExecutorLinkFileList-normal-arm64.txt (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    construct-stub-executor-link-file-list /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-ExecutorLinkFileList-normal-arm64.txt
+
+note: Using stub executor library with Swift entry point. (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+Using stub executor library with Swift entry point.
+
+Ld /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes normal (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk -O0 -L/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -F/Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -debug_variant -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes-ExecutorLinkFileList-normal-arm64.txt /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes
+
+LinkAssetCatalog /Users/arnev/Desktop/Pagebound-Notes/PageBoundNotes/Assets.xcassets (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-linkAssetCatalog --thinned /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/thinned --thinned-dependencies /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_generated_info.plist_unthinned --output /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app --plist-output /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_generated_info.plist
+
+note: Emplaced /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Assets.car (in target 'PageBoundNotes' from project 'PageBoundNotes')
+note: Emplaced /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/AppIcon60x60@2x.png (in target 'PageBoundNotes' from project 'PageBoundNotes')
+note: Emplaced /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/AppIcon76x76@2x~ipad.png (in target 'PageBoundNotes' from project 'PageBoundNotes')
+
+Emplaced /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Assets.car
+
+Emplaced /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/AppIcon60x60@2x.png
+
+Emplaced /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/AppIcon76x76@2x~ipad.png
+
+ProcessInfoPlistFile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Info.plist /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/empty-PageBoundNotes.plist (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-infoPlistUtility /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/empty-PageBoundNotes.plist -producttype com.apple.product-type.application -genpkginfo /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -additionalcontentfile /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/assetcatalog_generated_info.plist -requiredArchitecture arm64 -o /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Info.plist
+
+CopySwiftLibs /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-swiftStdLibTool --copy --verbose --sign 58336C799AF2B21E246DEF9B023499F653A4F03E --scan-executable /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes.debug.dylib --scan-folder /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Frameworks --scan-folder /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PlugIns --scan-folder /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/SystemExtensions --scan-folder /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Extensions --platform iphoneos --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+
+ExtractAppIntentsMetadata (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name PageBoundNotes --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk --xcode-version 17F113 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.pagebound.notes --output /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app --target-triple arm64-apple-ios17.0 --binary-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes --dependency-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes_dependency_info.dat --stringsdata-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftFileList --metadata-file-list /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.DependencyMetadataFileList --static-metadata-file-list /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.DependencyStaticMetadataFileList --swift-const-vals-list /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/Objects-normal/arm64/PageBoundNotes.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+
+2026-07-14 10:40:05.254 appintentsmetadataprocessor[4191:98860] Starting appintentsmetadataprocessor export
+2026-07-14 10:40:05.256 appintentsmetadataprocessor[4191:98860] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+AppIntentsSSUTraining (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Info.plist --temp-dir-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/ssu --bundle-id com.pagebound.notes --product-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app --extracted-metadata-path /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Metadata.appintents --metadata-file-list /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.DependencyMetadataFileList --source-file /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/Info.plist --archive-ssu-assets
+
+2026-07-14 10:40:05.268 appintentsnltrainingprocessor[4192:98861] Parsing options for appintentsnltrainingprocessor
+2026-07-14 10:40:05.268 appintentsnltrainingprocessor[4192:98861] Starting AppIntents SSU YAML Generation
+2026-07-14 10:40:05.268 appintentsnltrainingprocessor[4192:98861] No AppShortcuts found - Skipping.
+
+CodeSign /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes.debug.dylib (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+    Signing Identity:     "Apple Development: arnavaggarwal1@gmail.com (3Z58M9K3K2)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.pagebound.notes"
+                          (ecb3f04b-02bb-4d6f-b008-dc68ffef9a35)
+    
+    /usr/bin/codesign --force --sign 58336C799AF2B21E246DEF9B023499F653A4F03E --timestamp\=none --generate-entitlement-der /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/PageBoundNotes.debug.dylib
+
+CodeSign /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/__preview.dylib (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+    Signing Identity:     "Apple Development: arnavaggarwal1@gmail.com (3Z58M9K3K2)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.pagebound.notes"
+                          (ecb3f04b-02bb-4d6f-b008-dc68ffef9a35)
+    
+    /usr/bin/codesign --force --sign 58336C799AF2B21E246DEF9B023499F653A4F03E --timestamp\=none --generate-entitlement-der /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app/__preview.dylib
+
+CodeSign /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    
+    Signing Identity:     "Apple Development: arnavaggarwal1@gmail.com (3Z58M9K3K2)"
+    Provisioning Profile: "iOS Team Provisioning Profile: com.pagebound.notes"
+                          (ecb3f04b-02bb-4d6f-b008-dc68ffef9a35)
+    
+    /usr/bin/codesign --force --sign 58336C799AF2B21E246DEF9B023499F653A4F03E --entitlements /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Intermediates.noindex/PageBoundNotes.build/Debug-iphoneos/PageBoundNotes.build/PageBoundNotes.app.xcent --timestamp\=none --generate-entitlement-der /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app
+
+RegisterExecutionPolicyException /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-RegisterExecutionPolicyException /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app
+
+Validate /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    builtin-validationUtility /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app (in target 'PageBoundNotes' from project 'PageBoundNotes')
+    cd /Users/arnev/Desktop/Pagebound-Notes
+    /usr/bin/touch -c /Users/arnev/Library/Developer/Xcode/DerivedData/PageBoundNotes-cgklfvqzyccskwewpiclmonrzckn/Build/Products/Debug-iphoneos/PageBoundNotes.app
+
+
+
+Build succeeded    7/14/26, 10:40 AM    4.5 seconds

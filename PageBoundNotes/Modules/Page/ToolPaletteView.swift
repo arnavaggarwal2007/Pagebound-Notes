@@ -174,6 +174,24 @@ struct ToolPaletteView: View {
             ) {
                 toolSession.selectLaser()
             }
+
+            labeledToolButton(
+                title: String(localized: "Text"),
+                systemImage: "textbox",
+                isSelected: toolSession.selectedTool == .text,
+                accessibilityId: "tool-text"
+            ) {
+                toolSession.selectText()
+            }
+
+            labeledToolButton(
+                title: String(localized: "Image"),
+                systemImage: "photo",
+                isSelected: toolSession.selectedTool == .image,
+                accessibilityId: "tool-image"
+            ) {
+                toolSession.selectImage()
+            }
         }
     }
 
@@ -201,6 +219,21 @@ struct ToolPaletteView: View {
             Text(String(localized: "Shape"))
                 .font(.headline)
 
+            Picker(String(localized: "Mode"), selection: Binding(
+                get: { toolSession.shapeCommitMode },
+                set: { toolSession.setShapeCommitMode($0) }
+            )) {
+                ForEach(ShapeCommitMode.allCases, id: \.self) { mode in
+                    Text(mode.displayName).tag(mode)
+                }
+            }
+            .pickerStyle(.segmented)
+
+            Text(shapeModeDescription)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
             ForEach(ShapeKind.allCases, id: \.self) { kind in
                 Button {
                     toolSession.selectShape(kind)
@@ -211,7 +244,7 @@ struct ToolPaletteView: View {
             }
         }
         .padding(16)
-        .frame(minWidth: 200)
+        .frame(minWidth: 220)
     }
 
     private var inputModeToggle: some View {
@@ -266,6 +299,15 @@ struct ToolPaletteView: View {
     private var isMoreInkSelected: Bool {
         guard case .ink(let kind) = toolSession.selectedTool else { return false }
         return InkKind.moreInks.contains(kind)
+    }
+
+    private var shapeModeDescription: String {
+        switch toolSession.shapeCommitMode {
+        case .ink:
+            String(localized: "Ink — draws permanent strokes on the page.")
+        case .object:
+            String(localized: "Object — inserts a movable shape overlay.")
+        }
     }
 
     private func labeledToolButton(

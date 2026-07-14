@@ -7,17 +7,25 @@ struct BookWritingSurface: View {
     var body: some View {
         PageView(viewModel: pageViewModel, toolSession: toolSession)
             .overlay(alignment: .bottom) {
-                ToolPaletteView(
-                    toolSession: toolSession,
-                    presets: pageViewModel.allPresets,
-                    onApplyPreset: { pageViewModel.applyPreset($0) },
-                    onSavePreset: { name in
-                        try? pageViewModel.saveCurrentStyleAsPreset(named: name)
-                    },
-                    onDeletePreset: { id in
-                        try? pageViewModel.deleteUserPreset(id: id)
+                VStack(spacing: 10) {
+                    if pageViewModel.selectedTextBox != nil {
+                        TextStyleBar(viewModel: pageViewModel)
                     }
-                )
+
+                    SelectedObjectBar(viewModel: pageViewModel)
+
+                    ToolPaletteView(
+                        toolSession: toolSession,
+                        presets: pageViewModel.allPresets,
+                        onApplyPreset: { pageViewModel.applyPreset($0) },
+                        onSavePreset: { name in
+                            try? pageViewModel.saveCurrentStyleAsPreset(named: name)
+                        },
+                        onDeletePreset: { id in
+                            try? pageViewModel.deleteUserPreset(id: id)
+                        }
+                    )
+                }
                 .padding(.bottom, 16)
             }
     }

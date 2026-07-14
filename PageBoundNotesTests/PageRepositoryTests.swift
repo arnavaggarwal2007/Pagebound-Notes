@@ -59,4 +59,37 @@ final class PageRepositoryTests: XCTestCase {
             XCTAssertEqual(error, .duplicatePageIndex)
         }
     }
+
+    func testObjectsBlobRoundTrip() async throws {
+        let (dependencies, tempDirectory) = try TestSupport.makeTestDependencies()
+        defer { TestSupport.cleanup(tempDirectory) }
+
+        let folder = try await dependencies.libraryRepository.createFolder(Folder(name: "Notes"))
+        let book = try await dependencies.libraryRepository.createBook(Book(folderId: folder.id, title: "Book"))
+        let page = try await dependencies.pageRepository.createPage(
+            Page(bookId: book.id, index: 0, templateId: TemplateCatalog.blank.id)
+        )
+
+        let textBox = TextBoxObject.makeDefault(at: CGPoint(x: 50, y: 50), zIndex: 0)
+        let document = PageObjectsDocument(version: 1, objects: [.text(textBox)])
+        let payload = try ObjectSerialization.encode(document)
+
+        let blobId = try await dependencies.pageRepository.saveObjectsData(forPageId: page.id, data: payload)
+        XCTAssertFalse(blobId.isEmpty)
+
+        let loaded = try dependencies.pageRepository.loadObjectsData(blobId: blobId)
+        let decoded = try ObjectSerialization.decode(loaded!)
+        XCTAssertEqual(decoded.objects.count, 1)
+        XCTAssertEqual(decoded.objects.first?.id, textBox.id)
+    }
+
+    func testImageAssetSaveAndLoad() throws {
+        let (dependencies, tempDirectory) = try TestSupport.makeTestDependencies()
+        defer { TestSupport.cleanup(tempDirectory) }
+
+        let payload = Data([0x89, 0x50, 0x4E, 0x47])
+        let blobId = try dependencies.pageRepository.saveImageAsset(data: payload)
+        let loaded = try dependencies.pageRepository.loadImageAsset(blobId: blobId)
+        XCTAssertEqual(loaded, payload)
+    }
 }

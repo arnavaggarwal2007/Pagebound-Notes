@@ -97,7 +97,7 @@ enum PencilKitToolFactory {
             }
         case .lasso:
             return PKLassoTool()
-        case .shapes, .laser:
+        case .shapes, .laser, .text, .image:
             return PKInkingTool(.pen, color: .clear, width: 1)
         }
     }

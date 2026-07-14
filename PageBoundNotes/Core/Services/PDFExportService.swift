@@ -36,7 +36,8 @@ final class PDFExportService: Sendable {
         book: Book,
         scope: PDFExportScope,
         currentPageId: UUID?,
-        currentPageDrawingOverride: PKDrawing? = nil
+        currentPageDrawingOverride: PKDrawing? = nil,
+        currentPageObjectsOverride: PageObjectsDocument? = nil
     ) async throws -> Data {
         let pages = try pageRepository.fetchPages(forBook: book.id)
         guard !pages.isEmpty else {
@@ -61,7 +62,8 @@ final class PDFExportService: Sendable {
             try makeSnapshot(
                 for: page,
                 currentPageId: currentPageId,
-                currentPageDrawingOverride: currentPageDrawingOverride
+                currentPageDrawingOverride: currentPageDrawingOverride,
+                currentPageObjectsOverride: currentPageObjectsOverride
             )
         }
 
@@ -74,7 +76,7 @@ final class PDFExportService: Sendable {
             size: book.pageSize.dimensions(in: firstSnapshot.orientation)
         )
 
-        return await Task.detached(priority: .userInitiated) {
+        return await Task.detached(priority: .userInitiated) { [pageRepository] in
             let renderer = UIGraphicsPDFRenderer(bounds: initialBounds)
             return renderer.pdfData { context in
                 for snapshot in snapshots {
@@ -85,9 +87,20 @@ final class PDFExportService: Sendable {
                     context.beginPage(withBounds: pageRect, pageInfo: [:])
 
                     let template = TemplateCatalog.template(for: snapshot.templateId) ?? TemplateCatalog.blank
+                    let imageLoader: (String) -> UIImage? = { blobId in
+                        guard
+                            let data = try? pageRepository.loadImageAsset(blobId: blobId),
+                            let image = UIImage(data: data)
+                        else {
+                            return nil
+                        }
+                        return image
+                    }
                     let pageImage = PageContentRenderer.renderPage(
                         template: template,
                         drawing: snapshot.drawing,
+                        objects: snapshot.objectsDocument.sortedObjects,
+                        imageLoader: imageLoader,
                         pageSize: book.pageSize,
                         orientation: snapshot.orientation,
                         scale: 2.0
@@ -101,7 +114,8 @@ final class PDFExportService: Sendable {
     private func makeSnapshot(
         for page: Page,
         currentPageId: UUID?,
-        currentPageDrawingOverride: PKDrawing?
+        currentPageDrawingOverride: PKDrawing?,
+        currentPageObjectsOverride: PageObjectsDocument?
     ) throws -> PageRenderSnapshot {
         let strokeData: Data?
 
@@ -126,6 +140,15 @@ final class PDFExportService: Sendable {
             strokeData = nil
         }
 
-        return PageRenderSnapshot(page: page, strokeData: strokeData)
+        let objectsData: Data?
+        if page.id == currentPageId, let override = currentPageObjectsOverride {
+            objectsData = try ObjectSerialization.encode(override)
+        } else if let blobId = page.objectsBlobId {
+            objectsData = try pageRepository.loadObjectsData(blobId: blobId)
+        } else {
+            objectsData = nil
+        }
+
+        return PageRenderSnapshot(page: page, strokeData: strokeData, objectsData: objectsData)
     }
 }

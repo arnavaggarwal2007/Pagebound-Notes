@@ -4,7 +4,7 @@
 
 PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can import lecture slides, annotate them, and organize content in unlimited folders and books—all without a subscription or custom backend.
 
-**Status:** Phase 2 in progress — **Phase 2 Part 1 (Full Tool Catalog) signed off July 10, 2026** (device re-QA complete). Phase 1 signed off July 8, 2026.
+**Status:** Phase 2 in progress — **Phase 2 Part 2 (Content Overlays) implemented July 12, 2026**; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
 
 ---
 
@@ -182,6 +182,17 @@ PageBoundNotes/
    ```bash
    xcodebuild -project PageBoundNotes.xcodeproj -scheme PageBoundNotes -destination 'platform=iOS Simulator,name=iPad (A16)' test
    ```
+
+   ### Log artifacts
+
+   When triaging builds or QA issues, save Xcode output to these repo-root folders:
+
+   | Folder | Xcode action | Contents |
+   |--------|--------------|----------|
+   | `build logs/` | Normal build (⌘B) | App target compile/link output |
+   | `test build logs/` | Test build (⌘U compile phase) | Unit/UI test target **compile** errors |
+   | `console logs/console_log.md` | Run on device/simulator (Option **R**) | **Runtime** logs during app use |
+   | `console logs/test_logs.md` | Run tests (Option **U**) | **Test execution** console output |
 
 7. **Google Drive setup** — *Coming in Phase 3.* Requires OAuth client configuration and Keychain storage for tokens.
 

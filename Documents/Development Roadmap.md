@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** July 10, 2026
+**Last updated:** July 14, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -161,7 +161,23 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 **Dependencies:** Phase 1 complete
 
-> **2026-07-10 (Phase 2 Part 1 closeout):** Full Tool Catalog signed off after remediation and device re-QA. All Part 1 deliverables and exit criteria met — 84 unit tests; pixel eraser (`fixedWidthBitmap`), laser lifecycle/polish, library home + root grid verified on iPad. **Phase 2 remains in progress** (Content Overlays, Zoom Window, Page Management next).
+> **2026-07-10 (Phase 2 Part 1 closeout):** Full Tool Catalog signed off after remediation and device re-QA. All Part 1 deliverables and exit criteria met — 84 unit tests; pixel eraser (`fixedWidthBitmap`), laser lifecycle/polish, library home + root grid verified on iPad. **Phase 2 remains in progress** (Zoom Window, Page Management next).
+>
+> **2026-07-12 (Phase 2 Part 2 implementation):** Content Overlays implemented — text boxes, image insertion (Photos/Files/drag-drop), object-layer shapes with dual Ink/Object shape modes; objects persist via `objectsBlobId`; PDF export and thumbnails composite overlays. Device QA pending.
+>
+> **2026-07-14 (Phase 2 Part 2 QA remediation):** Object/text interaction fixes — stroke-rim hit for unfilled shapes; 12pt visual / 44pt hit transform handles; opposite-corner resize pin; aspect-locked image resize; shared delete for image/shape; first-insert keyboard focus via windowed `UITextView`. Device re-QA pending.
+
+### Phase 2 Part 2 — Content Overlays (QA remediation complete; device re-QA pending)
+
+#### Part 2 Exit Criteria
+
+- [x] Text boxes: place, edit font/size/color/bold/italic, move, resize; persist via `objectsBlobId`
+- [x] Images: insert from Photos, Files, drag-and-drop; scale and rotate handles; separate image blobs
+- [x] Object-layer shapes: rectangle, circle, arrow, line with snap-to-straight; movable/resizable after placement
+- [x] Objects render above strokes; selection handles per UI Guidelines §4.4
+- [x] PDF export and thumbnails composite objects above strokes
+- [x] Unit tests: object serialization, repository round-trip, renderer regression, transform/hit-testing
+- [ ] Device QA on physical iPad (see vault `Area – QA`)
 
 ### Phase 2 Part 1 — Full Tool Catalog (Complete)
 
@@ -198,11 +214,11 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 - [x] Adjustable pixel eraser width
 - [x] Lasso selection, shapes tool, ruler, and laser pointer
 
-#### Content Overlays
+#### Content Overlays — Part 2
 
-- [ ] Text boxes with font, size, color, bold/italic; movable and resizable
-- [ ] Image insertion from Photos, Files, and drag-and-drop with scale/rotate handles
-- [ ] Shapes: rectangles, circles, arrows, straight lines with snap-to-straight
+- [x] Text boxes with font, size, color, bold/italic; movable and resizable
+- [x] Image insertion from Photos, Files, and drag-and-drop with scale/rotate handles
+- [x] Shapes: rectangles, circles, arrows, straight lines with snap-to-straight (object-layer; Ink/Object mode in shape picker)
 
 #### Zoom Window
 
@@ -223,6 +239,7 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 - [ ] Additional templates: fine/coarse graph paper, Cornell notes, music staff, checklists, planners
 - [ ] Global pinch-to-zoom and pan on page canvas
 - [ ] Fit-page-to-screen gesture
+- [ ] **Immersive writing chrome (deferred):** expand page canvas toward top safe area under floating tool palette; optional hide/show for nav toolbar and thumbnail strip (Apple Notes–inspired); keep add/export/delete reachable — document in Product Spec §4.5 before implementation
 
 ### Exit Criteria (Phase 2 overall — not yet complete)
 
@@ -230,7 +247,7 @@ The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Ca
 
 - All Markup-style pen tools are functional with adjustable parameters — **Part 1 complete**
 - Eraser, lasso, shapes, and ruler work correctly on the canvas — **Part 1 complete**
-- Text boxes and images can be placed, moved, and resized on pages
+- Text boxes and images can be placed, moved, and resized on pages — **Part 2 complete (device QA pending)**
 - Zoom window provides magnified writing with miniature page context
 - Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates
 - Auto-advance can be disabled per book

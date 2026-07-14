@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct PageThumbnailStripView: View {
     let pages: [Page]
@@ -12,7 +13,7 @@ struct PageThumbnailStripView: View {
 
     private var thumbnailCacheKey: String {
         let signatures = pages.map {
-            "\($0.id.uuidString)-\($0.strokeBlobId ?? "none")-\($0.updatedAt.timeIntervalSince1970)"
+            "\($0.id.uuidString)-\($0.strokeBlobId ?? "none")-\($0.objectsBlobId ?? "none")-\($0.updatedAt.timeIntervalSince1970)"
         }
         return "\(thumbnailRevision)-\(signatures.joined(separator: "|"))"
     }
@@ -67,13 +68,35 @@ struct PageThumbnailStripView: View {
             } else {
                 strokeData = nil
             }
-            return PageRenderSnapshot(page: page, strokeData: strokeData)
+
+            let objectsData: Data?
+            if let blobId = page.objectsBlobId {
+                objectsData = try? pageRepository.loadObjectsData(blobId: blobId)
+            } else {
+                objectsData = nil
+            }
+
+            return PageRenderSnapshot(page: page, strokeData: strokeData, objectsData: objectsData)
+        }
+
+        let imageLoader: (String) -> UIImage? = { blobId in
+            guard
+                let data = try? pageRepository.loadImageAsset(blobId: blobId),
+                let image = UIImage(data: data)
+            else {
+                return nil
+            }
+            return image
         }
 
         await withTaskGroup(of: (UUID, UIImage?).self) { group in
             for snapshot in snapshots {
                 group.addTask {
-                    let image = PageContentRenderer.renderThumbnail(snapshot: snapshot, book: book)
+                    let image = PageContentRenderer.renderThumbnail(
+                        snapshot: snapshot,
+                        book: book,
+                        imageLoader: imageLoader
+                    )
                     return (snapshot.pageId, image)
                 }
             }

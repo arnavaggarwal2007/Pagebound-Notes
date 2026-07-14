@@ -80,6 +80,23 @@
 		B1000000000000000000005A /* LaserPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000004C /* LaserPathBuilder.swift */; };
 		B10000000000000000000056 /* DrawingToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000048 /* DrawingToolsTests.swift */; };
 		B10000000000000000000057 /* ToolPresetStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000049 /* ToolPresetStoreTests.swift */; };
+		B10000000000000000000060 /* PageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000060 /* PageObject.swift */; };
+		B10000000000000000000061 /* ObjectSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000061 /* ObjectSerialization.swift */; };
+		B10000000000000000000062 /* ObjectBlobLifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000062 /* ObjectBlobLifecycle.swift */; };
+		B10000000000000000000063 /* ObjectRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000063 /* ObjectRenderer.swift */; };
+		B10000000000000000000064 /* ContentObjectsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000064 /* ContentObjectsOverlay.swift */; };
+		B10000000000000000000065 /* ObjectSerializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000065 /* ObjectSerializationTests.swift */; };
+		B10000000000000000000066 /* ObjectTransformSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000066 /* ObjectTransformSession.swift */; };
+		B10000000000000000000067 /* CanvasTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000067 /* CanvasTextField.swift */; };
+		B10000000000000000000068 /* TextStyleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000068 /* TextStyleBar.swift */; };
+		B10000000000000000000069 /* ObjectTransformSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000069 /* ObjectTransformSessionTests.swift */; };
+		B10000000000000000000070 /* PageInteractionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000070 /* PageInteractionPolicy.swift */; };
+		B10000000000000000000071 /* UIImage+NormalizedSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000071 /* UIImage+NormalizedSize.swift */; };
+		B10000000000000000000072 /* PageTextEditingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000072 /* PageTextEditingOverlay.swift */; };
+		B10000000000000000000073 /* UIImageNormalizedSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000073 /* UIImageNormalizedSizeTests.swift */; };
+		B10000000000000000000074 /* PageObjectHitTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000074 /* PageObjectHitTesting.swift */; };
+		B10000000000000000000075 /* SelectedObjectBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000075 /* SelectedObjectBar.swift */; };
+		B10000000000000000000076 /* PageObjectHitTestingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000076 /* PageObjectHitTestingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +193,23 @@
 		F1000000000000000000004C /* LaserPathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserPathBuilder.swift; sourceTree = "<group>"; };
 		F10000000000000000000048 /* DrawingToolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingToolsTests.swift; sourceTree = "<group>"; };
 		F10000000000000000000049 /* ToolPresetStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPresetStoreTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000060 /* PageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageObject.swift; sourceTree = "<group>"; };
+		F10000000000000000000061 /* ObjectSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSerialization.swift; sourceTree = "<group>"; };
+		F10000000000000000000062 /* ObjectBlobLifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectBlobLifecycle.swift; sourceTree = "<group>"; };
+		F10000000000000000000063 /* ObjectRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectRenderer.swift; sourceTree = "<group>"; };
+		F10000000000000000000064 /* ContentObjectsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentObjectsOverlay.swift; sourceTree = "<group>"; };
+		F10000000000000000000065 /* ObjectSerializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSerializationTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000066 /* ObjectTransformSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTransformSession.swift; sourceTree = "<group>"; };
+		F10000000000000000000067 /* CanvasTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasTextField.swift; sourceTree = "<group>"; };
+		F10000000000000000000068 /* TextStyleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleBar.swift; sourceTree = "<group>"; };
+		F10000000000000000000069 /* ObjectTransformSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTransformSessionTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000070 /* PageInteractionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInteractionPolicy.swift; sourceTree = "<group>"; };
+		F10000000000000000000071 /* UIImage+NormalizedSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+NormalizedSize.swift"; sourceTree = "<group>"; };
+		F10000000000000000000072 /* PageTextEditingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTextEditingOverlay.swift; sourceTree = "<group>"; };
+		F10000000000000000000073 /* UIImageNormalizedSizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageNormalizedSizeTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000074 /* PageObjectHitTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageObjectHitTesting.swift; sourceTree = "<group>"; };
+		F10000000000000000000075 /* SelectedObjectBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedObjectBar.swift; sourceTree = "<group>"; };
+		F10000000000000000000076 /* PageObjectHitTestingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageObjectHitTestingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +277,10 @@
 				F10000000000000000000040 /* TemplateCatalogTests.swift */,
 				F10000000000000000000048 /* DrawingToolsTests.swift */,
 				F10000000000000000000049 /* ToolPresetStoreTests.swift */,
+				F10000000000000000000065 /* ObjectSerializationTests.swift */,
+				F10000000000000000000069 /* ObjectTransformSessionTests.swift */,
+				F10000000000000000000073 /* UIImageNormalizedSizeTests.swift */,
+				F10000000000000000000076 /* PageObjectHitTestingTests.swift */,
 			);
 			path = PageBoundNotesTests;
 			sourceTree = "<group>";
@@ -332,6 +370,11 @@
 				F1000000000000000000004C /* LaserPathBuilder.swift */,
 				F10000000000000000000047 /* ToolParameterPopover.swift */,
 				F1000000000000000000004A /* InkPickerPopover.swift */,
+				F10000000000000000000064 /* ContentObjectsOverlay.swift */,
+				F10000000000000000000067 /* CanvasTextField.swift */,
+				F10000000000000000000068 /* TextStyleBar.swift */,
+				F10000000000000000000072 /* PageTextEditingOverlay.swift */,
+				F10000000000000000000075 /* SelectedObjectBar.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -353,6 +396,11 @@
 				F10000000000000000000041 /* DrawingTools.swift */,
 				F10000000000000000000042 /* ToolPreset.swift */,
 				F1000000000000000000004B /* LaserTrailTiming.swift */,
+				F10000000000000000000060 /* PageObject.swift */,
+				F10000000000000000000066 /* ObjectTransformSession.swift */,
+				F10000000000000000000070 /* PageInteractionPolicy.swift */,
+				F10000000000000000000071 /* UIImage+NormalizedSize.swift */,
+				F10000000000000000000074 /* PageObjectHitTesting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -378,6 +426,9 @@
 				F10000000000000000000025 /* PageContentRenderer.swift */,
 				F10000000000000000000026 /* PDFExportService.swift */,
 				F10000000000000000000043 /* ToolPresetStore.swift */,
+				F10000000000000000000061 /* ObjectSerialization.swift */,
+				F10000000000000000000062 /* ObjectBlobLifecycle.swift */,
+				F10000000000000000000063 /* ObjectRenderer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -581,6 +632,19 @@
 				B10000000000000000000058 /* InkPickerPopover.swift in Sources */,
 				B10000000000000000000059 /* LaserTrailTiming.swift in Sources */,
 				B1000000000000000000005A /* LaserPathBuilder.swift in Sources */,
+				B10000000000000000000060 /* PageObject.swift in Sources */,
+				B10000000000000000000061 /* ObjectSerialization.swift in Sources */,
+				B10000000000000000000062 /* ObjectBlobLifecycle.swift in Sources */,
+				B10000000000000000000063 /* ObjectRenderer.swift in Sources */,
+				B10000000000000000000064 /* ContentObjectsOverlay.swift in Sources */,
+				B10000000000000000000066 /* ObjectTransformSession.swift in Sources */,
+				B10000000000000000000067 /* CanvasTextField.swift in Sources */,
+				B10000000000000000000068 /* TextStyleBar.swift in Sources */,
+				B10000000000000000000070 /* PageInteractionPolicy.swift in Sources */,
+				B10000000000000000000071 /* UIImage+NormalizedSize.swift in Sources */,
+				B10000000000000000000072 /* PageTextEditingOverlay.swift in Sources */,
+				B10000000000000000000074 /* PageObjectHitTesting.swift in Sources */,
+				B10000000000000000000075 /* SelectedObjectBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +668,10 @@
 				B1000000000000000000003E /* TemplateCatalogTests.swift in Sources */,
 				B10000000000000000000056 /* DrawingToolsTests.swift in Sources */,
 				B10000000000000000000057 /* ToolPresetStoreTests.swift in Sources */,
+				B10000000000000000000065 /* ObjectSerializationTests.swift in Sources */,
+				B10000000000000000000069 /* ObjectTransformSessionTests.swift in Sources */,
+				B10000000000000000000076 /* PageObjectHitTestingTests.swift in Sources */,
+				B10000000000000000000073 /* UIImageNormalizedSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
