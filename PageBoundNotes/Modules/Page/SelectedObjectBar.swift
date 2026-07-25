@@ -4,29 +4,43 @@ struct SelectedObjectBar: View {
     @ObservedObject var viewModel: PageViewModel
 
     var body: some View {
-        if showsDelete {
-            HStack(spacing: 12) {
-                Spacer(minLength: 0)
-
-                Button(role: .destructive) {
-                    viewModel.deleteSelectedObject()
+        if showsBar {
+            HStack(spacing: 8) {
+                Button {
+                    viewModel.selectObject(id: nil)
                 } label: {
-                    Label(String(localized: "Delete"), systemImage: "trash")
+                    Label(String(localized: "Done"), systemImage: "checkmark")
+                        .labelStyle(.titleAndIcon)
+                        .font(.subheadline.weight(.semibold))
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
                 }
-                .accessibilityLabel(String(localized: "Delete Object"))
+                .buttonStyle(.plain)
+                .accessibilityLabel(String(localized: "Done"))
+
+                if showsDelete {
+                    Button(role: .destructive) {
+                        viewModel.deleteSelectedObject()
+                    } label: {
+                        Label(String(localized: "Delete"), systemImage: "trash")
+                            .labelStyle(.iconOnly)
+                            .font(.subheadline.weight(.semibold))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(String(localized: "Delete Object"))
+                }
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
             .background(.ultraThinMaterial, in: Capsule())
             .overlay {
                 Capsule()
-                    .strokeBorder(.quaternary, lineWidth: 1)
+                    .strokeBorder(.quaternary, lineWidth: 0.5)
             }
-            .padding(.horizontal, 16)
         }
     }
 
-    private var showsDelete: Bool {
+    private var showsBar: Bool {
         guard let selected = viewModel.selectedObject, !viewModel.isEditingText else { return false }
         switch selected {
         case .text:
@@ -34,5 +48,9 @@ struct SelectedObjectBar: View {
         case .image, .shape:
             return true
         }
+    }
+
+    private var showsDelete: Bool {
+        showsBar
     }
 }

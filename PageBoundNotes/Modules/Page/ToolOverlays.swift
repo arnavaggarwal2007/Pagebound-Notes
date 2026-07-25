@@ -22,10 +22,16 @@ struct LaserPointerOverlay: View {
     private let coreWhite = Color(red: 1, green: 0.95, blue: 0.95)
 
     var body: some View {
+        // Fade opacity from TimelineView date only — do not mutate @State on every tick
+        // (that caused AttributeGraph cycles via onChange(of: timeline.date)).
         TimelineView(.animation(minimumInterval: 1.0 / 30.0)) { timeline in
-            let snapshot = strokes
+            let now = timeline.date
+            let visible = strokes.filter { stroke in
+                guard let endedAt = stroke.endedAt else { return true }
+                return !LaserTrailTiming.shouldPruneStroke(endedAt: endedAt, now: now)
+            }
             Canvas { context, _ in
-                drawStrokes(in: &context, strokes: snapshot, at: timeline.date)
+                drawStrokes(in: &context, strokes: visible, at: now)
             }
             .frame(width: pageSize.width, height: pageSize.height)
             .contentShape(Rectangle())
@@ -36,12 +42,10 @@ struct LaserPointerOverlay: View {
                     }
                     .onEnded { _ in
                         endActiveStroke()
+                        pruneExpiredStrokes(now: Date())
                         onStrokeEnded()
                     }
             )
-            .onChange(of: timeline.date) { _, date in
-                pruneExpiredStrokes(now: date)
-            }
             .allowsHitTesting(true)
             .accessibilityLabel(String(localized: "Laser pointer"))
         }
@@ -115,6 +119,7 @@ struct ShapeDrawingOverlay: View {
     let shapeKind: ShapeKind
     let strokeStyle: InkStrokeStyle
     let onCommit: (CGPoint, CGPoint) -> Void
+    var onCancelTap: ((CGPoint) -> Void)? = nil
 
     @State private var startPoint: CGPoint?
     @State private var currentPoint: CGPoint?
@@ -128,7 +133,7 @@ struct ShapeDrawingOverlay: View {
         .frame(width: pageSize.width, height: pageSize.height)
         .contentShape(Rectangle())
         .gesture(
-            DragGesture(minimumDistance: 2, coordinateSpace: .named(ContentObjectsOverlay.pageCanvasCoordinateSpace))
+            DragGesture(minimumDistance: 0, coordinateSpace: .named(ContentObjectsOverlay.pageCanvasCoordinateSpace))
                 .onChanged { value in
                     if startPoint == nil {
                         startPoint = value.startLocation
@@ -142,6 +147,8 @@ struct ShapeDrawingOverlay: View {
                     let dy = end.y - start.y
                     if hypot(dx, dy) >= ObjectTransformSession.minimumShapeDragDistance {
                         onCommit(start, end)
+                    } else {
+                        onCancelTap?(value.startLocation)
                     }
                     startPoint = nil
                     currentPoint = nil
@@ -190,6 +197,20 @@ struct ShapeDrawingOverlay: View {
                 path.addLine(to: snappedEnd)
             }
             .stroke(color, style: SwiftUI.StrokeStyle(lineWidth: strokeStyle.width, lineCap: .round))
+            .overlay {
+                if shapeKind == .arrow {
+                    Canvas { context, _ in
+                        ShapeArrowhead.draw(
+                            in: &context,
+                            from: start,
+                            to: snappedEnd,
+                            color: color,
+                            lineWidth: strokeStyle.width
+                        )
+                    }
+                    .allowsHitTesting(false)
+                }
+            }
         }
     }
 }

@@ -75,11 +75,11 @@
 		B10000000000000000000053 /* ShapeStrokeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000045 /* ShapeStrokeBuilder.swift */; };
 		B10000000000000000000054 /* ToolOverlays.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000046 /* ToolOverlays.swift */; };
 		B10000000000000000000055 /* ToolParameterPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000047 /* ToolParameterPopover.swift */; };
+		B10000000000000000000056 /* DrawingToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000048 /* DrawingToolsTests.swift */; };
+		B10000000000000000000057 /* ToolPresetStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000049 /* ToolPresetStoreTests.swift */; };
 		B10000000000000000000058 /* InkPickerPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000004A /* InkPickerPopover.swift */; };
 		B10000000000000000000059 /* LaserTrailTiming.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000004B /* LaserTrailTiming.swift */; };
 		B1000000000000000000005A /* LaserPathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000004C /* LaserPathBuilder.swift */; };
-		B10000000000000000000056 /* DrawingToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000048 /* DrawingToolsTests.swift */; };
-		B10000000000000000000057 /* ToolPresetStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000049 /* ToolPresetStoreTests.swift */; };
 		B10000000000000000000060 /* PageObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000060 /* PageObject.swift */; };
 		B10000000000000000000061 /* ObjectSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000061 /* ObjectSerialization.swift */; };
 		B10000000000000000000062 /* ObjectBlobLifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000062 /* ObjectBlobLifecycle.swift */; };
@@ -97,6 +97,12 @@
 		B10000000000000000000074 /* PageObjectHitTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000074 /* PageObjectHitTesting.swift */; };
 		B10000000000000000000075 /* SelectedObjectBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000075 /* SelectedObjectBar.swift */; };
 		B10000000000000000000076 /* PageObjectHitTestingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000076 /* PageObjectHitTestingTests.swift */; };
+		B10000000000000000000078 /* PageHitPassthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000078 /* PageHitPassthrough.swift */; };
+		B10000000000000000000079 /* PageOverlayHitTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000079 /* PageOverlayHitTesting.swift */; };
+		B10000000000000000000080 /* ObjectDisplayGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000080 /* ObjectDisplayGeometry.swift */; };
+		B10000000000000000000081 /* ImageObjectsUnderlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000081 /* ImageObjectsUnderlay.swift */; };
+		B10000000000000000000082 /* PageInteractionPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000082 /* PageInteractionPolicyTests.swift */; };
+		B10000000000000000000083 /* PageOverlayHitTestingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000083 /* PageOverlayHitTestingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,11 +194,11 @@
 		F10000000000000000000045 /* ShapeStrokeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeStrokeBuilder.swift; sourceTree = "<group>"; };
 		F10000000000000000000046 /* ToolOverlays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolOverlays.swift; sourceTree = "<group>"; };
 		F10000000000000000000047 /* ToolParameterPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolParameterPopover.swift; sourceTree = "<group>"; };
+		F10000000000000000000048 /* DrawingToolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingToolsTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000049 /* ToolPresetStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPresetStoreTests.swift; sourceTree = "<group>"; };
 		F1000000000000000000004A /* InkPickerPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkPickerPopover.swift; sourceTree = "<group>"; };
 		F1000000000000000000004B /* LaserTrailTiming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserTrailTiming.swift; sourceTree = "<group>"; };
 		F1000000000000000000004C /* LaserPathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserPathBuilder.swift; sourceTree = "<group>"; };
-		F10000000000000000000048 /* DrawingToolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingToolsTests.swift; sourceTree = "<group>"; };
-		F10000000000000000000049 /* ToolPresetStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPresetStoreTests.swift; sourceTree = "<group>"; };
 		F10000000000000000000060 /* PageObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageObject.swift; sourceTree = "<group>"; };
 		F10000000000000000000061 /* ObjectSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSerialization.swift; sourceTree = "<group>"; };
 		F10000000000000000000062 /* ObjectBlobLifecycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectBlobLifecycle.swift; sourceTree = "<group>"; };
@@ -210,6 +216,12 @@
 		F10000000000000000000074 /* PageObjectHitTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageObjectHitTesting.swift; sourceTree = "<group>"; };
 		F10000000000000000000075 /* SelectedObjectBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedObjectBar.swift; sourceTree = "<group>"; };
 		F10000000000000000000076 /* PageObjectHitTestingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageObjectHitTestingTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000078 /* PageHitPassthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHitPassthrough.swift; sourceTree = "<group>"; };
+		F10000000000000000000079 /* PageOverlayHitTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOverlayHitTesting.swift; sourceTree = "<group>"; };
+		F10000000000000000000080 /* ObjectDisplayGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDisplayGeometry.swift; sourceTree = "<group>"; };
+		F10000000000000000000081 /* ImageObjectsUnderlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObjectsUnderlay.swift; sourceTree = "<group>"; };
+		F10000000000000000000082 /* PageInteractionPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInteractionPolicyTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000083 /* PageOverlayHitTestingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOverlayHitTestingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,16 +293,10 @@
 				F10000000000000000000069 /* ObjectTransformSessionTests.swift */,
 				F10000000000000000000073 /* UIImageNormalizedSizeTests.swift */,
 				F10000000000000000000076 /* PageObjectHitTestingTests.swift */,
+				F10000000000000000000082 /* PageInteractionPolicyTests.swift */,
+				F10000000000000000000083 /* PageOverlayHitTestingTests.swift */,
 			);
 			path = PageBoundNotesTests;
-			sourceTree = "<group>";
-		};
-		G10000000000000000000011 /* PageBoundNotesUITests */ = {
-			isa = PBXGroup;
-			children = (
-				F1000000000000000000003B /* LibraryNavigationUITests.swift */,
-			);
-			path = PageBoundNotesUITests;
 			sourceTree = "<group>";
 		};
 		G10000000000000000000004 /* Products */ = {
@@ -343,42 +349,6 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
-		G1000000000000000000000F /* Book */ = {
-			isa = PBXGroup;
-			children = (
-				F1000000000000000000002A /* BookViewModel.swift */,
-				F1000000000000000000002B /* BookView.swift */,
-				F1000000000000000000002C /* PageThumbnailView.swift */,
-				F1000000000000000000002D /* PageThumbnailStripView.swift */,
-				F10000000000000000000039 /* BookWritingSurface.swift */,
-			);
-			path = Book;
-			sourceTree = "<group>";
-		};
-		G10000000000000000000010 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				F1000000000000000000002E /* PageViewModel.swift */,
-				F10000000000000000000033 /* PageView.swift */,
-				F1000000000000000000002F /* TemplateBackgroundView.swift */,
-				F10000000000000000000030 /* PageFrameView.swift */,
-				F10000000000000000000031 /* CanvasView.swift */,
-				F10000000000000000000032 /* ToolPaletteView.swift */,
-				F10000000000000000000044 /* InkKind+PKMapping.swift */,
-				F10000000000000000000045 /* ShapeStrokeBuilder.swift */,
-				F10000000000000000000046 /* ToolOverlays.swift */,
-				F1000000000000000000004C /* LaserPathBuilder.swift */,
-				F10000000000000000000047 /* ToolParameterPopover.swift */,
-				F1000000000000000000004A /* InkPickerPopover.swift */,
-				F10000000000000000000064 /* ContentObjectsOverlay.swift */,
-				F10000000000000000000067 /* CanvasTextField.swift */,
-				F10000000000000000000068 /* TextStyleBar.swift */,
-				F10000000000000000000072 /* PageTextEditingOverlay.swift */,
-				F10000000000000000000075 /* SelectedObjectBar.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
 		G10000000000000000000009 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +371,8 @@
 				F10000000000000000000070 /* PageInteractionPolicy.swift */,
 				F10000000000000000000071 /* UIImage+NormalizedSize.swift */,
 				F10000000000000000000074 /* PageObjectHitTesting.swift */,
+				F10000000000000000000079 /* PageOverlayHitTesting.swift */,
+				F10000000000000000000080 /* ObjectDisplayGeometry.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -462,6 +434,52 @@
 				F10000000000000000000019 /* SwiftDataPageRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		G1000000000000000000000F /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000002A /* BookViewModel.swift */,
+				F1000000000000000000002B /* BookView.swift */,
+				F1000000000000000000002C /* PageThumbnailView.swift */,
+				F1000000000000000000002D /* PageThumbnailStripView.swift */,
+				F10000000000000000000039 /* BookWritingSurface.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000010 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000002E /* PageViewModel.swift */,
+				F10000000000000000000033 /* PageView.swift */,
+				F1000000000000000000002F /* TemplateBackgroundView.swift */,
+				F10000000000000000000030 /* PageFrameView.swift */,
+				F10000000000000000000031 /* CanvasView.swift */,
+				F10000000000000000000032 /* ToolPaletteView.swift */,
+				F10000000000000000000044 /* InkKind+PKMapping.swift */,
+				F10000000000000000000045 /* ShapeStrokeBuilder.swift */,
+				F10000000000000000000046 /* ToolOverlays.swift */,
+				F1000000000000000000004C /* LaserPathBuilder.swift */,
+				F10000000000000000000047 /* ToolParameterPopover.swift */,
+				F1000000000000000000004A /* InkPickerPopover.swift */,
+				F10000000000000000000064 /* ContentObjectsOverlay.swift */,
+				F10000000000000000000081 /* ImageObjectsUnderlay.swift */,
+				F10000000000000000000078 /* PageHitPassthrough.swift */,
+				F10000000000000000000067 /* CanvasTextField.swift */,
+				F10000000000000000000068 /* TextStyleBar.swift */,
+				F10000000000000000000072 /* PageTextEditingOverlay.swift */,
+				F10000000000000000000075 /* SelectedObjectBar.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000011 /* PageBoundNotesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F1000000000000000000003B /* LibraryNavigationUITests.swift */,
+			);
+			path = PageBoundNotesUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,7 +544,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					T10000000000000000000001 = {
 						CreatedOnToolsVersion = 15.0;
@@ -637,6 +655,7 @@
 				B10000000000000000000062 /* ObjectBlobLifecycle.swift in Sources */,
 				B10000000000000000000063 /* ObjectRenderer.swift in Sources */,
 				B10000000000000000000064 /* ContentObjectsOverlay.swift in Sources */,
+				B10000000000000000000078 /* PageHitPassthrough.swift in Sources */,
 				B10000000000000000000066 /* ObjectTransformSession.swift in Sources */,
 				B10000000000000000000067 /* CanvasTextField.swift in Sources */,
 				B10000000000000000000068 /* TextStyleBar.swift in Sources */,
@@ -644,6 +663,9 @@
 				B10000000000000000000071 /* UIImage+NormalizedSize.swift in Sources */,
 				B10000000000000000000072 /* PageTextEditingOverlay.swift in Sources */,
 				B10000000000000000000074 /* PageObjectHitTesting.swift in Sources */,
+				B10000000000000000000079 /* PageOverlayHitTesting.swift in Sources */,
+				B10000000000000000000080 /* ObjectDisplayGeometry.swift in Sources */,
+				B10000000000000000000081 /* ImageObjectsUnderlay.swift in Sources */,
 				B10000000000000000000075 /* SelectedObjectBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -671,6 +693,8 @@
 				B10000000000000000000065 /* ObjectSerializationTests.swift in Sources */,
 				B10000000000000000000069 /* ObjectTransformSessionTests.swift in Sources */,
 				B10000000000000000000076 /* PageObjectHitTestingTests.swift in Sources */,
+				B10000000000000000000082 /* PageInteractionPolicyTests.swift in Sources */,
+				B10000000000000000000083 /* PageOverlayHitTestingTests.swift in Sources */,
 				B10000000000000000000073 /* UIImageNormalizedSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,20 +730,48 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = W2A9J24774;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -732,14 +784,42 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = W2A9J24774;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -752,7 +832,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2A9J24774;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "PageBound Notes";
@@ -783,7 +862,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2A9J24774;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "PageBound Notes";
@@ -813,7 +891,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2A9J24774;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1.0;
@@ -832,7 +909,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2A9J24774;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1.0;
@@ -850,7 +926,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2A9J24774;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1.0;
@@ -868,7 +943,6 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W2A9J24774;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 0.1.0;
@@ -902,20 +976,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		L10000000000000000000004 /* Build configuration list for PBXNativeTarget "PageBoundNotesUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C20000000000000000000007 /* Debug */,
-				C20000000000000000000008 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		L10000000000000000000003 /* Build configuration list for PBXProject "PageBoundNotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C20000000000000000000001 /* Debug */,
 				C20000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L10000000000000000000004 /* Build configuration list for PBXNativeTarget "PageBoundNotesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C20000000000000000000007 /* Debug */,
+				C20000000000000000000008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

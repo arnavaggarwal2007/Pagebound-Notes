@@ -6,9 +6,11 @@ struct CanvasView: UIViewRepresentable {
     let pageId: UUID
     let drawing: PKDrawing
     var toolState: ToolApplicationState
+    var allowsFingerObjectTap: Bool
     var onDrawingChanged: (PKDrawing) -> Void
     var onPencilSwitchEraser: () -> Void
     var onPencilSwitchPrevious: () -> Void
+    var onFingerObjectTap: ((CGPoint) -> Void)?
 
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
@@ -21,6 +23,10 @@ struct CanvasView: UIViewRepresentable {
         canvas.backgroundColor = .clear
         canvas.isOpaque = false
         canvas.overrideUserInterfaceStyle = .light
+        canvas.isScrollEnabled = false
+        canvas.bounces = false
+        canvas.minimumZoomScale = 1
+        canvas.maximumZoomScale = 1
         context.coordinator.boundPageId = pageId
         PencilKitToolFactory.configureContentVersion(on: canvas)
 
@@ -28,6 +34,15 @@ struct CanvasView: UIViewRepresentable {
         pencilInteraction.delegate = context.coordinator
         canvas.addInteraction(pencilInteraction)
         context.coordinator.pencilInteraction = pencilInteraction
+
+        let fingerTap = UITapGestureRecognizer(
+            target: context.coordinator,
+            action: #selector(Coordinator.handleFingerTap(_:))
+        )
+        fingerTap.allowedTouchTypes = [NSNumber(value: UITouch.TouchType.direct.rawValue)]
+        fingerTap.cancelsTouchesInView = false
+        canvas.addGestureRecognizer(fingerTap)
+        context.coordinator.fingerTapRecognizer = fingerTap
 
         context.coordinator.sync(canvas: canvas, drawing: drawing, toolState: toolState)
         return canvas
@@ -50,6 +65,7 @@ struct CanvasView: UIViewRepresentable {
         var lastAppliedToolState: ToolApplicationState?
         var lastAppliedDrawingData: Data?
         weak var pencilInteraction: UIPencilInteraction?
+        weak var fingerTapRecognizer: UITapGestureRecognizer?
 
         init(parent: CanvasView) {
             self.parent = parent
@@ -60,6 +76,12 @@ struct CanvasView: UIViewRepresentable {
             canvas.drawingPolicy = toolState.isPencilOnly ? .pencilOnly : .anyInput
             canvas.isUserInteractionEnabled = toolState.isDrawingEnabled
             canvas.isRulerActive = toolState.isRulerActive
+            canvas.isScrollEnabled = false
+            canvas.bounces = false
+
+            fingerTapRecognizer?.isEnabled = parent.allowsFingerObjectTap
+                && toolState.isDrawingEnabled
+                && parent.onFingerObjectTap != nil
 
             let drawingData = drawing.dataRepresentation()
             if drawingData != lastAppliedDrawingData {
@@ -83,6 +105,13 @@ struct CanvasView: UIViewRepresentable {
                 style: toolState.strokeStyle,
                 pixelEraserWidth: toolState.eraserWidth
             )
+        }
+
+        @objc func handleFingerTap(_ recognizer: UITapGestureRecognizer) {
+            guard recognizer.state == .ended,
+                  let canvas = recognizer.view else { return }
+            let location = recognizer.location(in: canvas)
+            parent.onFingerObjectTap?(location)
         }
 
         func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {

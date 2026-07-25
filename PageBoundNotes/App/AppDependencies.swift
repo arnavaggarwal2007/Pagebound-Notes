@@ -9,6 +9,7 @@ struct AppDependencies {
     let pdfExportService: PDFExportService
     let toolPresetStore: ToolPresetStore
 
+    @MainActor
     static func live(container: ModelContainer) throws -> AppDependencies {
         let context = ModelContext(container)
         let blobStore = try BlobStoreService()
@@ -25,11 +26,13 @@ struct AppDependencies {
         )
     }
 
+    @MainActor
     static func preview() throws -> AppDependencies {
         let container = try PersistenceController.makePreviewContainer()
         return try live(container: container)
     }
 
+    @MainActor
     static func test(container: ModelContainer, blobRoot: URL? = nil) throws -> AppDependencies {
         let context = ModelContext(container)
         let blobStore = try BlobStoreService(rootDirectory: blobRoot)

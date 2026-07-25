@@ -107,7 +107,7 @@ final class LibraryNavigationUITests: XCTestCase {
 
         app.buttons["Create"].tap()
 
-        XCTAssertFalse(app.textFields["Folder Name"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.textFields["Folder Name"].waitForNonExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Empty Folder"].waitForExistence(timeout: 5))
     }
 

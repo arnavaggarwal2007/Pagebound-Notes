@@ -1,7 +1,8 @@
 import Foundation
 import SwiftData
 
-final class SwiftDataPageRepository: PageRepositoryProtocol, @unchecked Sendable {
+@MainActor
+final class SwiftDataPageRepository: PageRepositoryProtocol {
     private let modelContext: ModelContext
     private let blobStore: BlobStoreService
 
@@ -122,6 +123,10 @@ final class SwiftDataPageRepository: PageRepositoryProtocol, @unchecked Sendable
 
     func loadImageAsset(blobId: String) throws -> Data? {
         try blobStore.load(id: blobId)
+    }
+
+    func deleteImageAsset(blobId: String) throws {
+        try blobStore.delete(id: blobId)
     }
 
     func deleteObjectsBlob(_ blobId: String) throws {

@@ -38,12 +38,36 @@ struct PageInteractionPolicy: Equatable, Sendable {
         allowsObjectInteraction || selectedObjectId != nil || textToolPhase == .insertPending
     }
 
-    var disablesPageScrolling: Bool {
+    /// Finger tap-to-select on objects while ink/lasso/eraser is active (pencil passes through overlay).
+    var allowsFingerObjectSelection: Bool {
         switch selectedTool {
-        case .shapes, .laser, .text, .image:
+        case .ink, .lasso, .eraser:
             true
         default:
-            selectedObjectId != nil || isEditingText
+            false
+        }
+    }
+
+    var overlayReceivesHits: Bool {
+        allowsObjectTransform
+            || allowsObjectInteraction
+            || allowsBackgroundTap
+            || allowsFingerObjectSelection
+            || isEditingText
+    }
+
+    var disablesPageScrolling: Bool {
+        if isEditingText {
+            return false
+        }
+        if selectedTool.usesCanvasInput, !shouldDisableCanvasDrawing {
+            return true
+        }
+        switch selectedTool {
+        case .shapes, .laser, .text, .image:
+            return true
+        default:
+            return selectedObjectId != nil || isEditingText
         }
     }
 

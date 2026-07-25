@@ -1,6 +1,7 @@
 import XCTest
 @testable import PageBoundNotes
 
+@MainActor
 final class SwiftDataBookRepositoryTests: XCTestCase {
     private var storeDirectory: URL!
     private var dependencies: AppDependencies!

@@ -9,6 +9,33 @@ enum ObjectRenderer {
         in context: CGContext,
         pageSize: CGSize
     ) {
+        drawImages(objects: objects, imageLoader: imageLoader, in: context, pageSize: pageSize)
+        drawForegroundObjects(objects: objects, in: context, pageSize: pageSize)
+    }
+
+    static func drawImages(
+        objects: [PageObject],
+        imageLoader: (String) -> UIImage?,
+        in context: CGContext,
+        pageSize: CGSize
+    ) {
+        let clip = CGRect(origin: .zero, size: pageSize)
+        context.saveGState()
+        context.clip(to: clip)
+
+        for object in objects.sorted(by: { $0.zIndex < $1.zIndex }) {
+            guard case .image(let imageObject) = object else { continue }
+            drawImage(imageObject, imageLoader: imageLoader, in: context)
+        }
+
+        context.restoreGState()
+    }
+
+    static func drawForegroundObjects(
+        objects: [PageObject],
+        in context: CGContext,
+        pageSize: CGSize
+    ) {
         let clip = CGRect(origin: .zero, size: pageSize)
         context.saveGState()
         context.clip(to: clip)
@@ -17,8 +44,8 @@ enum ObjectRenderer {
             switch object {
             case .text(let textBox):
                 drawTextBox(textBox, in: context)
-            case .image(let imageObject):
-                drawImage(imageObject, imageLoader: imageLoader, in: context)
+            case .image:
+                break
             case .shape(let shapeObject):
                 drawShape(shapeObject, in: context)
             }
@@ -74,9 +101,21 @@ enum ObjectRenderer {
     }
 
     private static func drawShape(_ shapeObject: ShapeObject, in context: CGContext) {
+        let frame = shapeObject.geometry.frame.cgRect
+        let lineWidth = CGFloat(shapeObject.style.strokeWidth)
+        let inset = max(lineWidth / 2, 0.5)
+        let drawRect = frame.insetBy(dx: inset, dy: inset)
+
+        context.saveGState()
+        if shapeObject.geometry.rotation != 0 {
+            context.translateBy(x: frame.midX, y: frame.midY)
+            context.rotate(by: CGFloat(shapeObject.geometry.rotation))
+            context.translateBy(x: -frame.midX, y: -frame.midY)
+        }
+
         let color = shapeObject.style.strokeColor.uiColor
         context.setStrokeColor(color.cgColor)
-        context.setLineWidth(CGFloat(shapeObject.style.strokeWidth))
+        context.setLineWidth(lineWidth)
         context.setLineCap(.round)
         context.setLineJoin(.round)
 
@@ -86,26 +125,28 @@ enum ObjectRenderer {
 
         switch shapeObject.kind {
         case .rectangle:
-            let rect = shapeObject.geometry.frame.cgRect
             if shapeObject.style.fillColor != nil {
-                context.fill(rect)
+                context.fill(drawRect)
             }
-            context.stroke(rect)
+            context.stroke(drawRect)
         case .ellipse:
-            let rect = shapeObject.geometry.frame.cgRect
             if shapeObject.style.fillColor != nil {
-                context.fillEllipse(in: rect)
+                context.fillEllipse(in: drawRect)
             }
-            context.strokeEllipse(in: rect)
+            context.strokeEllipse(in: drawRect)
         case .line, .arrow:
-            guard let (start, end) = shapeObject.lineEndpoints() else { return }
+            guard let (start, end) = shapeObject.lineEndpoints() else {
+                context.restoreGState()
+                return
+            }
             context.move(to: start)
             context.addLine(to: end)
             context.strokePath()
             if shapeObject.kind == .arrow {
-                drawArrowhead(from: start, to: end, in: context, lineWidth: CGFloat(shapeObject.style.strokeWidth))
+                drawArrowhead(from: start, to: end, in: context, lineWidth: lineWidth)
             }
         }
+        context.restoreGState()
     }
 
     private static func drawArrowhead(

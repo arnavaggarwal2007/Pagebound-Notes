@@ -9,6 +9,7 @@ enum TestSupport {
         return url
     }
 
+    @MainActor
     static func makeTestDependencies() throws -> (AppDependencies, URL) {
         let storeDirectory = try makeTemporaryStoreDirectory()
         let blobDirectory = storeDirectory.appendingPathComponent("Blobs", isDirectory: true)

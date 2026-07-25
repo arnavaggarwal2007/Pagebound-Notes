@@ -1,6 +1,7 @@
 import XCTest
 @testable import PageBoundNotes
 
+@MainActor
 final class PageRepositoryTests: XCTestCase {
     func testPageCRUDAndStrokeBlobRoundTrip() async throws {
         let (dependencies, tempDirectory) = try TestSupport.makeTestDependencies()
@@ -91,5 +92,16 @@ final class PageRepositoryTests: XCTestCase {
         let blobId = try dependencies.pageRepository.saveImageAsset(data: payload)
         let loaded = try dependencies.pageRepository.loadImageAsset(blobId: blobId)
         XCTAssertEqual(loaded, payload)
+    }
+
+    func testDeleteImageAssetRemovesBlob() throws {
+        let (dependencies, tempDirectory) = try TestSupport.makeTestDependencies()
+        defer { TestSupport.cleanup(tempDirectory) }
+
+        let payload = Data([0x89, 0x50, 0x4E, 0x47])
+        let blobId = try dependencies.pageRepository.saveImageAsset(data: payload)
+        try dependencies.pageRepository.deleteImageAsset(blobId: blobId)
+        let loaded = try dependencies.pageRepository.loadImageAsset(blobId: blobId)
+        XCTAssertNil(loaded)
     }
 }

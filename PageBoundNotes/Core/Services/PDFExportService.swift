@@ -25,7 +25,10 @@ enum PDFExportError: Error, LocalizedError, Equatable {
     }
 }
 
-final class PDFExportService: Sendable {
+/// Export orchestration stays on the main actor so SwiftData access is safe.
+/// Heavy PDF rasterization still runs off-main via `Task.detached` with preloaded assets.
+@MainActor
+final class PDFExportService {
     private let pageRepository: PageRepositoryProtocol
 
     init(pageRepository: PageRepositoryProtocol) {
@@ -71,15 +74,28 @@ final class PDFExportService: Sendable {
             throw PDFExportError.pageNotFound
         }
 
+        var imageAssets: [String: Data] = [:]
+        for snapshot in snapshots {
+            for blobId in snapshot.objectsDocument.imageBlobIds() {
+                if imageAssets[blobId] == nil,
+                   let data = try pageRepository.loadImageAsset(blobId: blobId) {
+                    imageAssets[blobId] = data
+                }
+            }
+        }
+
         let initialBounds = CGRect(
             origin: .zero,
             size: book.pageSize.dimensions(in: firstSnapshot.orientation)
         )
 
-        return await Task.detached(priority: .userInitiated) { [pageRepository] in
+        let preparedSnapshots = snapshots
+        let preparedAssets = imageAssets
+
+        return await Task.detached(priority: .userInitiated) {
             let renderer = UIGraphicsPDFRenderer(bounds: initialBounds)
             return renderer.pdfData { context in
-                for snapshot in snapshots {
+                for snapshot in preparedSnapshots {
                     let pageRect = CGRect(
                         origin: .zero,
                         size: book.pageSize.dimensions(in: snapshot.orientation)
@@ -89,7 +105,7 @@ final class PDFExportService: Sendable {
                     let template = TemplateCatalog.template(for: snapshot.templateId) ?? TemplateCatalog.blank
                     let imageLoader: (String) -> UIImage? = { blobId in
                         guard
-                            let data = try? pageRepository.loadImageAsset(blobId: blobId),
+                            let data = preparedAssets[blobId],
                             let image = UIImage(data: data)
                         else {
                             return nil

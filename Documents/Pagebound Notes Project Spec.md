@@ -140,8 +140,8 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 - Text boxes overlaying pages, with:
     - Font, size, color, basic rich text (bold/italic).
     - Movable and resizable bounding boxes.
-- Image insertion from Photos, Files, or drag‑and‑drop, with transform handles for scale/rotate. **Image resize preserves intrinsic aspect ratio** — selection chrome matches photo bounds.
-- Shapes: rectangles, circles, arrows, straight lines, with “snap to straight” when appropriate. **Unfilled object shapes** allow ink/eraser/lasso through the interior; borders remain selectable. **Ink-mode shapes** commit as strokes (erasable; not object-resizable).
+- Image insertion from Photos, Files, or drag‑and‑drop, with transform handles for scale/rotate. **Images render below the stroke layer** so pen ink can annotate photos (PDF Markup / GoodNotes pattern). **Image resize preserves intrinsic aspect ratio** — selection chrome matches photo bounds.
+- Shapes: rectangles, circles, arrows, straight lines, with “snap to straight” when appropriate. **Object shapes and text render above ink.** **Unfilled object shapes** allow ink/eraser/lasso through the interior; borders remain selectable. **Ink-mode shapes** commit as strokes (erasable; not object-resizable) using the last selected ink tool.
 
 
 ### 4.7 PDF Import and Export

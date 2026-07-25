@@ -1,16 +1,9 @@
 import UIKit
 
 extension UIImage {
-    /// Pixel dimensions as displayed after applying EXIF orientation.
+    /// Pixel dimensions as displayed in layout after orientation is applied.
     var normalizedPixelSize: CGSize {
-        guard let cgImage else { return size }
-        let pixelSize = CGSize(width: cgImage.width, height: cgImage.height)
-        switch imageOrientation {
-        case .left, .leftMirrored, .right, .rightMirrored:
-            return CGSize(width: pixelSize.height, height: pixelSize.width)
-        default:
-            return pixelSize
-        }
+        CGSize(width: size.width * scale, height: size.height * scale)
     }
 
     /// Aspect-fit rect for drawing `self` inside `bounds`, matching on-screen scaledToFit layout.

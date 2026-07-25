@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** July 14, 2026
+**Last updated:** July 21, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -165,9 +165,15 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 >
 > **2026-07-12 (Phase 2 Part 2 implementation):** Content Overlays implemented — text boxes, image insertion (Photos/Files/drag-drop), object-layer shapes with dual Ink/Object shape modes; objects persist via `objectsBlobId`; PDF export and thumbnails composite overlays. Device QA pending.
 >
-> **2026-07-14 (Phase 2 Part 2 QA remediation):** Object/text interaction fixes — stroke-rim hit for unfilled shapes; 12pt visual / 44pt hit transform handles; opposite-corner resize pin; aspect-locked image resize; shared delete for image/shape; first-insert keyboard focus via windowed `UITextView`. Device re-QA pending.
+> **2026-07-21 (Phase 2 Part 2 recovery):** Interaction and layering recovery — images under ink; region-aware hit testing; scroll/gesture ownership fixes; transform clamp + rotation-aware hits; writing chrome polish. Device re-QA pending.
 
-### Phase 2 Part 2 — Content Overlays (QA remediation complete; device re-QA pending)
+> **2026-07-21 (Phase 2 Part 2 closeout):** Draw-on-image fix — overlay no longer claims unselected bodies during ink; finger tap-select via canvas gesture. Unit test fixes.
+>
+> **2026-07-21 (Phase 2 Part 2 sign-off):** Device QA passed on physical iPad (stroke/erase/lasso on photos, layering, transforms, regression). **Part 2 officially signed off.** Phase 2 remains in progress (Zoom Window next).
+
+### Phase 2 Part 2 — Content Overlays (Complete)
+
+**Signed off:** 2026-07-21 (device QA confirmed after draw-on-image fix)
 
 #### Part 2 Exit Criteria
 
@@ -175,9 +181,9 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 - [x] Images: insert from Photos, Files, drag-and-drop; scale and rotate handles; separate image blobs
 - [x] Object-layer shapes: rectangle, circle, arrow, line with snap-to-straight; movable/resizable after placement
 - [x] Objects render above strokes; selection handles per UI Guidelines §4.4
-- [x] PDF export and thumbnails composite objects above strokes
+- [x] PDF export and thumbnails composite images under ink; text and shapes above ink
 - [x] Unit tests: object serialization, repository round-trip, renderer regression, transform/hit-testing
-- [ ] Device QA on physical iPad (see vault `Area – QA`)
+- [x] Device QA on physical iPad (see vault `Area – QA`)
 
 ### Phase 2 Part 1 — Full Tool Catalog (Complete)
 
@@ -247,7 +253,7 @@ The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Ca
 
 - All Markup-style pen tools are functional with adjustable parameters — **Part 1 complete**
 - Eraser, lasso, shapes, and ruler work correctly on the canvas — **Part 1 complete**
-- Text boxes and images can be placed, moved, and resized on pages — **Part 2 complete (device QA pending)**
+- Text boxes and images can be placed, moved, and resized on pages — **Part 2 complete**
 - Zoom window provides magnified writing with miniature page context
 - Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates
 - Auto-advance can be disabled per book
@@ -402,6 +408,9 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-07-21 | **Phase 2 Part 2 officially signed off** — device QA passed (draw/erase/lasso on photos, layering, transforms); unit + UI tests green; Phase 2 in progress (Zoom Window next) |
+| 2026-07-21 | Phase 2 Part 2 closeout — draw-on-image fix (canvas finger tap-select); unit test fixes |
+| 2026-07-21 | Phase 2 Part 2 recovery — images under ink, gesture ownership fixes, transform/hit-testing hardening, writing chrome polish; device re-QA pending |
 | 2026-07-10 | **Phase 2 Part 1 officially signed off** — remediation + library polish re-QA complete; 84 unit tests; all Part 1 exit criteria met; Phase 2 in progress |
 | 2026-07-10 | Phase 2 Part 1 remediation — pixel eraser `fixedWidthBitmap`, laser render fix; sign-off pending re-QA |
 | 2026-07-10 | Phase 2 Part 1 (Full Tool Catalog) signed off — closeout polish (eraser labels, pixel eraser width, laser fade); 75 unit tests, ~72% coverage; Phase 2 status In progress |

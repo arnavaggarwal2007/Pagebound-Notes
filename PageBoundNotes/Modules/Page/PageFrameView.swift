@@ -7,7 +7,7 @@ struct PageFrameView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .strokeBorder(.primary.opacity(0.35), lineWidth: 1)
+                .strokeBorder(.primary.opacity(0.22), lineWidth: 0.75)
 
             if showsSafeMargin {
                 Rectangle()

@@ -18,7 +18,7 @@ struct PageTextEditingLayer: View {
                 textColor: uiTextColor(for: textBox),
                 shouldBecomeFirstResponder: shouldFocus,
                 onEditingEnded: {
-                    viewModel.endTextEditing()
+                    viewModel.finishTextEditing()
                 }
             )
             .padding(4)
@@ -48,14 +48,12 @@ struct PageTextEditingLayer: View {
     }
 
     private func uiFont(for textBox: TextBoxObject) -> UIFont {
-        let weight: UIFont.Weight = textBox.isBold ? .bold : .regular
-        let descriptor = UIFontDescriptor(name: textBox.fontName, size: CGFloat(textBox.fontSize))
-            .addingAttributes([.traits: [UIFontDescriptor.TraitKey.weight: weight]])
-        var font = UIFont(descriptor: descriptor, size: CGFloat(textBox.fontSize))
-        if textBox.isItalic, let italicDescriptor = font.fontDescriptor.withSymbolicTraits(.traitItalic) {
-            font = UIFont(descriptor: italicDescriptor, size: CGFloat(textBox.fontSize))
-        }
-        return font
+        ObjectRenderer.makeFont(
+            name: textBox.fontName,
+            size: CGFloat(textBox.fontSize),
+            isBold: textBox.isBold,
+            isItalic: textBox.isItalic
+        )
     }
 
     private func uiTextColor(for textBox: TextBoxObject) -> UIColor {

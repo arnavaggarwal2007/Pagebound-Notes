@@ -61,6 +61,29 @@ final class PageObjectHitTestingTests: XCTestCase {
         )
     }
 
+    func testRotatedRectangleHitUsesLocalSpace() {
+        var geometry = ObjectGeometry(frame: CGRect(x: 100, y: 100, width: 100, height: 40))
+        geometry.rotation = .pi / 2
+        let shape = ShapeObject(
+            id: UUID(),
+            geometry: geometry,
+            kind: .rectangle,
+            style: .default,
+            startPoint: nil,
+            endPoint: nil
+        )
+
+        let visualCenter = CGPoint(x: 150, y: 150)
+        XCTAssertTrue(
+            PageObjectHitTesting.contains(
+                visualCenter,
+                in: shape,
+                isSelected: true,
+                allowsTransform: true
+            )
+        )
+    }
+
     private func makeShape(kind: ShapeKind, frame: CGRect) -> ShapeObject {
         ShapeObject(
             id: UUID(),

@@ -2,7 +2,7 @@
 title: UI Guidelines
 version: 1.0
 status: canonical
-last-updated: 2026-07-07
+last-updated: 2026-07-21
 ---
 
 # PageBound Notes – UI and Visual Design Specification
@@ -129,7 +129,7 @@ Handwritten content (PencilKit strokes) should visually dominate on page surface
 
 - **Page framing:** Each page is rendered with a crisp outline indicating its physical size and clipping area; safe margins may be shown as subtle guide lines.
 - **Templates:** Ruled, grid, Cornell, and other templates use fine, low-contrast lines that do not visually compete with ink strokes.
-- **Content overlays:** Text boxes, images, and shapes sit above the stroke layer and are manipulable via handles when selected; otherwise they visually integrate into the page.
+- **Content overlays:** Text boxes and object shapes sit above the stroke layer and are manipulable via handles when selected. **Images** sit below the stroke layer so ink can annotate photos (PDF Markup / GoodNotes pattern). Unfilled shapes pass ink through their interior via stroke-rim hit targets.
 
 ### 4.5 Adaptive Layout
 

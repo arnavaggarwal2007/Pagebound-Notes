@@ -1,7 +1,8 @@
 import Foundation
 import SwiftData
 
-final class SwiftDataLibraryRepository: LibraryRepositoryProtocol, @unchecked Sendable {
+@MainActor
+final class SwiftDataLibraryRepository: LibraryRepositoryProtocol {
     private let modelContext: ModelContext
     private let blobStore: BlobStoreService
 

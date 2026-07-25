@@ -1,6 +1,7 @@
 import XCTest
 @testable import PageBoundNotes
 
+@MainActor
 final class DuplicateBookTests: XCTestCase {
     private var storeDirectory: URL!
     private var dependencies: AppDependencies!

@@ -61,7 +61,8 @@ struct PageThumbnailStripView: View {
     private func loadThumbnails() async {
         thumbnails = [:]
 
-        let snapshots = pages.map { page -> PageRenderSnapshot in
+        // Load blob payloads on the main actor; render off-main without touching repositories.
+        let snapshots: [PageRenderSnapshot] = pages.map { page in
             let strokeData: Data?
             if let blobId = page.strokeBlobId {
                 strokeData = try? pageRepository.loadStrokeData(blobId: blobId)
@@ -79,22 +80,33 @@ struct PageThumbnailStripView: View {
             return PageRenderSnapshot(page: page, strokeData: strokeData, objectsData: objectsData)
         }
 
-        let imageLoader: (String) -> UIImage? = { blobId in
-            guard
-                let data = try? pageRepository.loadImageAsset(blobId: blobId),
-                let image = UIImage(data: data)
-            else {
-                return nil
+        var imageAssets: [String: Data] = [:]
+        for snapshot in snapshots {
+            for blobId in snapshot.objectsDocument.imageBlobIds() {
+                if imageAssets[blobId] == nil,
+                   let data = try? pageRepository.loadImageAsset(blobId: blobId) {
+                    imageAssets[blobId] = data
+                }
             }
-            return image
         }
 
+        let bookForRender = book
         await withTaskGroup(of: (UUID, UIImage?).self) { group in
             for snapshot in snapshots {
+                let assets = imageAssets
                 group.addTask {
+                    let imageLoader: (String) -> UIImage? = { blobId in
+                        guard
+                            let data = assets[blobId],
+                            let image = UIImage(data: data)
+                        else {
+                            return nil
+                        }
+                        return image
+                    }
                     let image = PageContentRenderer.renderThumbnail(
                         snapshot: snapshot,
-                        book: book,
+                        book: bookForRender,
                         imageLoader: imageLoader
                     )
                     return (snapshot.pageId, image)
@@ -103,9 +115,7 @@ struct PageThumbnailStripView: View {
 
             for await (pageId, image) in group {
                 if let image {
-                    await MainActor.run {
-                        thumbnails[pageId] = image
-                    }
+                    thumbnails[pageId] = image
                 }
             }
         }

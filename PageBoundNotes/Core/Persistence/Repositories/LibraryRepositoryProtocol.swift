@@ -1,6 +1,7 @@
 import Foundation
 
-protocol LibraryRepositoryProtocol: Sendable {
+@MainActor
+protocol LibraryRepositoryProtocol: AnyObject {
     func fetchRootFolders() throws -> [Folder]
     func fetchFolders(inParent parentId: UUID?) throws -> [Folder]
     func fetchFolder(id: UUID) throws -> Folder?

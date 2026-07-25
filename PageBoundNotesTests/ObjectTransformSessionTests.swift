@@ -37,6 +37,36 @@ final class ObjectTransformSessionTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(resized.size.height, ObjectTransformSession.minimumSize)
     }
 
+    func testResizedFrameWithRotationPinsScreenAnchorCorner() {
+        let start = CGRect(x: 100, y: 200, width: 80, height: 160)
+        let rotation = Double.pi / 4
+        let localDelta = CGSize(width: 20, height: 10)
+        let screenDelta = ObjectTransformSession.rotateDelta(localDelta, by: rotation)
+        let pageBounds = CGRect(x: 0, y: 0, width: 800, height: 1000)
+        let resized = ObjectTransformSession.resizedFrame(
+            from: start,
+            handle: .bottomRight,
+            delta: screenDelta,
+            rotation: rotation,
+            pageBounds: pageBounds
+        )
+
+        let anchorBefore = ObjectTransformHandle.topLeft.point(in: start, rotation: rotation)
+        let anchorAfter = ObjectTransformHandle.topLeft.point(in: resized, rotation: rotation)
+        XCTAssertEqual(anchorAfter.x, anchorBefore.x, accuracy: 0.5)
+        XCTAssertEqual(anchorAfter.y, anchorBefore.y, accuracy: 0.5)
+    }
+
+    func testClampedFrameKeepsRectInsidePageBounds() {
+        let frame = CGRect(x: -20, y: 700, width: 200, height: 200)
+        let pageBounds = CGRect(x: 0, y: 0, width: 612, height: 792)
+        let clamped = ObjectTransformSession.clampedFrame(frame, to: pageBounds)
+        XCTAssertGreaterThanOrEqual(clamped.minX, pageBounds.minX)
+        XCTAssertGreaterThanOrEqual(clamped.minY, pageBounds.minY)
+        XCTAssertLessThanOrEqual(clamped.maxX, pageBounds.maxX)
+        XCTAssertLessThanOrEqual(clamped.maxY, pageBounds.maxY)
+    }
+
     func testResizedFrameWithLockedAspectPreservesRatio() {
         let start = CGRect(x: 10, y: 20, width: 200, height: 200)
         let resized = ObjectTransformSession.resizedFrame(
@@ -82,10 +112,11 @@ final class ObjectTransformSessionTests: XCTestCase {
             to: newFrame
         )
 
-        XCTAssertEqual(endpoints?.0.x, 20, accuracy: 0.01)
-        XCTAssertEqual(endpoints?.0.y, 20, accuracy: 0.01)
-        XCTAssertEqual(endpoints?.1.x, 180, accuracy: 0.01)
-        XCTAssertEqual(endpoints?.1.y, 180, accuracy: 0.01)
+        XCTAssertNotNil(endpoints)
+        XCTAssertEqual(endpoints?.0.x ?? 0, 20, accuracy: 0.01)
+        XCTAssertEqual(endpoints?.0.y ?? 0, 20, accuracy: 0.01)
+        XCTAssertEqual(endpoints?.1.x ?? 0, 180, accuracy: 0.01)
+        XCTAssertEqual(endpoints?.1.y ?? 0, 180, accuracy: 0.01)
     }
 
     func testRotationDeltaUsesAngleAroundCenter() {

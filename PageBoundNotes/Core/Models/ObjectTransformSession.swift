@@ -43,24 +43,56 @@ enum ObjectTransformSession {
     static let handleHitSize: CGFloat = 44
     static let rotationHandleHitSize: CGFloat = handleHitSize
 
-    static func movedFrame(_ frame: CGRect, by translation: CGSize) -> CGRect {
+    static func movedFrame(_ frame: CGRect, by translation: CGSize, pageBounds: CGRect? = nil) -> CGRect {
         var rect = frame
         rect.origin.x += translation.width
         rect.origin.y += translation.height
+        if let pageBounds {
+            rect = clampedFrame(rect, to: pageBounds)
+        }
         return rect
     }
 
+    static func clampedFrame(
+        _ frame: CGRect,
+        to pageBounds: CGRect,
+        minSize: CGFloat = minimumSize
+    ) -> CGRect {
+        var rect = frame
+        rect.size.width = max(rect.size.width, minSize)
+        rect.size.height = max(rect.size.height, minSize)
+
+        if rect.minX < pageBounds.minX {
+            rect.origin.x = pageBounds.minX
+        }
+        if rect.minY < pageBounds.minY {
+            rect.origin.y = pageBounds.minY
+        }
+        if rect.maxX > pageBounds.maxX {
+            rect.origin.x = pageBounds.maxX - rect.width
+        }
+        if rect.maxY > pageBounds.maxY {
+            rect.origin.y = pageBounds.maxY - rect.height
+        }
+        return rect
+    }
+
+    /// Resize in the object's local (unrotated) space so the opposite corner stays pinned
+    /// even when the visual has been rotated. `delta` is in page/screen space.
     static func resizedFrame(
         from start: CGRect,
         handle: ObjectTransformHandle,
         delta: CGSize,
+        rotation: Double = 0,
         minSize: CGFloat = minimumSize,
-        lockedAspect: CGFloat? = nil
+        lockedAspect: CGFloat? = nil,
+        pageBounds: CGRect? = nil
     ) -> CGRect {
         guard handle.isCorner else { return start }
 
+        let localDelta = rotateDelta(delta, by: -rotation)
         let anchor = anchorPoint(for: handle, in: start)
-        let dragged = draggedCorner(for: handle, in: start, delta: delta)
+        let dragged = draggedCorner(for: handle, in: start, delta: localDelta)
         var width = abs(dragged.x - anchor.x)
         var height = abs(dragged.y - anchor.y)
 
@@ -83,7 +115,54 @@ enum ObjectTransformSession {
             height = max(height, minSize)
         }
 
-        return rectFrom(anchor: anchor, handle: handle, width: width, height: height)
+        var rect = rectFrom(anchor: anchor, handle: handle, width: width, height: height)
+        if rotation != 0 {
+            rect = translateToPinScreenAnchor(
+                frame: rect,
+                start: start,
+                handle: handle,
+                rotation: rotation
+            )
+        }
+        if let pageBounds {
+            rect = clampedFrame(rect, to: pageBounds, minSize: minSize)
+        }
+        return rect
+    }
+
+    private static func translateToPinScreenAnchor(
+        frame: CGRect,
+        start: CGRect,
+        handle: ObjectTransformHandle,
+        rotation: Double
+    ) -> CGRect {
+        let anchorHandle = oppositeHandle(for: handle)
+        let startAnchor = anchorHandle.point(in: start, rotation: rotation)
+        let newAnchor = anchorHandle.point(in: frame, rotation: rotation)
+        return frame.offsetBy(
+            dx: startAnchor.x - newAnchor.x,
+            dy: startAnchor.y - newAnchor.y
+        )
+    }
+
+    private static func oppositeHandle(for handle: ObjectTransformHandle) -> ObjectTransformHandle {
+        switch handle {
+        case .topLeft: .bottomRight
+        case .topRight: .bottomLeft
+        case .bottomLeft: .topRight
+        case .bottomRight: .topLeft
+        case .rotation: .rotation
+        }
+    }
+
+    static func rotateDelta(_ delta: CGSize, by angle: Double) -> CGSize {
+        guard angle != 0 else { return delta }
+        let cosA = cos(angle)
+        let sinA = sin(angle)
+        return CGSize(
+            width: delta.width * cosA - delta.height * sinA,
+            height: delta.width * sinA + delta.height * cosA
+        )
     }
 
     static func aspectNormalizedImageFrame(for imageObject: ImageObject) -> CGRect {

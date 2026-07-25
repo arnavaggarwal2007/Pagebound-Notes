@@ -1,6 +1,7 @@
 import XCTest
 @testable import PageBoundNotes
 
+@MainActor
 final class LibraryRepositoryTests: XCTestCase {
     func testFolderAndBookCRUDRoundTripOnDisk() async throws {
         let (dependencies, tempDirectory) = try TestSupport.makeTestDependencies()

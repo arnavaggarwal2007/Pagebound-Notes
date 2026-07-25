@@ -1,6 +1,7 @@
 import Foundation
 
-protocol PageRepositoryProtocol: Sendable {
+@MainActor
+protocol PageRepositoryProtocol: AnyObject {
     func fetchPage(id: UUID) throws -> Page?
     func fetchPages(forBook bookId: UUID) throws -> [Page]
     func createPage(_ page: Page) async throws -> Page
@@ -14,6 +15,7 @@ protocol PageRepositoryProtocol: Sendable {
 
     func saveImageAsset(data: Data) throws -> String
     func loadImageAsset(blobId: String) throws -> Data?
+    func deleteImageAsset(blobId: String) throws
     func deleteObjectsBlob(_ blobId: String) throws
     func copyObjectsBlob(_ sourceBlobId: String) throws -> String
 }

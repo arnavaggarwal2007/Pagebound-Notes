@@ -3,6 +3,7 @@ import XCTest
 @testable import PageBoundNotes
 
 @MainActor
+
 final class BookViewModelTests: XCTestCase {
     private var storeDirectory: URL!
     private var dependencies: AppDependencies!

@@ -33,6 +33,8 @@ struct CanvasTextField: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: FocusableTextView, context: Context) {
+        context.coordinator.parent = self
+
         if uiView.text != text {
             uiView.text = text
         }
@@ -47,6 +49,10 @@ struct CanvasTextField: UIViewRepresentable {
 
         if shouldBecomeFirstResponder, !context.coordinator.didBecomeFirstResponder {
             context.coordinator.requestFirstResponder(on: uiView)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { [weak uiView] in
+                guard let uiView, uiView.window != nil, !uiView.isFirstResponder else { return }
+                _ = uiView.becomeFirstResponder()
+            }
         }
 
         if !shouldBecomeFirstResponder, uiView.isFirstResponder {

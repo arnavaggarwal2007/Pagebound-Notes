@@ -51,18 +51,57 @@ final class PageContentRendererTests: XCTestCase {
     }
 
     func testRenderPageIncludesTextObjectMarker() throws {
-        let textBox = TextBoxObject.makeDefault(at: CGPoint(x: 100, y: 100), zIndex: 0)
+        let textBox = TextBoxObject.makeDefault(at: CGPoint(x: 100, y: 100), zIndex: 1)
         var textBoxCopy = textBox
         textBoxCopy.text = "Overlay"
+        let imageObject = ImageObject.makeDefault(
+            imageBlobId: "image-blob",
+            intrinsicSize: CGSize(width: 200, height: 100),
+            center: CGPoint(x: 300, y: 300),
+            zIndex: 0
+        )
         let image = PageContentRenderer.renderPage(
             template: TemplateCatalog.blank,
             drawing: StrokeSerialization.emptyDrawing(),
-            objects: [.text(textBoxCopy)],
+            objects: [.image(imageObject), .text(textBoxCopy)],
             pageSize: .letter,
             orientation: .portrait,
             scale: 1.0
         )
 
         XCTAssertGreaterThan(image.size.width, 0)
+    }
+
+    func testRenderPageDrawsImagesBeforeForegroundObjects() throws {
+        let imageObject = ImageObject.makeDefault(
+            imageBlobId: "image-blob",
+            intrinsicSize: CGSize(width: 100, height: 100),
+            center: CGPoint(x: 200, y: 200),
+            zIndex: 0
+        )
+        var textBox = TextBoxObject.makeDefault(at: CGPoint(x: 100, y: 100), zIndex: 1)
+        textBox.text = "Above"
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        let imageData = UIGraphicsImageRenderer(size: CGSize(width: 100, height: 100), format: format).pngData { context in
+            UIColor.red.setFill()
+            context.fill(CGRect(x: 0, y: 0, width: 100, height: 100))
+        }
+        let imageLoader: (String) -> UIImage? = { _ in
+            UIImage(data: imageData)
+        }
+
+        let rendered = PageContentRenderer.renderPage(
+            template: TemplateCatalog.blank,
+            drawing: StrokeSerialization.emptyDrawing(),
+            objects: [.image(imageObject), .text(textBox)],
+            imageLoader: imageLoader,
+            pageSize: .letter,
+            orientation: .portrait,
+            scale: 1.0
+        )
+
+        XCTAssertGreaterThan(rendered.size.width, 0)
     }
 }

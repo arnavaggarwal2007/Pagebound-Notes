@@ -2,6 +2,7 @@ import XCTest
 @testable import PageBoundNotes
 
 @MainActor
+
 final class PageViewModelTests: XCTestCase {
     private var storeDirectory: URL!
     private var dependencies: AppDependencies!
@@ -315,5 +316,32 @@ final class PageViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.objectsDocument.objects.count, 1)
         XCTAssertEqual(viewModel.drawing.strokes.count, 0)
+        XCTAssertNil(viewModel.selectedObjectId)
+    }
+
+    func testAppendShapeStrokesUsesLastInkTool() async throws {
+        let folder = try await dependencies.libraryRepository.createFolder(Folder(name: "Notes"))
+        let book = try await dependencies.libraryRepository.createBook(
+            Book(folderId: folder.id, title: "Book")
+        )
+        let page = try await dependencies.pageRepository.createPage(
+            Page(bookId: book.id, index: 0, templateId: TemplateCatalog.blank.id)
+        )
+
+        let toolSession = ToolSessionState()
+        toolSession.selectInk(.marker)
+        toolSession.selectShape(.rectangle)
+
+        let viewModel = PageViewModel(
+            page: page,
+            book: book,
+            pageRepository: dependencies.pageRepository,
+            toolPresetStore: dependencies.toolPresetStore,
+            toolSession: toolSession
+        )
+        await viewModel.load()
+
+        viewModel.appendShapeStrokes(from: CGPoint(x: 10, y: 10), to: CGPoint(x: 100, y: 80))
+        XCTAssertFalse(viewModel.drawing.strokes.isEmpty)
     }
 }

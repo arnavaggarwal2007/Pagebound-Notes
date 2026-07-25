@@ -111,12 +111,18 @@ enum PageContentRenderer {
         return renderer.image { context in
             TemplateRenderer.draw(template: template, in: context.cgContext, pageSize: dimensions)
 
+            ObjectRenderer.drawImages(
+                objects: objects,
+                imageLoader: imageLoader,
+                in: context.cgContext,
+                pageSize: dimensions
+            )
+
             let strokeImage = strokeImage(from: drawing, bounds: bounds, scale: scale)
             strokeImage.draw(in: bounds)
 
-            ObjectRenderer.draw(
+            ObjectRenderer.drawForegroundObjects(
                 objects: objects,
-                imageLoader: imageLoader,
                 in: context.cgContext,
                 pageSize: dimensions
             )

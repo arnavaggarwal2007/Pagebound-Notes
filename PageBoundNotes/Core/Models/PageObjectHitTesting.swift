@@ -14,16 +14,18 @@ enum PageObjectHitTesting {
         return !(isSelected && allowsTransform)
     }
 
-    static func contains(_ point: CGPoint, in object: PageObject) -> Bool {
+    static func contains(_ point: CGPoint, in object: PageObject, allowUnfilledInterior: Bool = false) -> Bool {
+        let localPoint = pointInLocalSpace(point, for: object)
         switch object {
         case .text, .image:
-            return object.frame.insetBy(dx: -tapSlop, dy: -tapSlop).contains(point)
+            return object.frame.insetBy(dx: -tapSlop, dy: -tapSlop).contains(localPoint)
         case .shape(let shapeObject):
             return contains(
-                point,
+                localPoint,
                 in: shapeObject,
                 isSelected: false,
-                allowsTransform: false
+                allowsTransform: false,
+                allowUnfilledInterior: allowUnfilledInterior
             )
         }
     }
@@ -32,16 +34,46 @@ enum PageObjectHitTesting {
         _ point: CGPoint,
         in shapeObject: ShapeObject,
         isSelected: Bool,
-        allowsTransform: Bool
+        allowsTransform: Bool,
+        allowUnfilledInterior: Bool = false
     ) -> Bool {
+        let localPoint = pointInLocalSpace(point, rotation: shapeObject.geometry.rotation, frame: shapeObject.geometry.frame.cgRect)
         let frame = shapeObject.geometry.frame.cgRect
         if shapeObject.style.fillColor != nil {
-            return frame.insetBy(dx: -tapSlop, dy: -tapSlop).contains(point)
+            return frame.insetBy(dx: -tapSlop, dy: -tapSlop).contains(localPoint)
         }
         if isSelected && allowsTransform {
-            return frame.contains(point)
+            return frame.contains(localPoint)
         }
-        return strokeRimContains(point, in: shapeObject)
+        if allowUnfilledInterior {
+            return frame.insetBy(dx: -tapSlop, dy: -tapSlop).contains(localPoint)
+        }
+        return strokeRimContains(localPoint, in: shapeObject)
+    }
+
+    private static func pointInLocalSpace(_ point: CGPoint, for object: PageObject) -> CGPoint {
+        switch object {
+        case .text:
+            return point
+        case .image(let imageObject):
+            return pointInLocalSpace(
+                point,
+                rotation: imageObject.geometry.rotation,
+                frame: imageObject.geometry.frame.cgRect
+            )
+        case .shape(let shapeObject):
+            return pointInLocalSpace(
+                point,
+                rotation: shapeObject.geometry.rotation,
+                frame: shapeObject.geometry.frame.cgRect
+            )
+        }
+    }
+
+    private static func pointInLocalSpace(_ point: CGPoint, rotation: Double, frame: CGRect) -> CGPoint {
+        guard rotation != 0 else { return point }
+        let center = CGPoint(x: frame.midX, y: frame.midY)
+        return ObjectTransformSession.rotate(point: point, around: center, by: -rotation)
     }
 
     static func strokeRimContains(_ point: CGPoint, in shapeObject: ShapeObject) -> Bool {

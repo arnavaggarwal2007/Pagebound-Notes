@@ -9,9 +9,11 @@ final class PageViewModel: ObservableObject {
     @Published var selectedObjectId: UUID?
     @Published var editingTextObjectId: UUID?
     @Published var textToolPhase: TextToolPhase = .idle
+    @Published var insertErrorMessage: String?
     @Published private(set) var isDirty = false
     @Published private(set) var isSaving = false
-    @Published private(set) var loadedImageCache: [String: Data] = [:]
+    /// Non-published cache — writing during view body must not invalidate AttributeGraph.
+    private var loadedImageCache: [String: Data] = [:]
 
     let toolSession: ToolSessionState
     private(set) var page: Page
@@ -225,8 +227,12 @@ final class PageViewModel: ObservableObject {
             selectedObjectId = imageObject.id
             markObjectsDirty()
         } catch {
-            return
+            insertErrorMessage = error.localizedDescription
         }
+    }
+
+    func clearInsertError() {
+        insertErrorMessage = nil
     }
 
     func addShapeObject(kind: ShapeKind, from start: CGPoint, to end: CGPoint) {
@@ -246,8 +252,36 @@ final class PageViewModel: ObservableObject {
         )
         document.objects.append(.shape(shapeObject))
         objectsDocument = document
-        selectedObjectId = shapeObject.id
         markObjectsDirty()
+    }
+
+    func topmostObject(
+        at point: CGPoint,
+        allowUnfilledShapeInterior: Bool = false
+    ) -> PageObject? {
+        sortedObjects.reversed().first { object in
+            PageObjectHitTesting.contains(
+                point,
+                in: object,
+                allowUnfilledInterior: allowUnfilledShapeInterior
+            )
+        }
+    }
+
+    /// Finger tap-to-select while ink/eraser/lasso is active (canvas gesture; overlay passes through).
+    func selectObjectAtPagePoint(_ location: CGPoint) {
+        guard interactionPolicy.allowsFingerObjectSelection else { return }
+
+        if case .text = toolSession.selectedTool {
+            handleTextToolCanvasTap(at: location)
+            return
+        }
+
+        if let hit = topmostObject(at: location) {
+            selectObject(id: hit.id)
+        } else {
+            selectObject(id: nil)
+        }
     }
 
     func selectObject(id: UUID?) {
@@ -284,7 +318,7 @@ final class PageViewModel: ObservableObject {
         guard let index = objectsDocument.objects.firstIndex(where: { $0.id == id }) else { return }
 
         if case .image(let imageObject) = objectsDocument.objects[index] {
-            try? pageRepository.loadImageAsset(blobId: imageObject.imageBlobId)
+            try? pageRepository.deleteImageAsset(blobId: imageObject.imageBlobId)
             loadedImageCache.removeValue(forKey: imageObject.imageBlobId)
         }
 
@@ -322,9 +356,11 @@ final class PageViewModel: ObservableObject {
 
     func appendShapeStrokes(from start: CGPoint, to end: CGPoint) {
         guard case .shapes(let kind) = toolSession.selectedTool else { return }
-        guard case .ink(let inkKind) = lastInkTool else {
-            appendShapeStrokes(kind: kind, ink: .pen, from: start, to: end)
-            return
+        let inkKind: InkKind
+        if case .ink(let kind) = toolSession.lastInkTool {
+            inkKind = kind
+        } else {
+            inkKind = .pen
         }
         appendShapeStrokes(kind: kind, ink: inkKind, from: start, to: end)
     }
@@ -388,7 +424,7 @@ final class PageViewModel: ObservableObject {
             strokesDirty = false
         }
 
-        if objectsDirty, !objectsDocument.objects.isEmpty {
+        if objectsDirty {
             let data = try ObjectSerialization.encode(objectsDocument)
             _ = try await pageRepository.saveObjectsData(forPageId: page.id, data: data)
             objectsDirty = false
@@ -425,12 +461,5 @@ final class PageViewModel: ObservableObject {
             }
         }
         loadedImageCache = cache
-    }
-
-    private var lastInkTool: DrawingTool {
-        if case .ink = toolSession.selectedTool {
-            return toolSession.selectedTool
-        }
-        return .ink(.pen)
     }
 }

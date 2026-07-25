@@ -2,6 +2,7 @@ import XCTest
 @testable import PageBoundNotes
 
 @MainActor
+
 final class LibraryViewModelTests: XCTestCase {
     private var storeDirectory: URL!
     private var dependencies: AppDependencies!

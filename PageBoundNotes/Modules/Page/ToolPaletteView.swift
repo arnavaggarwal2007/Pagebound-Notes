@@ -13,29 +13,29 @@ struct ToolPaletteView: View {
     @State private var showEraserModes = false
 
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 6) {
             styleChip
 
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
+                HStack(spacing: 4) {
                     inkQuickPick
                     paletteDivider
                     editingGroup
                     paletteDivider
                     utilityGroup
                 }
-                .padding(.vertical, 2)
+                .padding(.vertical, 4)
             }
 
             paletteDivider
             inputModeToggle
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
         .background(.ultraThinMaterial, in: Capsule())
         .overlay {
             Capsule()
-                .strokeBorder(.quaternary, lineWidth: 1)
+                .strokeBorder(.quaternary, lineWidth: 0.5)
         }
         .popover(isPresented: $showParameters) {
             ToolParameterPopover(
@@ -79,8 +79,8 @@ struct ToolPaletteView: View {
                     .font(.caption.monospacedDigit().weight(.semibold))
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 8)
-            .background(Color.secondary.opacity(0.12), in: Capsule())
+            .padding(.vertical, 6)
+            .background(Color.secondary.opacity(0.1), in: Capsule())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(String(localized: "Tool parameters"))
@@ -364,8 +364,8 @@ struct ToolPaletteView: View {
         }
         .frame(width: 52, height: 52)
         .background(
-            (isSelected || isToggled) ? Color.accentColor.opacity(0.12) : Color.clear,
-            in: RoundedRectangle(cornerRadius: 10)
+            (isSelected || isToggled) ? Color.accentColor.opacity(0.14) : Color.clear,
+            in: RoundedRectangle(cornerRadius: 10, style: .continuous)
         )
         .accessibilityLabel(title)
     }
