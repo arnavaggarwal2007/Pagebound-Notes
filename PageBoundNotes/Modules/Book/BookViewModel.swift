@@ -1,6 +1,7 @@
 import Combine
 import Foundation
 import PencilKit
+import UIKit
 
 enum BookExportPresentation: Identifiable, Equatable {
     case scopePicker
@@ -33,6 +34,7 @@ final class BookViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var saveStatusMessage: String?
     @Published private(set) var thumbnailRevision = 0
+    @Published private(set) var thumbnails: [UUID: UIImage] = [:]
     @Published var toolSession = ToolSessionState()
 
     let bookId: UUID
@@ -70,6 +72,7 @@ final class BookViewModel: ObservableObject {
             }
             currentPageIndex = min(currentPageIndex, max(pages.count - 1, 0))
             await loadCurrentPageViewModel()
+            await loadThumbnails()
             errorMessage = nil
         } catch {
             errorMessage = error.localizedDescription
@@ -98,6 +101,7 @@ final class BookViewModel: ObservableObject {
             pages.append(created)
             currentPageIndex = pages.count - 1
             await loadCurrentPageViewModel()
+            await reloadThumbnails()
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -122,6 +126,7 @@ final class BookViewModel: ObservableObject {
             currentPageIndex = min(currentPageIndex, pages.count - 1)
             thumbnailRevision += 1
             await loadCurrentPageViewModel()
+            await reloadThumbnails()
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -200,7 +205,7 @@ final class BookViewModel: ObservableObject {
             if let updatedPage = try await pageViewModel.saveImmediately(),
                pages.indices.contains(currentPageIndex) {
                 pages[currentPageIndex] = updatedPage
-                thumbnailRevision += 1
+                await reloadThumbnails()
             }
             saveStatusMessage = String(localized: "Saved")
             return !pageViewModel.isDirty
@@ -208,5 +213,80 @@ final class BookViewModel: ObservableObject {
             errorMessage = error.localizedDescription
             return false
         }
+    }
+
+    func loadThumbnails() async {
+        guard let book else {
+            thumbnails = [:]
+            return
+        }
+
+        thumbnails = [:]
+
+        let pageRepository = dependencies.pageRepository
+        let snapshots: [PageRenderSnapshot] = pages.map { page in
+            let strokeData: Data?
+            if let blobId = page.strokeBlobId {
+                strokeData = try? pageRepository.loadStrokeData(blobId: blobId)
+            } else {
+                strokeData = nil
+            }
+
+            let objectsData: Data?
+            if let blobId = page.objectsBlobId {
+                objectsData = try? pageRepository.loadObjectsData(blobId: blobId)
+            } else {
+                objectsData = nil
+            }
+
+            return PageRenderSnapshot(page: page, strokeData: strokeData, objectsData: objectsData)
+        }
+
+        var imageAssets: [String: Data] = [:]
+        for snapshot in snapshots {
+            for blobId in snapshot.objectsDocument.imageBlobIds() {
+                if imageAssets[blobId] == nil,
+                   let data = try? pageRepository.loadImageAsset(blobId: blobId) {
+                    imageAssets[blobId] = data
+                }
+            }
+        }
+
+        let bookForRender = book
+        var loaded: [UUID: UIImage] = [:]
+        await withTaskGroup(of: (UUID, UIImage?).self) { group in
+            for snapshot in snapshots {
+                let assets = imageAssets
+                group.addTask {
+                    let imageLoader: (String) -> UIImage? = { blobId in
+                        guard
+                            let data = assets[blobId],
+                            let image = UIImage(data: data)
+                        else {
+                            return nil
+                        }
+                        return image
+                    }
+                    let image = PageContentRenderer.renderThumbnail(
+                        snapshot: snapshot,
+                        book: bookForRender,
+                        imageLoader: imageLoader
+                    )
+                    return (snapshot.pageId, image)
+                }
+            }
+
+            for await (pageId, image) in group {
+                if let image {
+                    loaded[pageId] = image
+                }
+            }
+        }
+        thumbnails = loaded
+    }
+
+    private func reloadThumbnails() async {
+        thumbnailRevision += 1
+        await loadThumbnails()
     }
 }

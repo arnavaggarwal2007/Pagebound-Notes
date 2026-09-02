@@ -251,4 +251,17 @@ final class BookViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.toolSession.isRulerActive)
         XCTAssertEqual(viewModel.pageViewModel?.toolSession.selectedTool, .lasso)
     }
+
+    func testLoadPopulatesThumbnailsForPages() async throws {
+        let folder = try await dependencies.libraryRepository.createFolder(Folder(name: "School"))
+        let book = try await dependencies.libraryRepository.createBook(
+            Book(folderId: folder.id, title: "Math", pageSize: .letter)
+        )
+
+        let viewModel = BookViewModel(bookId: book.id, dependencies: dependencies)
+        await viewModel.load()
+
+        XCTAssertEqual(viewModel.thumbnails.count, viewModel.pages.count)
+        XCTAssertNotNil(viewModel.thumbnails[viewModel.pages[0].id])
+    }
 }
