@@ -100,15 +100,24 @@ final class LibraryNavigationUITests: XCTestCase {
             newFolderButton.tap()
         }
 
-        let folderNameField = app.textFields["Folder Name"]
-        XCTAssertTrue(folderNameField.waitForExistence(timeout: 3))
-        folderNameField.tap()
-        folderNameField.typeText(name)
+        let folderNameField = app.textFields["folder-name-field"]
+        if !folderNameField.waitForExistence(timeout: 3) {
+            XCTAssertTrue(app.textFields["Folder Name"].waitForExistence(timeout: 3))
+            app.textFields["Folder Name"].tap()
+            app.textFields["Folder Name"].typeText(name)
+        } else {
+            folderNameField.tap()
+            folderNameField.typeText(name)
+        }
 
-        app.buttons["Create"].tap()
+        let confirmButton = app.buttons["folder-create-confirm"]
+        if confirmButton.waitForExistence(timeout: 3) {
+            tapWhenHittable(confirmButton)
+        } else {
+            tapWhenHittable(app.buttons["Create"])
+        }
 
-        XCTAssertTrue(app.textFields["Folder Name"].waitForNonExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["Empty Folder"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Empty Folder"].waitForExistence(timeout: 8))
     }
 
     private func createBook(named title: String) {

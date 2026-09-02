@@ -92,13 +92,16 @@ Use **layers** inside the vault for clarity, inspired by PARA/Zettelkasten setup
     - Turn a decision into an ADR in `70_Decisions/`.
 
 
-### Keeping the spec and architecture “canonical”
+### Keeping the spec and architecture canonical (repo-primary)
 
-- The **Product Spec** and **Architecture Overview** are canonical documents; all major changes must be reflected there.
-- When implementing a feature or making a design change:
-    - Update the relevant feature spec note in `30_Implementation/`.
-    - Update higher‑level summaries in `Product Hub` or `Architecture Hub` if the change is impactful.
-- Use “Change Log” sections inside spec/architecture notes to briefly record what changed, when, and why.
+**Decision (September 2026):** Canonical documentation lives **only in the git repo** (`Pagebound-Notes/Documents/`). The vault does not maintain duplicate copies.
+
+- **Product Spec, Development Roadmap, accepted ADRs, UI Guidelines** — edit in repo; vault has stub notes that link to repo paths.
+- **Feature specs, module notes, research, QA, backlog** — vault-only working documents.
+- When requirements or sequencing change, update the **repo** canonical file directly.
+- When designing or verifying a feature, update the vault feature spec and module note.
+- **Do not** copy canonical docs between vault and repo. **Do not** use `repo-sync-status` or `last-synced` frontmatter (retired).
+- On ADR acceptance: add content to `Documents/ADR – *.md` in repo; convert vault ADR note to a stub linking to the repo file.
 
 
 ### Meeting and decisions hygiene

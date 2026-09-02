@@ -295,6 +295,7 @@ struct LibraryView: View {
             NavigationStack {
                 Form {
                     TextField(String(localized: "Folder Name"), text: $folderNameInput)
+                        .accessibilityIdentifier("folder-name-field")
                 }
                 .navigationTitle(String(localized: "New Folder"))
                 .toolbar {
@@ -303,6 +304,7 @@ struct LibraryView: View {
                             folderNameInput = ""
                             viewModel.activeSheet = nil
                         }
+                        .accessibilityIdentifier("folder-create-cancel")
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button(String(localized: "Create")) {
@@ -312,10 +314,12 @@ struct LibraryView: View {
                                 viewModel.activeSheet = nil
                             }
                         }
+                        .accessibilityIdentifier("folder-create-confirm")
                         .disabled(folderNameInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     }
                 }
             }
+            .accessibilityIdentifier("folder-create-sheet")
             .presentationDetents([.medium])
 
         case .createBook:

@@ -28,7 +28,6 @@ private struct BookViewContainer: View {
     var body: some View {
         BookViewBody(
             viewModel: viewModel,
-            dependencies: dependencies,
             exportDocument: $exportDocument,
             exportFilename: $exportFilename
         )
@@ -43,7 +42,6 @@ private struct BookViewContainer: View {
 
 private struct BookViewBody: View {
     @ObservedObject var viewModel: BookViewModel
-    let dependencies: AppDependencies
     @Binding var exportDocument: ExportDocument?
     @Binding var exportFilename: String
 
@@ -81,8 +79,7 @@ private struct BookViewBody: View {
                     pages: viewModel.pages,
                     book: book,
                     currentPageIndex: viewModel.currentPageIndex,
-                    thumbnailRevision: viewModel.thumbnailRevision,
-                    pageRepository: dependencies.pageRepository,
+                    thumbnails: viewModel.thumbnails,
                     onSelectPage: { index in
                         Task { await viewModel.selectPage(at: index) }
                     }

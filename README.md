@@ -2,7 +2,7 @@
 
 **Free, handwriting-first, iPad-native note-taking with paginated pages and PDF export.**
 
-PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can import lecture slides, annotate them, and organize content in unlimited folders and books—all without a subscription or custom backend.
+PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can organize content in unlimited folders and books—all without a subscription or custom backend.
 
 **Status:** Phase 2 in progress — **Phase 2 Part 2 (Content Overlays) signed off July 21, 2026**; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
 
@@ -25,58 +25,72 @@ PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combi
 
 ## Features
 
-### Library and Organization
+### Shipped (Phases 0–2 Parts 1–2)
+
+#### Library and Organization
 
 - Unlimited nested folders and books, bounded only by device storage
 - Create, rename, move, duplicate, and delete folders and books
-- Sort by name or date; filter by tag or template type
-- Book metadata: title, cover style, default page size, default template, auto-advance settings
+- Sort by name or date
+- Book metadata: title, cover style, default page size, default template
 
-### Pages and Pagination
+#### Pages and Pagination
 
-- Fixed physical page sizes (A4, US Letter, custom) with portrait or landscape orientation
+- Fixed physical page sizes (A4, US Letter) with portrait or landscape orientation
 - Visible page borders and optional safe-margin lines for precise PDF export clipping
-- Templates: blank, college ruled, wide ruled, dotted grid, graph paper, Cornell notes, music staff, checklists, and planners
-- Add, duplicate, delete, and reorder pages via a scrollable thumbnail strip
+- Templates: blank, college ruled, wide ruled, dotted grid
+- Add page at end; delete page with confirmation
+- Scrollable thumbnail strip navigation
 
-### Handwriting and Tools
+#### Handwriting and Tools
 
 - Low-latency Apple Pencil input via PencilKit
-- Full Markup-style tool catalog: pen, marker, pencil, crayon, fountain pen, reed pen, and watercolor brush
+- Full Markup-style tool catalog: pen, marker, pencil, crayon, fountain pen, reed pen (OS-gated), and watercolor brush
 - Adjustable stroke width, opacity, and color with user-saved presets
-- Eraser (bitmap and vector), lasso selection, shapes, ruler, and laser pointer
+- Pixel and object eraser, lasso selection, stroke-committed shapes, ruler, and laser pointer
 - Palm rejection and configurable pencil/finger input policies
+- Apple Pencil double-tap honors system Settings
 
-### Zoom Window and Navigation
-
-- GoodNotes-style zoom window with magnified writing strip and miniature page preview
-- Auto-advance when writing near the page edge, with configurable return height per template
-- Pinch-to-zoom, pan, and fit-page-to-screen on each canvas
-- Optional split view for two books or pages side by side (Phase 4)
-
-### Text, Images, and Shapes
+#### Text, Images, and Shapes
 
 - Movable, resizable text boxes with basic rich text (bold, italic)
 - Image insertion from Photos, Files, or drag-and-drop with scale and rotate handles
-- Shapes: rectangles, circles, arrows, and straight lines with snap-to-straight
+- Object-layer shapes: rectangles, circles, arrows, and straight lines with snap-to-straight
+- Images render under ink; text and shapes above ink in export and thumbnails
 
-### PDF Import and Export
+#### PDF Export
 
-- Export a single page, an entire book, or an entire folder as PDF
-- Import PDFs into a new book with each page rendered as background and a PencilKit annotation layer on top
+- Export current page or entire book as PDF
+- Background rendering; strokes and overlays clipped to page bounds
 
-### Storage and Backup
+#### Storage
 
 - All primary content stored locally in the app sandbox
-- Export and restore compressed `.pbn` backup archives
-- Optional user-initiated cloud backup via the system share sheet or Google Drive integration
+
+### Planned (Phase 2 remainder and later)
+
+| Area | Phase |
+|------|-------|
+| Zoom window with magnified writing strip and auto-advance | 2 |
+| Page insert-between, duplicate, reorder via thumbnail strip | 2 |
+| Additional templates (fine/coarse graph, Cornell, music staff, checklist, planner) | 2 |
+| Pinch-to-zoom, pan, and fit-page-to-screen | 2 |
+| Immersive writing chrome (optional hide/show nav and thumbnail strip) | 2 |
+| Filter by tag or template type | 2+ |
+| PDF import into new books | 3 |
+| Export folder as PDF or zip; `.pbn` backup and restore | 3 |
+| Share sheet integration for export and import | 3 |
+| Optional Google Drive backup | 3 |
+| Library search; handwriting OCR search | 4 |
+| Split view for two books or pages | 4 |
+| Custom user-defined templates | 4 |
+| VoiceOver, Dynamic Type, and accessibility audit | 4 |
 
 ### Out of Scope (Initial Releases)
 
 - Real-time cross-device sync with a custom backend
 - Non-Apple platforms (Android, Web, Windows)
 - Multi-user collaborative editing
-- Handwriting-to-text search (planned for Phase 4)
 
 ---
 
@@ -137,14 +151,14 @@ PageBoundNotes/
 │   ├── Library/       # Folder and book library
 │   ├── Book/          # Book shell, thumbnail strip
 │   ├── Page/          # Canvas, templates, tool palette
-│   ├── ZoomWindow/    # Magnified writing and auto-advance
-│   ├── ExportImport/  # PDF and .pbn backup
-│   └── CloudBackup/   # Share sheet, optional Google Drive
+│   ├── ZoomWindow/    # Magnified writing and auto-advance (Phase 2)
+│   ├── ExportImport/  # PDF and .pbn backup (Phase 3)
+│   └── CloudBackup/   # Share sheet, optional Google Drive (Phase 3)
 ├── Core/
 │   ├── Models/
 │   ├── Persistence/
 │   └── Services/
-└── Documents/         # Product spec, roadmap, and guidelines
+└── Documents/         # Product spec, roadmap, and guidelines (canonical)
 ```
 
 ---
@@ -171,7 +185,7 @@ PageBoundNotes/
 
 2. **Read the product spec** — [Documents/Pagebound Notes Project Spec.md](Documents/Pagebound%20Notes%20Project%20Spec.md) is the canonical source of truth for requirements, architecture, and data model.
 
-3. **Read the development roadmap** — [Documents/Development Roadmap.md](Documents/Development%20Roadmap.md) defines phased deliverables, exit criteria, and contributor workflow. Start at Phase 0.
+3. **Read the development roadmap** — [Documents/Development Roadmap.md](Documents/Development%20Roadmap.md) defines phased deliverables, exit criteria, and contributor workflow.
 
 4. **Configure signing** — Open `PageBoundNotes.xcodeproj` in Xcode and confirm **Signing & Capabilities** has a Development Team selected at the project level (applies to both the app and test targets). Team selection is per-developer in Xcode and is not committed to the repository.
 
@@ -200,12 +214,18 @@ PageBoundNotes/
 
 ## Documentation
 
+Canonical documentation lives **only in this repo** (`Documents/`). The Obsidian vault (`Notes KB/`) is a working environment for feature specs, QA, backlog, and research — vault stub notes link to repo files; do not duplicate canonical content.
+
 | Document | Purpose |
 |----------|---------|
 | [Pagebound Notes Project Spec](Documents/Pagebound%20Notes%20Project%20Spec.md) | Canonical requirements, architecture, data model, and integrations |
 | [Development Roadmap](Documents/Development%20Roadmap.md) | Phased deliverables, exit criteria, and contributor workflow |
 | [UI Guidelines](Documents/UI%20Guidelines.md) | Visual identity, layout, interaction patterns, and component behavior |
-| [Notes KB Guidelines](Documents/Notes%20KB%20Guidelines.md) | Optional — Obsidian vault conventions for extended project notes |
+| [ADR – Choose Persistence Layer](Documents/ADR%20%E2%80%93%20Choose%20Persistence%20Layer.md) | SwiftData decision |
+| [ADR – PencilKit Integration Strategy](Documents/ADR%20%E2%80%93%20PencilKit%20Integration%20Strategy.md) | PencilKit bridge pattern |
+| [ADR – Custom Tool Palette](Documents/ADR%20%E2%80%93%20Custom%20Tool%20Palette.md) | Tool palette architecture |
+| [ADR – Content Object Layer](Documents/ADR%20%E2%80%93%20Content%20Object%20Layer.md) | Text, images, shapes overlay model |
+| [Notes KB Guidelines](Documents/Notes%20KB%20Guidelines.md) | Obsidian vault conventions for extended project notes |
 
 ---
 
@@ -217,7 +237,7 @@ PageBoundNotes/
 |-------|---------|
 | **Phase 0** | App shell, domain models, SwiftData persistence, repositories, DI — **complete** |
 | **Phase 1** | MVP: library, paginated pages, basic PencilKit, PDF export — **complete** |
-| **Phase 2** | Full tooling, zoom window with auto-advance, text/images/shapes — **in progress** (Part 1 and Part 2 signed off; Zoom Window next) |
+| **Phase 2** | Full tooling, zoom window with auto-advance, text/images/shapes — **in progress** (Parts 1–2 signed off; Zoom Window next) |
 | **Phase 3** | PDF import, local backup/restore, cloud export |
 | **Phase 4** | Search, handwriting OCR, split view, accessibility |
 
