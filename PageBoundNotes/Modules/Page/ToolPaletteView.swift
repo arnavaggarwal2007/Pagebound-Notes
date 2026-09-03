@@ -3,6 +3,8 @@ import SwiftUI
 struct ToolPaletteView: View {
     @ObservedObject var toolSession: ToolSessionState
     let presets: [ToolPreset]
+    var isZoomWindowActive: Bool = false
+    var onToggleZoomWindow: (() -> Void)?
     let onApplyPreset: (ToolPreset) -> Void
     let onSavePreset: (String) -> Void
     let onDeletePreset: (UUID) -> Void
@@ -147,6 +149,17 @@ struct ToolPaletteView: View {
 
     private var utilityGroup: some View {
         HStack(spacing: 4) {
+            if let onToggleZoomWindow {
+                labeledToolButton(
+                    title: String(localized: "Zoom"),
+                    systemImage: "viewfinder",
+                    isSelected: isZoomWindowActive,
+                    accessibilityId: "tool-zoom-window"
+                ) {
+                    onToggleZoomWindow()
+                }
+            }
+
             labeledToolButton(
                 title: String(localized: "Shapes"),
                 systemImage: toolSession.selectedShapeKind.systemImageName,

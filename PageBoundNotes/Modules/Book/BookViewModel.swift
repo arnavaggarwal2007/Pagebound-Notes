@@ -36,6 +36,7 @@ final class BookViewModel: ObservableObject {
     @Published private(set) var thumbnailRevision = 0
     @Published private(set) var thumbnails: [UUID: UIImage] = [:]
     @Published var toolSession = ToolSessionState()
+    @Published var zoomWindowViewModel: ZoomWindowViewModel?
 
     let bookId: UUID
     let dependencies: AppDependencies
@@ -136,6 +137,45 @@ final class BookViewModel: ObservableObject {
         await saveCurrentPageIfNeeded()
     }
 
+    func toggleZoomWindow() {
+        guard let book, let pageViewModel else { return }
+
+        if let zoom = zoomWindowViewModel, zoom.isPresented {
+            closeZoomWindow()
+            return
+        }
+
+        pageViewModel.selectObject(id: nil)
+        pageViewModel.finishTextEditing(switchToPen: false)
+
+        let zoom = zoomWindowViewModel ?? ZoomWindowViewModel(
+            pageSize: pageViewModel.pageDimensions,
+            template: pageViewModel.template,
+            autoAdvanceEnabled: book.autoAdvanceEnabled,
+            settingsStore: dependencies.zoomSettingsStore
+        )
+        zoom.syncAutoAdvanceFromBook(book.autoAdvanceEnabled)
+        zoom.open()
+        pageViewModel.zoomModeActive = true
+        zoomWindowViewModel = zoom
+    }
+
+    func closeZoomWindow() {
+        zoomWindowViewModel?.close()
+        pageViewModel?.zoomModeActive = false
+    }
+
+    func updateAutoAdvance(_ enabled: Bool) async {
+        guard var book else { return }
+        book.autoAdvanceEnabled = enabled
+        do {
+            self.book = try await dependencies.bookRepository.updateBook(book)
+            zoomWindowViewModel?.setAutoAdvanceEnabled(enabled)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
     func beginExport() {
         exportPresentation = .scopePicker
     }
@@ -175,10 +215,13 @@ final class BookViewModel: ObservableObject {
     private func loadCurrentPageViewModel() async {
         guard let page = currentPage, let book else {
             pageViewModel = nil
+            zoomWindowViewModel = nil
             return
         }
 
+        closeZoomWindow()
         pageViewModel = nil
+        zoomWindowViewModel = nil
         let viewModel = PageViewModel(
             page: page,
             book: book,

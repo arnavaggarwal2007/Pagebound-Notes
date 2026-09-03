@@ -8,6 +8,7 @@ struct PageView: View {
 
     @ObservedObject var viewModel: PageViewModel
     @ObservedObject var toolSession: ToolSessionState
+    var zoomViewportRect: CGRect?
 
     @State private var showImageSourcePicker = false
     @State private var showPhotoPicker = false
@@ -122,6 +123,13 @@ struct PageView: View {
             .frame(width: viewModel.pageDimensions.width, height: viewModel.pageDimensions.height)
 
             toolOverlayLayer
+
+            if let zoomViewportRect {
+                ZoomViewportOverlay(
+                    viewportRect: zoomViewportRect,
+                    pageSize: viewModel.pageDimensions
+                )
+            }
 
             PageFrameView(pageSize: viewModel.pageDimensions)
         }

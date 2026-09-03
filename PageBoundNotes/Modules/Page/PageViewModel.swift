@@ -12,6 +12,7 @@ final class PageViewModel: ObservableObject {
     @Published var insertErrorMessage: String?
     @Published private(set) var isDirty = false
     @Published private(set) var isSaving = false
+    @Published var zoomModeActive = false
     /// Non-published cache — writing during view body must not invalidate AttributeGraph.
     private var loadedImageCache: [String: Data] = [:]
 
@@ -115,7 +116,8 @@ final class PageViewModel: ObservableObject {
             toolSession: toolSession,
             selectedObjectId: selectedObjectId,
             isEditingText: isEditingText,
-            textToolPhase: textToolPhase
+            textToolPhase: textToolPhase,
+            zoomModeActive: zoomModeActive
         )
     }
 
@@ -193,6 +195,22 @@ final class PageViewModel: ObservableObject {
     func canvasToolState() -> ToolApplicationState {
         var state = toolSession.applicationState
         if interactionPolicy.shouldDisableCanvasDrawing {
+            state.isDrawingEnabled = false
+        }
+        return state
+    }
+
+    func zoomCanvasToolState() -> ToolApplicationState {
+        var state = toolSession.applicationState
+        switch toolSession.selectedTool {
+        case .text, .image:
+            state.isDrawingEnabled = false
+        case .shapes where toolSession.isObjectShapeMode:
+            state.isDrawingEnabled = false
+        default:
+            state.isDrawingEnabled = true
+        }
+        if selectedObjectId != nil {
             state.isDrawingEnabled = false
         }
         return state

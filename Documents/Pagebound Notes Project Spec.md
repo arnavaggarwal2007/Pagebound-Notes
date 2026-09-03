@@ -119,7 +119,7 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
     - Writing within that zone causes horizontal sliding of the zoom window along the current line.[^13][^14][^2]
     - At page margin, zoom window moves down by a configurable “return height”, aligned to current template’s line spacing.[^2][^13]
 - Settings:
-    - Auto‑advance on/off at book and per‑document level, mirroring GoodNotes’ ability to disable auto‑advancing zoom.[^21][^12][^2]
+    - Auto‑advance on/off at book level (each book is a document), mirroring GoodNotes’ ability to disable auto‑advancing zoom.[^21][^12][^2]
     - Return height configuration per template type.
 
 

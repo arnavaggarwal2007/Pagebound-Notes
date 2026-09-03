@@ -68,6 +68,7 @@ private struct BookViewBody: View {
             VStack(spacing: 0) {
                 if let pageViewModel = viewModel.pageViewModel {
                     BookWritingSurface(
+                        bookViewModel: viewModel,
                         pageViewModel: pageViewModel,
                         toolSession: viewModel.toolSession
                     )

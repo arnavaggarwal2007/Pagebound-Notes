@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** July 21, 2026
+**Last updated:** September 1, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -28,7 +28,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 |-------|------|--------|
 | 0 | Foundations | Complete |
 | 1 | MVP: Local Notebooks and Pagination | Complete |
-| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–2 complete) |
+| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–3 implemented; device QA pending for Part 3) |
 | 3 | Import, Backup, and Cloud Export | Not started |
 | 4 | Advanced Features | Not started |
 
@@ -171,6 +171,24 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 >
 > **2026-07-21 (Phase 2 Part 2 sign-off):** Device QA passed on physical iPad (stroke/erase/lasso on photos, layering, transforms, regression). **Part 2 officially signed off.** Phase 2 remains in progress (Zoom Window next).
 
+> **2026-09-01 (Phase 2 Part 3 implementation):** Zoom Window module implemented — magnified writing strip, mini page preview, blue-zone auto-advance, book-level toggle, return height per template type via `ZoomSettingsStore`. Device QA pending.
+
+### Phase 2 Part 3 — Zoom Window (Implementation complete; device QA pending)
+
+**Implemented:** 2026-09-01
+
+#### Part 3 Exit Criteria
+
+- [x] `ZoomWindowViewModel` and `ZoomWindowView` under `Modules/ZoomWindow/`
+- [x] Magnified strip + mini preview share page drawing with main canvas
+- [x] Blue-zone auto-advance: horizontal then vertical on ruled templates (line-spacing return height)
+- [x] Auto-advance disableable per book (`Book.autoAdvanceEnabled`); survives relaunch
+- [x] Return height configurable per template type (`ZoomSettingsStore`)
+- [x] Ink tools / presets / eraser / lasso / ruler work in zoom strip
+- [x] Strokes autosave via existing `PageViewModel` path
+- [x] Unit tests: viewport math, auto-advance logic, settings persistence
+- [ ] Device QA on physical iPad (see vault `Area – QA Phase 2 Part 3 Zoom Window`)
+
 ### Phase 2 Part 2 — Content Overlays (Complete)
 
 **Signed off:** 2026-07-21 (device QA confirmed after draw-on-image fix)
@@ -228,14 +246,14 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 #### Zoom Window
 
-- [ ] `ZoomWindowViewModel` and `ZoomWindowView`
-- [ ] Magnified writing strip over the current page
-- [ ] Miniature page preview showing context
-- [ ] Auto-advance: visual indicator (blue zone) near right edge of zoom pane
-- [ ] Horizontal sliding when writing in the advance zone
-- [ ] At page margin, move down by configurable return height aligned to template line spacing
-- [ ] Auto-advance on/off toggle at book level
-- [ ] Return height configuration per template type
+- [x] `ZoomWindowViewModel` and `ZoomWindowView`
+- [x] Magnified writing strip over the current page
+- [x] Miniature page preview showing context
+- [x] Auto-advance: visual indicator (blue zone) near right edge of zoom pane
+- [x] Horizontal sliding when writing in the advance zone
+- [x] At page margin, move down by configurable return height aligned to template line spacing
+- [x] Auto-advance on/off toggle at book level
+- [x] Return height configuration per template type
 
 #### Page Management and Navigation
 
@@ -254,9 +272,9 @@ The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Ca
 - All Markup-style pen tools are functional with adjustable parameters — **Part 1 complete**
 - Eraser, lasso, shapes, and ruler work correctly on the canvas — **Part 1 complete**
 - Text boxes and images can be placed, moved, and resized on pages — **Part 2 complete**
-- Zoom window provides magnified writing with miniature page context
-- Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates
-- Auto-advance can be disabled per book
+- Zoom window provides magnified writing with miniature page context — **Part 3 complete (device QA pending)**
+- Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates — **Part 3 complete (device QA pending)**
+- Auto-advance can be disabled per book — **Part 3 complete (device QA pending)**
 - Pages can be added, duplicated, deleted, and reordered via the thumbnail strip
 - Pinch-zoom, pan, and fit-to-screen work smoothly
 
@@ -408,6 +426,7 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-09-01 | **Phase 2 Part 3 (Zoom Window) implemented** — `ZoomWindow` MVVM module, magnified strip, mini preview, blue-zone auto-advance, book-level toggle, return height per template; ADR – Zoom Window Viewport Strategy accepted; device QA pending |
 | 2026-09-01 | **Documentation model:** Adopted repo-primary policy (Option A); vault canonical notes are stubs linking to repo. Phase status table updated (Parts 1–2 complete). PencilKit ADR added to repo. |
 | 2026-07-21 | **Phase 2 Part 2 officially signed off** — device QA passed (draw/erase/lasso on photos, layering, transforms); unit + UI tests green; Phase 2 in progress (Zoom Window next) |
 | 2026-07-21 | Phase 2 Part 2 closeout — draw-on-image fix (canvas finger tap-select); unit test fixes |
