@@ -1,1105 +1,177 @@
 Update NavigationRequestObserver tried to update multiple times per frame.
-Called -[UIContextMenuInteraction updateVisibleMenuWithBlock:] while no context menu is visible. This won't do anything.
 Reading from public effective user settings.
-<0x15826e300> Gesture: System gesture gate timed out.
-Result accumulator timeout: 3.000000, exceeded.
-Result accumulator timeout: 3.000000, exceeded.
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Reporter disconnected. { function=sendMessage, reporterID=4110283702273 }
-Attempted to update accumulator from source type: 5, after completion has already been called for token:[C324F365]. This is an error and will be ignored.
-Attempted to update accumulator from source type: 5, after completion has already been called for token:[6A7A0CA8]. This is an error and will be ignored.
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Result accumulator timeout: 3.000000, exceeded.
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Invalid reflowable tokens count: result tokens:4 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:4 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:2 reflowable tokens:0
 Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-CoreData: debug: WAL checkpoint: Database did checkpoint. Log size: 1003 checkpointed: 1003
+Invalid reflowable tokens count: result tokens:6 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+=== AttributeGraph: cycle detected through attribute 1312792 ===
+=== AttributeGraph: cycle detected through attribute 379240 ===
+=== AttributeGraph: cycle detected through attribute 898332 ===
+=== AttributeGraph: cycle detected through attribute 866044 ===
+=== AttributeGraph: cycle detected through attribute 969424 ===
+=== AttributeGraph: cycle detected through attribute 969424 ===
+=== AttributeGraph: cycle detected through attribute 982336 ===
+=== AttributeGraph: cycle detected through attribute 984368 ===
+=== AttributeGraph: cycle detected through attribute 984368 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 866044 ===
+=== AttributeGraph: cycle detected through attribute 866044 ===
+=== AttributeGraph: cycle detected through attribute 862812 ===
+=== AttributeGraph: cycle detected through attribute 862812 ===
+=== AttributeGraph: cycle detected through attribute 379240 ===
+=== AttributeGraph: cycle detected through attribute 969424 ===
+=== AttributeGraph: cycle detected through attribute 982336 ===
+=== AttributeGraph: cycle detected through attribute 984368 ===
+=== AttributeGraph: cycle detected through attribute 984368 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 969424 ===
+=== AttributeGraph: cycle detected through attribute 982336 ===
+=== AttributeGraph: cycle detected through attribute 984368 ===
+=== AttributeGraph: cycle detected through attribute 984368 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 990936 ===
+=== AttributeGraph: cycle detected through attribute 991768 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+=== AttributeGraph: cycle detected through attribute 991256 ===
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:2 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
 Inventory request unexpected results. No inventory or error were returned
-Inventory request unexpected results. No inventory or error were returned
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Inventory request unexpected results. No inventory or error were returned
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 1462696 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 828440 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 862892 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Remote connection to handwritingd was invalidated
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 1457064 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 828440 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 862892 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
 Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 819736 ===
-=== AttributeGraph: cycle detected through attribute 828336 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Remote connection to handwritingd was invalidated
-Remote connection to handwritingd was invalidated
-Remote connection to handwritingd was invalidated
-Inventory request unexpected results. No inventory or error were returned
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 1452968 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 828440 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 862892 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-The edit menu (configuration: <UIEditMenuConfiguration: 0x15a4b9770: identifier=PKEditMenuConfigurationIdentifier, sourcePoint={169.875, 58.725000000000023}, arrowDirection=.automatic>) did not have performable commands and/or actions; ignoring present.
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 819736 ===
-=== AttributeGraph: cycle detected through attribute 828336 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 1444264 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 828440 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 862892 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Suspect normalizing of a drawing where stroke order is flipped. Reverting.
-Suspect normalizing of a drawing where stroke order is flipped. Reverting.
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 819736 ===
-=== AttributeGraph: cycle detected through attribute 828336 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
+CoreData: debug: WAL checkpoint: Database did checkpoint. Log size: 1007 checkpointed: 1007
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 1444264 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 828440 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 862892 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-CoreData: debug: WAL checkpoint: Database did checkpoint. Log size: 1002 checkpointed: 1002
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 819736 ===
-=== AttributeGraph: cycle detected through attribute 828336 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 1450920 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 828440 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 862892 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
+Remote connection to handwritingd was invalidated
 Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
 Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 819736 ===
-=== AttributeGraph: cycle detected through attribute 828336 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 1450920 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 312680 ===
-=== AttributeGraph: cycle detected through attribute 828440 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 862892 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 819804 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
-Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
 Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
 Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 135864 ===
-=== AttributeGraph: cycle detected through attribute 686160 ===
-=== AttributeGraph: cycle detected through attribute 819736 ===
-=== AttributeGraph: cycle detected through attribute 828336 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 859160 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 857808 ===
-=== AttributeGraph: cycle detected through attribute 909632 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 911664 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921304 ===
-=== AttributeGraph: cycle detected through attribute 922136 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
-=== AttributeGraph: cycle detected through attribute 921624 ===
--[RTIInputSystemClient remoteTextInputSessionWithID:performInputOperation:]  perform input operation requires a valid sessionID. inputModality = Keyboard, inputOperation = <null selector>, customInfoType = UIEmojiSearchOperations
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:6 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Remote connection to handwritingd was invalidated
+Remote connection to handwritingd was invalidated
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:5 reflowable tokens:0
+Invalid reflowable tokens count: result tokens:1 reflowable tokens:0
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated
 Remote connection to handwritingd was invalidated

@@ -216,6 +216,12 @@ final class PageViewModel: ObservableObject {
         return state
     }
 
+    func zoomOpenAnchorPoint() -> CGPoint? {
+        let bounds = drawing.bounds
+        guard !bounds.isNull, !bounds.isEmpty else { return nil }
+        return CGPoint(x: bounds.midX, y: bounds.midY)
+    }
+
     func insertTextBox(at point: CGPoint) {
         var document = objectsDocument
         let zIndex = document.assignNextZIndex()

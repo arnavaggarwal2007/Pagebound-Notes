@@ -8,8 +8,6 @@ struct ZoomWindowView: View {
     let onClose: () -> Void
     let onAutoAdvanceChanged: (Bool) -> Void
 
-    @State private var stripSize: CGSize = .zero
-
     private let stripHeight: CGFloat = 160
 
     var body: some View {
@@ -27,15 +25,6 @@ struct ZoomWindowView: View {
 
             zoomStrip
                 .frame(height: stripHeight)
-                .background(
-                    GeometryReader { geometry in
-                        Color.clear
-                            .onAppear { stripSize = geometry.size }
-                            .onChange(of: geometry.size) { _, newSize in
-                                stripSize = newSize
-                            }
-                    }
-                )
 
             zoomControls
         }
@@ -54,7 +43,7 @@ struct ZoomWindowView: View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: "info.circle")
                 .foregroundStyle(.secondary)
-            Text(String(localized: "Write near the right edge to auto-advance. Turn off auto-advance anytime below."))
+            Text(String(localized: "Write to the right edge of the strip to auto-advance. Turn off auto-advance anytime below."))
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 0)
@@ -95,25 +84,32 @@ struct ZoomWindowView: View {
                     drawing: pageViewModel.drawing,
                     toolState: pageViewModel.zoomCanvasToolState(),
                     allowsFingerObjectTap: false,
+                    acceptsUserDrawingChanges: true,
+                    syncsDrawingFromBinding: true,
                     onDrawingChanged: { drawing in
                         pageViewModel.drawingDidChange(drawing)
                         zoomViewModel.handleDrawingChanged(drawing)
                     },
+                    onStrokeBegan: { zoomViewModel.handleStrokeBegan() },
+                    onStrokeEnded: { zoomViewModel.handleStrokeEnded() },
                     onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
                     onPencilSwitchPrevious: { toolSession.swapPreviousTool() },
                     onFingerObjectTap: nil
                 )
+                .id(toolSession.toolRevision)
                 .frame(
                     width: pageViewModel.pageDimensions.width,
                     height: pageViewModel.pageDimensions.height
                 )
 
                 if zoomViewModel.autoAdvanceEnabled {
-                    advanceZoneOverlay(scale: scale)
+                    advanceZoneOverlay
                 }
             }
             .scaleEffect(scale, anchor: .topLeading)
             .offset(x: offset.width, y: offset.height)
+            .animation(.easeOut(duration: 0.15), value: zoomViewModel.magnification)
+            .animation(.easeInOut(duration: 0.2), value: zoomViewModel.viewportRect)
             .frame(width: size.width, height: size.height, alignment: .topLeading)
             .clipped()
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -124,12 +120,16 @@ struct ZoomWindowView: View {
         }
     }
 
-    private func advanceZoneOverlay(scale: CGFloat) -> some View {
+    private var advanceZoneOverlay: some View {
         let zone = ZoomViewportMath.advanceZone(in: zoomViewModel.viewportRect)
+        let localOrigin = CGPoint(
+            x: zone.origin.x - zoomViewModel.viewportRect.origin.x,
+            y: zone.origin.y - zoomViewModel.viewportRect.origin.y
+        )
         return Rectangle()
             .fill(Color.blue.opacity(zoomViewModel.isAdvanceZoneActive ? 0.28 : 0.14))
             .frame(width: zone.width, height: zone.height)
-            .offset(x: zone.origin.x, y: zone.origin.y)
+            .offset(x: localOrigin.x, y: localOrigin.y)
             .allowsHitTesting(false)
             .accessibilityHidden(true)
             .overlay(alignment: .trailing) {
@@ -175,9 +175,11 @@ struct ZoomWindowView: View {
             )) {
                 Text(String(localized: "Auto-advance"))
                     .font(.caption)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
             }
             .toggleStyle(.switch)
-            .labelsHidden()
+            .fixedSize(horizontal: true, vertical: false)
             .accessibilityLabel(String(localized: "Auto-advance"))
             .accessibilityValue(
                 zoomViewModel.autoAdvanceEnabled

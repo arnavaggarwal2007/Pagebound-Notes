@@ -4,8 +4,9 @@ import PencilKit
 import UIKit
 
 enum ZoomViewportMath {
-    static let advanceZoneWidthFraction: CGFloat = 0.15
-    static let horizontalAdvanceStepFraction: CGFloat = 0.08
+    static let advanceZoneWidthFraction: CGFloat = 0.28
+    static let advanceTriggerMargin: CGFloat = 10
+    static let horizontalAdvanceStepFraction: CGFloat = 0.6
     static let defaultViewportHeight: CGFloat = 72
     static let defaultViewportWidthFraction: CGFloat = 0.55
 
@@ -29,6 +30,14 @@ enum ZoomViewportMath {
         )
     }
 
+    static func viewport(anchoredAt point: CGPoint, pageSize: CGSize) -> CGRect {
+        let base = defaultViewport(pageSize: pageSize)
+        var rect = base
+        rect.origin.x = point.x - rect.width / 2
+        rect.origin.y = point.y - rect.height / 2
+        return clampViewport(rect, pageSize: pageSize)
+    }
+
     static func clampViewport(_ rect: CGRect, pageSize: CGSize) -> CGRect {
         let margins = writingMargins(for: pageSize)
         let minWidth: CGFloat = 120
@@ -48,7 +57,7 @@ enum ZoomViewportMath {
     }
 
     static func advanceZone(in viewportRect: CGRect) -> CGRect {
-        let zoneWidth = max(24, viewportRect.width * advanceZoneWidthFraction)
+        let zoneWidth = max(32, viewportRect.width * advanceZoneWidthFraction)
         return CGRect(
             x: viewportRect.maxX - zoneWidth,
             y: viewportRect.minY,
@@ -59,6 +68,10 @@ enum ZoomViewportMath {
 
     static func isInAdvanceZone(_ point: CGPoint, viewportRect: CGRect) -> Bool {
         advanceZone(in: viewportRect).contains(point)
+    }
+
+    static func isPastAdvanceTrigger(_ point: CGPoint, viewportRect: CGRect) -> Bool {
+        point.x >= viewportRect.maxX - advanceTriggerMargin
     }
 
     static func horizontalAdvance(
@@ -135,9 +148,9 @@ enum AutoAdvanceEngine {
             return (current, false)
         }
 
-        let inZone = ZoomViewportMath.isInAdvanceZone(point, viewportRect: current)
-        guard inZone else {
-            return (current, false)
+        let inVisualZone = ZoomViewportMath.isInAdvanceZone(point, viewportRect: current)
+        guard ZoomViewportMath.isPastAdvanceTrigger(point, viewportRect: current) else {
+            return (current, inVisualZone)
         }
 
         if ZoomViewportMath.shouldWrapToNextLine(viewport: current, pageSize: pageSize) {

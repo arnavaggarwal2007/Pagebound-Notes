@@ -36,7 +36,7 @@ struct MiniPagePreviewView: View {
             .contentShape(Rectangle())
             .gesture(
                 DragGesture(minimumDistance: 0)
-                    .onEnded { value in
+                    .onChanged { value in
                         guard let onReposition else { return }
                         let pageX = value.location.x / scale
                         let pageY = value.location.y / scale
@@ -50,6 +50,7 @@ struct MiniPagePreviewView: View {
                     localized: "Viewport at \(Int(viewportRect.origin.x)), \(Int(viewportRect.origin.y))"
                 )
             )
+            .accessibilityHint(String(localized: "Drag to reposition the zoom window on the page."))
         }
         .frame(height: previewHeight)
     }

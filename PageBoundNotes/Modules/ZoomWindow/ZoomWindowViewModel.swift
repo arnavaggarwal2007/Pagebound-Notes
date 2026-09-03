@@ -18,6 +18,7 @@ final class ZoomWindowViewModel: ObservableObject {
     private let settingsStore: ZoomSettingsStore
     private var settings: ZoomSettings
     private var lastAdvancePointX: CGFloat?
+    private var isStrokeActive = false
     private let inlineTipDefaultsKey = "zoomWindowInlineTipShown"
 
     init(
@@ -40,17 +41,23 @@ final class ZoomWindowViewModel: ObservableObject {
         settings.returnHeight(for: template)
     }
 
-    func open(anchorY: CGFloat? = nil) {
-        viewportRect = ZoomViewportMath.defaultViewport(pageSize: pageSize, anchorY: anchorY)
+    func open(anchorPoint: CGPoint? = nil) {
+        if let anchorPoint {
+            viewportRect = ZoomViewportMath.viewport(anchoredAt: anchorPoint, pageSize: pageSize)
+        } else {
+            viewportRect = ZoomViewportMath.defaultViewport(pageSize: pageSize)
+        }
         magnification = ZoomState.defaultMagnification
         lastAdvancePointX = nil
         isAdvanceZoneActive = false
+        isStrokeActive = false
         isPresented = true
     }
 
     func close() {
         isPresented = false
         isAdvanceZoneActive = false
+        isStrokeActive = false
         lastAdvancePointX = nil
     }
 
@@ -93,6 +100,15 @@ final class ZoomWindowViewModel: ObservableObject {
         try? settingsStore.saveSettings(settings)
     }
 
+    func handleStrokeBegan() {
+        isStrokeActive = true
+    }
+
+    func handleStrokeEnded() {
+        isStrokeActive = false
+        lastAdvancePointX = nil
+    }
+
     func handleDrawingChanged(_ drawing: PKDrawing) {
         guard isPresented else { return }
 
@@ -104,8 +120,26 @@ final class ZoomWindowViewModel: ObservableObject {
         isAdvanceZoneActive = autoAdvanceEnabled
             && ZoomViewportMath.isInAdvanceZone(point, viewportRect: viewportRect)
 
-        guard autoAdvanceEnabled, isAdvanceZoneActive else {
-            lastAdvancePointX = nil
+        guard autoAdvanceEnabled, isStrokeActive else {
+            return
+        }
+
+        processWritingPoint(point)
+    }
+
+    func repositionViewport(to pagePoint: CGPoint) {
+        var next = viewportRect
+        next.origin.x = pagePoint.x - viewportRect.width / 2
+        next.origin.y = pagePoint.y - viewportRect.height / 2
+        viewportRect = ZoomViewportMath.clampViewport(next, pageSize: pageSize)
+    }
+
+    func updatePageContext(pageSize: CGSize, template: Template) {
+        viewportRect = ZoomViewportMath.clampViewport(viewportRect, pageSize: pageSize)
+    }
+
+    private func processWritingPoint(_ point: CGPoint) {
+        guard ZoomViewportMath.isPastAdvanceTrigger(point, viewportRect: viewportRect) else {
             return
         }
 
@@ -126,16 +160,5 @@ final class ZoomWindowViewModel: ObservableObject {
             viewportRect = updated
             lastAdvancePointX = nil
         }
-    }
-
-    func repositionViewport(to pagePoint: CGPoint) {
-        var next = viewportRect
-        next.origin.x = pagePoint.x - viewportRect.width / 2
-        next.origin.y = pagePoint.y - viewportRect.height / 2
-        viewportRect = ZoomViewportMath.clampViewport(next, pageSize: pageSize)
-    }
-
-    func updatePageContext(pageSize: CGSize, template: Template) {
-        viewportRect = ZoomViewportMath.clampViewport(viewportRect, pageSize: pageSize)
     }
 }

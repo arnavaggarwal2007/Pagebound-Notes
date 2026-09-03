@@ -109,6 +109,8 @@ struct PageView: View {
                 drawing: viewModel.drawing,
                 toolState: viewModel.canvasToolState(),
                 allowsFingerObjectTap: interactionPolicy.allowsFingerObjectSelection,
+                acceptsUserDrawingChanges: !viewModel.zoomModeActive,
+                syncsDrawingFromBinding: true,
                 onDrawingChanged: { viewModel.drawingDidChange($0) },
                 onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
                 onPencilSwitchPrevious: { toolSession.swapPreviousTool() },

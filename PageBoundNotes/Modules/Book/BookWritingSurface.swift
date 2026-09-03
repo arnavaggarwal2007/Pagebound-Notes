@@ -7,13 +7,7 @@ struct BookWritingSurface: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            PageView(
-                viewModel: pageViewModel,
-                toolSession: toolSession,
-                zoomViewportRect: bookViewModel.zoomWindowViewModel?.isPresented == true
-                    ? bookViewModel.zoomWindowViewModel?.viewportRect
-                    : nil
-            )
+            pageLayer
 
             VStack(spacing: 8) {
                 if let zoomViewModel = bookViewModel.zoomWindowViewModel, zoomViewModel.isPresented {
@@ -42,6 +36,38 @@ struct BookWritingSurface: View {
             }
         }
         .animation(.easeInOut(duration: 0.25), value: bookViewModel.zoomWindowViewModel?.isPresented == true)
+    }
+
+    @ViewBuilder
+    private var pageLayer: some View {
+        if let zoomViewModel = bookViewModel.zoomWindowViewModel, zoomViewModel.isPresented {
+            ZoomObservedPageView(
+                pageViewModel: pageViewModel,
+                toolSession: toolSession,
+                zoomViewModel: zoomViewModel
+            )
+        } else {
+            PageView(
+                viewModel: pageViewModel,
+                toolSession: toolSession,
+                zoomViewportRect: nil
+            )
+        }
+    }
+}
+
+private struct ZoomObservedPageView: View {
+    @ObservedObject var pageViewModel: PageViewModel
+    @ObservedObject var toolSession: ToolSessionState
+    @ObservedObject var zoomViewModel: ZoomWindowViewModel
+
+    var body: some View {
+        PageView(
+            viewModel: pageViewModel,
+            toolSession: toolSession,
+            zoomViewportRect: zoomViewModel.viewportRect
+        )
+        .animation(.easeInOut(duration: 0.2), value: zoomViewModel.viewportRect)
     }
 }
 

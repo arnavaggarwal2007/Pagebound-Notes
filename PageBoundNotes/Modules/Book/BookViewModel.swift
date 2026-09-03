@@ -41,6 +41,8 @@ final class BookViewModel: ObservableObject {
     let bookId: UUID
     let dependencies: AppDependencies
 
+    private var zoomChangeCancellable: AnyCancellable?
+
     init(bookId: UUID, dependencies: AppDependencies) {
         self.bookId = bookId
         self.dependencies = dependencies
@@ -155,14 +157,16 @@ final class BookViewModel: ObservableObject {
             settingsStore: dependencies.zoomSettingsStore
         )
         zoom.syncAutoAdvanceFromBook(book.autoAdvanceEnabled)
-        zoom.open()
+        zoom.open(anchorPoint: pageViewModel.zoomOpenAnchorPoint())
         pageViewModel.zoomModeActive = true
         zoomWindowViewModel = zoom
+        bindZoomWindowViewModel(zoom)
     }
 
     func closeZoomWindow() {
         zoomWindowViewModel?.close()
         pageViewModel?.zoomModeActive = false
+        unbindZoomWindowViewModel()
     }
 
     func updateAutoAdvance(_ enabled: Bool) async {
@@ -222,6 +226,7 @@ final class BookViewModel: ObservableObject {
         closeZoomWindow()
         pageViewModel = nil
         zoomWindowViewModel = nil
+        unbindZoomWindowViewModel()
         let viewModel = PageViewModel(
             page: page,
             book: book,
@@ -331,5 +336,18 @@ final class BookViewModel: ObservableObject {
     private func reloadThumbnails() async {
         thumbnailRevision += 1
         await loadThumbnails()
+    }
+
+    private func bindZoomWindowViewModel(_ zoom: ZoomWindowViewModel) {
+        zoomChangeCancellable = zoom.objectWillChange
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+    }
+
+    private func unbindZoomWindowViewModel() {
+        zoomChangeCancellable?.cancel()
+        zoomChangeCancellable = nil
     }
 }

@@ -2,12 +2,25 @@ import PencilKit
 import SwiftUI
 import UIKit
 
+enum CanvasSyncPolicy {
+    static func shouldForwardDrawingChange(
+        isApplyingExternalDrawing: Bool,
+        acceptsUserDrawingChanges: Bool
+    ) -> Bool {
+        !isApplyingExternalDrawing && acceptsUserDrawingChanges
+    }
+}
+
 struct CanvasView: UIViewRepresentable {
     let pageId: UUID
     let drawing: PKDrawing
     var toolState: ToolApplicationState
     var allowsFingerObjectTap: Bool
+    var acceptsUserDrawingChanges: Bool = true
+    var syncsDrawingFromBinding: Bool = true
     var onDrawingChanged: (PKDrawing) -> Void
+    var onStrokeBegan: (() -> Void)?
+    var onStrokeEnded: (() -> Void)?
     var onPencilSwitchEraser: () -> Void
     var onPencilSwitchPrevious: () -> Void
     var onFingerObjectTap: ((CGPoint) -> Void)?
@@ -64,6 +77,7 @@ struct CanvasView: UIViewRepresentable {
         var boundPageId: UUID?
         var lastAppliedToolState: ToolApplicationState?
         var lastAppliedDrawingData: Data?
+        var isApplyingExternalDrawing = false
         weak var pencilInteraction: UIPencilInteraction?
         weak var fingerTapRecognizer: UITapGestureRecognizer?
 
@@ -83,10 +97,14 @@ struct CanvasView: UIViewRepresentable {
                 && toolState.isDrawingEnabled
                 && parent.onFingerObjectTap != nil
 
-            let drawingData = drawing.dataRepresentation()
-            if drawingData != lastAppliedDrawingData {
-                canvas.drawing = drawing
-                lastAppliedDrawingData = drawingData
+            if parent.syncsDrawingFromBinding {
+                let drawingData = drawing.dataRepresentation()
+                if drawingData != lastAppliedDrawingData {
+                    isApplyingExternalDrawing = true
+                    canvas.drawing = drawing
+                    lastAppliedDrawingData = drawingData
+                    isApplyingExternalDrawing = false
+                }
             }
 
             if lastAppliedToolState != toolState {
@@ -115,9 +133,30 @@ struct CanvasView: UIViewRepresentable {
         }
 
         func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
+            guard CanvasSyncPolicy.shouldForwardDrawingChange(
+                isApplyingExternalDrawing: isApplyingExternalDrawing,
+                acceptsUserDrawingChanges: parent.acceptsUserDrawingChanges
+            ) else {
+                return
+            }
+
             let newDrawing = canvasView.drawing
             DispatchQueue.main.async { [parent] in
                 parent.onDrawingChanged(newDrawing)
+            }
+        }
+
+        func canvasViewDidBeginUsingTool(_ canvasView: PKCanvasView) {
+            guard parent.acceptsUserDrawingChanges else { return }
+            DispatchQueue.main.async { [parent] in
+                parent.onStrokeBegan?()
+            }
+        }
+
+        func canvasViewDidEndUsingTool(_ canvasView: PKCanvasView) {
+            guard parent.acceptsUserDrawingChanges else { return }
+            DispatchQueue.main.async { [parent] in
+                parent.onStrokeEnded?()
             }
         }
 
