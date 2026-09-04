@@ -5,43 +5,84 @@ import UIKit
 
 enum ZoomViewportMath {
     static let advanceZoneWidthFraction: CGFloat = 0.28
-    static let advanceTriggerMargin: CGFloat = 10
+    static let advanceTriggerWidthFraction: CGFloat = 0.08
     static let horizontalAdvanceStepFraction: CGFloat = 0.6
     static let defaultViewportHeight: CGFloat = 72
     static let defaultViewportWidthFraction: CGFloat = 0.55
+    static let maxRenderingScaleMultiplier: CGFloat = 3
 
     static func writingMargins(for pageSize: CGSize) -> UIEdgeInsets {
         let inset = PageLayoutConstants.safeMarginInset
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
 
+    /// Base viewport size at `ZoomState.defaultMagnification`. Higher magnification
+    /// shrinks this size so the strip shows less page area (GoodNotes-style zoom).
+    static func viewportSize(forMagnification magnification: CGFloat, pageSize: CGSize) -> CGSize {
+        let margins = writingMargins(for: pageSize)
+        let clampedMag = min(
+            max(magnification, ZoomState.magnificationRange.lowerBound),
+            ZoomState.magnificationRange.upperBound
+        )
+        let factor = ZoomState.defaultMagnification / clampedMag
+        let baseWidth = (pageSize.width - margins.left - margins.right) * defaultViewportWidthFraction
+        let baseHeight = defaultViewportHeight
+        return CGSize(width: baseWidth * factor, height: baseHeight * factor)
+    }
+
     static func defaultViewport(
         pageSize: CGSize,
+        magnification: CGFloat = ZoomState.defaultMagnification,
         anchorY: CGFloat? = nil
     ) -> CGRect {
         let margins = writingMargins(for: pageSize)
-        let width = (pageSize.width - margins.left - margins.right) * defaultViewportWidthFraction
-        let height = defaultViewportHeight
+        let size = viewportSize(forMagnification: magnification, pageSize: pageSize)
         let x = margins.left
         let y = anchorY ?? margins.top
         return clampViewport(
-            CGRect(x: x, y: y, width: width, height: height),
+            CGRect(x: x, y: y, width: size.width, height: size.height),
             pageSize: pageSize
         )
     }
 
-    static func viewport(anchoredAt point: CGPoint, pageSize: CGSize) -> CGRect {
-        let base = defaultViewport(pageSize: pageSize)
-        var rect = base
-        rect.origin.x = point.x - rect.width / 2
-        rect.origin.y = point.y - rect.height / 2
+    static func viewport(
+        anchoredAt point: CGPoint,
+        pageSize: CGSize,
+        magnification: CGFloat = ZoomState.defaultMagnification
+    ) -> CGRect {
+        let size = viewportSize(forMagnification: magnification, pageSize: pageSize)
+        var rect = CGRect(
+            x: point.x - size.width / 2,
+            y: point.y - size.height / 2,
+            width: size.width,
+            height: size.height
+        )
         return clampViewport(rect, pageSize: pageSize)
+    }
+
+    /// Resize viewport around its center for a new magnification level.
+    static func viewport(
+        resizing current: CGRect,
+        toMagnification magnification: CGFloat,
+        pageSize: CGSize
+    ) -> CGRect {
+        let size = viewportSize(forMagnification: magnification, pageSize: pageSize)
+        let center = CGPoint(x: current.midX, y: current.midY)
+        return clampViewport(
+            CGRect(
+                x: center.x - size.width / 2,
+                y: center.y - size.height / 2,
+                width: size.width,
+                height: size.height
+            ),
+            pageSize: pageSize
+        )
     }
 
     static func clampViewport(_ rect: CGRect, pageSize: CGSize) -> CGRect {
         let margins = writingMargins(for: pageSize)
-        let minWidth: CGFloat = 120
-        let minHeight: CGFloat = 48
+        let minWidth: CGFloat = 80
+        let minHeight: CGFloat = 36
         var viewport = rect
         viewport.size.width = max(minWidth, min(viewport.width, pageSize.width - margins.left - margins.right))
         viewport.size.height = max(minHeight, min(viewport.height, pageSize.height - margins.top - margins.bottom))
@@ -66,12 +107,16 @@ enum ZoomViewportMath {
         )
     }
 
+    static func advanceTriggerMargin(for viewportRect: CGRect) -> CGFloat {
+        max(8, viewportRect.width * advanceTriggerWidthFraction)
+    }
+
     static func isInAdvanceZone(_ point: CGPoint, viewportRect: CGRect) -> Bool {
         advanceZone(in: viewportRect).contains(point)
     }
 
     static func isPastAdvanceTrigger(_ point: CGPoint, viewportRect: CGRect) -> Bool {
-        point.x >= viewportRect.maxX - advanceTriggerMargin
+        point.x >= viewportRect.maxX - advanceTriggerMargin(for: viewportRect)
     }
 
     static func horizontalAdvance(
@@ -118,14 +163,14 @@ enum ZoomViewportMath {
         return origin + lines * spacing
     }
 
+    /// Scale that maps `viewportRect` exactly into `stripSize` height.
+    /// Magnification is expressed by resizing the viewport, not an extra multiplier.
     static func contentScale(
         viewportRect: CGRect,
-        stripSize: CGSize,
-        magnification: CGFloat
+        stripSize: CGSize
     ) -> CGFloat {
-        guard viewportRect.height > 0, stripSize.height > 0 else { return magnification }
-        let fitScale = stripSize.height / viewportRect.height
-        return fitScale * magnification / ZoomState.defaultMagnification
+        guard viewportRect.height > 0, stripSize.height > 0 else { return 1 }
+        return stripSize.height / viewportRect.height
     }
 
     static func contentOffset(
@@ -133,6 +178,11 @@ enum ZoomViewportMath {
         scale: CGFloat
     ) -> CGSize {
         CGSize(width: -viewportRect.origin.x * scale, height: -viewportRect.origin.y * scale)
+    }
+
+    static func cappedRenderingScale(contentScale: CGFloat, screenScale: CGFloat) -> CGFloat {
+        let combined = screenScale * min(max(contentScale, 1), maxRenderingScaleMultiplier)
+        return combined
     }
 }
 

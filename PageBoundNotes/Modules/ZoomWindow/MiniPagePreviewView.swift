@@ -5,12 +5,17 @@ struct MiniPagePreviewView: View {
     let viewportRect: CGRect
     var onReposition: ((CGPoint) -> Void)?
 
-    private let previewHeight: CGFloat = 56
+    private let previewHeight: CGFloat = 72
 
     var body: some View {
         GeometryReader { geometry in
-            let scale = geometry.size.width / pageSize.width
-            let previewSize = CGSize(width: geometry.size.width, height: pageSize.height * scale)
+            let available = geometry.size
+            let fit = min(available.width / pageSize.width, available.height / pageSize.height)
+            let fittedSize = CGSize(width: pageSize.width * fit, height: pageSize.height * fit)
+            let origin = CGPoint(
+                x: (available.width - fittedSize.width) / 2,
+                y: (available.height - fittedSize.height) / 2
+            )
 
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 6, style: .continuous)
@@ -18,28 +23,29 @@ struct MiniPagePreviewView: View {
 
                 RoundedRectangle(cornerRadius: 4, style: .continuous)
                     .strokeBorder(Color.secondary.opacity(0.35), lineWidth: 1)
-                    .frame(width: pageSize.width * scale, height: previewSize.height)
+                    .frame(width: fittedSize.width, height: fittedSize.height)
+                    .offset(x: origin.x, y: origin.y)
 
                 RoundedRectangle(cornerRadius: 2, style: .continuous)
                     .strokeBorder(Color.accentColor, lineWidth: 2)
                     .background(Color.accentColor.opacity(0.15))
                     .frame(
-                        width: viewportRect.width * scale,
-                        height: viewportRect.height * scale
+                        width: viewportRect.width * fit,
+                        height: viewportRect.height * fit
                     )
                     .offset(
-                        x: viewportRect.origin.x * scale,
-                        y: viewportRect.origin.y * scale
+                        x: origin.x + viewportRect.origin.x * fit,
+                        y: origin.y + viewportRect.origin.y * fit
                     )
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .contentShape(Rectangle())
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        guard let onReposition else { return }
-                        let pageX = value.location.x / scale
-                        let pageY = value.location.y / scale
+                        guard let onReposition, fit > 0 else { return }
+                        let pageX = (value.location.x - origin.x) / fit
+                        let pageY = (value.location.y - origin.y) / fit
                         onReposition(CGPoint(x: pageX, y: pageY))
                     }
             )

@@ -43,7 +43,7 @@ struct ZoomWindowView: View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: "info.circle")
                 .foregroundStyle(.secondary)
-            Text(String(localized: "Write to the right edge of the strip to auto-advance. Turn off auto-advance anytime below."))
+            Text(String(localized: "Write to the right edge of the strip to auto-advance. Drag the mini preview to reposition. Turn off auto-advance anytime below."))
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 0)
@@ -65,8 +65,7 @@ struct ZoomWindowView: View {
             let size = geometry.size
             let scale = ZoomViewportMath.contentScale(
                 viewportRect: zoomViewModel.viewportRect,
-                stripSize: size,
-                magnification: zoomViewModel.magnification
+                stripSize: size
             )
             let offset = ZoomViewportMath.contentOffset(
                 viewportRect: zoomViewModel.viewportRect,
@@ -86,6 +85,7 @@ struct ZoomWindowView: View {
                     allowsFingerObjectTap: false,
                     acceptsUserDrawingChanges: true,
                     syncsDrawingFromBinding: true,
+                    renderingScale: scale,
                     onDrawingChanged: { drawing in
                         pageViewModel.drawingDidChange(drawing)
                         zoomViewModel.handleDrawingChanged(drawing)
@@ -96,15 +96,10 @@ struct ZoomWindowView: View {
                     onPencilSwitchPrevious: { toolSession.swapPreviousTool() },
                     onFingerObjectTap: nil
                 )
-                .id(toolSession.toolRevision)
                 .frame(
                     width: pageViewModel.pageDimensions.width,
                     height: pageViewModel.pageDimensions.height
                 )
-
-                if zoomViewModel.autoAdvanceEnabled {
-                    advanceZoneOverlay
-                }
             }
             .scaleEffect(scale, anchor: .topLeading)
             .offset(x: offset.width, y: offset.height)
@@ -117,19 +112,19 @@ struct ZoomWindowView: View {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .strokeBorder(Color.secondary.opacity(0.25), lineWidth: 1)
             }
+            .overlay(alignment: .trailing) {
+                if zoomViewModel.autoAdvanceEnabled {
+                    stripLocalAdvanceZone(stripWidth: size.width)
+                }
+            }
         }
     }
 
-    private var advanceZoneOverlay: some View {
-        let zone = ZoomViewportMath.advanceZone(in: zoomViewModel.viewportRect)
-        let localOrigin = CGPoint(
-            x: zone.origin.x - zoomViewModel.viewportRect.origin.x,
-            y: zone.origin.y - zoomViewModel.viewportRect.origin.y
-        )
+    private func stripLocalAdvanceZone(stripWidth: CGFloat) -> some View {
+        let zoneWidth = max(24, stripWidth * ZoomViewportMath.advanceZoneWidthFraction)
         return Rectangle()
             .fill(Color.blue.opacity(zoomViewModel.isAdvanceZoneActive ? 0.28 : 0.14))
-            .frame(width: zone.width, height: zone.height)
-            .offset(x: localOrigin.x, y: localOrigin.y)
+            .frame(width: zoneWidth)
             .allowsHitTesting(false)
             .accessibilityHidden(true)
             .overlay(alignment: .trailing) {

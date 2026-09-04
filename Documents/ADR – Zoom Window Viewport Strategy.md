@@ -23,8 +23,10 @@ Open questions before implementation:
 5. **Book-level auto-advance:** `Book.autoAdvanceEnabled` is the persistence source. In PageBound Notes, a book is the user-facing document; per-document wording in §4.4 means book scope.
 6. **Return height:** `ZoomSettingsStore` persists per-`TemplateType` return-height overrides (UserDefaults, injectable). Defaults derive from `Template.lineSpacing` or `Template.gridSize.height`, with a 24 pt fallback.
 7. **Interaction policy:** `PageInteractionPolicy.zoomModeActive` disables main-canvas drawing, page scroll, and object interaction while zoom is open.
-8. **Auto-advance:** Pure `ZoomViewportMath` / `AutoAdvanceEngine` in the ZoomWindow module. A wide blue **visual zone** (~28% of viewport width) indicates the approach region; **horizontal advance** fires only when an active stroke crosses a **trailing trigger line** (`viewport.maxX - 10pt`), not on mere zone entry or pencil lift. Advance step is ~60% of viewport width per trigger. Vertical wrap at the right margin uses template return height.
+8. **Auto-advance:** Pure `ZoomViewportMath` / `AutoAdvanceEngine` in the ZoomWindow module. A wide blue **visual zone** (~28% of strip width) is drawn as a **strip-local trailing overlay** (not inside the scaled page ZStack). **Horizontal advance** fires when an active stroke crosses a trailing trigger (~8% of viewport width from `viewport.maxX`). Stroke-end processing runs before clearing the active flag so late PencilKit samples still advance. Advance step is ~60% of viewport width. Vertical wrap at the right margin uses template return height.
 9. **Dual-canvas sync guard:** The main `CanvasView` remains display-synced from `PKDrawing` but sets `acceptsUserDrawingChanges = false` while zoom is open. Programmatic `canvas.drawing = …` updates set `isApplyingExternalDrawing` so `canvasViewDrawingDidChange` does not echo to `PageViewModel`. Only the zoom strip canvas forwards user drawing changes. `BookViewModel` forwards `ZoomWindowViewModel.objectWillChange` so the main-page viewport overlay stays in sync.
+10. **Magnification resizes viewport:** Slider magnification inversely resizes `viewportRect` around its center (smaller rect = higher zoom). Strip `contentScale = stripHeight / viewportRect.height` with no separate magnification multiplier, so the main-page highlight, mini preview, and writable strip region stay aligned.
+11. **Zoom render density:** The zoom `CanvasView` raises `contentScaleFactor` using `cappedRenderingScale(contentScale:screenScale:)` (cap 3×) so SwiftUI `scaleEffect` upscaling stays sharper at high zoom.
 
 ## Consequences
 
@@ -55,3 +57,4 @@ Open questions before implementation:
 |------|--------|
 | 2026-09-01 | Accepted for Phase 2 Part 3 implementation |
 | 2026-09-02 | Amended auto-advance trigger semantics (trailing-edge, stroke-active) and dual-canvas sync guard after device QA remediation |
+| 2026-09-03 | Magnification resizes viewport; strip-local advance chrome; denser zoom `contentScaleFactor`; stroke-end advance race fix |

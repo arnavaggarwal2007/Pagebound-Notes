@@ -19,6 +19,7 @@ final class ZoomWindowViewModel: ObservableObject {
     private var settings: ZoomSettings
     private var lastAdvancePointX: CGFloat?
     private var isStrokeActive = false
+    private var lastDrawing: PKDrawing = PKDrawing()
     private let inlineTipDefaultsKey = "zoomWindowInlineTipShown"
 
     init(
@@ -42,12 +43,19 @@ final class ZoomWindowViewModel: ObservableObject {
     }
 
     func open(anchorPoint: CGPoint? = nil) {
-        if let anchorPoint {
-            viewportRect = ZoomViewportMath.viewport(anchoredAt: anchorPoint, pageSize: pageSize)
-        } else {
-            viewportRect = ZoomViewportMath.defaultViewport(pageSize: pageSize)
-        }
         magnification = ZoomState.defaultMagnification
+        if let anchorPoint {
+            viewportRect = ZoomViewportMath.viewport(
+                anchoredAt: anchorPoint,
+                pageSize: pageSize,
+                magnification: magnification
+            )
+        } else {
+            viewportRect = ZoomViewportMath.defaultViewport(
+                pageSize: pageSize,
+                magnification: magnification
+            )
+        }
         lastAdvancePointX = nil
         isAdvanceZoneActive = false
         isStrokeActive = false
@@ -62,10 +70,19 @@ final class ZoomWindowViewModel: ObservableObject {
     }
 
     func setMagnification(_ value: CGFloat) {
-        magnification = min(
+        let clamped = min(
             max(value, ZoomState.magnificationRange.lowerBound),
             ZoomState.magnificationRange.upperBound
         )
+        guard clamped != magnification else { return }
+        magnification = clamped
+        viewportRect = ZoomViewportMath.viewport(
+            resizing: viewportRect,
+            toMagnification: magnification,
+            pageSize: pageSize
+        )
+        lastAdvancePointX = nil
+        isAdvanceZoneActive = false
     }
 
     func setAutoAdvanceEnabled(_ enabled: Bool) {
@@ -104,13 +121,21 @@ final class ZoomWindowViewModel: ObservableObject {
         isStrokeActive = true
     }
 
+    /// Process the final stroke point before clearing active state so advance
+    /// still fires when PencilKit delivers the last sample at tool end.
     func handleStrokeEnded() {
+        let shouldProcessFinalPoint = isStrokeActive && autoAdvanceEnabled
+        if shouldProcessFinalPoint, let point = AutoAdvanceEngine.lastPoint(in: lastDrawing) {
+            isAdvanceZoneActive = ZoomViewportMath.isInAdvanceZone(point, viewportRect: viewportRect)
+            processWritingPoint(point)
+        }
         isStrokeActive = false
         lastAdvancePointX = nil
     }
 
     func handleDrawingChanged(_ drawing: PKDrawing) {
         guard isPresented else { return }
+        lastDrawing = drawing
 
         guard let point = AutoAdvanceEngine.lastPoint(in: drawing) else {
             isAdvanceZoneActive = false

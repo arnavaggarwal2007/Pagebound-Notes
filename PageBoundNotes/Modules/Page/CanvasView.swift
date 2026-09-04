@@ -9,6 +9,14 @@ enum CanvasSyncPolicy {
     ) -> Bool {
         !isApplyingExternalDrawing && acceptsUserDrawingChanges
     }
+
+    static func runOnMain(_ work: @escaping () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.async(execute: work)
+        }
+    }
 }
 
 struct CanvasView: UIViewRepresentable {
@@ -18,6 +26,9 @@ struct CanvasView: UIViewRepresentable {
     var allowsFingerObjectTap: Bool
     var acceptsUserDrawingChanges: Bool = true
     var syncsDrawingFromBinding: Bool = true
+    /// Multiplier applied on top of `UIScreen.main.scale` for denser rasterization
+    /// under SwiftUI scale transforms (zoom strip). Capped inside `sync`.
+    var renderingScale: CGFloat = 1
     var onDrawingChanged: (PKDrawing) -> Void
     var onStrokeBegan: (() -> Void)?
     var onStrokeEnded: (() -> Void)?
@@ -93,6 +104,12 @@ struct CanvasView: UIViewRepresentable {
             canvas.isScrollEnabled = false
             canvas.bounces = false
 
+            let screenScale = canvas.window?.screen.scale ?? UIScreen.main.scale
+            canvas.contentScaleFactor = ZoomViewportMath.cappedRenderingScale(
+                contentScale: parent.renderingScale,
+                screenScale: screenScale
+            )
+
             fingerTapRecognizer?.isEnabled = parent.allowsFingerObjectTap
                 && toolState.isDrawingEnabled
                 && parent.onFingerObjectTap != nil
@@ -141,28 +158,32 @@ struct CanvasView: UIViewRepresentable {
             }
 
             let newDrawing = canvasView.drawing
-            DispatchQueue.main.async { [parent] in
+            CanvasSyncPolicy.runOnMain { [parent] in
                 parent.onDrawingChanged(newDrawing)
             }
         }
 
         func canvasViewDidBeginUsingTool(_ canvasView: PKCanvasView) {
             guard parent.acceptsUserDrawingChanges else { return }
-            DispatchQueue.main.async { [parent] in
+            CanvasSyncPolicy.runOnMain { [parent] in
                 parent.onStrokeBegan?()
             }
         }
 
         func canvasViewDidEndUsingTool(_ canvasView: PKCanvasView) {
             guard parent.acceptsUserDrawingChanges else { return }
-            DispatchQueue.main.async { [parent] in
+            // Push the final drawing before ending the stroke so auto-advance can
+            // evaluate the last point even when drawingDidChange ordering is late.
+            let endedDrawing = canvasView.drawing
+            CanvasSyncPolicy.runOnMain { [parent] in
+                parent.onDrawingChanged(endedDrawing)
                 parent.onStrokeEnded?()
             }
         }
 
         func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
             let action = UIPencilInteraction.preferredTapAction
-            DispatchQueue.main.async { [parent] in
+            CanvasSyncPolicy.runOnMain { [parent] in
                 switch action {
                 case .switchEraser:
                     parent.onPencilSwitchEraser()

@@ -1,4 +1,5 @@
 import CoreGraphics
+import PencilKit
 import XCTest
 @testable import PageBoundNotes
 
@@ -19,11 +20,38 @@ final class ZoomViewportMathTests: XCTestCase {
         XCTAssertEqual(viewport.midY, anchor.y, accuracy: 1)
     }
 
+    func testMagnificationShrinksViewport() {
+        let low = ZoomViewportMath.viewportSize(forMagnification: 1.5, pageSize: pageSize)
+        let high = ZoomViewportMath.viewportSize(forMagnification: 4.0, pageSize: pageSize)
+        XCTAssertGreaterThan(low.width, high.width)
+        XCTAssertGreaterThan(low.height, high.height)
+    }
+
+    func testResizingViewportKeepsCenter() {
+        let original = CGRect(x: 100, y: 120, width: 200, height: 72)
+        let resized = ZoomViewportMath.viewport(
+            resizing: original,
+            toMagnification: 4.0,
+            pageSize: pageSize
+        )
+        XCTAssertEqual(resized.midX, original.midX, accuracy: 1)
+        XCTAssertEqual(resized.midY, original.midY, accuracy: 1)
+        XCTAssertLessThan(resized.width, original.width)
+    }
+
     func testAdvanceZoneIsRightmostFraction() {
         let viewport = CGRect(x: 40, y: 40, width: 200, height: 60)
         let zone = ZoomViewportMath.advanceZone(in: viewport)
         XCTAssertEqual(zone.maxX, viewport.maxX, accuracy: 0.01)
         XCTAssertGreaterThan(zone.width, 20)
+    }
+
+    func testAdvanceZonePageCoordsUseViewportOrigin() {
+        let viewport = CGRect(x: 80, y: 100, width: 200, height: 60)
+        let zone = ZoomViewportMath.advanceZone(in: viewport)
+        XCTAssertEqual(zone.minY, viewport.minY, accuracy: 0.01)
+        XCTAssertEqual(zone.maxX, viewport.maxX, accuracy: 0.01)
+        XCTAssertGreaterThan(zone.minX, viewport.minX)
     }
 
     func testIsInAdvanceZone() {
@@ -37,11 +65,11 @@ final class ZoomViewportMathTests: XCTestCase {
         let viewport = CGRect(x: 0, y: 0, width: 200, height: 60)
         let zone = ZoomViewportMath.advanceZone(in: viewport)
         let entryPoint = CGPoint(x: zone.minX + 2, y: zone.midY)
-        let triggerPoint = CGPoint(x: viewport.maxX - 4, y: zone.midY)
+        let triggerMargin = ZoomViewportMath.advanceTriggerMargin(for: viewport)
+        let triggerPoint = CGPoint(x: viewport.maxX - triggerMargin / 2, y: zone.midY)
 
         XCTAssertTrue(ZoomViewportMath.isInAdvanceZone(entryPoint, viewportRect: viewport))
         XCTAssertFalse(ZoomViewportMath.isPastAdvanceTrigger(entryPoint, viewportRect: viewport))
-
         XCTAssertTrue(ZoomViewportMath.isPastAdvanceTrigger(triggerPoint, viewportRect: viewport))
 
         let entryResult = AutoAdvanceEngine.updatedViewport(
@@ -81,7 +109,8 @@ final class ZoomViewportMathTests: XCTestCase {
             returnHeight: 24,
             autoAdvanceEnabled: true
         ).viewport
-        XCTAssertLessThan(triggerPoint.x, advanced.maxX - ZoomViewportMath.advanceTriggerMargin)
+        let margin = ZoomViewportMath.advanceTriggerMargin(for: advanced)
+        XCTAssertLessThan(triggerPoint.x, advanced.maxX - margin)
     }
 
     func testVerticalWrapResetsXAndMovesDown() {
@@ -122,30 +151,98 @@ final class ZoomViewportMathTests: XCTestCase {
         XCTAssertEqual(snapped, 36 + 24, accuracy: 0.01)
     }
 
-    func testContentScaleUsesStripHeight() {
-        let viewport = CGRect(x: 0, y: 0, width: 300, height: 72)
-        let scale = ZoomViewportMath.contentScale(
-            viewportRect: viewport,
-            stripSize: CGSize(width: 400, height: 144),
-            magnification: 2.0
-        )
-        XCTAssertGreaterThan(scale, 1)
-    }
-
-    func testContentScaleIncreasesWithMagnification() {
+    func testContentScaleEqualsStripOverViewportHeight() {
         let viewport = CGRect(x: 0, y: 0, width: 300, height: 72)
         let stripSize = CGSize(width: 400, height: 144)
-        let lowScale = ZoomViewportMath.contentScale(
-            viewportRect: viewport,
-            stripSize: stripSize,
-            magnification: 1.5
-        )
-        let highScale = ZoomViewportMath.contentScale(
-            viewportRect: viewport,
-            stripSize: stripSize,
-            magnification: 4.0
-        )
+        let scale = ZoomViewportMath.contentScale(viewportRect: viewport, stripSize: stripSize)
+        XCTAssertEqual(scale, 2.0, accuracy: 0.01)
+    }
+
+    func testContentScaleIncreasesWhenViewportShrinks() {
+        let stripSize = CGSize(width: 400, height: 144)
+        let largeViewport = CGRect(x: 0, y: 0, width: 300, height: 72)
+        let smallViewport = CGRect(x: 0, y: 0, width: 150, height: 36)
+        let lowScale = ZoomViewportMath.contentScale(viewportRect: largeViewport, stripSize: stripSize)
+        let highScale = ZoomViewportMath.contentScale(viewportRect: smallViewport, stripSize: stripSize)
         XCTAssertGreaterThan(highScale, lowScale)
+    }
+
+    func testVisibleViewportMatchesOverlaySize() {
+        let mag: CGFloat = 3.0
+        let size = ZoomViewportMath.viewportSize(forMagnification: mag, pageSize: pageSize)
+        let viewport = ZoomViewportMath.defaultViewport(pageSize: pageSize, magnification: mag)
+        XCTAssertEqual(viewport.width, size.width, accuracy: 0.01)
+        XCTAssertEqual(viewport.height, size.height, accuracy: 0.01)
+    }
+}
+
+@MainActor
+final class ZoomWindowViewModelAdvanceTests: XCTestCase {
+    private let pageSize = CGSize(width: 612, height: 792)
+
+    func testStrokeEndStillAdvancesWhenPastTrigger() {
+        let store = InMemoryZoomSettingsStore()
+        let vm = ZoomWindowViewModel(
+            pageSize: pageSize,
+            template: TemplateCatalog.collegeRuled,
+            autoAdvanceEnabled: true,
+            settingsStore: store
+        )
+        vm.open()
+        let start = vm.viewportRect
+
+        // Simulate begin → drawing past trigger → end (PencilKit final-change-after-end order).
+        vm.handleStrokeBegan()
+        let triggerX = start.maxX - 2
+        let drawing = makeDrawing(endingAt: CGPoint(x: triggerX, y: start.midY))
+        vm.handleDrawingChanged(drawing)
+        // Clear active as if end arrived before a late drawingDidChange would have —
+        // handleStrokeEnded itself must still advance using lastDrawing.
+        vm.handleStrokeEnded()
+
+        XCTAssertGreaterThan(vm.viewportRect.origin.x, start.origin.x)
+    }
+
+    func testSetMagnificationResizesViewport() {
+        let store = InMemoryZoomSettingsStore()
+        let vm = ZoomWindowViewModel(
+            pageSize: pageSize,
+            template: TemplateCatalog.collegeRuled,
+            autoAdvanceEnabled: true,
+            settingsStore: store
+        )
+        vm.open()
+        let startSize = vm.viewportRect.size
+        vm.setMagnification(4.0)
+        XCTAssertLessThan(vm.viewportRect.width, startSize.width)
+        XCTAssertLessThan(vm.viewportRect.height, startSize.height)
+    }
+
+    private func makeDrawing(endingAt point: CGPoint) -> PKDrawing {
+        let start = CGPoint(x: point.x - 20, y: point.y)
+        let controlPoints: [PKStrokePoint] = [
+            PKStrokePoint(
+                location: start,
+                timeOffset: 0,
+                size: CGSize(width: 4, height: 4),
+                opacity: 1,
+                force: 1,
+                azimuth: 0,
+                altitude: .pi / 2
+            ),
+            PKStrokePoint(
+                location: point,
+                timeOffset: 0.1,
+                size: CGSize(width: 4, height: 4),
+                opacity: 1,
+                force: 1,
+                azimuth: 0,
+                altitude: .pi / 2
+            )
+        ]
+        let strokePath = PKStrokePath(controlPoints: controlPoints, creationDate: Date())
+        let stroke = PKStroke(ink: PKInk(.pen, color: .black), path: strokePath)
+        return PKDrawing(strokes: [stroke])
     }
 }
 
