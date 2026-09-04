@@ -177,9 +177,11 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 >
 > **2026-09-03 (Phase 2 Part 3 second remediation):** Re-QA found auto-advance dead/missing zone, mini-preview drag/zoom mismatch, overlay ≠ writable region, high-zoom haze. Fixes: magnification resizes viewport; strip-local advance overlay; stroke-end advance race; fit-page mini preview; denser zoom canvas `contentScaleFactor`; removed toolRevision canvas remount. Device re-QA pending.
 
-### Phase 2 Part 3 — Zoom Window (Second remediation complete; device re-QA pending)
+> **2026-09-03 (Phase 2 Part 3 third remediation):** Manual QA found near-edge advance stuck band, no reliable vertical wrap/manual move, chrome ink bleed, strip↔highlight mismatch, page cutoff under zoom. Fixes: aspect-locked viewport to strip; page-mapped advance zone; UIKit strip hit clip; clamp-then-wrap advance; drag-on-page highlight; programmatic keep-in-view scroll. Device re-QA pending.
 
-**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03
+### Phase 2 Part 3 — Zoom Window (Third remediation complete; device re-QA pending)
+
+**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03 (×2)
 
 #### Part 3 Exit Criteria
 
@@ -433,6 +435,7 @@ Follow this process for all implementation work:
 | 2026-09-01 | **Phase 2 Part 3 (Zoom Window) implemented** — `ZoomWindow` MVVM module, magnified strip, mini preview, blue-zone auto-advance, book-level toggle, return height per template; ADR – Zoom Window Viewport Strategy accepted; device QA pending |
 | 2026-09-02 | **Phase 2 Part 3 remediation** — dual-canvas sync guard, zoom observation forwarding, trailing-edge auto-advance, open-at-last-ink, mini-preview live drag, toggle label; device re-QA pending |
 | 2026-09-03 | **Phase 2 Part 3 second remediation** — viewport-sized magnification, strip-local advance zone, stroke-end race fix, fit-page mini preview, denser zoom render scale; device re-QA pending |
+| 2026-09-03 | **Phase 2 Part 3 third remediation** — aspect-locked strip↔viewport, page-mapped advance zone, strip hit isolation, clamp-then-wrap advance, drag-on-page highlight, keep-in-view scroll; device re-QA pending |
 | 2026-09-01 | **Documentation model:** Adopted repo-primary policy (Option A); vault canonical notes are stubs linking to repo. Phase status table updated (Parts 1–2 complete). PencilKit ADR added to repo. |
 | 2026-07-21 | **Phase 2 Part 2 officially signed off** — device QA passed (draw/erase/lasso on photos, layering, transforms); unit + UI tests green; Phase 2 in progress (Zoom Window next) |
 | 2026-07-21 | Phase 2 Part 2 closeout — draw-on-image fix (canvas finger tap-select); unit test fixes |

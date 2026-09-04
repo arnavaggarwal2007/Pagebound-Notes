@@ -65,7 +65,8 @@ private struct ZoomObservedPageView: View {
         PageView(
             viewModel: pageViewModel,
             toolSession: toolSession,
-            zoomViewportRect: zoomViewModel.viewportRect
+            zoomViewportRect: zoomViewModel.viewportRect,
+            onZoomViewportReposition: { zoomViewModel.repositionViewport(to: $0) }
         )
         .animation(.easeInOut(duration: 0.2), value: zoomViewModel.viewportRect)
     }

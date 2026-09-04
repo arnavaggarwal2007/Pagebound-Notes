@@ -129,9 +129,51 @@ enum ZoomViewportMath {
         next.origin.x += step
         let maxX = pageSize.width - margins.right - viewport.width
         if next.origin.x > maxX {
-            return viewport
+            next.origin.x = maxX
         }
         return clampViewport(next, pageSize: pageSize)
+    }
+
+    /// Resize viewport width so `viewport.width * contentScale == stripSize.width`,
+    /// keeping height (magnification) and centering on the current midX.
+    static func aspectLockedViewport(
+        current: CGRect,
+        stripSize: CGSize,
+        pageSize: CGSize
+    ) -> CGRect {
+        guard current.height > 0, stripSize.height > 0, stripSize.width > 0 else {
+            return current
+        }
+        let scale = stripSize.height / current.height
+        let targetWidth = stripSize.width / scale
+        if abs(current.width - targetWidth) < 0.5 {
+            return current
+        }
+        let centerX = current.midX
+        return clampViewport(
+            CGRect(
+                x: centerX - targetWidth / 2,
+                y: current.origin.y,
+                width: targetWidth,
+                height: current.height
+            ),
+            pageSize: pageSize
+        )
+    }
+
+    /// Page-space advance zone mapped into strip coordinates after scale/offset.
+    static func advanceZoneInStrip(
+        viewportRect: CGRect,
+        scale: CGFloat,
+        offset: CGSize
+    ) -> CGRect {
+        let zone = advanceZone(in: viewportRect)
+        return CGRect(
+            x: zone.origin.x * scale + offset.width,
+            y: zone.origin.y * scale + offset.height,
+            width: zone.width * scale,
+            height: zone.height * scale
+        )
     }
 
     static func verticalWrap(

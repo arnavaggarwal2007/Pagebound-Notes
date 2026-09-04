@@ -9,6 +9,7 @@ struct PageView: View {
     @ObservedObject var viewModel: PageViewModel
     @ObservedObject var toolSession: ToolSessionState
     var zoomViewportRect: CGRect?
+    var onZoomViewportReposition: ((CGPoint) -> Void)?
 
     @State private var showImageSourcePicker = false
     @State private var showPhotoPicker = false
@@ -18,6 +19,8 @@ struct PageView: View {
 
     private static let pageCanvasScrollID = "pageCanvasScrollTarget"
     private static let writingChromeClearance: CGFloat = 200
+    /// Approximate height of zoom panel + tool palette covering the bottom of the page.
+    static let zoomChromeClearance: CGFloat = 360
 
     var body: some View {
         pageScrollSurface
@@ -55,6 +58,10 @@ struct PageView: View {
                 guard editingId != nil, let textBox = viewModel.selectedTextBox else { return }
                 scrollTextBoxIntoView(textBox.geometry.frame.cgRect, proxy: proxy)
             }
+            .onChange(of: zoomViewportRect) { _, rect in
+                guard let rect else { return }
+                scrollZoomViewportIntoView(rect, proxy: proxy)
+            }
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)) { notification in
                 guard viewModel.isEditingText, let textBox = viewModel.selectedTextBox else { return }
                 scrollTextBoxIntoView(textBox.geometry.frame.cgRect, proxy: proxy, keyboardNotification: notification)
@@ -80,6 +87,29 @@ struct PageView: View {
             proxy.scrollTo(
                 Self.pageCanvasScrollID,
                 anchor: scrollAnchor(for: CGPoint(x: frame.midX, y: frame.maxY))
+            )
+        }
+    }
+
+    private func scrollZoomViewportIntoView(_ frame: CGRect, proxy: ScrollViewProxy) {
+        let pageHeight = viewModel.pageDimensions.height
+        guard pageHeight > 0 else { return }
+        // Keep the highlight in the upper band so zoom chrome does not cover it.
+        let clearanceRatio = min(Self.zoomChromeClearance / max(pageHeight, 1), 0.55)
+        let visibleBandMaxY = pageHeight * (1 - clearanceRatio)
+        let targetY: CGFloat
+        if frame.maxY > visibleBandMaxY || frame.minY < pageHeight * 0.05 {
+            targetY = frame.midY
+        } else {
+            return
+        }
+        withAnimation(.easeOut(duration: 0.2)) {
+            proxy.scrollTo(
+                Self.pageCanvasScrollID,
+                anchor: UnitPoint(
+                    x: 0.5,
+                    y: min(max(targetY / pageHeight, 0.08), 0.5)
+                )
             )
         }
     }
@@ -129,7 +159,8 @@ struct PageView: View {
             if let zoomViewportRect {
                 ZoomViewportOverlay(
                     viewportRect: zoomViewportRect,
-                    pageSize: viewModel.pageDimensions
+                    pageSize: viewModel.pageDimensions,
+                    onReposition: onZoomViewportReposition
                 )
             }
 

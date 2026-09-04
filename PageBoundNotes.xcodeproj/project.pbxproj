@@ -113,6 +113,7 @@
 		B1000000000000000000008B /* ZoomSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008B /* ZoomSettingsStore.swift */; };
 		B1000000000000000000008C /* ZoomViewportOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008C /* ZoomViewportOverlay.swift */; };
 		B1000000000000000000008D /* ZoomWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008D /* ZoomWindowTests.swift */; };
+		B1000000000000000000008E /* ZoomStripHitClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008E /* ZoomStripHitClip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +243,7 @@
 		F1000000000000000000008B /* ZoomSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomSettingsStore.swift; sourceTree = "<group>"; };
 		F1000000000000000000008C /* ZoomViewportOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewportOverlay.swift; sourceTree = "<group>"; };
 		F1000000000000000000008D /* ZoomWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomWindowTests.swift; sourceTree = "<group>"; };
+		F1000000000000000000008E /* ZoomStripHitClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomStripHitClip.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -508,6 +510,7 @@
 				F10000000000000000000088 /* ZoomWindowView.swift */,
 				F10000000000000000000089 /* MiniPagePreviewView.swift */,
 				F1000000000000000000008A /* ZoomPageBackdropView.swift */,
+				F1000000000000000000008E /* ZoomStripHitClip.swift */,
 			);
 			path = ZoomWindow;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				B1000000000000000000008A /* ZoomPageBackdropView.swift in Sources */,
 				B1000000000000000000008B /* ZoomSettingsStore.swift in Sources */,
 				B1000000000000000000008C /* ZoomViewportOverlay.swift in Sources */,
+				B1000000000000000000008E /* ZoomStripHitClip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

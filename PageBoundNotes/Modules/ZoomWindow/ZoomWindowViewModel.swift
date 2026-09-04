@@ -20,6 +20,7 @@ final class ZoomWindowViewModel: ObservableObject {
     private var lastAdvancePointX: CGFloat?
     private var isStrokeActive = false
     private var lastDrawing: PKDrawing = PKDrawing()
+    private var lastStripSize: CGSize = .zero
     private let inlineTipDefaultsKey = "zoomWindowInlineTipShown"
 
     init(
@@ -44,6 +45,7 @@ final class ZoomWindowViewModel: ObservableObject {
 
     func open(anchorPoint: CGPoint? = nil) {
         magnification = ZoomState.defaultMagnification
+        lastStripSize = .zero
         if let anchorPoint {
             viewportRect = ZoomViewportMath.viewport(
                 anchoredAt: anchorPoint,
@@ -67,6 +69,7 @@ final class ZoomWindowViewModel: ObservableObject {
         isAdvanceZoneActive = false
         isStrokeActive = false
         lastAdvancePointX = nil
+        lastStripSize = .zero
     }
 
     func setMagnification(_ value: CGFloat) {
@@ -81,8 +84,35 @@ final class ZoomWindowViewModel: ObservableObject {
             toMagnification: magnification,
             pageSize: pageSize
         )
+        applyStripAspectLockIfNeeded()
         lastAdvancePointX = nil
         isAdvanceZoneActive = false
+    }
+
+    /// Keep viewport width matched to the strip so ink, highlight, and blue zone align.
+    func syncStripSize(_ stripSize: CGSize) {
+        guard stripSize.width > 0, stripSize.height > 0 else { return }
+        let sizeUnchanged =
+            abs(lastStripSize.width - stripSize.width) < 0.5
+            && abs(lastStripSize.height - stripSize.height) < 0.5
+        lastStripSize = stripSize
+        let locked = ZoomViewportMath.aspectLockedViewport(
+            current: viewportRect,
+            stripSize: stripSize,
+            pageSize: pageSize
+        )
+        if !sizeUnchanged || locked != viewportRect {
+            viewportRect = locked
+        }
+    }
+
+    private func applyStripAspectLockIfNeeded() {
+        guard lastStripSize.width > 0, lastStripSize.height > 0 else { return }
+        viewportRect = ZoomViewportMath.aspectLockedViewport(
+            current: viewportRect,
+            stripSize: lastStripSize,
+            pageSize: pageSize
+        )
     }
 
     func setAutoAdvanceEnabled(_ enabled: Bool) {

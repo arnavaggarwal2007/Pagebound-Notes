@@ -99,6 +99,45 @@ final class ZoomViewportMathTests: XCTestCase {
         XCTAssertEqual(advanced.origin.x, viewport.origin.x + step, accuracy: 0.01)
     }
 
+    func testHorizontalAdvanceClampsNearRightMargin() {
+        let margins = ZoomViewportMath.writingMargins(for: pageSize)
+        let width: CGFloat = 200
+        let maxX = pageSize.width - margins.right - width
+        let viewport = CGRect(x: maxX - 40, y: 40, width: width, height: 60)
+        let advanced = ZoomViewportMath.horizontalAdvance(viewport: viewport, pageSize: pageSize)
+        XCTAssertEqual(advanced.origin.x, maxX, accuracy: 0.01)
+        XCTAssertNotEqual(advanced.origin.x, viewport.origin.x)
+    }
+
+    func testStuckBandClampThenWrapsOnNextTrigger() {
+        let margins = ZoomViewportMath.writingMargins(for: pageSize)
+        let width: CGFloat = 200
+        let maxX = pageSize.width - margins.right - width
+        let nearEdge = CGRect(x: maxX - 30, y: 40, width: width, height: 60)
+        let triggerNear = CGPoint(x: nearEdge.maxX - 1, y: nearEdge.midY)
+
+        let clamped = AutoAdvanceEngine.updatedViewport(
+            current: nearEdge,
+            lastWritingPoint: triggerNear,
+            pageSize: pageSize,
+            returnHeight: 24,
+            autoAdvanceEnabled: true
+        ).viewport
+        XCTAssertEqual(clamped.origin.x, maxX, accuracy: 0.01)
+        XCTAssertEqual(clamped.origin.y, nearEdge.origin.y, accuracy: 0.01)
+
+        let triggerAtEdge = CGPoint(x: clamped.maxX - 1, y: clamped.midY)
+        let wrapped = AutoAdvanceEngine.updatedViewport(
+            current: clamped,
+            lastWritingPoint: triggerAtEdge,
+            pageSize: pageSize,
+            returnHeight: 24,
+            autoAdvanceEnabled: true
+        ).viewport
+        XCTAssertEqual(wrapped.origin.x, margins.left, accuracy: 0.01)
+        XCTAssertGreaterThan(wrapped.origin.y, clamped.origin.y)
+    }
+
     func testHorizontalAdvanceStepClearsWritingPoint() {
         let viewport = CGRect(x: 40, y: 40, width: 200, height: 60)
         let triggerPoint = CGPoint(x: viewport.maxX - 2, y: viewport.midY)
@@ -111,6 +150,52 @@ final class ZoomViewportMathTests: XCTestCase {
         ).viewport
         let margin = ZoomViewportMath.advanceTriggerMargin(for: advanced)
         XCTAssertLessThan(triggerPoint.x, advanced.maxX - margin)
+    }
+
+    func testAspectLockedViewportMatchesStripWidth() {
+        // Interior fixture so widening does not hit writing margins (midX preserved).
+        let viewport = CGRect(x: 200, y: 40, width: 150, height: 80)
+        let stripSize = CGSize(width: 400, height: 160)
+        let locked = ZoomViewportMath.aspectLockedViewport(
+            current: viewport,
+            stripSize: stripSize,
+            pageSize: pageSize
+        )
+        let scale = ZoomViewportMath.contentScale(viewportRect: locked, stripSize: stripSize)
+        XCTAssertEqual(locked.width * scale, stripSize.width, accuracy: 0.5)
+        XCTAssertEqual(locked.height, viewport.height, accuracy: 0.01)
+        XCTAssertEqual(locked.midX, viewport.midX, accuracy: 1)
+        XCTAssertNotEqual(locked.width, viewport.width, accuracy: 0.5)
+    }
+
+    func testAspectLockedViewportClampsNearLeftMargin() {
+        let viewport = CGRect(x: 40, y: 40, width: 150, height: 80)
+        let stripSize = CGSize(width: 400, height: 160)
+        let locked = ZoomViewportMath.aspectLockedViewport(
+            current: viewport,
+            stripSize: stripSize,
+            pageSize: pageSize
+        )
+        let scale = ZoomViewportMath.contentScale(viewportRect: locked, stripSize: stripSize)
+        XCTAssertEqual(locked.minX, PageLayoutConstants.safeMarginInset, accuracy: 0.01)
+        XCTAssertEqual(locked.width * scale, stripSize.width, accuracy: 0.5)
+        XCTAssertEqual(locked.height, viewport.height, accuracy: 0.01)
+    }
+
+    func testAdvanceZoneInStripMapsPageZone() {
+        let viewport = CGRect(x: 80, y: 100, width: 200, height: 60)
+        let stripSize = CGSize(width: 400, height: 120)
+        let scale = ZoomViewportMath.contentScale(viewportRect: viewport, stripSize: stripSize)
+        let offset = ZoomViewportMath.contentOffset(viewportRect: viewport, scale: scale)
+        let zone = ZoomViewportMath.advanceZone(in: viewport)
+        let mapped = ZoomViewportMath.advanceZoneInStrip(
+            viewportRect: viewport,
+            scale: scale,
+            offset: offset
+        )
+        XCTAssertEqual(mapped.maxX, viewport.width * scale, accuracy: 0.5)
+        XCTAssertEqual(mapped.width, zone.width * scale, accuracy: 0.5)
+        XCTAssertEqual(mapped.minY, 0, accuracy: 0.5)
     }
 
     func testVerticalWrapResetsXAndMovesDown() {
@@ -216,6 +301,24 @@ final class ZoomWindowViewModelAdvanceTests: XCTestCase {
         vm.setMagnification(4.0)
         XCTAssertLessThan(vm.viewportRect.width, startSize.width)
         XCTAssertLessThan(vm.viewportRect.height, startSize.height)
+    }
+
+    func testSyncStripSizeAspectLocksWidth() {
+        let store = InMemoryZoomSettingsStore()
+        let vm = ZoomWindowViewModel(
+            pageSize: pageSize,
+            template: TemplateCatalog.collegeRuled,
+            autoAdvanceEnabled: true,
+            settingsStore: store
+        )
+        vm.open()
+        let stripSize = CGSize(width: 500, height: 160)
+        vm.syncStripSize(stripSize)
+        let scale = ZoomViewportMath.contentScale(
+            viewportRect: vm.viewportRect,
+            stripSize: stripSize
+        )
+        XCTAssertEqual(vm.viewportRect.width * scale, stripSize.width, accuracy: 0.5)
     }
 
     private func makeDrawing(endingAt point: CGPoint) -> PKDrawing {

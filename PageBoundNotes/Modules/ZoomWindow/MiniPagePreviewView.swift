@@ -5,7 +5,7 @@ struct MiniPagePreviewView: View {
     let viewportRect: CGRect
     var onReposition: ((CGPoint) -> Void)?
 
-    private let previewHeight: CGFloat = 72
+    private let previewHeight: CGFloat = 88
 
     var body: some View {
         GeometryReader { geometry in

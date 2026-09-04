@@ -22,6 +22,7 @@ struct ZoomWindowView: View {
                 onReposition: { zoomViewModel.repositionViewport(to: $0) }
             )
             .padding(.horizontal, 4)
+            .frame(minHeight: 88)
 
             zoomStrip
                 .frame(height: stripHeight)
@@ -43,7 +44,7 @@ struct ZoomWindowView: View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: "info.circle")
                 .foregroundStyle(.secondary)
-            Text(String(localized: "Write to the right edge of the strip to auto-advance. Drag the mini preview to reposition. Turn off auto-advance anytime below."))
+            Text(String(localized: "Write to the right edge of the strip to auto-advance. Drag the page highlight or mini preview to reposition. Turn off auto-advance anytime below."))
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 0)
@@ -72,59 +73,73 @@ struct ZoomWindowView: View {
                 scale: scale
             )
 
-            ZStack(alignment: .topLeading) {
-                ZoomPageBackdropView(
-                    pageViewModel: pageViewModel,
-                    pageSize: pageViewModel.pageDimensions
-                )
+            ZoomStripHitClip {
+                ZStack(alignment: .topLeading) {
+                    ZoomPageBackdropView(
+                        pageViewModel: pageViewModel,
+                        pageSize: pageViewModel.pageDimensions
+                    )
 
-                CanvasView(
-                    pageId: pageViewModel.page.id,
-                    drawing: pageViewModel.drawing,
-                    toolState: pageViewModel.zoomCanvasToolState(),
-                    allowsFingerObjectTap: false,
-                    acceptsUserDrawingChanges: true,
-                    syncsDrawingFromBinding: true,
-                    renderingScale: scale,
-                    onDrawingChanged: { drawing in
-                        pageViewModel.drawingDidChange(drawing)
-                        zoomViewModel.handleDrawingChanged(drawing)
-                    },
-                    onStrokeBegan: { zoomViewModel.handleStrokeBegan() },
-                    onStrokeEnded: { zoomViewModel.handleStrokeEnded() },
-                    onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
-                    onPencilSwitchPrevious: { toolSession.swapPreviousTool() },
-                    onFingerObjectTap: nil
-                )
-                .frame(
-                    width: pageViewModel.pageDimensions.width,
-                    height: pageViewModel.pageDimensions.height
-                )
+                    CanvasView(
+                        pageId: pageViewModel.page.id,
+                        drawing: pageViewModel.drawing,
+                        toolState: pageViewModel.zoomCanvasToolState(),
+                        allowsFingerObjectTap: false,
+                        acceptsUserDrawingChanges: true,
+                        syncsDrawingFromBinding: true,
+                        renderingScale: scale,
+                        onDrawingChanged: { drawing in
+                            pageViewModel.drawingDidChange(drawing)
+                            zoomViewModel.handleDrawingChanged(drawing)
+                        },
+                        onStrokeBegan: { zoomViewModel.handleStrokeBegan() },
+                        onStrokeEnded: { zoomViewModel.handleStrokeEnded() },
+                        onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
+                        onPencilSwitchPrevious: { toolSession.swapPreviousTool() },
+                        onFingerObjectTap: nil
+                    )
+                    .frame(
+                        width: pageViewModel.pageDimensions.width,
+                        height: pageViewModel.pageDimensions.height
+                    )
+                }
+                .scaleEffect(scale, anchor: .topLeading)
+                .offset(x: offset.width, y: offset.height)
+                .frame(width: size.width, height: size.height, alignment: .topLeading)
             }
-            .scaleEffect(scale, anchor: .topLeading)
-            .offset(x: offset.width, y: offset.height)
-            .animation(.easeOut(duration: 0.15), value: zoomViewModel.magnification)
-            .animation(.easeInOut(duration: 0.2), value: zoomViewModel.viewportRect)
-            .frame(width: size.width, height: size.height, alignment: .topLeading)
-            .clipped()
+            .frame(width: size.width, height: size.height)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .overlay {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .strokeBorder(Color.secondary.opacity(0.25), lineWidth: 1)
             }
-            .overlay(alignment: .trailing) {
+            .overlay(alignment: .topLeading) {
                 if zoomViewModel.autoAdvanceEnabled {
-                    stripLocalAdvanceZone(stripWidth: size.width)
+                    pageMappedAdvanceZone(scale: scale, offset: offset)
                 }
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .animation(.easeOut(duration: 0.15), value: zoomViewModel.magnification)
+            .animation(.easeInOut(duration: 0.2), value: zoomViewModel.viewportRect)
+            .onAppear {
+                scheduleStripSync(size)
+            }
+            .onChange(of: size) { _, newSize in
+                scheduleStripSync(newSize)
             }
         }
     }
 
-    private func stripLocalAdvanceZone(stripWidth: CGFloat) -> some View {
-        let zoneWidth = max(24, stripWidth * ZoomViewportMath.advanceZoneWidthFraction)
+    private func pageMappedAdvanceZone(scale: CGFloat, offset: CGSize) -> some View {
+        let zone = ZoomViewportMath.advanceZoneInStrip(
+            viewportRect: zoomViewModel.viewportRect,
+            scale: scale,
+            offset: offset
+        )
         return Rectangle()
             .fill(Color.blue.opacity(zoomViewModel.isAdvanceZoneActive ? 0.28 : 0.14))
-            .frame(width: zoneWidth)
+            .frame(width: zone.width, height: zone.height)
+            .offset(x: zone.origin.x, y: zone.origin.y)
             .allowsHitTesting(false)
             .accessibilityHidden(true)
             .overlay(alignment: .trailing) {
@@ -136,6 +151,12 @@ struct ZoomWindowView: View {
                         .accessibilityLabel(String(localized: "Auto-advance zone active"))
                 }
             }
+    }
+
+    private func scheduleStripSync(_ size: CGSize) {
+        Task { @MainActor in
+            zoomViewModel.syncStripSize(size)
+        }
     }
 
     private var zoomControls: some View {
