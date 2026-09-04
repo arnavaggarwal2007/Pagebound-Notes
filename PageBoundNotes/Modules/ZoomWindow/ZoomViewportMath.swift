@@ -5,7 +5,7 @@ import UIKit
 
 enum ZoomViewportMath {
     static let advanceZoneWidthFraction: CGFloat = 0.28
-    static let advanceTriggerWidthFraction: CGFloat = 0.08
+    static let advanceTriggerWidthFraction: CGFloat = 0.20
     static let horizontalAdvanceStepFraction: CGFloat = 0.6
     static let defaultViewportHeight: CGFloat = 72
     static let defaultViewportWidthFraction: CGFloat = 0.55
@@ -117,6 +117,17 @@ enum ZoomViewportMath {
 
     static func isPastAdvanceTrigger(_ point: CGPoint, viewportRect: CGRect) -> Bool {
         point.x >= viewportRect.maxX - advanceTriggerMargin(for: viewportRect)
+    }
+
+    /// True when a writing sample belongs to the current viewport (blocks stale
+    /// page-right points from advancing a freshly wrapped left-aligned viewport).
+    static func isPointInCurrentViewport(
+        _ point: CGPoint,
+        viewportRect: CGRect,
+        horizontalPad: CGFloat = 8
+    ) -> Bool {
+        let expanded = viewportRect.insetBy(dx: -horizontalPad, dy: -horizontalPad)
+        return expanded.contains(point)
     }
 
     static func horizontalAdvance(

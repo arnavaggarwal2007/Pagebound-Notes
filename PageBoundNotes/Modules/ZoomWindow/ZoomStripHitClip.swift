@@ -3,21 +3,39 @@ import UIKit
 
 /// Hosts the magnified zoom strip content in a fixed-size UIKit container so
 /// `PKCanvasView` hits cannot escape into surrounding zoom chrome (mini preview, controls).
+/// Also owns `UIPencilInteraction` so Apple Pencil double-tap works outside nested hosting.
 struct ZoomStripHitClip<Content: View>: UIViewRepresentable {
     let content: Content
+    var onPencilSwitchEraser: () -> Void
+    var onPencilSwitchPrevious: () -> Void
 
-    init(@ViewBuilder content: () -> Content) {
+    init(
+        onPencilSwitchEraser: @escaping () -> Void,
+        onPencilSwitchPrevious: @escaping () -> Void,
+        @ViewBuilder content: () -> Content
+    ) {
         self.content = content()
+        self.onPencilSwitchEraser = onPencilSwitchEraser
+        self.onPencilSwitchPrevious = onPencilSwitchPrevious
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(
+            onPencilSwitchEraser: onPencilSwitchEraser,
+            onPencilSwitchPrevious: onPencilSwitchPrevious
+        )
     }
 
     func makeUIView(context: Context) -> ZoomStripClipContainerView {
         let container = ZoomStripClipContainerView()
         container.clipsToBounds = true
         container.isMultipleTouchEnabled = true
+
+        let pencilInteraction = UIPencilInteraction()
+        pencilInteraction.delegate = context.coordinator
+        container.addInteraction(pencilInteraction)
+        context.coordinator.pencilInteraction = pencilInteraction
+
         let hosting = UIHostingController(rootView: content)
         hosting.view.backgroundColor = .clear
         hosting.view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,11 +52,39 @@ struct ZoomStripHitClip<Content: View>: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: ZoomStripClipContainerView, context: Context) {
+        context.coordinator.onPencilSwitchEraser = onPencilSwitchEraser
+        context.coordinator.onPencilSwitchPrevious = onPencilSwitchPrevious
         context.coordinator.hostingController?.rootView = content
     }
 
-    final class Coordinator {
+    final class Coordinator: NSObject, UIPencilInteractionDelegate {
         var hostingController: UIHostingController<Content>?
+        weak var pencilInteraction: UIPencilInteraction?
+        var onPencilSwitchEraser: () -> Void
+        var onPencilSwitchPrevious: () -> Void
+
+        init(
+            onPencilSwitchEraser: @escaping () -> Void,
+            onPencilSwitchPrevious: @escaping () -> Void
+        ) {
+            self.onPencilSwitchEraser = onPencilSwitchEraser
+            self.onPencilSwitchPrevious = onPencilSwitchPrevious
+        }
+
+        func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
+            let action = UIPencilInteraction.preferredTapAction
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                switch action {
+                case .switchEraser:
+                    self.onPencilSwitchEraser()
+                case .switchPrevious:
+                    self.onPencilSwitchPrevious()
+                default:
+                    break
+                }
+            }
+        }
     }
 }
 

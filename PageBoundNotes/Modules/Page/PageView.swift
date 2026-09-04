@@ -16,6 +16,7 @@ struct PageView: View {
     @State private var showFileImporter = false
     @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var transformPreview = ObjectTransformPreviewState.idle
+    @State private var allowZoomProgrammaticScroll = false
 
     private static let pageCanvasScrollID = "pageCanvasScrollTarget"
     private static let writingChromeClearance: CGFloat = 200
@@ -47,13 +48,14 @@ struct PageView: View {
             ScrollView([.horizontal, .vertical], showsIndicators: false) {
                 pageCanvas
                     .padding(Self.pagePadding)
+                    .padding(.bottom, zoomViewportRect != nil ? Self.zoomChromeClearance : 0)
                     .id(Self.pageCanvasScrollID)
                     .coordinateSpace(name: ContentObjectsOverlay.pageCanvasCoordinateSpace)
                     .onDrop(of: [.image], isTargeted: nil) { providers in
                         handleImageDrop(providers)
                     }
             }
-            .scrollDisabled(interactionPolicy.disablesPageScrolling)
+            .scrollDisabled(interactionPolicy.disablesPageScrolling && !allowZoomProgrammaticScroll)
             .onChange(of: viewModel.editingTextObjectId) { _, editingId in
                 guard editingId != nil, let textBox = viewModel.selectedTextBox else { return }
                 scrollTextBoxIntoView(textBox.geometry.frame.cgRect, proxy: proxy)
@@ -94,23 +96,17 @@ struct PageView: View {
     private func scrollZoomViewportIntoView(_ frame: CGRect, proxy: ScrollViewProxy) {
         let pageHeight = viewModel.pageDimensions.height
         guard pageHeight > 0 else { return }
-        // Keep the highlight in the upper band so zoom chrome does not cover it.
-        let clearanceRatio = min(Self.zoomChromeClearance / max(pageHeight, 1), 0.55)
-        let visibleBandMaxY = pageHeight * (1 - clearanceRatio)
-        let targetY: CGFloat
-        if frame.maxY > visibleBandMaxY || frame.minY < pageHeight * 0.05 {
-            targetY = frame.midY
-        } else {
-            return
-        }
+        // Always keep the highlight mid in the upper band above zoom chrome.
+        let normalizedY = min(max(frame.midY / pageHeight, 0.08), 0.42)
+        allowZoomProgrammaticScroll = true
         withAnimation(.easeOut(duration: 0.2)) {
             proxy.scrollTo(
                 Self.pageCanvasScrollID,
-                anchor: UnitPoint(
-                    x: 0.5,
-                    y: min(max(targetY / pageHeight, 0.08), 0.5)
-                )
+                anchor: UnitPoint(x: 0.5, y: normalizedY)
             )
+        }
+        DispatchQueue.main.async {
+            allowZoomProgrammaticScroll = false
         }
     }
 
@@ -144,6 +140,7 @@ struct PageView: View {
                 onDrawingChanged: { viewModel.drawingDidChange($0) },
                 onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
                 onPencilSwitchPrevious: { toolSession.swapPreviousTool() },
+                handlesPencilInteraction: !viewModel.zoomModeActive,
                 onFingerObjectTap: { viewModel.selectObjectAtPagePoint($0) }
             )
             .frame(width: viewModel.pageDimensions.width, height: viewModel.pageDimensions.height)

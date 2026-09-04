@@ -117,9 +117,10 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
     - Main-page viewport highlight that can be dragged to reposition the zoom region.
 - While zoom is open, the main page stays full size; the app programmatically keeps the viewport highlight in the visible band above zoom chrome (user panning remains disabled).
 - Auto‑advance logic:
-    - A visual indicator (blue zone) is shown on the trailing portion of the zoom pane when auto-advance is enabled (~28% of the viewport width). Writing in the zone does not advance until the stroke reaches a trailing trigger (~8% from the viewport’s right edge), consistent with GoodNotes-style continuous writing.[^15][^14][^2]
-    - Crossing that trigger slides the zoom window horizontally along the current line; near the page margin the viewport clamps to the edge, then wraps down by return height on the next trigger.[^13][^14][^2]
+    - A visual indicator (blue zone) is shown on the trailing portion of the zoom pane when auto-advance is enabled (~28% of the viewport width). Advance occurs **when the pencil lifts** if the final point is past a trailing trigger (~20% from the viewport’s right edge), not mid-stroke.[^15][^14][^2]
+    - Crossing that trigger on stroke end slides the zoom window horizontally along the current line; near the page margin the viewport clamps to the edge, then wraps down by return height on the next stroke-end trigger.[^13][^14][^2]
     - At page margin, zoom window moves down by a configurable “return height”, aligned to current template’s line spacing.[^2][^13]
+    - Apple Pencil double-tap (switch eraser / previous tool) works while writing in the zoom strip.
 - Settings:
     - Auto‑advance on/off at book level (each book is a document), mirroring GoodNotes’ ability to disable auto‑advancing zoom.[^21][^12][^2]
     - Return height configuration per template type.

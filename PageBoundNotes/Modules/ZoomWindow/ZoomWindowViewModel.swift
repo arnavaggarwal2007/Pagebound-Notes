@@ -156,7 +156,8 @@ final class ZoomWindowViewModel: ObservableObject {
     func handleStrokeEnded() {
         let shouldProcessFinalPoint = isStrokeActive && autoAdvanceEnabled
         if shouldProcessFinalPoint, let point = AutoAdvanceEngine.lastPoint(in: lastDrawing) {
-            isAdvanceZoneActive = ZoomViewportMath.isInAdvanceZone(point, viewportRect: viewportRect)
+            isAdvanceZoneActive = ZoomViewportMath.isPointInCurrentViewport(point, viewportRect: viewportRect)
+                && ZoomViewportMath.isInAdvanceZone(point, viewportRect: viewportRect)
             processWritingPoint(point)
         }
         isStrokeActive = false
@@ -172,14 +173,10 @@ final class ZoomWindowViewModel: ObservableObject {
             return
         }
 
+        // Visual feedback only during the stroke; advance runs on stroke end.
         isAdvanceZoneActive = autoAdvanceEnabled
+            && ZoomViewportMath.isPointInCurrentViewport(point, viewportRect: viewportRect)
             && ZoomViewportMath.isInAdvanceZone(point, viewportRect: viewportRect)
-
-        guard autoAdvanceEnabled, isStrokeActive else {
-            return
-        }
-
-        processWritingPoint(point)
     }
 
     func repositionViewport(to pagePoint: CGPoint) {
@@ -194,6 +191,9 @@ final class ZoomWindowViewModel: ObservableObject {
     }
 
     private func processWritingPoint(_ point: CGPoint) {
+        guard ZoomViewportMath.isPointInCurrentViewport(point, viewportRect: viewportRect) else {
+            return
+        }
         guard ZoomViewportMath.isPastAdvanceTrigger(point, viewportRect: viewportRect) else {
             return
         }

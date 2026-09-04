@@ -233,7 +233,8 @@ Tools are grouped logically:
 ### 8.2 Auto-Advance Indicator
 
 - When auto-advance is **on**, a **blue auto-advance zone** is always visible on the trailing portion of the zoom pane (~28% of the viewport width).
-- Writing into the zone does not advance until the stroke reaches the trailing trigger (~8% from the right edge); then the pane slides horizontally. At the page margin it clamps, then wraps down by return height on the next trigger.
+- Advance occurs on **pencil lift** when the final point is past the trailing trigger (~20% from the right edge); mid-stroke writing only highlights the zone. At the page margin the viewport clamps, then wraps down by return height on the next stroke-end trigger.
+- Apple Pencil double-tap continues to switch eraser / previous tool while the zoom strip is active.
 
 ### 8.3 Controls and Settings
 

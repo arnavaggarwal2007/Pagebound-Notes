@@ -91,6 +91,22 @@ final class ZoomViewportMathTests: XCTestCase {
         XCTAssertGreaterThan(triggerResult.viewport.origin.x, viewport.origin.x)
     }
 
+    func testPointInCurrentViewportRejectsStaleRightEdge() {
+        let viewport = CGRect(x: 36, y: 40, width: 200, height: 60)
+        XCTAssertTrue(
+            ZoomViewportMath.isPointInCurrentViewport(
+                CGPoint(x: viewport.midX, y: viewport.midY),
+                viewportRect: viewport
+            )
+        )
+        XCTAssertFalse(
+            ZoomViewportMath.isPointInCurrentViewport(
+                CGPoint(x: 500, y: viewport.midY),
+                viewportRect: viewport
+            )
+        )
+    }
+
     func testHorizontalAdvanceMovesViewportRight() {
         let viewport = CGRect(x: 40, y: 40, width: 200, height: 60)
         let advanced = ZoomViewportMath.horizontalAdvance(viewport: viewport, pageSize: pageSize)
@@ -281,11 +297,61 @@ final class ZoomWindowViewModelAdvanceTests: XCTestCase {
         let triggerX = start.maxX - 2
         let drawing = makeDrawing(endingAt: CGPoint(x: triggerX, y: start.midY))
         vm.handleDrawingChanged(drawing)
-        // Clear active as if end arrived before a late drawingDidChange would have —
+        // Mid-stroke must not advance.
+        XCTAssertEqual(vm.viewportRect.origin.x, start.origin.x, accuracy: 0.01)
         // handleStrokeEnded itself must still advance using lastDrawing.
         vm.handleStrokeEnded()
 
         XCTAssertGreaterThan(vm.viewportRect.origin.x, start.origin.x)
+    }
+
+    func testMidStrokeDrawingDoesNotAdvance() {
+        let store = InMemoryZoomSettingsStore()
+        let vm = ZoomWindowViewModel(
+            pageSize: pageSize,
+            template: TemplateCatalog.collegeRuled,
+            autoAdvanceEnabled: true,
+            settingsStore: store
+        )
+        vm.open()
+        let start = vm.viewportRect
+        vm.handleStrokeBegan()
+        vm.handleDrawingChanged(
+            makeDrawing(endingAt: CGPoint(x: start.maxX - 2, y: start.midY))
+        )
+        XCTAssertEqual(vm.viewportRect, start)
+        XCTAssertTrue(vm.isAdvanceZoneActive)
+    }
+
+    func testStalePointAfterWrapDoesNotBounceAdvance() {
+        let store = InMemoryZoomSettingsStore()
+        let vm = ZoomWindowViewModel(
+            pageSize: pageSize,
+            template: TemplateCatalog.collegeRuled,
+            autoAdvanceEnabled: true,
+            settingsStore: store
+        )
+        vm.open()
+        let margins = ZoomViewportMath.writingMargins(for: pageSize)
+        let width = vm.viewportRect.width
+        let height = vm.viewportRect.height
+        let maxX = pageSize.width - margins.right - width
+        vm.viewportRect = CGRect(x: maxX, y: 40, width: width, height: height)
+
+        let rightEdgePoint = CGPoint(x: maxX + width - 1, y: 40 + height / 2)
+        vm.handleStrokeBegan()
+        vm.handleDrawingChanged(makeDrawing(endingAt: rightEdgePoint))
+        vm.handleStrokeEnded()
+
+        XCTAssertEqual(vm.viewportRect.origin.x, margins.left, accuracy: 1)
+        let afterWrap = vm.viewportRect
+
+        vm.handleStrokeBegan()
+        vm.handleDrawingChanged(makeDrawing(endingAt: rightEdgePoint))
+        vm.handleStrokeEnded()
+
+        XCTAssertEqual(vm.viewportRect.origin.x, afterWrap.origin.x, accuracy: 0.01)
+        XCTAssertEqual(vm.viewportRect.origin.y, afterWrap.origin.y, accuracy: 0.01)
     }
 
     func testSetMagnificationResizesViewport() {

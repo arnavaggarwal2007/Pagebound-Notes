@@ -44,7 +44,7 @@ struct ZoomWindowView: View {
         HStack(alignment: .top, spacing: 8) {
             Image(systemName: "info.circle")
                 .foregroundStyle(.secondary)
-            Text(String(localized: "Write to the right edge of the strip to auto-advance. Drag the page highlight or mini preview to reposition. Turn off auto-advance anytime below."))
+            Text(String(localized: "Lift the pencil in the blue zone to auto-advance. Drag the page highlight or mini preview to reposition. Turn off auto-advance anytime below."))
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 0)
@@ -73,7 +73,10 @@ struct ZoomWindowView: View {
                 scale: scale
             )
 
-            ZoomStripHitClip {
+            ZoomStripHitClip(
+                onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
+                onPencilSwitchPrevious: { toolSession.swapPreviousTool() }
+            ) {
                 ZStack(alignment: .topLeading) {
                     ZoomPageBackdropView(
                         pageViewModel: pageViewModel,
@@ -96,6 +99,7 @@ struct ZoomWindowView: View {
                         onStrokeEnded: { zoomViewModel.handleStrokeEnded() },
                         onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
                         onPencilSwitchPrevious: { toolSession.swapPreviousTool() },
+                        handlesPencilInteraction: false,
                         onFingerObjectTap: nil
                     )
                     .frame(

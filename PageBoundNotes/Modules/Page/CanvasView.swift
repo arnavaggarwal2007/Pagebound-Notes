@@ -34,6 +34,8 @@ struct CanvasView: UIViewRepresentable {
     var onStrokeEnded: (() -> Void)?
     var onPencilSwitchEraser: () -> Void
     var onPencilSwitchPrevious: () -> Void
+    /// When false, hardware Pencil double-tap is ignored (e.g. main canvas while zoom is open).
+    var handlesPencilInteraction: Bool = true
     var onFingerObjectTap: ((CGPoint) -> Void)?
 
     func makeCoordinator() -> Coordinator {
@@ -182,6 +184,7 @@ struct CanvasView: UIViewRepresentable {
         }
 
         func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
+            guard parent.handlesPencilInteraction else { return }
             let action = UIPencilInteraction.preferredTapAction
             CanvasSyncPolicy.runOnMain { [parent] in
                 switch action {

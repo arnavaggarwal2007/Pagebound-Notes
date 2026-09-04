@@ -179,9 +179,11 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 > **2026-09-03 (Phase 2 Part 3 third remediation):** Manual QA found near-edge advance stuck band, no reliable vertical wrap/manual move, chrome ink bleed, strip↔highlight mismatch, page cutoff under zoom. Fixes: aspect-locked viewport to strip; page-mapped advance zone; UIKit strip hit clip; clamp-then-wrap advance; drag-on-page highlight; programmatic keep-in-view scroll. Device re-QA pending.
 
-### Phase 2 Part 3 — Zoom Window (Third remediation complete; device re-QA pending)
+> **2026-09-04 (Phase 2 Part 3 fourth remediation):** Manual QA found Pencil double-tap dead in strip, mid-stroke advance jumps, wrap bounce to center, keep-in-view unreliable. Fixes: strip-host `UIPencilInteraction`; stroke-end-only advance with 20% trigger; viewport-bounded point check; bottom padding + always scroll keep-in-view. Device re-QA pending.
 
-**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03 (×2)
+### Phase 2 Part 3 — Zoom Window (Fourth remediation complete; device re-QA pending)
+
+**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03 (×2), 2026-09-04
 
 #### Part 3 Exit Criteria
 
@@ -436,6 +438,7 @@ Follow this process for all implementation work:
 | 2026-09-02 | **Phase 2 Part 3 remediation** — dual-canvas sync guard, zoom observation forwarding, trailing-edge auto-advance, open-at-last-ink, mini-preview live drag, toggle label; device re-QA pending |
 | 2026-09-03 | **Phase 2 Part 3 second remediation** — viewport-sized magnification, strip-local advance zone, stroke-end race fix, fit-page mini preview, denser zoom render scale; device re-QA pending |
 | 2026-09-03 | **Phase 2 Part 3 third remediation** — aspect-locked strip↔viewport, page-mapped advance zone, strip hit isolation, clamp-then-wrap advance, drag-on-page highlight, keep-in-view scroll; device re-QA pending |
+| 2026-09-04 | **Phase 2 Part 3 fourth remediation** — stroke-end advance, 20% trigger, no post-wrap bounce, strip pencil double-tap, keep-in-view padding/scroll; device re-QA pending |
 | 2026-09-01 | **Documentation model:** Adopted repo-primary policy (Option A); vault canonical notes are stubs linking to repo. Phase status table updated (Parts 1–2 complete). PencilKit ADR added to repo. |
 | 2026-07-21 | **Phase 2 Part 2 officially signed off** — device QA passed (draw/erase/lasso on photos, layering, transforms); unit + UI tests green; Phase 2 in progress (Zoom Window next) |
 | 2026-07-21 | Phase 2 Part 2 closeout — draw-on-image fix (canvas finger tap-select); unit test fixes |
