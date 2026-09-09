@@ -8,15 +8,25 @@ struct PageView: View {
 
     @ObservedObject var viewModel: PageViewModel
     @ObservedObject var toolSession: ToolSessionState
+    var zoomViewportRect: CGRect?
+    var onZoomViewportReposition: ((CGPoint) -> Void)?
 
     @State private var showImageSourcePicker = false
     @State private var showPhotoPicker = false
     @State private var showFileImporter = false
     @State private var selectedPhotoItem: PhotosPickerItem?
     @State private var transformPreview = ObjectTransformPreviewState.idle
+    @StateObject private var scrollRuntime = PageScrollRuntime()
 
     private static let pageCanvasScrollID = "pageCanvasScrollTarget"
     private static let writingChromeClearance: CGFloat = 200
+    /// Approximate height of zoom panel + tool palette covering the bottom of the page.
+    static let zoomChromeClearance: CGFloat = 360
+    /// Place highlight mid in the upper visible band (above zoom chrome).
+    private static let zoomKeepInViewAnchorY: CGFloat = 0.22
+    private static let zoomKeepInViewThrottleNanoseconds: UInt64 = 16_000_000
+    /// Large mid jumps (e.g. wrap/advance) get a short animation; drag stays unanimated.
+    private static let zoomKeepInViewAnimateDistance: CGFloat = 80
 
     var body: some View {
         pageScrollSurface
@@ -43,6 +53,7 @@ struct PageView: View {
             ScrollView([.horizontal, .vertical], showsIndicators: false) {
                 pageCanvas
                     .padding(Self.pagePadding)
+                    .padding(.bottom, zoomViewportRect != nil ? Self.zoomChromeClearance : 0)
                     .id(Self.pageCanvasScrollID)
                     .coordinateSpace(name: ContentObjectsOverlay.pageCanvasCoordinateSpace)
                     .onDrop(of: [.image], isTargeted: nil) { providers in
@@ -50,9 +61,21 @@ struct PageView: View {
                     }
             }
             .scrollDisabled(interactionPolicy.disablesPageScrolling)
+            .background(
+                PageScrollViewAccessor(runtime: scrollRuntime) {
+                    scheduleZoomViewportKeepInView()
+                }
+            )
             .onChange(of: viewModel.editingTextObjectId) { _, editingId in
                 guard editingId != nil, let textBox = viewModel.selectedTextBox else { return }
                 scrollTextBoxIntoView(textBox.geometry.frame.cgRect, proxy: proxy)
+            }
+            .onChange(of: zoomViewportRect) { _, rect in
+                guard rect != nil else {
+                    scrollRuntime.clearLastMid()
+                    return
+                }
+                scheduleZoomViewportKeepInView()
             }
             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)) { notification in
                 guard viewModel.isEditingText, let textBox = viewModel.selectedTextBox else { return }
@@ -83,6 +106,103 @@ struct PageView: View {
         }
     }
 
+    private func scheduleZoomViewportKeepInView() {
+        guard zoomViewportRect != nil else { return }
+        scrollRuntime.keepInViewTask?.cancel()
+        scrollRuntime.keepInViewTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: Self.zoomKeepInViewThrottleNanoseconds)
+            guard !Task.isCancelled else { return }
+            applyZoomViewportKeepInView(isRetry: false)
+        }
+    }
+
+    private func applyZoomViewportKeepInView(isRetry: Bool) {
+        guard let viewport = zoomViewportRect else { return }
+        guard let scrollView = scrollRuntime.scrollView else {
+            PageBoundLog.zoom.debug("Keep-in-view skip: noScrollView")
+            return
+        }
+
+        if scrollView.contentSize.width <= 0 || scrollView.contentSize.height <= 0 {
+            scrollView.layoutIfNeeded()
+        }
+
+        let bounds = scrollView.bounds
+        let contentSize = scrollView.contentSize
+        guard bounds.width > 0, bounds.height > 0 else { return }
+        guard contentSize.width > 0, contentSize.height > 0 else {
+            PageBoundLog.zoom.debug("Keep-in-view skip: zeroContentSize retry=\(isRetry)")
+            guard !isRetry else { return }
+            scrollRuntime.keepInViewTask?.cancel()
+            scrollRuntime.keepInViewTask = Task { @MainActor in
+                try? await Task.sleep(nanoseconds: Self.zoomKeepInViewThrottleNanoseconds * 2)
+                guard !Task.isCancelled else { return }
+                applyZoomViewportKeepInView(isRetry: true)
+            }
+            return
+        }
+
+        let midInContent = CGPoint(
+            x: Self.pagePadding + viewport.midX,
+            y: Self.pagePadding + viewport.midY
+        )
+        let target = Self.clampedContentOffset(
+            focusing: midInContent,
+            scrollBounds: bounds,
+            contentSize: contentSize,
+            adjustedInsets: scrollView.adjustedContentInset,
+            anchorY: Self.zoomKeepInViewAnchorY,
+            chromeClearance: Self.zoomChromeClearance
+        )
+
+        let shouldAnimate: Bool
+        if let previous = scrollRuntime.lastMid {
+            let dx = midInContent.x - previous.x
+            let dy = midInContent.y - previous.y
+            shouldAnimate = hypot(dx, dy) >= Self.zoomKeepInViewAnimateDistance
+        } else {
+            shouldAnimate = false
+        }
+
+        guard abs(scrollView.contentOffset.x - target.x) > 0.5
+            || abs(scrollView.contentOffset.y - target.y) > 0.5
+        else {
+            scrollRuntime.lastMid = midInContent
+            return
+        }
+
+        scrollRuntime.lastMid = midInContent
+        PageBoundLog.zoom.debug(
+            "Keep-in-view offset x=\(target.x, format: .fixed(precision: 1)) y=\(target.y, format: .fixed(precision: 1)) animated=\(shouldAnimate)"
+        )
+        scrollView.setContentOffset(target, animated: shouldAnimate)
+    }
+
+    /// Content offset that places `focus` at horizontal center and `anchorY` of the usable visible height.
+    static func clampedContentOffset(
+        focusing focus: CGPoint,
+        scrollBounds: CGRect,
+        contentSize: CGSize,
+        adjustedInsets: UIEdgeInsets,
+        anchorY: CGFloat,
+        chromeClearance: CGFloat = 0
+    ) -> CGPoint {
+        let visibleWidth = max(0, scrollBounds.width - adjustedInsets.left - adjustedInsets.right)
+        let fullVisibleHeight = max(0, scrollBounds.height - adjustedInsets.top - adjustedInsets.bottom)
+        let usableHeight = max(1, fullVisibleHeight - max(0, chromeClearance))
+        var offset = CGPoint(
+            x: focus.x - visibleWidth * 0.5 - adjustedInsets.left,
+            y: focus.y - usableHeight * anchorY - adjustedInsets.top
+        )
+        let minX = -adjustedInsets.left
+        let minY = -adjustedInsets.top
+        let maxX = max(minX, contentSize.width - scrollBounds.width + adjustedInsets.right)
+        let maxY = max(minY, contentSize.height - scrollBounds.height + adjustedInsets.bottom)
+        offset.x = min(max(offset.x, minX), maxX)
+        offset.y = min(max(offset.y, minY), maxY)
+        return offset
+    }
+
     private func scrollAnchor(for point: CGPoint) -> UnitPoint {
         let pageHeight = viewModel.pageDimensions.height
         guard pageHeight > 0 else { return .center }
@@ -91,7 +211,7 @@ struct PageView: View {
     }
 
     private var pageCanvas: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             TemplateBackgroundView(
                 template: viewModel.template,
                 pageSize: viewModel.pageDimensions
@@ -108,9 +228,12 @@ struct PageView: View {
                 drawing: viewModel.drawing,
                 toolState: viewModel.canvasToolState(),
                 allowsFingerObjectTap: interactionPolicy.allowsFingerObjectSelection,
+                acceptsUserDrawingChanges: !viewModel.zoomModeActive,
+                syncsDrawingFromBinding: true,
                 onDrawingChanged: { viewModel.drawingDidChange($0) },
                 onPencilSwitchEraser: { toolSession.swapPencilDoubleTap() },
                 onPencilSwitchPrevious: { toolSession.swapPreviousTool() },
+                handlesPencilInteraction: !viewModel.zoomModeActive,
                 onFingerObjectTap: { viewModel.selectObjectAtPagePoint($0) }
             )
             .frame(width: viewModel.pageDimensions.width, height: viewModel.pageDimensions.height)
@@ -122,6 +245,14 @@ struct PageView: View {
             .frame(width: viewModel.pageDimensions.width, height: viewModel.pageDimensions.height)
 
             toolOverlayLayer
+
+            if let zoomViewportRect {
+                ZoomViewportOverlay(
+                    viewportRect: zoomViewportRect,
+                    pageSize: viewModel.pageDimensions,
+                    onReposition: onZoomViewportReposition
+                )
+            }
 
             PageFrameView(pageSize: viewModel.pageDimensions)
         }

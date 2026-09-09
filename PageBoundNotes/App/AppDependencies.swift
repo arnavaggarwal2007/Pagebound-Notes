@@ -8,6 +8,7 @@ struct AppDependencies {
     let pageRepository: PageRepositoryProtocol
     let pdfExportService: PDFExportService
     let toolPresetStore: ToolPresetStore
+    let zoomSettingsStore: ZoomSettingsStore
 
     @MainActor
     static func live(container: ModelContainer) throws -> AppDependencies {
@@ -22,7 +23,8 @@ struct AppDependencies {
             bookRepository: SwiftDataBookRepository(modelContext: context),
             pageRepository: pageRepository,
             pdfExportService: PDFExportService(pageRepository: pageRepository),
-            toolPresetStore: UserDefaultsToolPresetStore()
+            toolPresetStore: UserDefaultsToolPresetStore(),
+            zoomSettingsStore: UserDefaultsZoomSettingsStore()
         )
     }
 
@@ -43,7 +45,8 @@ struct AppDependencies {
             bookRepository: SwiftDataBookRepository(modelContext: context),
             pageRepository: pageRepository,
             pdfExportService: PDFExportService(pageRepository: pageRepository),
-            toolPresetStore: InMemoryToolPresetStore()
+            toolPresetStore: InMemoryToolPresetStore(),
+            zoomSettingsStore: InMemoryZoomSettingsStore()
         )
     }
 }

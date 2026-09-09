@@ -12,6 +12,7 @@ final class PageViewModel: ObservableObject {
     @Published var insertErrorMessage: String?
     @Published private(set) var isDirty = false
     @Published private(set) var isSaving = false
+    @Published var zoomModeActive = false
     /// Non-published cache — writing during view body must not invalidate AttributeGraph.
     private var loadedImageCache: [String: Data] = [:]
 
@@ -98,6 +99,9 @@ final class PageViewModel: ObservableObject {
             objectsDirty = false
             isDirty = false
         } catch {
+            PageBoundLog.persistence.error(
+                "Page load failed; blanking drawing pageId=\(self.page.id.uuidString, privacy: .public)"
+            )
             drawing = StrokeSerialization.emptyDrawing()
             objectsDocument = .empty
         }
@@ -115,7 +119,8 @@ final class PageViewModel: ObservableObject {
             toolSession: toolSession,
             selectedObjectId: selectedObjectId,
             isEditingText: isEditingText,
-            textToolPhase: textToolPhase
+            textToolPhase: textToolPhase,
+            zoomModeActive: zoomModeActive
         )
     }
 
@@ -196,6 +201,28 @@ final class PageViewModel: ObservableObject {
             state.isDrawingEnabled = false
         }
         return state
+    }
+
+    func zoomCanvasToolState() -> ToolApplicationState {
+        var state = toolSession.applicationState
+        switch toolSession.selectedTool {
+        case .text, .image:
+            state.isDrawingEnabled = false
+        case .shapes where toolSession.isObjectShapeMode:
+            state.isDrawingEnabled = false
+        default:
+            state.isDrawingEnabled = true
+        }
+        if selectedObjectId != nil {
+            state.isDrawingEnabled = false
+        }
+        return state
+    }
+
+    func zoomOpenAnchorPoint() -> CGPoint? {
+        let bounds = drawing.bounds
+        guard !bounds.isNull, !bounds.isEmpty else { return nil }
+        return CGPoint(x: bounds.midX, y: bounds.midY)
     }
 
     func insertTextBox(at point: CGPoint) {
@@ -407,9 +434,27 @@ final class PageViewModel: ObservableObject {
         autosaveTask?.cancel()
         autosaveTask = Task {
             try? await Task.sleep(nanoseconds: 300_000_000)
-            guard !Task.isCancelled else { return }
-            try? await saveImmediately()
+            guard !Task.isCancelled else {
+                PageBoundLog.persistence.debug(
+                    "Autosave skipped: cancelled pageId=\(self.page.id.uuidString, privacy: .public)"
+                )
+                return
+            }
+            do {
+                _ = try await saveImmediately()
+            } catch {
+                PageBoundLog.persistence.error(
+                    "Autosave failed pageId=\(self.page.id.uuidString, privacy: .public): \(error.localizedDescription, privacy: .public)"
+                )
+            }
         }
+    }
+
+    /// Cancels debounced autosave and writes dirty state. Call before tearing down the book.
+    func flushPendingChanges() async throws {
+        autosaveTask?.cancel()
+        autosaveTask = nil
+        _ = try await saveImmediately()
     }
 
     @discardableResult

@@ -2,7 +2,7 @@
 title: UI Guidelines
 version: 1.0
 status: canonical
-last-updated: 2026-07-21
+last-updated: 2026-09-03
 ---
 
 # PageBound Notes – UI and Visual Design Specification
@@ -183,9 +183,10 @@ The app is structured into the following primary contexts:
 
 ### 6.4 Zoom Window Components
 
-- **Zoom pane:** Magnified writing strip anchored near the bottom of the screen, showing an enlarged portion of the page.
-- **Mini page preview:** Small preview indicating the zoom pane’s position relative to the full page.
-- **Auto-advance zone indicator:** Blue highlight zone near the right edge of the zoom pane to signal auto-advance (aligned with Product Spec §4.4 and GoodNotes UX).
+- **Zoom pane:** Magnified writing strip anchored near the bottom of the screen, showing an enlarged portion of the page that matches the main-page viewport highlight.
+- **Mini page preview:** Small preview indicating the zoom pane’s position relative to the full page; drag to reposition.
+- **Main-page viewport highlight:** Accent frame on the page; drag to reposition the zoom region (content-first, Apple Notes–calm chrome).
+- **Auto-advance zone indicator:** Blue highlight mapped from the page-space advance zone (~28% of viewport width) on the trailing edge of the zoom pane.
 
 ### 6.5 Import/Export Components
 
@@ -226,16 +227,19 @@ Tools are grouped logically:
 
 - Zoom window appears when invoked from the tool palette or gesture, presenting a magnified strip of the current page aligned to writing lines.
 - The pane respects the page template’s line spacing, adjusting its vertical position with a configurable "return height".
+- While open, the main page stays full size; programmatic scrolling keeps the viewport highlight in the **upper visible band** above zoom chrome (including when the box is in the bottom third of the page). User panning stays disabled.
+- Pencil writes in the zoom strip only; finger (or drag) on the main-page highlight or mini preview repositions the viewport. Zoom chrome outside the strip does not accept ink.
 
 ### 8.2 Auto-Advance Indicator
 
-- When the pencil approaches the right edge of the zoom pane, a **blue auto-advance zone** appears (consistent with GoodNotes and Product Spec §4.4).
-- Writing into this zone triggers horizontal sliding of the pane along the current line; upon reaching the page margin, the pane moves down by the return height.
+- When auto-advance is **on**, a **blue auto-advance zone** is always visible on the trailing portion of the zoom pane (~28% of the viewport width).
+- Advance occurs on **pencil lift** when the final point is past the trailing trigger (~20% from the right edge); mid-stroke writing only highlights the zone. At the page margin the viewport clamps, then wraps down by return height on the next stroke-end trigger.
+- Apple Pencil double-tap continues to switch eraser / previous tool while the zoom strip is active.
 
 ### 8.3 Controls and Settings
 
 - Zoom window UI includes minimal controls: Close, zoom level slider, Auto-advance toggle.
-- Auto-advance settings are configurable at book and document levels, accessible via a Settings or context menu.
+- Auto-advance is configured at **book** level (a book is the user-facing document).
 
 
 ## 9. Interaction, Feedback, and Motion

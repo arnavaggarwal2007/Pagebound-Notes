@@ -112,14 +112,17 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 
 - Zoom window mode provides a magnified writing strip over the current page, similar to GoodNotes’ Zoom Window.[^2][^13][^14]
 - Zoom window shows:
-    - Magnified area for writing.
+    - Magnified area for writing (exactly the region framed by the main-page viewport highlight).
     - Miniature page preview to indicate context.
+    - Main-page viewport highlight that can be dragged to reposition the zoom region.
+- While zoom is open, the main page stays full size; the app programmatically keeps the viewport highlight in the visible band above zoom chrome (user panning remains disabled).
 - Auto‑advance logic:
-    - A visual indicator (e.g., blue zone) appears near the right edge of the zoom pane when the stylus approaches that area, consistent with GoodNotes UX.[^15][^14][^2]
-    - Writing within that zone causes horizontal sliding of the zoom window along the current line.[^13][^14][^2]
+    - A visual indicator (blue zone) is shown on the trailing portion of the zoom pane when auto-advance is enabled (~28% of the viewport width). Advance occurs **when the pencil lifts** if the final point is past a trailing trigger (~20% from the viewport’s right edge), not mid-stroke.[^15][^14][^2]
+    - Crossing that trigger on stroke end slides the zoom window horizontally along the current line; near the page margin the viewport clamps to the edge, then wraps down by return height on the next stroke-end trigger.[^13][^14][^2]
     - At page margin, zoom window moves down by a configurable “return height”, aligned to current template’s line spacing.[^2][^13]
+    - Apple Pencil double-tap (switch eraser / previous tool) works while writing in the zoom strip.
 - Settings:
-    - Auto‑advance on/off at book and per‑document level, mirroring GoodNotes’ ability to disable auto‑advancing zoom.[^21][^12][^2]
+    - Auto‑advance on/off at book level (each book is a document), mirroring GoodNotes’ ability to disable auto‑advancing zoom.[^21][^12][^2]
     - Return height configuration per template type.
 
 

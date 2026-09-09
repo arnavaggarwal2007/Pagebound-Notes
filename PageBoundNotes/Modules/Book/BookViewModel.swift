@@ -36,9 +36,12 @@ final class BookViewModel: ObservableObject {
     @Published private(set) var thumbnailRevision = 0
     @Published private(set) var thumbnails: [UUID: UIImage] = [:]
     @Published var toolSession = ToolSessionState()
+    @Published var zoomWindowViewModel: ZoomWindowViewModel?
 
     let bookId: UUID
     let dependencies: AppDependencies
+
+    private var zoomChangeCancellable: AnyCancellable?
 
     init(bookId: UUID, dependencies: AppDependencies) {
         self.bookId = bookId
@@ -133,7 +136,66 @@ final class BookViewModel: ObservableObject {
     }
 
     func flushForBackground() async {
-        await saveCurrentPageIfNeeded()
+        PageBoundLog.persistence.info("Flush begin bookId=\(self.bookId.uuidString, privacy: .public)")
+        guard let pageViewModel else {
+            PageBoundLog.persistence.info("Flush success bookId=\(self.bookId.uuidString, privacy: .public) (no page)")
+            return
+        }
+        do {
+            try await pageViewModel.flushPendingChanges()
+            if pages.indices.contains(currentPageIndex) {
+                pages[currentPageIndex] = pageViewModel.page
+            }
+            await reloadThumbnails()
+            saveStatusMessage = String(localized: "Saved")
+            PageBoundLog.persistence.info("Flush success bookId=\(self.bookId.uuidString, privacy: .public)")
+        } catch {
+            errorMessage = error.localizedDescription
+            PageBoundLog.persistence.error(
+                "Flush failure bookId=\(self.bookId.uuidString, privacy: .public): \(error.localizedDescription, privacy: .public)"
+            )
+        }
+    }
+
+    func toggleZoomWindow() {
+        guard let book, let pageViewModel else { return }
+
+        if let zoom = zoomWindowViewModel, zoom.isPresented {
+            closeZoomWindow()
+            return
+        }
+
+        pageViewModel.selectObject(id: nil)
+        pageViewModel.finishTextEditing(switchToPen: false)
+
+        let zoom = zoomWindowViewModel ?? ZoomWindowViewModel(
+            pageSize: pageViewModel.pageDimensions,
+            template: pageViewModel.template,
+            autoAdvanceEnabled: book.autoAdvanceEnabled,
+            settingsStore: dependencies.zoomSettingsStore
+        )
+        zoom.syncAutoAdvanceFromBook(book.autoAdvanceEnabled)
+        zoom.open(anchorPoint: pageViewModel.zoomOpenAnchorPoint())
+        pageViewModel.zoomModeActive = true
+        zoomWindowViewModel = zoom
+        bindZoomWindowViewModel(zoom)
+    }
+
+    func closeZoomWindow() {
+        zoomWindowViewModel?.close()
+        pageViewModel?.zoomModeActive = false
+        unbindZoomWindowViewModel()
+    }
+
+    func updateAutoAdvance(_ enabled: Bool) async {
+        guard var book else { return }
+        book.autoAdvanceEnabled = enabled
+        do {
+            self.book = try await dependencies.bookRepository.updateBook(book)
+            zoomWindowViewModel?.setAutoAdvanceEnabled(enabled)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
 
     func beginExport() {
@@ -175,10 +237,14 @@ final class BookViewModel: ObservableObject {
     private func loadCurrentPageViewModel() async {
         guard let page = currentPage, let book else {
             pageViewModel = nil
+            zoomWindowViewModel = nil
             return
         }
 
+        closeZoomWindow()
         pageViewModel = nil
+        zoomWindowViewModel = nil
+        unbindZoomWindowViewModel()
         let viewModel = PageViewModel(
             page: page,
             book: book,
@@ -221,7 +287,8 @@ final class BookViewModel: ObservableObject {
             return
         }
 
-        thumbnails = [:]
+        let pageCount = pages.count
+        PageBoundLog.persistence.debug("Thumbnail load begin count=\(pageCount)")
 
         let pageRepository = dependencies.pageRepository
         let snapshots: [PageRenderSnapshot] = pages.map { page in
@@ -283,10 +350,24 @@ final class BookViewModel: ObservableObject {
             }
         }
         thumbnails = loaded
+        PageBoundLog.persistence.debug("Thumbnail load done count=\(loaded.count)")
     }
 
     private func reloadThumbnails() async {
         thumbnailRevision += 1
         await loadThumbnails()
+    }
+
+    private func bindZoomWindowViewModel(_ zoom: ZoomWindowViewModel) {
+        zoomChangeCancellable = zoom.objectWillChange
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+    }
+
+    private func unbindZoomWindowViewModel() {
+        zoomChangeCancellable?.cancel()
+        zoomChangeCancellable = nil
     }
 }

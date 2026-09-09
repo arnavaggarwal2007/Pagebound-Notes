@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** July 21, 2026
+**Last updated:** September 1, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -28,7 +28,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 |-------|------|--------|
 | 0 | Foundations | Complete |
 | 1 | MVP: Local Notebooks and Pagination | Complete |
-| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–2 complete) |
+| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–3 implemented; device QA pending for Part 3) |
 | 3 | Import, Backup, and Cloud Export | Not started |
 | 4 | Advanced Features | Not started |
 
@@ -171,6 +171,40 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 >
 > **2026-07-21 (Phase 2 Part 2 sign-off):** Device QA passed on physical iPad (stroke/erase/lasso on photos, layering, transforms, regression). **Part 2 officially signed off.** Phase 2 remains in progress (Zoom Window next).
 
+> **2026-09-01 (Phase 2 Part 3 implementation):** Zoom Window module implemented — magnified writing strip, mini page preview, blue-zone auto-advance, book-level toggle, return height per template type via `ZoomSettingsStore`. Device QA pending.
+>
+> **2026-09-02 (Phase 2 Part 3 remediation):** Device QA failed on tool switching, auto-advance UX, zoom slider, and viewport positioning. Remediation shipped: dual-canvas sync guard, zoom VM observation forwarding, trailing-edge auto-advance, open-at-last-ink anchor, live mini-preview drag, labeled auto-advance toggle. Re-QA pending.
+>
+> **2026-09-03 (Phase 2 Part 3 second remediation):** Re-QA found auto-advance dead/missing zone, mini-preview drag/zoom mismatch, overlay ≠ writable region, high-zoom haze. Fixes: magnification resizes viewport; strip-local advance overlay; stroke-end advance race; fit-page mini preview; denser zoom canvas `contentScaleFactor`; removed toolRevision canvas remount. Device re-QA pending.
+
+> **2026-09-03 (Phase 2 Part 3 third remediation):** Manual QA found near-edge advance stuck band, no reliable vertical wrap/manual move, chrome ink bleed, strip↔highlight mismatch, page cutoff under zoom. Fixes: aspect-locked viewport to strip; page-mapped advance zone; UIKit strip hit clip; clamp-then-wrap advance; drag-on-page highlight; programmatic keep-in-view scroll. Device re-QA pending.
+
+> **2026-09-04 (Phase 2 Part 3 fourth remediation):** Manual QA found Pencil double-tap dead in strip, mid-stroke advance jumps, wrap bounce to center, keep-in-view unreliable. Fixes: strip-host `UIPencilInteraction`; stroke-end-only advance with 20% trigger; viewport-bounded point check; bottom padding + always scroll keep-in-view. Device re-QA pending.
+
+> **2026-09-04 (Phase 2 Part 3 fifth remediation):** Keep-in-view failed in bottom third (clamped whole-canvas `scrollTo`). Fix: highlight-mid scroll marker + fixed upper-band anchor; hold programmatic scroll unlock for animation. Auto-advance H/V fine-tune deferred to pre/post-launch. Device re-QA pending for keep-in-view.
+
+> **2026-09-04 (Phase 2 Part 3 sixth remediation):** Fifth remediation regressed follow entirely (`.offset` marker ignored by `ScrollViewReader`; scroll unlock published during view updates). Fix: layout VStack focus marker; deferred `Task`/`yield` unlock + `scrollTo`. Device re-QA pending.
+
+> **2026-09-05 (Phase 2 Part 3 seventh remediation):** Sixth remediation left follow broken and free pan unlocked (`allowZoomProgrammaticScroll` + unreliable `scrollTo`). Fix: `PageScrollViewAccessor` + UIKit `setContentOffset` while scroll stays disabled; remove unlock/marker; remove PageView viewport animation. Device re-QA pending.
+
+> **2026-09-05 (Phase 2 Part 3 eighth stabilization):** Round 7 `@State` keep-in-view churn froze toolbar/nav and broke follow; leave-book had no flush (ink loss). Fix: non-publishing `PageScrollRuntime` + chrome-aware offset; flush on book disappear; keep stale thumbs during reload; `PageBoundLog`. Sidebar lock in book remains intentional (use Back). Device re-QA pending.
+
+### Phase 2 Part 3 — Zoom Window (Eighth stabilization complete; device re-QA pending)
+
+**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03 (×2), 2026-09-04 (×3), 2026-09-05 (×2)
+
+#### Part 3 Exit Criteria
+
+- [x] `ZoomWindowViewModel` and `ZoomWindowView` under `Modules/ZoomWindow/`
+- [x] Magnified strip + mini preview share page drawing with main canvas
+- [ ] Blue-zone auto-advance: horizontal then vertical on ruled templates (line-spacing return height) — re-test after remediation
+- [x] Auto-advance disableable per book (`Book.autoAdvanceEnabled`); survives relaunch
+- [x] Return height configurable per template type (`ZoomSettingsStore`)
+- [ ] Ink tools / presets / eraser / lasso / ruler work in zoom strip — re-test after remediation
+- [x] Strokes autosave via existing `PageViewModel` path
+- [x] Unit tests: viewport math, auto-advance logic, settings persistence, canvas sync policy
+- [ ] Device QA on physical iPad (see vault `Area – QA Phase 2 Part 3 Zoom Window`)
+
 ### Phase 2 Part 2 — Content Overlays (Complete)
 
 **Signed off:** 2026-07-21 (device QA confirmed after draw-on-image fix)
@@ -228,14 +262,14 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 #### Zoom Window
 
-- [ ] `ZoomWindowViewModel` and `ZoomWindowView`
-- [ ] Magnified writing strip over the current page
-- [ ] Miniature page preview showing context
-- [ ] Auto-advance: visual indicator (blue zone) near right edge of zoom pane
-- [ ] Horizontal sliding when writing in the advance zone
-- [ ] At page margin, move down by configurable return height aligned to template line spacing
-- [ ] Auto-advance on/off toggle at book level
-- [ ] Return height configuration per template type
+- [x] `ZoomWindowViewModel` and `ZoomWindowView`
+- [x] Magnified writing strip over the current page
+- [x] Miniature page preview showing context
+- [x] Auto-advance: visual indicator (blue zone) near right edge of zoom pane
+- [x] Horizontal sliding when writing in the advance zone
+- [x] At page margin, move down by configurable return height aligned to template line spacing
+- [x] Auto-advance on/off toggle at book level
+- [x] Return height configuration per template type
 
 #### Page Management and Navigation
 
@@ -254,9 +288,9 @@ The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Ca
 - All Markup-style pen tools are functional with adjustable parameters — **Part 1 complete**
 - Eraser, lasso, shapes, and ruler work correctly on the canvas — **Part 1 complete**
 - Text boxes and images can be placed, moved, and resized on pages — **Part 2 complete**
-- Zoom window provides magnified writing with miniature page context
-- Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates
-- Auto-advance can be disabled per book
+- Zoom window provides magnified writing with miniature page context — **Part 3 complete (device QA pending)**
+- Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates — **Part 3 complete (device QA pending)**
+- Auto-advance can be disabled per book — **Part 3 complete (device QA pending)**
 - Pages can be added, duplicated, deleted, and reordered via the thumbnail strip
 - Pinch-zoom, pan, and fit-to-screen work smoothly
 
@@ -408,6 +442,15 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-09-01 | **Phase 2 Part 3 (Zoom Window) implemented** — `ZoomWindow` MVVM module, magnified strip, mini preview, blue-zone auto-advance, book-level toggle, return height per template; ADR – Zoom Window Viewport Strategy accepted; device QA pending |
+| 2026-09-02 | **Phase 2 Part 3 remediation** — dual-canvas sync guard, zoom observation forwarding, trailing-edge auto-advance, open-at-last-ink, mini-preview live drag, toggle label; device re-QA pending |
+| 2026-09-03 | **Phase 2 Part 3 second remediation** — viewport-sized magnification, strip-local advance zone, stroke-end race fix, fit-page mini preview, denser zoom render scale; device re-QA pending |
+| 2026-09-03 | **Phase 2 Part 3 third remediation** — aspect-locked strip↔viewport, page-mapped advance zone, strip hit isolation, clamp-then-wrap advance, drag-on-page highlight, keep-in-view scroll; device re-QA pending |
+| 2026-09-04 | **Phase 2 Part 3 fourth remediation** — stroke-end advance, 20% trigger, no post-wrap bounce, strip pencil double-tap, keep-in-view padding/scroll; device re-QA pending |
+| 2026-09-04 | **Phase 2 Part 3 fifth remediation** — keep-in-view marker + fixed upper-band anchor; deferred AA polish noted; device re-QA pending |
+| 2026-09-04 | **Phase 2 Part 3 sixth remediation** — fix keep-in-view regression (layout focus marker + deferred scroll unlock); device re-QA pending |
+| 2026-09-05 | **Phase 2 Part 3 seventh remediation** — UIKit `setContentOffset` keep-in-view (scroll stays disabled); remove unlock/`scrollTo`; device re-QA pending |
+| 2026-09-05 | **Phase 2 Part 3 eighth stabilization** — non-publishing scroll runtime; leave-book flush; stale thumbs; `PageBoundLog`; device re-QA pending |
 | 2026-09-01 | **Documentation model:** Adopted repo-primary policy (Option A); vault canonical notes are stubs linking to repo. Phase status table updated (Parts 1–2 complete). PencilKit ADR added to repo. |
 | 2026-07-21 | **Phase 2 Part 2 officially signed off** — device QA passed (draw/erase/lasso on photos, layering, transforms); unit + UI tests green; Phase 2 in progress (Zoom Window next) |
 | 2026-07-21 | Phase 2 Part 2 closeout — draw-on-image fix (canvas finger tap-select); unit test fixes |

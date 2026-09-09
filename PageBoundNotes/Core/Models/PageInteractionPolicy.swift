@@ -14,6 +14,7 @@ struct PageInteractionPolicy: Equatable, Sendable {
     let selectedObjectId: UUID?
     let isEditingText: Bool
     let textToolPhase: TextToolPhase
+    let zoomModeActive: Bool
 
     var canFingerDrawOnCanvas: Bool {
         !isPencilOnly
@@ -49,7 +50,10 @@ struct PageInteractionPolicy: Equatable, Sendable {
     }
 
     var overlayReceivesHits: Bool {
-        allowsObjectTransform
+        if zoomModeActive {
+            return false
+        }
+        return allowsObjectTransform
             || allowsObjectInteraction
             || allowsBackgroundTap
             || allowsFingerObjectSelection
@@ -57,6 +61,9 @@ struct PageInteractionPolicy: Equatable, Sendable {
     }
 
     var disablesPageScrolling: Bool {
+        if zoomModeActive {
+            return true
+        }
         if isEditingText {
             return false
         }
@@ -72,7 +79,10 @@ struct PageInteractionPolicy: Equatable, Sendable {
     }
 
     var shouldDisableCanvasDrawing: Bool {
-        selectedObjectId != nil || allowsObjectInteraction || isEditingText
+        if zoomModeActive {
+            return true
+        }
+        return selectedObjectId != nil || allowsObjectInteraction || isEditingText
     }
 
     @MainActor
@@ -80,7 +90,8 @@ struct PageInteractionPolicy: Equatable, Sendable {
         toolSession: ToolSessionState,
         selectedObjectId: UUID?,
         isEditingText: Bool,
-        textToolPhase: TextToolPhase
+        textToolPhase: TextToolPhase,
+        zoomModeActive: Bool = false
     ) -> PageInteractionPolicy {
         PageInteractionPolicy(
             selectedTool: toolSession.selectedTool,
@@ -88,7 +99,8 @@ struct PageInteractionPolicy: Equatable, Sendable {
             allowsObjectInteraction: toolSession.allowsObjectInteraction,
             selectedObjectId: selectedObjectId,
             isEditingText: isEditingText,
-            textToolPhase: textToolPhase
+            textToolPhase: textToolPhase,
+            zoomModeActive: zoomModeActive
         )
     }
 }

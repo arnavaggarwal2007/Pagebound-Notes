@@ -103,6 +103,19 @@
 		B10000000000000000000081 /* ImageObjectsUnderlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000081 /* ImageObjectsUnderlay.swift */; };
 		B10000000000000000000082 /* PageInteractionPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000082 /* PageInteractionPolicyTests.swift */; };
 		B10000000000000000000083 /* PageOverlayHitTestingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000083 /* PageOverlayHitTestingTests.swift */; };
+		B10000000000000000000084 /* ZoomSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000084 /* ZoomSettings.swift */; };
+		B10000000000000000000085 /* ZoomState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000085 /* ZoomState.swift */; };
+		B10000000000000000000086 /* ZoomViewportMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000086 /* ZoomViewportMath.swift */; };
+		B10000000000000000000087 /* ZoomWindowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000087 /* ZoomWindowViewModel.swift */; };
+		B10000000000000000000088 /* ZoomWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000088 /* ZoomWindowView.swift */; };
+		B10000000000000000000089 /* MiniPagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000089 /* MiniPagePreviewView.swift */; };
+		B1000000000000000000008A /* ZoomPageBackdropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008A /* ZoomPageBackdropView.swift */; };
+		B1000000000000000000008B /* ZoomSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008B /* ZoomSettingsStore.swift */; };
+		B1000000000000000000008C /* ZoomViewportOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008C /* ZoomViewportOverlay.swift */; };
+		B1000000000000000000008D /* ZoomWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008D /* ZoomWindowTests.swift */; };
+		B1000000000000000000008E /* ZoomStripHitClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008E /* ZoomStripHitClip.swift */; };
+		B1000000000000000000008F /* PageScrollViewAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008F /* PageScrollViewAccessor.swift */; };
+		B10000000000000000000090 /* PageBoundLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000090 /* PageBoundLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +235,19 @@
 		F10000000000000000000081 /* ImageObjectsUnderlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageObjectsUnderlay.swift; sourceTree = "<group>"; };
 		F10000000000000000000082 /* PageInteractionPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInteractionPolicyTests.swift; sourceTree = "<group>"; };
 		F10000000000000000000083 /* PageOverlayHitTestingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOverlayHitTestingTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000084 /* ZoomSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomSettings.swift; sourceTree = "<group>"; };
+		F10000000000000000000085 /* ZoomState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomState.swift; sourceTree = "<group>"; };
+		F10000000000000000000086 /* ZoomViewportMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewportMath.swift; sourceTree = "<group>"; };
+		F10000000000000000000087 /* ZoomWindowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomWindowViewModel.swift; sourceTree = "<group>"; };
+		F10000000000000000000088 /* ZoomWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomWindowView.swift; sourceTree = "<group>"; };
+		F10000000000000000000089 /* MiniPagePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPagePreviewView.swift; sourceTree = "<group>"; };
+		F1000000000000000000008A /* ZoomPageBackdropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomPageBackdropView.swift; sourceTree = "<group>"; };
+		F1000000000000000000008B /* ZoomSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomSettingsStore.swift; sourceTree = "<group>"; };
+		F1000000000000000000008C /* ZoomViewportOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewportOverlay.swift; sourceTree = "<group>"; };
+		F1000000000000000000008D /* ZoomWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomWindowTests.swift; sourceTree = "<group>"; };
+		F1000000000000000000008E /* ZoomStripHitClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomStripHitClip.swift; sourceTree = "<group>"; };
+		F1000000000000000000008F /* PageScrollViewAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageScrollViewAccessor.swift; sourceTree = "<group>"; };
+		F10000000000000000000090 /* PageBoundLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBoundLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +321,7 @@
 				F10000000000000000000076 /* PageObjectHitTestingTests.swift */,
 				F10000000000000000000082 /* PageInteractionPolicyTests.swift */,
 				F10000000000000000000083 /* PageOverlayHitTestingTests.swift */,
+				F1000000000000000000008D /* ZoomWindowTests.swift */,
 			);
 			path = PageBoundNotesTests;
 			sourceTree = "<group>";
@@ -324,6 +351,7 @@
 				G10000000000000000000008 /* Library */,
 				G1000000000000000000000F /* Book */,
 				G10000000000000000000010 /* Page */,
+				G10000000000000000000012 /* ZoomWindow */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -334,6 +362,7 @@
 				G10000000000000000000009 /* Models */,
 				G1000000000000000000000A /* Persistence */,
 				G1000000000000000000000B /* Services */,
+				G10000000000000000000013 /* Logging */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -398,11 +427,20 @@
 				F10000000000000000000025 /* PageContentRenderer.swift */,
 				F10000000000000000000026 /* PDFExportService.swift */,
 				F10000000000000000000043 /* ToolPresetStore.swift */,
+				F1000000000000000000008B /* ZoomSettingsStore.swift */,
 				F10000000000000000000061 /* ObjectSerialization.swift */,
 				F10000000000000000000062 /* ObjectBlobLifecycle.swift */,
 				F10000000000000000000063 /* ObjectRenderer.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000013 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000090 /* PageBoundLog.swift */,
+			);
+			path = Logging;
 			sourceTree = "<group>";
 		};
 		G1000000000000000000000C /* Entities */ = {
@@ -470,8 +508,25 @@
 				F10000000000000000000068 /* TextStyleBar.swift */,
 				F10000000000000000000072 /* PageTextEditingOverlay.swift */,
 				F10000000000000000000075 /* SelectedObjectBar.swift */,
+				F1000000000000000000008C /* ZoomViewportOverlay.swift */,
+				F1000000000000000000008F /* PageScrollViewAccessor.swift */,
 			);
 			path = Page;
+			sourceTree = "<group>";
+		};
+		G10000000000000000000012 /* ZoomWindow */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000084 /* ZoomSettings.swift */,
+				F10000000000000000000085 /* ZoomState.swift */,
+				F10000000000000000000086 /* ZoomViewportMath.swift */,
+				F10000000000000000000087 /* ZoomWindowViewModel.swift */,
+				F10000000000000000000088 /* ZoomWindowView.swift */,
+				F10000000000000000000089 /* MiniPagePreviewView.swift */,
+				F1000000000000000000008A /* ZoomPageBackdropView.swift */,
+				F1000000000000000000008E /* ZoomStripHitClip.swift */,
+			);
+			path = ZoomWindow;
 			sourceTree = "<group>";
 		};
 		G10000000000000000000011 /* PageBoundNotesUITests */ = {
@@ -667,6 +722,18 @@
 				B10000000000000000000080 /* ObjectDisplayGeometry.swift in Sources */,
 				B10000000000000000000081 /* ImageObjectsUnderlay.swift in Sources */,
 				B10000000000000000000075 /* SelectedObjectBar.swift in Sources */,
+				B10000000000000000000084 /* ZoomSettings.swift in Sources */,
+				B10000000000000000000085 /* ZoomState.swift in Sources */,
+				B10000000000000000000086 /* ZoomViewportMath.swift in Sources */,
+				B10000000000000000000087 /* ZoomWindowViewModel.swift in Sources */,
+				B10000000000000000000088 /* ZoomWindowView.swift in Sources */,
+				B10000000000000000000089 /* MiniPagePreviewView.swift in Sources */,
+				B1000000000000000000008A /* ZoomPageBackdropView.swift in Sources */,
+				B1000000000000000000008B /* ZoomSettingsStore.swift in Sources */,
+				B1000000000000000000008C /* ZoomViewportOverlay.swift in Sources */,
+				B1000000000000000000008F /* PageScrollViewAccessor.swift in Sources */,
+				B10000000000000000000090 /* PageBoundLog.swift in Sources */,
+				B1000000000000000000008E /* ZoomStripHitClip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +762,7 @@
 				B10000000000000000000076 /* PageObjectHitTestingTests.swift in Sources */,
 				B10000000000000000000082 /* PageInteractionPolicyTests.swift in Sources */,
 				B10000000000000000000083 /* PageOverlayHitTestingTests.swift in Sources */,
+				B1000000000000000000008D /* ZoomWindowTests.swift in Sources */,
 				B10000000000000000000073 /* UIImageNormalizedSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

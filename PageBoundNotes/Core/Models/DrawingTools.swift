@@ -214,7 +214,14 @@ struct ToolApplicationState: Equatable, Sendable {
 @MainActor
 final class ToolSessionState: ObservableObject {
     @Published private(set) var selectedTool: DrawingTool = .ink(.pen)
-    @Published var strokeStyle: InkStrokeStyle = .default
+    @Published private(set) var toolRevision: UInt = 0
+    @Published var strokeStyle: InkStrokeStyle = .default {
+        didSet {
+            if oldValue != strokeStyle {
+                bumpToolRevision()
+            }
+        }
+    }
     @Published var isRulerActive = false
     @Published var isPencilOnly = true
     @Published var pixelEraserWidth: CGFloat = EraserMode.defaultPixelWidth
@@ -245,6 +252,7 @@ final class ToolSessionState: ObservableObject {
 
     func setPixelEraserWidth(_ width: CGFloat) {
         pixelEraserWidth = EraserMode.clampedPixelWidth(width)
+        bumpToolRevision()
     }
 
     func selectInk(_ kind: InkKind) {
@@ -286,6 +294,7 @@ final class ToolSessionState: ObservableObject {
 
     func setShapeCommitMode(_ mode: ShapeCommitMode) {
         shapeCommitMode = mode
+        bumpToolRevision()
         if case .shapes(let kind) = selectedTool {
             setSelectedTool(.shapes(kind))
         }
@@ -311,10 +320,12 @@ final class ToolSessionState: ObservableObject {
 
     func toggleRuler() {
         isRulerActive.toggle()
+        bumpToolRevision()
     }
 
     func togglePencilOnly() {
         isPencilOnly.toggle()
+        bumpToolRevision()
     }
 
     func applyPreset(_ preset: ToolPreset) {
@@ -373,11 +384,16 @@ final class ToolSessionState: ObservableObject {
     private func setSelectedTool(_ tool: DrawingTool) {
         if selectedTool != tool {
             previousTool = selectedTool
+            selectedTool = tool
+            if case .ink = tool {
+                lastInkTool = tool
+            }
+            bumpToolRevision()
         }
-        selectedTool = tool
-        if case .ink = tool {
-            lastInkTool = tool
-        }
+    }
+
+    private func bumpToolRevision() {
+        toolRevision &+= 1
     }
 }
 

@@ -31,6 +31,7 @@ struct LibraryView: View {
         }
         .onChange(of: columnVisibility) { _, visibility in
             if !navigationPath.isEmpty, visibility != .detailOnly {
+                PageBoundLog.navigation.debug("Forcing columnVisibility back to detailOnly while book open")
                 columnVisibility = .detailOnly
             }
         }

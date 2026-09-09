@@ -4,7 +4,7 @@
 
 PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can organize content in unlimited folders and books—all without a subscription or custom backend.
 
-**Status:** Phase 2 in progress — **Phase 2 Part 2 (Content Overlays) signed off July 21, 2026**; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
+**Status:** Phase 2 in progress — **Phase 2 Part 3 (Zoom Window) eighth stabilization September 5, 2026** (device re-QA pending); prior remediations September 2–5; implemented September 1, 2026. Part 2 signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
 
 ---
 
@@ -25,7 +25,7 @@ PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combi
 
 ## Features
 
-### Shipped (Phases 0–2 Parts 1–2)
+### Shipped (Phases 0–2 Parts 1–3)
 
 #### Library and Organization
 
@@ -67,11 +67,17 @@ PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combi
 
 - All primary content stored locally in the app sandbox
 
+#### Zoom Window
+
+- Magnified writing strip with miniature page preview
+- Blue-zone auto-advance (horizontal slide, vertical return height aligned to template line spacing)
+- Per-book auto-advance toggle; configurable return height per template type
+- Zoom level slider; inline help tip
+
 ### Planned (Phase 2 remainder and later)
 
 | Area | Phase |
 |------|-------|
-| Zoom window with magnified writing strip and auto-advance | 2 |
 | Page insert-between, duplicate, reorder via thumbnail strip | 2 |
 | Additional templates (fine/coarse graph, Cornell, music staff, checklist, planner) | 2 |
 | Pinch-to-zoom, pan, and fit-page-to-screen | 2 |
@@ -237,7 +243,7 @@ Canonical documentation lives **only in this repo** (`Documents/`). The Obsidian
 |-------|---------|
 | **Phase 0** | App shell, domain models, SwiftData persistence, repositories, DI — **complete** |
 | **Phase 1** | MVP: library, paginated pages, basic PencilKit, PDF export — **complete** |
-| **Phase 2** | Full tooling, zoom window with auto-advance, text/images/shapes — **in progress** (Parts 1–2 signed off; Zoom Window next) |
+| **Phase 2** | Full tooling, zoom window with auto-advance, text/images/shapes — **in progress** (Parts 1–3 implemented; Part 3 device QA pending; Page Management next) |
 | **Phase 3** | PDF import, local backup/restore, cloud export |
 | **Phase 4** | Search, handwriting OCR, split view, accessibility |
 
