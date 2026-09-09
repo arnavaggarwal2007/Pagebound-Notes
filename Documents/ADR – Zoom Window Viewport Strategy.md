@@ -28,7 +28,8 @@ Open questions before implementation:
 10. **Magnification resizes viewport:** Slider magnification inversely resizes `viewportRect` around its center (smaller rect = higher zoom). Strip `contentScale = stripHeight / viewportRect.height` with no separate magnification multiplier. After strip layout, **aspect-lock** sets `viewport.width = stripWidth / contentScale` so the main-page highlight, mini preview, and writable strip region stay aligned.
 11. **Zoom render density:** The zoom `CanvasView` raises `contentScaleFactor` using `cappedRenderingScale(contentScale:screenScale:)` (cap 3×) so SwiftUI `scaleEffect` upscaling stays sharper at high zoom.
 12. **Strip hit isolation + pencil tap:** Magnified strip content is hosted in `ZoomStripHitClip` (UIKit container with bounds-checked `hitTest`). The clip container owns `UIPencilInteraction` so Apple Pencil double-tap reaches `toolSession` reliably outside nested hosting.
-13. **Manual reposition + keep-in-view:** The main-page viewport highlight is draggable (centers viewport on drag). User page panning stays disabled while zoom is open; `PageView` adds bottom padding (`zoomChromeClearance`) and always programmatically scrolls so the highlight mid sits in the upper band above zoom chrome.
+13. **Manual reposition + keep-in-view:** The main-page viewport highlight is draggable (centers viewport on drag). User page panning stays disabled while zoom is open (`.scrollDisabled` never unlocked for keep-in-view). `PageView` holds a non-publishing `PageScrollRuntime` and drives the hosting `UIScrollView` via `setContentOffset` (works while `isScrollEnabled == false`) so highlight mid stays in the upper **usable** band above zoom chrome (~0.22 of height minus `zoomChromeClearance`). Drag updates are throttled on the runtime Task (no `@State` churn). Structured logs use `PageBoundLog` (Zoom/Persistence/Navigation).
+14. **Part 4 caution:** General pinch/pan must own outer scroll separately from `zoomModeActive` scroll disable; wire `updatePageContext` before page-size/orientation changes.
 
 ## Consequences
 
@@ -62,3 +63,7 @@ Open questions before implementation:
 | 2026-09-03 | Magnification resizes viewport; strip-local advance chrome; denser zoom `contentScaleFactor`; stroke-end advance race fix |
 | 2026-09-03 | Third remediation: aspect-locked strip↔viewport; page-mapped advance zone; UIKit strip hit clip; clamp-then-wrap advance; drag-on-page highlight; programmatic keep-in-view scroll |
 | 2026-09-04 | Fourth remediation: stroke-end-only advance; 20% trigger; viewport-bounded point check; strip-host pencil double-tap; keep-in-view padding + always scroll |
+| 2026-09-04 | Fifth remediation: highlight-mid scroll marker + fixed upper-band anchor; hold programmatic scroll unlock for animation |
+| 2026-09-04 | Sixth remediation: layout-valid focus marker (fix `.offset` regression); defer scroll unlock/`scrollTo` off view-update path |
+| 2026-09-05 | Seventh remediation: UIKit `setContentOffset` keep-in-view while scroll stays disabled; remove unlock/`scrollTo`/marker; drop PageView viewport animation |
+| 2026-09-05 | Eighth stabilization: non-publishing `PageScrollRuntime` (stop `@State` storm); chrome-aware usable height; leave-book flush; stale thumbnails during load; `PageBoundLog` |

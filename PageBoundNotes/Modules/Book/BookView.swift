@@ -32,6 +32,13 @@ private struct BookViewContainer: View {
             exportFilename: $exportFilename
         )
         .task { await viewModel.load() }
+        .onAppear {
+            PageBoundLog.navigation.info("Book appeared id=\(bookId.uuidString, privacy: .public)")
+        }
+        .onDisappear {
+            PageBoundLog.navigation.info("Book disappeared id=\(bookId.uuidString, privacy: .public); flushing")
+            Task { await viewModel.flushForBackground() }
+        }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background {
                 Task { await viewModel.flushForBackground() }

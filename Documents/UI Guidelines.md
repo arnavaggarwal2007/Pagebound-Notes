@@ -227,7 +227,7 @@ Tools are grouped logically:
 
 - Zoom window appears when invoked from the tool palette or gesture, presenting a magnified strip of the current page aligned to writing lines.
 - The pane respects the page template’s line spacing, adjusting its vertical position with a configurable "return height".
-- While open, the main page stays full size; programmatic scrolling keeps the viewport highlight visible above zoom chrome. User panning stays disabled.
+- While open, the main page stays full size; programmatic scrolling keeps the viewport highlight in the **upper visible band** above zoom chrome (including when the box is in the bottom third of the page). User panning stays disabled.
 - Pencil writes in the zoom strip only; finger (or drag) on the main-page highlight or mini preview repositions the viewport. Zoom chrome outside the strip does not accept ink.
 
 ### 8.2 Auto-Advance Indicator

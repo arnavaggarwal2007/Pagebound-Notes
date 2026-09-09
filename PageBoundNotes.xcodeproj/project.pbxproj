@@ -114,6 +114,8 @@
 		B1000000000000000000008C /* ZoomViewportOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008C /* ZoomViewportOverlay.swift */; };
 		B1000000000000000000008D /* ZoomWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008D /* ZoomWindowTests.swift */; };
 		B1000000000000000000008E /* ZoomStripHitClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008E /* ZoomStripHitClip.swift */; };
+		B1000000000000000000008F /* PageScrollViewAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008F /* PageScrollViewAccessor.swift */; };
+		B10000000000000000000090 /* PageBoundLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000090 /* PageBoundLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,6 +246,8 @@
 		F1000000000000000000008C /* ZoomViewportOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewportOverlay.swift; sourceTree = "<group>"; };
 		F1000000000000000000008D /* ZoomWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomWindowTests.swift; sourceTree = "<group>"; };
 		F1000000000000000000008E /* ZoomStripHitClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomStripHitClip.swift; sourceTree = "<group>"; };
+		F1000000000000000000008F /* PageScrollViewAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageScrollViewAccessor.swift; sourceTree = "<group>"; };
+		F10000000000000000000090 /* PageBoundLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBoundLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +362,7 @@
 				G10000000000000000000009 /* Models */,
 				G1000000000000000000000A /* Persistence */,
 				G1000000000000000000000B /* Services */,
+				G10000000000000000000013 /* Logging */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -430,6 +435,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		G10000000000000000000013 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				F10000000000000000000090 /* PageBoundLog.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 		G1000000000000000000000C /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +509,7 @@
 				F10000000000000000000072 /* PageTextEditingOverlay.swift */,
 				F10000000000000000000075 /* SelectedObjectBar.swift */,
 				F1000000000000000000008C /* ZoomViewportOverlay.swift */,
+				F1000000000000000000008F /* PageScrollViewAccessor.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -717,6 +731,8 @@
 				B1000000000000000000008A /* ZoomPageBackdropView.swift in Sources */,
 				B1000000000000000000008B /* ZoomSettingsStore.swift in Sources */,
 				B1000000000000000000008C /* ZoomViewportOverlay.swift in Sources */,
+				B1000000000000000000008F /* PageScrollViewAccessor.swift in Sources */,
+				B10000000000000000000090 /* PageBoundLog.swift in Sources */,
 				B1000000000000000000008E /* ZoomStripHitClip.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

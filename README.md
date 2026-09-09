@@ -4,7 +4,7 @@
 
 PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can organize content in unlimited folders and books—all without a subscription or custom backend.
 
-**Status:** Phase 2 in progress — **Phase 2 Part 3 (Zoom Window) fourth remediation September 4, 2026** (device re-QA pending); prior remediations September 2–3; implemented September 1, 2026. Part 2 signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
+**Status:** Phase 2 in progress — **Phase 2 Part 3 (Zoom Window) eighth stabilization September 5, 2026** (device re-QA pending); prior remediations September 2–5; implemented September 1, 2026. Part 2 signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
 
 ---
 

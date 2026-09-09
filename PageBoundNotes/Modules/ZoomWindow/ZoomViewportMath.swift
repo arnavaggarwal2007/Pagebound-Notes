@@ -51,7 +51,7 @@ enum ZoomViewportMath {
         magnification: CGFloat = ZoomState.defaultMagnification
     ) -> CGRect {
         let size = viewportSize(forMagnification: magnification, pageSize: pageSize)
-        var rect = CGRect(
+        let rect = CGRect(
             x: point.x - size.width / 2,
             y: point.y - size.height / 2,
             width: size.width,

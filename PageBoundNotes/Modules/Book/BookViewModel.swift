@@ -136,7 +136,25 @@ final class BookViewModel: ObservableObject {
     }
 
     func flushForBackground() async {
-        await saveCurrentPageIfNeeded()
+        PageBoundLog.persistence.info("Flush begin bookId=\(self.bookId.uuidString, privacy: .public)")
+        guard let pageViewModel else {
+            PageBoundLog.persistence.info("Flush success bookId=\(self.bookId.uuidString, privacy: .public) (no page)")
+            return
+        }
+        do {
+            try await pageViewModel.flushPendingChanges()
+            if pages.indices.contains(currentPageIndex) {
+                pages[currentPageIndex] = pageViewModel.page
+            }
+            await reloadThumbnails()
+            saveStatusMessage = String(localized: "Saved")
+            PageBoundLog.persistence.info("Flush success bookId=\(self.bookId.uuidString, privacy: .public)")
+        } catch {
+            errorMessage = error.localizedDescription
+            PageBoundLog.persistence.error(
+                "Flush failure bookId=\(self.bookId.uuidString, privacy: .public): \(error.localizedDescription, privacy: .public)"
+            )
+        }
     }
 
     func toggleZoomWindow() {
@@ -269,7 +287,8 @@ final class BookViewModel: ObservableObject {
             return
         }
 
-        thumbnails = [:]
+        let pageCount = pages.count
+        PageBoundLog.persistence.debug("Thumbnail load begin count=\(pageCount)")
 
         let pageRepository = dependencies.pageRepository
         let snapshots: [PageRenderSnapshot] = pages.map { page in
@@ -331,6 +350,7 @@ final class BookViewModel: ObservableObject {
             }
         }
         thumbnails = loaded
+        PageBoundLog.persistence.debug("Thumbnail load done count=\(loaded.count)")
     }
 
     private func reloadThumbnails() async {

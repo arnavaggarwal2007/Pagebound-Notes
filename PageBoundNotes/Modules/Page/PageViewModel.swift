@@ -99,6 +99,9 @@ final class PageViewModel: ObservableObject {
             objectsDirty = false
             isDirty = false
         } catch {
+            PageBoundLog.persistence.error(
+                "Page load failed; blanking drawing pageId=\(self.page.id.uuidString, privacy: .public)"
+            )
             drawing = StrokeSerialization.emptyDrawing()
             objectsDocument = .empty
         }
@@ -431,9 +434,27 @@ final class PageViewModel: ObservableObject {
         autosaveTask?.cancel()
         autosaveTask = Task {
             try? await Task.sleep(nanoseconds: 300_000_000)
-            guard !Task.isCancelled else { return }
-            try? await saveImmediately()
+            guard !Task.isCancelled else {
+                PageBoundLog.persistence.debug(
+                    "Autosave skipped: cancelled pageId=\(self.page.id.uuidString, privacy: .public)"
+                )
+                return
+            }
+            do {
+                _ = try await saveImmediately()
+            } catch {
+                PageBoundLog.persistence.error(
+                    "Autosave failed pageId=\(self.page.id.uuidString, privacy: .public): \(error.localizedDescription, privacy: .public)"
+                )
+            }
         }
+    }
+
+    /// Cancels debounced autosave and writes dirty state. Call before tearing down the book.
+    func flushPendingChanges() async throws {
+        autosaveTask?.cancel()
+        autosaveTask = nil
+        _ = try await saveImmediately()
     }
 
     @discardableResult

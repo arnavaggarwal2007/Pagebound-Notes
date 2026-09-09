@@ -1,5 +1,6 @@
 import CoreGraphics
 import PencilKit
+import UIKit
 import XCTest
 @testable import PageBoundNotes
 
@@ -484,5 +485,68 @@ final class PageInteractionPolicyZoomTests: XCTestCase {
         XCTAssertTrue(policy.shouldDisableCanvasDrawing)
         XCTAssertTrue(policy.disablesPageScrolling)
         XCTAssertFalse(policy.overlayReceivesHits)
+    }
+}
+
+final class PageKeepInViewOffsetTests: XCTestCase {
+    private let bounds = CGRect(x: 0, y: 0, width: 800, height: 1000)
+    /// Tall enough that chrome-aware mid/bottom targets are not clipped by maxY.
+    private let contentSize = CGSize(width: 660, height: 2000)
+    private let insets = UIEdgeInsets.zero
+    private let chrome: CGFloat = 360
+    private let anchorY: CGFloat = 0.22
+
+    func testTopFocusProducesNearZeroOffsetY() {
+        let focus = CGPoint(x: 330, y: 80)
+        let offset = PageView.clampedContentOffset(
+            focusing: focus,
+            scrollBounds: bounds,
+            contentSize: contentSize,
+            adjustedInsets: insets,
+            anchorY: anchorY,
+            chromeClearance: chrome
+        )
+        XCTAssertEqual(offset.y, 0, accuracy: 1)
+    }
+
+    func testMidFocusPlacesMidInUpperUsableBand() {
+        let focus = CGPoint(x: 330, y: 500)
+        let offset = PageView.clampedContentOffset(
+            focusing: focus,
+            scrollBounds: bounds,
+            contentSize: contentSize,
+            adjustedInsets: insets,
+            anchorY: anchorY,
+            chromeClearance: chrome
+        )
+        let usableHeight = bounds.height - chrome
+        let expectedY = focus.y - usableHeight * anchorY
+        XCTAssertEqual(offset.y, expectedY, accuracy: 1)
+    }
+
+    func testBottomThirdFocusCanScrollAboveChrome() {
+        let focus = CGPoint(x: 330, y: 1050)
+        let offset = PageView.clampedContentOffset(
+            focusing: focus,
+            scrollBounds: bounds,
+            contentSize: contentSize,
+            adjustedInsets: insets,
+            anchorY: anchorY,
+            chromeClearance: chrome
+        )
+        let maxY = contentSize.height - bounds.height
+        XCTAssertGreaterThan(offset.y, 0)
+        XCTAssertLessThanOrEqual(offset.y, maxY + 0.5)
+
+        let withoutChrome = PageView.clampedContentOffset(
+            focusing: focus,
+            scrollBounds: bounds,
+            contentSize: contentSize,
+            adjustedInsets: insets,
+            anchorY: anchorY,
+            chromeClearance: 0
+        )
+        // With chrome clearance, target Y is higher (more scroll) so mid sits in usable band.
+        XCTAssertGreaterThanOrEqual(offset.y, withoutChrome.y - 0.5)
     }
 }

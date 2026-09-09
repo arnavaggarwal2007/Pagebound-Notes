@@ -181,9 +181,17 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 > **2026-09-04 (Phase 2 Part 3 fourth remediation):** Manual QA found Pencil double-tap dead in strip, mid-stroke advance jumps, wrap bounce to center, keep-in-view unreliable. Fixes: strip-host `UIPencilInteraction`; stroke-end-only advance with 20% trigger; viewport-bounded point check; bottom padding + always scroll keep-in-view. Device re-QA pending.
 
-### Phase 2 Part 3 — Zoom Window (Fourth remediation complete; device re-QA pending)
+> **2026-09-04 (Phase 2 Part 3 fifth remediation):** Keep-in-view failed in bottom third (clamped whole-canvas `scrollTo`). Fix: highlight-mid scroll marker + fixed upper-band anchor; hold programmatic scroll unlock for animation. Auto-advance H/V fine-tune deferred to pre/post-launch. Device re-QA pending for keep-in-view.
 
-**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03 (×2), 2026-09-04
+> **2026-09-04 (Phase 2 Part 3 sixth remediation):** Fifth remediation regressed follow entirely (`.offset` marker ignored by `ScrollViewReader`; scroll unlock published during view updates). Fix: layout VStack focus marker; deferred `Task`/`yield` unlock + `scrollTo`. Device re-QA pending.
+
+> **2026-09-05 (Phase 2 Part 3 seventh remediation):** Sixth remediation left follow broken and free pan unlocked (`allowZoomProgrammaticScroll` + unreliable `scrollTo`). Fix: `PageScrollViewAccessor` + UIKit `setContentOffset` while scroll stays disabled; remove unlock/marker; remove PageView viewport animation. Device re-QA pending.
+
+> **2026-09-05 (Phase 2 Part 3 eighth stabilization):** Round 7 `@State` keep-in-view churn froze toolbar/nav and broke follow; leave-book had no flush (ink loss). Fix: non-publishing `PageScrollRuntime` + chrome-aware offset; flush on book disappear; keep stale thumbs during reload; `PageBoundLog`. Sidebar lock in book remains intentional (use Back). Device re-QA pending.
+
+### Phase 2 Part 3 — Zoom Window (Eighth stabilization complete; device re-QA pending)
+
+**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03 (×2), 2026-09-04 (×3), 2026-09-05 (×2)
 
 #### Part 3 Exit Criteria
 
@@ -439,6 +447,10 @@ Follow this process for all implementation work:
 | 2026-09-03 | **Phase 2 Part 3 second remediation** — viewport-sized magnification, strip-local advance zone, stroke-end race fix, fit-page mini preview, denser zoom render scale; device re-QA pending |
 | 2026-09-03 | **Phase 2 Part 3 third remediation** — aspect-locked strip↔viewport, page-mapped advance zone, strip hit isolation, clamp-then-wrap advance, drag-on-page highlight, keep-in-view scroll; device re-QA pending |
 | 2026-09-04 | **Phase 2 Part 3 fourth remediation** — stroke-end advance, 20% trigger, no post-wrap bounce, strip pencil double-tap, keep-in-view padding/scroll; device re-QA pending |
+| 2026-09-04 | **Phase 2 Part 3 fifth remediation** — keep-in-view marker + fixed upper-band anchor; deferred AA polish noted; device re-QA pending |
+| 2026-09-04 | **Phase 2 Part 3 sixth remediation** — fix keep-in-view regression (layout focus marker + deferred scroll unlock); device re-QA pending |
+| 2026-09-05 | **Phase 2 Part 3 seventh remediation** — UIKit `setContentOffset` keep-in-view (scroll stays disabled); remove unlock/`scrollTo`; device re-QA pending |
+| 2026-09-05 | **Phase 2 Part 3 eighth stabilization** — non-publishing scroll runtime; leave-book flush; stale thumbs; `PageBoundLog`; device re-QA pending |
 | 2026-09-01 | **Documentation model:** Adopted repo-primary policy (Option A); vault canonical notes are stubs linking to repo. Phase status table updated (Parts 1–2 complete). PencilKit ADR added to repo. |
 | 2026-07-21 | **Phase 2 Part 2 officially signed off** — device QA passed (draw/erase/lasso on photos, layering, transforms); unit + UI tests green; Phase 2 in progress (Zoom Window next) |
 | 2026-07-21 | Phase 2 Part 2 closeout — draw-on-image fix (canvas finger tap-select); unit test fixes |
