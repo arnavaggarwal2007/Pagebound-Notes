@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** October 1, 2026
+**Last updated:** October 5, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -28,7 +28,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 |-------|------|--------|
 | 0 | Foundations | Complete |
 | 1 | MVP: Local Notebooks and Pagination | Complete |
-| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–3 signed off; Part 4 page management in code, pinch/pan/fit awaiting device QA; Part 5 immersive chrome deferred) |
+| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–4 signed off; Part 5 immersive chrome deferred) |
 | 3 | Import, Backup, and Cloud Export | Not started |
 | 4 | Advanced Features | Not started |
 
@@ -277,14 +277,10 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 - [x] Duplicate page
 - [x] Reorder pages via drag-and-drop in thumbnail strip
 - [x] Additional templates: fine/coarse graph paper, Cornell notes, music staff, checklists, planners
-- [ ] Global pinch-to-zoom and two-finger pan on the outer page scroll view (implemented 2026-10-01; device QA pending)
-- [ ] Fit-page-to-screen: **Fit Page** toolbar control and finger double-tap (implemented 2026-10-01; device QA pending)
+- [x] Global pinch-to-zoom and two-finger pan on the outer page scroll view
+- [x] Fit-page-to-screen: **Fit Page** toolbar control and finger double-tap
 
-**In code:** 2026-10-01. Insert, duplicate, reorder, and the extra templates were already in the working tree. Pinch, two-finger pan, and fit landed on the outer scroll view. Do not mark the pinch/fit deliverables checked until device QA.
-
-- PencilKit zoom stays at 1×. `PageNavigationMath` is unit-tested. `PageNavigationController` holds session scale only.
-- Opening the zoom window forces page scale to 1 and disables pinch and pan. Keep-in-view is unchanged.
-- Template device retest from 2026-09-13 (New Book preview vs cover color) is still open in the vault QA note.
+**Signed off:** 2026-10-05 (manual device QA and host tests). PencilKit zoom stays at 1×. `PageNavigationController` holds session scale only. Opening the zoom window forces page scale to 1 and disables pinch and pan.
 
 ### Phase 2 Part 5 — Immersive Writing Chrome (Deferred)
 
@@ -305,8 +301,8 @@ The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Ca
 - Zoom window provides magnified writing with miniature page context — **Part 3 signed off 2026-09-08**
 - Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates — **Part 3 signed off 2026-09-08** (feel polish deferred)
 - Auto-advance can be disabled per book — **Part 3 signed off 2026-09-08**
-- Pages can be added, duplicated, deleted, and reordered via the thumbnail strip — **Part 4 in code** (template device retest still open)
-- Pinch-zoom, two-finger pan, and fit-to-screen — **Part 4 implemented; device QA pending**
+- Pages can be added, duplicated, deleted, and reordered via the thumbnail strip — **Part 4 signed off 2026-10-05**
+- Pinch-zoom, two-finger pan, and fit-to-screen — **Part 4 signed off 2026-10-05**
 - Immersive writing chrome — **Part 5, deferred**
 
 ---
@@ -457,6 +453,7 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-10-05 | **Phase 2 Part 4 signed off** — manual device QA and host tests passed (insert, duplicate, reorder, templates, pinch, two-finger pan, fit, zoom-window interaction). Phase 2 remains in progress for Part 5 immersive chrome. |
 | 2026-10-01 | **Phase 2 Part 4 navigation zoom** — outer scroll view owns pinch, two-finger pan, and fit; PencilKit stays 1×; zoom window forces scale 1. Insert, duplicate, reorder, and extra templates recorded as in code. Immersive chrome moved to Phase 2 Part 5. Part 3 recorded as signed off 2026-09-08. Device QA pending for pinch/fit and the September 13 template retest. |
 | 2026-09-01 | **Phase 2 Part 3 (Zoom Window) implemented** — `ZoomWindow` MVVM module, magnified strip, mini preview, blue-zone auto-advance, book-level toggle, return height per template; ADR – Zoom Window Viewport Strategy accepted; device QA pending |
 | 2026-09-02 | **Phase 2 Part 3 remediation** — dual-canvas sync guard, zoom observation forwarding, trailing-edge auto-advance, open-at-last-ink, mini-preview live drag, toggle label; device re-QA pending |
