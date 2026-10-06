@@ -4,6 +4,7 @@ struct BookWritingSurface: View {
     @ObservedObject var bookViewModel: BookViewModel
     @ObservedObject var pageViewModel: PageViewModel
     @ObservedObject var toolSession: ToolSessionState
+    @ObservedObject var pageNavigation: PageNavigationController
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -44,12 +45,14 @@ struct BookWritingSurface: View {
             ZoomObservedPageView(
                 pageViewModel: pageViewModel,
                 toolSession: toolSession,
+                pageNavigation: pageNavigation,
                 zoomViewModel: zoomViewModel
             )
         } else {
             PageView(
                 viewModel: pageViewModel,
                 toolSession: toolSession,
+                navigation: pageNavigation,
                 zoomViewportRect: nil
             )
         }
@@ -59,12 +62,14 @@ struct BookWritingSurface: View {
 private struct ZoomObservedPageView: View {
     @ObservedObject var pageViewModel: PageViewModel
     @ObservedObject var toolSession: ToolSessionState
+    @ObservedObject var pageNavigation: PageNavigationController
     @ObservedObject var zoomViewModel: ZoomWindowViewModel
 
     var body: some View {
         PageView(
             viewModel: pageViewModel,
             toolSession: toolSession,
+            navigation: pageNavigation,
             zoomViewportRect: zoomViewModel.viewportRect,
             onZoomViewportReposition: { zoomViewModel.repositionViewport(to: $0) }
         )

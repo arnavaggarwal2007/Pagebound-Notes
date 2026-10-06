@@ -11,6 +11,7 @@ struct ZoomPageBackdropView: View {
                 template: pageViewModel.template,
                 pageSize: pageSize
             )
+            .id(pageViewModel.template.id)
 
             ImageObjectsUnderlay(
                 viewModel: pageViewModel,

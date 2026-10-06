@@ -74,6 +74,12 @@ final class BookViewModel: ObservableObject {
                 pages = [created]
             }
             currentPageIndex = min(currentPageIndex, max(pages.count - 1, 0))
+            if let page = currentPage {
+                let resolvedType = TemplateCatalog.template(for: page.templateId)?.type.rawValue ?? "unknown"
+                PageBoundLog.persistence.info(
+                    "Book loaded id=\(loadedBook.id.uuidString, privacy: .public) defaultTemplateId=\(loadedBook.defaultTemplateId, privacy: .public) pageTemplateId=\(page.templateId, privacy: .public) resolvedType=\(resolvedType, privacy: .public)"
+                )
+            }
             await loadCurrentPageViewModel()
             await loadThumbnails()
             errorMessage = nil
@@ -90,7 +96,7 @@ final class BookViewModel: ObservableObject {
         await loadCurrentPageViewModel()
     }
 
-    func addPage() async {
+    func addPage(templateId: String? = nil) async {
         guard let book else { return }
         await saveCurrentPageIfNeeded()
 
@@ -98,12 +104,92 @@ final class BookViewModel: ObservableObject {
             let newPage = Page(
                 bookId: book.id,
                 index: pages.count,
-                templateId: book.defaultTemplateId
+                templateId: templateId ?? book.defaultTemplateId
             )
             let created = try await dependencies.pageRepository.createPage(newPage)
             pages.append(created)
             currentPageIndex = pages.count - 1
             await loadCurrentPageViewModel()
+            await reloadThumbnails()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    /// Inserts a new page immediately after `afterIndex` (defaults to the current page).
+    func insertPage(after afterIndex: Int? = nil, templateId: String? = nil) async {
+        guard let book else { return }
+        let sourceIndex = afterIndex ?? currentPageIndex
+        guard pages.indices.contains(sourceIndex) || (pages.isEmpty && sourceIndex == -1) else { return }
+
+        await saveCurrentPageIfNeeded()
+
+        let insertAt = pages.isEmpty ? 0 : sourceIndex + 1
+        do {
+            let newPage = Page(
+                bookId: book.id,
+                index: insertAt,
+                templateId: templateId ?? book.defaultTemplateId
+            )
+            let created = try await dependencies.pageRepository.insertPage(newPage, at: insertAt)
+            pages = try dependencies.pageRepository.fetchPages(forBook: bookId)
+            if let selected = pages.firstIndex(where: { $0.id == created.id }) {
+                currentPageIndex = selected
+            } else {
+                currentPageIndex = min(insertAt, max(pages.count - 1, 0))
+            }
+            await loadCurrentPageViewModel()
+            await reloadThumbnails()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func duplicateCurrentPage() async {
+        await duplicatePage(at: currentPageIndex)
+    }
+
+    func duplicatePage(at index: Int) async {
+        guard pages.indices.contains(index) else { return }
+        let sourceId = pages[index].id
+        await saveCurrentPageIfNeeded()
+
+        do {
+            let created = try await dependencies.pageRepository.duplicatePage(id: sourceId)
+            pages = try dependencies.pageRepository.fetchPages(forBook: bookId)
+            if let selected = pages.firstIndex(where: { $0.id == created.id }) {
+                currentPageIndex = selected
+            }
+            await loadCurrentPageViewModel()
+            await reloadThumbnails()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    func reorderPages(from sourceIndex: Int, to destinationIndex: Int) async {
+        guard pages.indices.contains(sourceIndex),
+              destinationIndex >= 0,
+              destinationIndex < pages.count,
+              sourceIndex != destinationIndex else { return }
+
+        let selectedId = currentPage?.id
+        await saveCurrentPageIfNeeded()
+
+        var orderedIds = pages.map(\.id)
+        let moved = orderedIds.remove(at: sourceIndex)
+        orderedIds.insert(moved, at: destinationIndex)
+
+        do {
+            pages = try await dependencies.pageRepository.reorderPages(
+                bookId: bookId,
+                orderedIds: orderedIds
+            )
+            if let selectedId, let newIndex = pages.firstIndex(where: { $0.id == selectedId }) {
+                currentPageIndex = newIndex
+            } else {
+                currentPageIndex = min(currentPageIndex, max(pages.count - 1, 0))
+            }
             await reloadThumbnails()
         } catch {
             errorMessage = error.localizedDescription
@@ -173,6 +259,10 @@ final class BookViewModel: ObservableObject {
             template: pageViewModel.template,
             autoAdvanceEnabled: book.autoAdvanceEnabled,
             settingsStore: dependencies.zoomSettingsStore
+        )
+        zoom.updatePageContext(
+            pageSize: pageViewModel.pageDimensions,
+            template: pageViewModel.template
         )
         zoom.syncAutoAdvanceFromBook(book.autoAdvanceEnabled)
         zoom.open(anchorPoint: pageViewModel.zoomOpenAnchorPoint())

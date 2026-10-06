@@ -19,8 +19,8 @@ final class PageScrollRuntime: ObservableObject {
     }
 }
 
-/// Resolves the hosting `UIScrollView` once so callers can `setContentOffset`
-/// while SwiftUI `.scrollDisabled(true)` keeps user panning off.
+/// Resolves a SwiftUI `ScrollView`'s `UIScrollView`. Page navigation zoom uses
+/// `PageCanvasScrollView` instead and attaches that scroll view directly.
 struct PageScrollViewAccessor: UIViewRepresentable {
     let runtime: PageScrollRuntime
     var onResolved: (() -> Void)?

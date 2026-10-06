@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** September 1, 2026
+**Last updated:** October 1, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -28,7 +28,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 |-------|------|--------|
 | 0 | Foundations | Complete |
 | 1 | MVP: Local Notebooks and Pagination | Complete |
-| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–3 implemented; device QA pending for Part 3) |
+| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–3 signed off; Part 4 page management in code, pinch/pan/fit awaiting device QA; Part 5 immersive chrome deferred) |
 | 3 | Import, Backup, and Cloud Export | Not started |
 | 4 | Advanced Features | Not started |
 
@@ -189,21 +189,21 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 > **2026-09-05 (Phase 2 Part 3 eighth stabilization):** Round 7 `@State` keep-in-view churn froze toolbar/nav and broke follow; leave-book had no flush (ink loss). Fix: non-publishing `PageScrollRuntime` + chrome-aware offset; flush on book disappear; keep stale thumbs during reload; `PageBoundLog`. Sidebar lock in book remains intentional (use Back). Device re-QA pending.
 
-### Phase 2 Part 3 — Zoom Window (Eighth stabilization complete; device re-QA pending)
+### Phase 2 Part 3 — Zoom Window (Signed off)
 
-**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 · **Re-remediated:** 2026-09-03 (×2), 2026-09-04 (×3), 2026-09-05 (×2)
+**Implemented:** 2026-09-01 · **Remediated:** 2026-09-02 through 2026-09-05 · **Signed off:** 2026-09-08 (manual device QA). Horizontal and vertical auto-advance feel (~85% / ~75%) stays pre/post-launch polish in the vault Inbox. It is not open Part 3 work.
 
 #### Part 3 Exit Criteria
 
 - [x] `ZoomWindowViewModel` and `ZoomWindowView` under `Modules/ZoomWindow/`
 - [x] Magnified strip + mini preview share page drawing with main canvas
-- [ ] Blue-zone auto-advance: horizontal then vertical on ruled templates (line-spacing return height) — re-test after remediation
+- [x] Blue-zone auto-advance: horizontal then vertical on ruled templates (line-spacing return height)
 - [x] Auto-advance disableable per book (`Book.autoAdvanceEnabled`); survives relaunch
 - [x] Return height configurable per template type (`ZoomSettingsStore`)
-- [ ] Ink tools / presets / eraser / lasso / ruler work in zoom strip — re-test after remediation
+- [x] Ink tools / presets / eraser / lasso / ruler work in zoom strip
 - [x] Strokes autosave via existing `PageViewModel` path
 - [x] Unit tests: viewport math, auto-advance logic, settings persistence, canvas sync policy
-- [ ] Device QA on physical iPad (see vault `Area – QA Phase 2 Part 3 Zoom Window`)
+- [x] Device QA on physical iPad (vault backlog, 2026-09-08; see `Area – QA Phase 2 Part 3 Zoom Window`)
 
 ### Phase 2 Part 2 — Content Overlays (Complete)
 
@@ -271,15 +271,29 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 - [x] Auto-advance on/off toggle at book level
 - [x] Return height configuration per template type
 
-#### Page Management and Navigation
+#### Page Management and Navigation — Part 4
 
-- [ ] Add page between existing pages
-- [ ] Duplicate page
-- [ ] Reorder pages via drag-and-drop in thumbnail strip
-- [ ] Additional templates: fine/coarse graph paper, Cornell notes, music staff, checklists, planners
-- [ ] Global pinch-to-zoom and pan on page canvas
-- [ ] Fit-page-to-screen gesture
-- [ ] **Immersive writing chrome (deferred):** expand page canvas toward top safe area under floating tool palette; optional hide/show for nav toolbar and thumbnail strip (Apple Notes–inspired); keep add/export/delete reachable — document in Product Spec §4.5 before implementation
+- [x] Add page between existing pages
+- [x] Duplicate page
+- [x] Reorder pages via drag-and-drop in thumbnail strip
+- [x] Additional templates: fine/coarse graph paper, Cornell notes, music staff, checklists, planners
+- [ ] Global pinch-to-zoom and two-finger pan on the outer page scroll view (implemented 2026-10-01; device QA pending)
+- [ ] Fit-page-to-screen: **Fit Page** toolbar control and finger double-tap (implemented 2026-10-01; device QA pending)
+
+**In code:** 2026-10-01. Insert, duplicate, reorder, and the extra templates were already in the working tree. Pinch, two-finger pan, and fit landed on the outer scroll view. Do not mark the pinch/fit deliverables checked until device QA.
+
+- PencilKit zoom stays at 1×. `PageNavigationMath` is unit-tested. `PageNavigationController` holds session scale only.
+- Opening the zoom window forces page scale to 1 and disables pinch and pan. Keep-in-view is unchanged.
+- Template device retest from 2026-09-13 (New Book preview vs cover color) is still open in the vault QA note.
+
+### Phase 2 Part 5 — Immersive Writing Chrome (Deferred)
+
+Not required for fit-to-screen. Fit uses the visible area that already exists under the navigation bar and above the thumbnail strip.
+
+- [ ] Expand the page canvas toward the top safe area under a floating tool palette
+- [ ] Optional hide/show for the navigation toolbar and thumbnail strip
+- [ ] Keep add, export, and delete reachable
+- [ ] Recompute fit scale from the larger visible viewport (`PageNavigationMath.fitScale` already takes that size)
 
 ### Exit Criteria (Phase 2 overall — not yet complete)
 
@@ -288,11 +302,12 @@ The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Ca
 - All Markup-style pen tools are functional with adjustable parameters — **Part 1 complete**
 - Eraser, lasso, shapes, and ruler work correctly on the canvas — **Part 1 complete**
 - Text boxes and images can be placed, moved, and resized on pages — **Part 2 complete**
-- Zoom window provides magnified writing with miniature page context — **Part 3 complete (device QA pending)**
-- Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates — **Part 3 complete (device QA pending)**
-- Auto-advance can be disabled per book — **Part 3 complete (device QA pending)**
-- Pages can be added, duplicated, deleted, and reordered via the thumbnail strip
-- Pinch-zoom, pan, and fit-to-screen work smoothly
+- Zoom window provides magnified writing with miniature page context — **Part 3 signed off 2026-09-08**
+- Auto-advance moves horizontally along a line and vertically at page margins on ruled and graph templates — **Part 3 signed off 2026-09-08** (feel polish deferred)
+- Auto-advance can be disabled per book — **Part 3 signed off 2026-09-08**
+- Pages can be added, duplicated, deleted, and reordered via the thumbnail strip — **Part 4 in code** (template device retest still open)
+- Pinch-zoom, two-finger pan, and fit-to-screen — **Part 4 implemented; device QA pending**
+- Immersive writing chrome — **Part 5, deferred**
 
 ---
 
@@ -442,6 +457,7 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-10-01 | **Phase 2 Part 4 navigation zoom** — outer scroll view owns pinch, two-finger pan, and fit; PencilKit stays 1×; zoom window forces scale 1. Insert, duplicate, reorder, and extra templates recorded as in code. Immersive chrome moved to Phase 2 Part 5. Part 3 recorded as signed off 2026-09-08. Device QA pending for pinch/fit and the September 13 template retest. |
 | 2026-09-01 | **Phase 2 Part 3 (Zoom Window) implemented** — `ZoomWindow` MVVM module, magnified strip, mini preview, blue-zone auto-advance, book-level toggle, return height per template; ADR – Zoom Window Viewport Strategy accepted; device QA pending |
 | 2026-09-02 | **Phase 2 Part 3 remediation** — dual-canvas sync guard, zoom observation forwarding, trailing-edge auto-advance, open-at-last-ink, mini-preview live drag, toggle label; device re-QA pending |
 | 2026-09-03 | **Phase 2 Part 3 second remediation** — viewport-sized magnification, strip-local advance zone, stroke-end race fix, fit-page mini preview, denser zoom render scale; device re-QA pending |

@@ -51,6 +51,27 @@ private struct BookViewBody: View {
     @ObservedObject var viewModel: BookViewModel
     @Binding var exportDocument: ExportDocument?
     @Binding var exportFilename: String
+    @State private var templatePickerMode: TemplatePickerMode?
+    @StateObject private var pageNavigation = PageNavigationController()
+
+    private enum TemplatePickerMode: Identifiable {
+        case addAtEnd
+        case insertAfterCurrent
+
+        var id: String {
+            switch self {
+            case .addAtEnd: return "addAtEnd"
+            case .insertAfterCurrent: return "insertAfterCurrent"
+            }
+        }
+
+        var title: String {
+            switch self {
+            case .addAtEnd: return String(localized: "Add Page Template")
+            case .insertAfterCurrent: return String(localized: "Insert Page Template")
+            }
+        }
+    }
 
     var body: some View {
         content
@@ -65,6 +86,21 @@ private struct BookViewBody: View {
                 exportFilename: $exportFilename
             ))
             .modifier(BookErrorAlertModifier(viewModel: viewModel))
+            .sheet(item: $templatePickerMode) { mode in
+                TemplatePickerView(
+                    title: mode.title,
+                    selectedTemplateId: viewModel.book?.defaultTemplateId ?? TemplateCatalog.collegeRuled.id
+                ) { templateId in
+                    Task {
+                        switch mode {
+                        case .addAtEnd:
+                            await viewModel.addPage(templateId: templateId)
+                        case .insertAfterCurrent:
+                            await viewModel.insertPage(templateId: templateId)
+                        }
+                    }
+                }
+            }
     }
 
     @ViewBuilder
@@ -77,7 +113,8 @@ private struct BookViewBody: View {
                     BookWritingSurface(
                         bookViewModel: viewModel,
                         pageViewModel: pageViewModel,
-                        toolSession: viewModel.toolSession
+                        toolSession: viewModel.toolSession,
+                        pageNavigation: pageNavigation
                     )
                 } else {
                     ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -90,6 +127,15 @@ private struct BookViewBody: View {
                     thumbnails: viewModel.thumbnails,
                     onSelectPage: { index in
                         Task { await viewModel.selectPage(at: index) }
+                    },
+                    onInsertAfter: { index in
+                        Task { await viewModel.insertPage(after: index) }
+                    },
+                    onDuplicate: { index in
+                        Task { await viewModel.duplicatePage(at: index) }
+                    },
+                    onReorder: { source, destination in
+                        Task { await viewModel.reorderPages(from: source, to: destination) }
                     }
                 )
             }
@@ -107,7 +153,41 @@ private struct BookViewBody: View {
             if viewModel.isExporting {
                 ProgressView()
             }
-            Button { Task { await viewModel.addPage() } } label: {
+            Button {
+                pageNavigation.fitPage()
+            } label: {
+                Label(String(localized: "Fit Page"), systemImage: "arrow.down.right.and.arrow.up.left")
+            }
+            .accessibilityIdentifier("fit-page-button")
+            .accessibilityLabel(String(localized: "Fit Page"))
+            Menu {
+                Button {
+                    Task { await viewModel.addPage() }
+                } label: {
+                    Label(String(localized: "Add Page at End"), systemImage: "plus.rectangle.on.rectangle")
+                }
+                Button {
+                    Task { await viewModel.insertPage() }
+                } label: {
+                    Label(String(localized: "Insert Page After Current"), systemImage: "text.insert")
+                }
+                Button {
+                    Task { await viewModel.duplicateCurrentPage() }
+                } label: {
+                    Label(String(localized: "Duplicate Page"), systemImage: "plus.square.on.square")
+                }
+                Divider()
+                Button {
+                    templatePickerMode = .addAtEnd
+                } label: {
+                    Label(String(localized: "Add with Template…"), systemImage: "doc.badge.plus")
+                }
+                Button {
+                    templatePickerMode = .insertAfterCurrent
+                } label: {
+                    Label(String(localized: "Insert with Template…"), systemImage: "doc.text")
+                }
+            } label: {
                 Label(String(localized: "Add Page"), systemImage: "plus.rectangle.on.rectangle")
             }
             Button { viewModel.deletePageConfirmation = true } label: {

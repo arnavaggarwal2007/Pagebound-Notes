@@ -388,6 +388,24 @@ final class ZoomWindowViewModelAdvanceTests: XCTestCase {
         XCTAssertEqual(vm.viewportRect.width * scale, stripSize.width, accuracy: 0.5)
     }
 
+    func testUpdatePageContextUpdatesSizeTemplateAndClampsViewport() {
+        let store = InMemoryZoomSettingsStore()
+        let vm = ZoomWindowViewModel(
+            pageSize: pageSize,
+            template: TemplateCatalog.collegeRuled,
+            autoAdvanceEnabled: true,
+            settingsStore: store
+        )
+        vm.open()
+        let largerPage = CGSize(width: 800, height: 1000)
+        vm.updatePageContext(pageSize: largerPage, template: TemplateCatalog.dottedGrid)
+
+        XCTAssertEqual(vm.pageSize, largerPage)
+        XCTAssertEqual(vm.template, TemplateCatalog.dottedGrid)
+        XCTAssertLessThanOrEqual(vm.viewportRect.maxX, largerPage.width)
+        XCTAssertLessThanOrEqual(vm.viewportRect.maxY, largerPage.height)
+    }
+
     private func makeDrawing(endingAt point: CGPoint) -> PKDrawing {
         let start = CGPoint(x: point.x - 20, y: point.y)
         let controlPoints: [PKStrokePoint] = [

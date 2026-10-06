@@ -36,6 +36,31 @@ final class LibraryViewModelTests: XCTestCase {
         XCTAssertEqual(pages.count, 1)
     }
 
+    func testCreateBookPersistsNonDefaultTemplateOnBookAndFirstPage() async throws {
+        await viewModel.createFolder(name: "Templates")
+        await viewModel.load()
+        XCTAssertEqual(viewModel.selectedFolderId, viewModel.sidebarFolders.first?.id)
+
+        await viewModel.createBook(
+            title: "Dots",
+            coverStyle: .plain,
+            pageSize: .letter,
+            templateId: TemplateCatalog.dottedGrid.id
+        )
+        await viewModel.load()
+
+        let book = try XCTUnwrap(viewModel.books.first)
+        XCTAssertEqual(book.defaultTemplateId, TemplateCatalog.dottedGrid.id)
+
+        let pages = try dependencies.pageRepository.fetchPages(forBook: book.id)
+        XCTAssertEqual(pages.count, 1)
+        XCTAssertEqual(pages[0].templateId, TemplateCatalog.dottedGrid.id)
+        XCTAssertEqual(
+            TemplateCatalog.template(for: pages[0].templateId)?.type,
+            .dottedGrid
+        )
+    }
+
     func testSortByName() async throws {
         await viewModel.createFolder(name: "Beta")
         viewModel.selectFolder(nil)

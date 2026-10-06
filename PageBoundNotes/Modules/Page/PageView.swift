@@ -8,6 +8,7 @@ struct PageView: View {
 
     @ObservedObject var viewModel: PageViewModel
     @ObservedObject var toolSession: ToolSessionState
+    @ObservedObject var navigation: PageNavigationController
     var zoomViewportRect: CGRect?
     var onZoomViewportReposition: ((CGPoint) -> Void)?
 
@@ -18,7 +19,6 @@ struct PageView: View {
     @State private var transformPreview = ObjectTransformPreviewState.idle
     @StateObject private var scrollRuntime = PageScrollRuntime()
 
-    private static let pageCanvasScrollID = "pageCanvasScrollTarget"
     private static let writingChromeClearance: CGFloat = 200
     /// Approximate height of zoom panel + tool palette covering the bottom of the page.
     static let zoomChromeClearance: CGFloat = 360
@@ -48,47 +48,64 @@ struct PageView: View {
             ))
     }
 
+    private var contentPixelSize: CGSize {
+        PageNavigationMath.contentSize(
+            pageSize: viewModel.pageDimensions,
+            padding: Self.pagePadding,
+            extraHeight: zoomViewportRect != nil ? Self.zoomChromeClearance : 0
+        )
+    }
+
     private var pageScrollSurface: some View {
-        ScrollViewReader { proxy in
-            ScrollView([.horizontal, .vertical], showsIndicators: false) {
-                pageCanvas
-                    .padding(Self.pagePadding)
-                    .padding(.bottom, zoomViewportRect != nil ? Self.zoomChromeClearance : 0)
-                    .id(Self.pageCanvasScrollID)
-                    .coordinateSpace(name: ContentObjectsOverlay.pageCanvasCoordinateSpace)
-                    .onDrop(of: [.image], isTargeted: nil) { providers in
-                        handleImageDrop(providers)
-                    }
+        PageCanvasScrollView(
+            contentPixelSize: contentPixelSize,
+            pageSize: viewModel.pageDimensions,
+            padding: Self.pagePadding,
+            zoomWindowActive: viewModel.zoomModeActive,
+            navigation: navigation,
+            runtime: scrollRuntime,
+            onReady: { scheduleZoomViewportKeepInView() },
+            shouldFitOnDoubleTap: { shouldFitPage(atContentPoint: $0) },
+            content: pageScrollContent
+        )
+        .onChange(of: viewModel.editingTextObjectId) { _, editingId in
+            guard editingId != nil, let textBox = viewModel.selectedTextBox else { return }
+            revealTextBox(textBox.geometry.frame.cgRect)
+        }
+        .onChange(of: zoomViewportRect) { _, rect in
+            guard rect != nil else {
+                scrollRuntime.clearLastMid()
+                return
             }
-            .scrollDisabled(interactionPolicy.disablesPageScrolling)
-            .background(
-                PageScrollViewAccessor(runtime: scrollRuntime) {
-                    scheduleZoomViewportKeepInView()
-                }
-            )
-            .onChange(of: viewModel.editingTextObjectId) { _, editingId in
-                guard editingId != nil, let textBox = viewModel.selectedTextBox else { return }
-                scrollTextBoxIntoView(textBox.geometry.frame.cgRect, proxy: proxy)
-            }
-            .onChange(of: zoomViewportRect) { _, rect in
-                guard rect != nil else {
-                    scrollRuntime.clearLastMid()
-                    return
-                }
-                scheduleZoomViewportKeepInView()
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)) { notification in
-                guard viewModel.isEditingText, let textBox = viewModel.selectedTextBox else { return }
-                scrollTextBoxIntoView(textBox.geometry.frame.cgRect, proxy: proxy, keyboardNotification: notification)
-            }
+            scheduleZoomViewportKeepInView()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)) { notification in
+            guard viewModel.isEditingText, let textBox = viewModel.selectedTextBox else { return }
+            revealTextBox(textBox.geometry.frame.cgRect, keyboardNotification: notification)
         }
     }
 
-    private func scrollTextBoxIntoView(
-        _ frame: CGRect,
-        proxy: ScrollViewProxy,
-        keyboardNotification: Notification? = nil
-    ) {
+    private var pageScrollContent: some View {
+        pageCanvas
+            .padding(Self.pagePadding)
+            .padding(.bottom, zoomViewportRect != nil ? Self.zoomChromeClearance : 0)
+            .frame(width: contentPixelSize.width, height: contentPixelSize.height, alignment: .topLeading)
+            .coordinateSpace(name: ContentObjectsOverlay.pageCanvasCoordinateSpace)
+            .onDrop(of: [.image], isTargeted: nil) { providers in
+                handleImageDrop(providers)
+            }
+    }
+
+    private func shouldFitPage(atContentPoint point: CGPoint) -> Bool {
+        guard !viewModel.zoomModeActive, !viewModel.isEditingText else { return false }
+        let pagePoint = CGPoint(x: point.x - Self.pagePadding, y: point.y - Self.pagePadding)
+        if let object = viewModel.topmostObject(at: pagePoint), case .text = object {
+            return false
+        }
+        return true
+    }
+
+    private func revealTextBox(_ frame: CGRect, keyboardNotification: Notification? = nil) {
         let keyboardHeight: CGFloat
         if let notification = keyboardNotification,
            let endFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
@@ -96,14 +113,11 @@ struct PageView: View {
         } else {
             keyboardHeight = Self.writingChromeClearance
         }
-        let visibleBottom = viewModel.pageDimensions.height + Self.pagePadding - keyboardHeight - Self.writingChromeClearance
-        guard frame.maxY > visibleBottom else { return }
-        withAnimation(.easeOut(duration: 0.25)) {
-            proxy.scrollTo(
-                Self.pageCanvasScrollID,
-                anchor: scrollAnchor(for: CGPoint(x: frame.midX, y: frame.maxY))
-            )
-        }
+        navigation.revealContentPoint(
+            CGPoint(x: Self.pagePadding + frame.midX, y: Self.pagePadding + frame.maxY),
+            bottomObstruction: keyboardHeight + Self.writingChromeClearance,
+            animated: true
+        )
     }
 
     private func scheduleZoomViewportKeepInView() {
@@ -203,19 +217,13 @@ struct PageView: View {
         return offset
     }
 
-    private func scrollAnchor(for point: CGPoint) -> UnitPoint {
-        let pageHeight = viewModel.pageDimensions.height
-        guard pageHeight > 0 else { return .center }
-        let normalizedY = min(max(point.y / pageHeight, 0), 1)
-        return UnitPoint(x: 0.5, y: normalizedY)
-    }
-
     private var pageCanvas: some View {
         ZStack(alignment: .topLeading) {
             TemplateBackgroundView(
                 template: viewModel.template,
                 pageSize: viewModel.pageDimensions
             )
+            .id(viewModel.template.id)
 
             ImageObjectsUnderlay(
                 viewModel: viewModel,
