@@ -11,6 +11,10 @@ final class PageNavigationController: ObservableObject {
     var padding: CGFloat = 24
 
     private var savedScale: CGFloat = 0
+    private var lastFitScale: CGFloat = 0
+    private var lastViewportSize: CGSize = .zero
+    private var isAtFitScale = false
+    private var viewportChangePending = false
     private var didApplyInitialFit = false
     private var isApplyingScale = false
 
@@ -33,7 +37,14 @@ final class PageNavigationController: ObservableObject {
         guard scrollView.bounds.width > 1, scrollView.bounds.height > 1 else { return }
         guard pageSize.width > 0, pageSize.height > 0 else { return }
 
+        let viewport = scrollView.bounds.size
+        let sizeChanged = viewportSizeChanged(from: lastViewportSize, to: viewport)
+
         if zoomWindowActive {
+            if sizeChanged {
+                viewportChangePending = true
+                lastViewportSize = viewport
+            }
             applyZoomWindowLock(on: scrollView)
             return
         }
@@ -45,8 +56,19 @@ final class PageNavigationController: ObservableObject {
             let scale = savedScale > 0
                 ? PageNavigationMath.clampedScale(savedScale, minimum: fit)
                 : fit
+            lastFitScale = fit
+            isAtFitScale = abs(scale - fit) <= PageNavigationMath.fitMatchTolerance
             apply(scale: scale, on: scrollView, animated: false)
             savedScale = scale
+            lastViewportSize = viewport
+            viewportChangePending = false
+            return
+        }
+
+        if sizeChanged || viewportChangePending {
+            lastViewportSize = viewport
+            viewportChangePending = false
+            applyViewportChange(on: scrollView)
         }
     }
 
@@ -56,9 +78,12 @@ final class PageNavigationController: ObservableObject {
         guard pageSize.width > 0, pageSize.height > 0 else { return }
         updateZoomRange(on: scrollView)
         let fit = minimumScale(for: scrollView)
+        lastFitScale = fit
+        isAtFitScale = true
         apply(scale: fit, on: scrollView, animated: animated)
         savedScale = fit
         didApplyInitialFit = true
+        lastViewportSize = scrollView.bounds.size
     }
 
     func setZoomWindowActive(_ active: Bool) {
@@ -89,6 +114,26 @@ final class PageNavigationController: ObservableObject {
     func rememberScale(_ scale: CGFloat) {
         guard !zoomWindowActive, !isApplyingScale else { return }
         savedScale = scale
+        isAtFitScale = abs(scale - lastFitScale) <= PageNavigationMath.fitMatchTolerance
+    }
+
+    private func applyViewportChange(on scrollView: UIScrollView) {
+        let newFit = minimumScale(for: scrollView)
+        updateZoomRange(on: scrollView)
+        let next = PageNavigationMath.scaleAfterViewportChange(
+            currentScale: scrollView.zoomScale,
+            newFitScale: newFit,
+            isAtFit: isAtFitScale
+        )
+        lastFitScale = newFit
+        if abs(scrollView.zoomScale - next) > PageNavigationMath.fitMatchTolerance {
+            apply(scale: next, on: scrollView, animated: false)
+        }
+        savedScale = next
+    }
+
+    private func viewportSizeChanged(from previous: CGSize, to next: CGSize) -> Bool {
+        abs(previous.width - next.width) > 0.5 || abs(previous.height - next.height) > 0.5
     }
 
     func centeringInsets(for scrollView: UIScrollView) -> PageNavigationInsets {

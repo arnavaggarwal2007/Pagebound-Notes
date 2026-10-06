@@ -53,6 +53,8 @@ private struct BookViewBody: View {
     @Binding var exportFilename: String
     @State private var templatePickerMode: TemplatePickerMode?
     @StateObject private var pageNavigation = PageNavigationController()
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private enum TemplatePickerMode: Identifiable {
         case addAtEnd
@@ -78,6 +80,7 @@ private struct BookViewBody: View {
             .navigationTitle(viewModel.book?.title ?? String(localized: "Book"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(removing: .sidebarToggle)
+            .toolbar(viewModel.isWritingChromeHidden ? .hidden : .visible, for: .navigationBar)
             .toolbar { toolbarItems }
             .modifier(BookDialogsModifier(viewModel: viewModel))
             .modifier(BookExportModifier(
@@ -108,37 +111,53 @@ private struct BookViewBody: View {
         if viewModel.isLoading && viewModel.book == nil {
             ProgressView(String(localized: "Loading book…"))
         } else if let book = viewModel.book {
-            VStack(spacing: 0) {
-                if let pageViewModel = viewModel.pageViewModel {
-                    BookWritingSurface(
-                        bookViewModel: viewModel,
-                        pageViewModel: pageViewModel,
-                        toolSession: viewModel.toolSession,
-                        pageNavigation: pageNavigation
-                    )
-                } else {
-                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+            ZStack(alignment: .top) {
+                VStack(spacing: 0) {
+                    if let pageViewModel = viewModel.pageViewModel {
+                        BookWritingSurface(
+                            bookViewModel: viewModel,
+                            pageViewModel: pageViewModel,
+                            toolSession: viewModel.toolSession,
+                            pageNavigation: pageNavigation
+                        )
+                    } else {
+                        ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+
+                    if !viewModel.isWritingChromeHidden {
+                        PageThumbnailStripView(
+                            pages: viewModel.pages,
+                            book: book,
+                            currentPageIndex: viewModel.currentPageIndex,
+                            thumbnails: viewModel.thumbnails,
+                            onSelectPage: { index in
+                                Task { await viewModel.selectPage(at: index) }
+                            },
+                            onInsertAfter: { index in
+                                Task { await viewModel.insertPage(after: index) }
+                            },
+                            onDuplicate: { index in
+                                Task { await viewModel.duplicatePage(at: index) }
+                            },
+                            onReorder: { source, destination in
+                                Task { await viewModel.reorderPages(from: source, to: destination) }
+                            }
+                        )
+                    }
                 }
 
-                PageThumbnailStripView(
-                    pages: viewModel.pages,
-                    book: book,
-                    currentPageIndex: viewModel.currentPageIndex,
-                    thumbnails: viewModel.thumbnails,
-                    onSelectPage: { index in
-                        Task { await viewModel.selectPage(at: index) }
-                    },
-                    onInsertAfter: { index in
-                        Task { await viewModel.insertPage(after: index) }
-                    },
-                    onDuplicate: { index in
-                        Task { await viewModel.duplicatePage(at: index) }
-                    },
-                    onReorder: { source, destination in
-                        Task { await viewModel.reorderPages(from: source, to: destination) }
-                    }
-                )
+                if viewModel.isWritingChromeHidden {
+                    ImmersiveChromeBar(
+                        title: book.title,
+                        onBack: { dismiss() },
+                        commands: { pageCommands(chromeToggle: .show) }
+                    )
+                    .fixedSize(horizontal: true, vertical: true)
+                    .padding(.top, 8)
+                    .padding(.horizontal, 16)
+                }
             }
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.25), value: viewModel.isWritingChromeHidden)
         } else {
             ContentUnavailableView(
                 String(localized: "Book Unavailable"),
@@ -149,53 +168,100 @@ private struct BookViewBody: View {
 
     @ToolbarContentBuilder
     private var toolbarItems: some ToolbarContent {
-        ToolbarItemGroup(placement: .topBarTrailing) {
-            if viewModel.isExporting {
-                ProgressView()
+        if !viewModel.isWritingChromeHidden {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                pageCommands(chromeToggle: .hide)
+            }
+        }
+    }
+
+    private enum ChromeToggle {
+        case hide
+        case show
+    }
+
+    @ViewBuilder
+    private func pageCommands(chromeToggle: ChromeToggle) -> some View {
+        if viewModel.isExporting {
+            ProgressView()
+                .frame(minWidth: 44, minHeight: 44)
+                .accessibilityLabel(String(localized: "Exporting"))
+        }
+        Button {
+            pageNavigation.fitPage()
+        } label: {
+            Label(String(localized: "Fit Page"), systemImage: "arrow.down.right.and.arrow.up.left")
+        }
+        .frame(minWidth: 44, minHeight: 44)
+        .labelStyle(.iconOnly)
+        .accessibilityIdentifier("fit-page-button")
+        .accessibilityLabel(String(localized: "Fit Page"))
+        Menu {
+            Button {
+                Task { await viewModel.addPage() }
+            } label: {
+                Label(String(localized: "Add Page at End"), systemImage: "plus.rectangle.on.rectangle")
             }
             Button {
-                pageNavigation.fitPage()
+                Task { await viewModel.insertPage() }
             } label: {
-                Label(String(localized: "Fit Page"), systemImage: "arrow.down.right.and.arrow.up.left")
+                Label(String(localized: "Insert Page After Current"), systemImage: "text.insert")
             }
-            .accessibilityIdentifier("fit-page-button")
-            .accessibilityLabel(String(localized: "Fit Page"))
-            Menu {
-                Button {
-                    Task { await viewModel.addPage() }
-                } label: {
-                    Label(String(localized: "Add Page at End"), systemImage: "plus.rectangle.on.rectangle")
-                }
-                Button {
-                    Task { await viewModel.insertPage() }
-                } label: {
-                    Label(String(localized: "Insert Page After Current"), systemImage: "text.insert")
-                }
-                Button {
-                    Task { await viewModel.duplicateCurrentPage() }
-                } label: {
-                    Label(String(localized: "Duplicate Page"), systemImage: "plus.square.on.square")
-                }
-                Divider()
-                Button {
-                    templatePickerMode = .addAtEnd
-                } label: {
-                    Label(String(localized: "Add with Template…"), systemImage: "doc.badge.plus")
-                }
-                Button {
-                    templatePickerMode = .insertAfterCurrent
-                } label: {
-                    Label(String(localized: "Insert with Template…"), systemImage: "doc.text")
-                }
+            Button {
+                Task { await viewModel.duplicateCurrentPage() }
             } label: {
-                Label(String(localized: "Add Page"), systemImage: "plus.rectangle.on.rectangle")
+                Label(String(localized: "Duplicate Page"), systemImage: "plus.square.on.square")
             }
-            Button { viewModel.deletePageConfirmation = true } label: {
-                Label(String(localized: "Delete Page"), systemImage: "trash")
+            Divider()
+            Button {
+                templatePickerMode = .addAtEnd
+            } label: {
+                Label(String(localized: "Add with Template…"), systemImage: "doc.badge.plus")
             }
-            Button { viewModel.beginExport() } label: {
-                Label(String(localized: "Export PDF"), systemImage: "square.and.arrow.up")
+            Button {
+                templatePickerMode = .insertAfterCurrent
+            } label: {
+                Label(String(localized: "Insert with Template…"), systemImage: "doc.text")
             }
+        } label: {
+            Label(String(localized: "Add Page"), systemImage: "plus.rectangle.on.rectangle")
+        }
+        .frame(minWidth: 44, minHeight: 44)
+        .labelStyle(.iconOnly)
+        .accessibilityLabel(String(localized: "Add Page"))
+        Button { viewModel.deletePageConfirmation = true } label: {
+            Label(String(localized: "Delete Page"), systemImage: "trash")
+        }
+        .frame(minWidth: 44, minHeight: 44)
+        .labelStyle(.iconOnly)
+        .accessibilityLabel(String(localized: "Delete Page"))
+        Button { viewModel.beginExport() } label: {
+            Label(String(localized: "Export PDF"), systemImage: "square.and.arrow.up")
+        }
+        .frame(minWidth: 44, minHeight: 44)
+        .labelStyle(.iconOnly)
+        .accessibilityLabel(String(localized: "Export PDF"))
+        switch chromeToggle {
+        case .hide:
+            Button {
+                viewModel.setWritingChromeHidden(true)
+            } label: {
+                Label(String(localized: "Hide Chrome"), systemImage: "rectangle.compress.vertical")
+            }
+            .frame(minWidth: 44, minHeight: 44)
+            .labelStyle(.iconOnly)
+            .accessibilityIdentifier("hide-writing-chrome")
+            .accessibilityLabel(String(localized: "Hide Chrome"))
+        case .show:
+            Button {
+                viewModel.setWritingChromeHidden(false)
+            } label: {
+                Label(String(localized: "Show Chrome"), systemImage: "rectangle.expand.vertical")
+            }
+            .frame(minWidth: 44, minHeight: 44)
+            .labelStyle(.iconOnly)
+            .accessibilityIdentifier("show-writing-chrome")
+            .accessibilityLabel(String(localized: "Show Chrome"))
         }
     }
 }

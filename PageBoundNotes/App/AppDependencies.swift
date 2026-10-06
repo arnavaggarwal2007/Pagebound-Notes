@@ -9,6 +9,7 @@ struct AppDependencies {
     let pdfExportService: PDFExportService
     let toolPresetStore: ToolPresetStore
     let zoomSettingsStore: ZoomSettingsStore
+    let writingChromeStore: WritingChromeStore
 
     @MainActor
     static func live(container: ModelContainer) throws -> AppDependencies {
@@ -24,7 +25,8 @@ struct AppDependencies {
             pageRepository: pageRepository,
             pdfExportService: PDFExportService(pageRepository: pageRepository),
             toolPresetStore: UserDefaultsToolPresetStore(),
-            zoomSettingsStore: UserDefaultsZoomSettingsStore()
+            zoomSettingsStore: UserDefaultsZoomSettingsStore(),
+            writingChromeStore: UserDefaultsWritingChromeStore()
         )
     }
 
@@ -46,7 +48,8 @@ struct AppDependencies {
             pageRepository: pageRepository,
             pdfExportService: PDFExportService(pageRepository: pageRepository),
             toolPresetStore: InMemoryToolPresetStore(),
-            zoomSettingsStore: InMemoryZoomSettingsStore()
+            zoomSettingsStore: InMemoryZoomSettingsStore(),
+            writingChromeStore: InMemoryWritingChromeStore()
         )
     }
 }

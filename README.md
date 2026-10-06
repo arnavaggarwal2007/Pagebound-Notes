@@ -4,7 +4,7 @@
 
 PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can organize content in unlimited folders and books—all without a subscription or custom backend.
 
-**Status:** Phase 2 in progress — Parts 1–4 signed off. Part 4 (page management, pinch, two-finger pan, and fit) signed off October 5, 2026. Immersive writing chrome is Phase 2 Part 5 and is deferred. Zoom Window signed off September 8, 2026. Part 2 signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
+**Status:** Phase 2 in progress — Parts 1–4 signed off. Part 5 (immersive writing chrome) is in code as of October 6, 2026; device QA is still open. Zoom Window signed off September 8, 2026. Part 4 signed off October 5, 2026. Part 2 signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
 
 ---
 
@@ -43,6 +43,7 @@ PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combi
 - Reorder pages by dragging thumbnails
 - Scrollable thumbnail strip navigation
 - Pinch-to-zoom and two-finger pan on the page (PencilKit stays at 1×). **Fit Page** toolbar control and finger double-tap fit the page in the current visible area.
+- Immersive writing chrome: optional hide/show for the navigation bar and thumbnail strip. A floating bar keeps Back, Fit Page, add, export, and delete reachable. A fitted page refits to the larger area. Device QA pending.
 
 #### Handwriting and Tools
 
@@ -80,7 +81,6 @@ PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combi
 
 | Area | Phase |
 |------|-------|
-| Immersive writing chrome (optional hide/show nav and thumbnail strip) | 2 Part 5 |
 | Filter by tag or template type | 2+ |
 | PDF import into new books | 3 |
 | Export folder as PDF or zip; `.pbn` backup and restore | 3 |
@@ -230,19 +230,20 @@ Canonical documentation lives **only in this repo** (`Documents/`). The Obsidian
 | [ADR – PencilKit Integration Strategy](Documents/ADR%20%E2%80%93%20PencilKit%20Integration%20Strategy.md) | PencilKit bridge pattern |
 | [ADR – Custom Tool Palette](Documents/ADR%20%E2%80%93%20Custom%20Tool%20Palette.md) | Tool palette architecture |
 | [ADR – Content Object Layer](Documents/ADR%20%E2%80%93%20Content%20Object%20Layer.md) | Text, images, shapes overlay model |
+| [ADR – Immersive Writing Chrome](Documents/ADR%20%E2%80%93%20Immersive%20Writing%20Chrome.md) | Hidden navigation chrome and fit-follow |
 | [Notes KB Guidelines](Documents/Notes%20KB%20Guidelines.md) | Obsidian vault conventions for extended project notes |
 
 ---
 
 ## Development Status
 
-**Current phase:** Phase 2 in progress — Parts 1–4 signed off (Part 4 on October 5, 2026). Part 5 (immersive chrome) is deferred.
+**Current phase:** Phase 2 in progress — Parts 1–4 signed off (Part 4 on October 5, 2026). Part 5 (immersive chrome) is in code as of October 6, 2026; device QA is still open.
 
 | Phase | Summary |
 |-------|---------|
 | **Phase 0** | App shell, domain models, SwiftData persistence, repositories, DI — **complete** |
 | **Phase 1** | MVP: library, paginated pages, basic PencilKit, PDF export — **complete** |
-| **Phase 2** | Full tooling, zoom window, content overlays, page management — **in progress** (Parts 1–4 signed off; Part 5 immersive chrome deferred) |
+| **Phase 2** | Full tooling, zoom window, content overlays, page management, immersive chrome — **in progress** (Parts 1–4 signed off; Part 5 in code, device QA pending) |
 | **Phase 3** | PDF import, local backup/restore, cloud export |
 | **Phase 4** | Search, handwriting OCR, split view, accessibility |
 

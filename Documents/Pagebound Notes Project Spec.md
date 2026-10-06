@@ -131,8 +131,8 @@ PageBound Notes is a handwriting‑first note‑taking app that combines the pag
 **Requirements:**
 
 - Pinch-to-zoom and two-finger pan on the page, consistent with GoodNotes behavior.[^17][^14][^16] PencilKit stays at 1× in page coordinates. One-finger input remains writing, lasso, or object editing. While the zoom window is open, page scale returns to 1× and user pinch and pan are off.
-- Fit page to the current visible area (navigation bar and thumbnail strip stay) via a **Fit Page** toolbar control and a finger double-tap.[^16] Apple Pencil double-tap remains the system tool switch.
-- **Immersive writing chrome (Phase 2 Part 5, deferred):** page canvas expands toward the top safe area with the tool palette floating above content; optional user toggle to hide/show the navigation toolbar and thumbnail strip while keeping page add/export/delete reachable. Not required for fit-to-screen. Fit math takes the visible viewport size so this part can pass a larger area later.
+- Fit page to the current visible area via a **Fit Page** toolbar control and a finger double-tap.[^16] Apple Pencil double-tap remains the system tool switch. While the navigation bar and thumbnail strip are showing, that visible area is the space between them.
+- **Immersive writing chrome (Phase 2 Part 5):** an app-wide toggle hides the navigation toolbar and thumbnail strip together. The page canvas expands toward the top safe area, and the tool palette stays floating above the page. A floating bar keeps Back, Fit Page, add, export, and delete reachable, and can show the navigation toolbar and thumbnail strip again. Fit uses the scroll view’s visible bounds, so the larger area is used when chrome is hidden. A page that is already fitted adopts the new fit; a pinch is kept and clamped.
 - Optional split view for two books or two pages side‑by‑side for cross‑referencing.[^16]
 
 

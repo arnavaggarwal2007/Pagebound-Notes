@@ -121,9 +121,9 @@ Handwritten content (PencilKit strokes) should visually dominate on page surface
 
 ### 4.3 Book View Layout
 
-- **Page thumbnails:** Display a horizontal or vertical strip of page thumbnails for navigation, similar to GoodNotes’ thumbnail strip.
-- **Current page:** The active page is centered with visible borders aligned to the PDF export area, with optional safe margin indicators.
-- **Tool placement:** Global page controls (add page, delete page, export) reside in a top bar (**Phase 1**). Reorder pages and fit-to-screen controls ship in **Phase 2**; zoom controls ship with the zoom window in **Phase 2**.
+- **Page thumbnails:** Display a horizontal or vertical strip of page thumbnails for navigation, similar to GoodNotes’ thumbnail strip. **Immersive writing chrome (Phase 2 Part 5)** can hide this strip together with the navigation bar.
+- **Current page:** The active page is centered with visible borders aligned to the PDF export area, with optional safe margin indicators. When chrome is hidden, the canvas grows toward the top safe area. The tool palette stays a floating overlay.
+- **Tool placement:** Global page controls (add page, delete page, export) reside in a top bar (**Phase 1**). Reorder pages and fit-to-screen controls ship in **Phase 2**; zoom controls ship with the zoom window in **Phase 2**. While chrome is hidden, Back, Fit Page, add, export, and delete stay on a floating bar, with a control to show the navigation bar and thumbnail strip again.
 
 ### 4.4 Page Canvas Layout
 
@@ -172,8 +172,8 @@ The app is structured into the following primary contexts:
 
 ### 6.2 Book Components
 
-- **Thumbnail strip:** Scrollable strip of page thumbnails, allowing tap to navigate (**Phase 1**). Drag-and-drop reorder ships in **Phase 2**.
-- **Page controls:** Buttons for adding and deleting pages, plus export (**Phase 1**). Duplicate page, reorder, and fit-to-screen ship in **Phase 2**.
+- **Thumbnail strip:** Scrollable strip of page thumbnails, allowing tap to navigate (**Phase 1**). Drag-and-drop reorder ships in **Phase 2**. The strip hides with the navigation bar in immersive writing chrome and returns with Show Chrome.
+- **Page controls:** Buttons for adding and deleting pages, plus export (**Phase 1**). Duplicate page, reorder, and fit-to-screen ship in **Phase 2**. Add, export, and delete stay reachable on the floating bar while chrome is hidden.
 
 ### 6.3 Page Components
 
@@ -201,6 +201,7 @@ The app is structured into the following primary contexts:
 
 - The tool palette appears as a floating bar or docked bottom bar with rounded corners and subtle blur, visually similar to Apple Markup’s tool strip.
 - Palette background is neutral and slightly translucent, so underlying page content remains subtly visible.
+- The palette stays floating over the page when immersive writing chrome hides the navigation bar and thumbnail strip. It does not take a row away from the canvas.
 
 ### 7.2 Tool Grouping
 
@@ -359,7 +360,7 @@ UI work aligns with the [Development Roadmap](Development%20Roadmap.md):
 | Phase | UI scope |
 |-------|----------|
 | **Phase 1** | Library sidebar/cards, book shell, page canvas framing, basic tool palette (pen + eraser), thumbnail strip, page borders and safe margins |
-| **Phase 2** | Full tool palette, zoom window + auto-advance UI, text/image/shape overlays, pinch-zoom and fit-to-screen |
+| **Phase 2** | Full tool palette, zoom window + auto-advance UI, text/image/shape overlays, pinch-zoom and fit-to-screen, immersive writing chrome |
 | **Phase 3** | Import preview, export sheet, backup card, share sheet flows |
 | **Phase 4** | Split view layout, search UI, custom templates UI, accessibility audit polish, optional Recent/Starred sidebar |
 

@@ -37,6 +37,7 @@ final class BookViewModel: ObservableObject {
     @Published private(set) var thumbnails: [UUID: UIImage] = [:]
     @Published var toolSession = ToolSessionState()
     @Published var zoomWindowViewModel: ZoomWindowViewModel?
+    @Published private(set) var isWritingChromeHidden: Bool
 
     let bookId: UUID
     let dependencies: AppDependencies
@@ -46,6 +47,19 @@ final class BookViewModel: ObservableObject {
     init(bookId: UUID, dependencies: AppDependencies) {
         self.bookId = bookId
         self.dependencies = dependencies
+        isWritingChromeHidden = dependencies.writingChromeStore.loadSettings().isHidden
+    }
+
+    func setWritingChromeHidden(_ isHidden: Bool) {
+        let previous = isWritingChromeHidden
+        isWritingChromeHidden = isHidden
+        do {
+            try dependencies.writingChromeStore.saveSettings(WritingChromeSettings(isHidden: isHidden))
+        } catch {
+            isWritingChromeHidden = previous
+            PageBoundLog.persistence.error("Writing chrome preference save failed")
+            errorMessage = String(localized: "Could not save the writing chrome preference.")
+        }
     }
 
     var currentPage: Page? {

@@ -121,6 +121,9 @@
 		B10000000000000000000093 /* PageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000093 /* PageNavigationController.swift */; };
 		B10000000000000000000094 /* PageCanvasScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000094 /* PageCanvasScrollView.swift */; };
 		B10000000000000000000095 /* PageNavigationMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000095 /* PageNavigationMathTests.swift */; };
+		B10000000000000000000096 /* WritingChromeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000096 /* WritingChromeStore.swift */; };
+		B10000000000000000000097 /* ImmersiveChromeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000097 /* ImmersiveChromeBar.swift */; };
+		B10000000000000000000098 /* WritingChromeStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000098 /* WritingChromeStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,6 +261,9 @@
 		F10000000000000000000093 /* PageNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageNavigationController.swift; sourceTree = "<group>"; };
 		F10000000000000000000094 /* PageCanvasScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCanvasScrollView.swift; sourceTree = "<group>"; };
 		F10000000000000000000095 /* PageNavigationMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageNavigationMathTests.swift; sourceTree = "<group>"; };
+		F10000000000000000000096 /* WritingChromeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingChromeStore.swift; sourceTree = "<group>"; };
+		F10000000000000000000097 /* ImmersiveChromeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveChromeBar.swift; sourceTree = "<group>"; };
+		F10000000000000000000098 /* WritingChromeStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingChromeStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +339,7 @@
 				F10000000000000000000083 /* PageOverlayHitTestingTests.swift */,
 				F1000000000000000000008D /* ZoomWindowTests.swift */,
 				F10000000000000000000095 /* PageNavigationMathTests.swift */,
+				F10000000000000000000098 /* WritingChromeStoreTests.swift */,
 			);
 			path = PageBoundNotesTests;
 			sourceTree = "<group>";
@@ -440,6 +447,7 @@
 				F10000000000000000000026 /* PDFExportService.swift */,
 				F10000000000000000000043 /* ToolPresetStore.swift */,
 				F1000000000000000000008B /* ZoomSettingsStore.swift */,
+				F10000000000000000000096 /* WritingChromeStore.swift */,
 				F10000000000000000000061 /* ObjectSerialization.swift */,
 				F10000000000000000000062 /* ObjectBlobLifecycle.swift */,
 				F10000000000000000000063 /* ObjectRenderer.swift */,
@@ -494,6 +502,7 @@
 				F1000000000000000000002C /* PageThumbnailView.swift */,
 				F1000000000000000000002D /* PageThumbnailStripView.swift */,
 				F10000000000000000000039 /* BookWritingSurface.swift */,
+				F10000000000000000000097 /* ImmersiveChromeBar.swift */,
 			);
 			path = Book;
 			sourceTree = "<group>";
@@ -704,6 +713,7 @@
 				B1000000000000000000002A /* PageThumbnailView.swift in Sources */,
 				B1000000000000000000002B /* PageThumbnailStripView.swift in Sources */,
 				B10000000000000000000037 /* BookWritingSurface.swift in Sources */,
+				B10000000000000000000097 /* ImmersiveChromeBar.swift in Sources */,
 				B1000000000000000000002C /* PageViewModel.swift in Sources */,
 				B1000000000000000000002D /* TemplateBackgroundView.swift in Sources */,
 				B10000000000000000000091 /* TemplatePickerView.swift in Sources */,
@@ -749,6 +759,7 @@
 				B10000000000000000000089 /* MiniPagePreviewView.swift in Sources */,
 				B1000000000000000000008A /* ZoomPageBackdropView.swift in Sources */,
 				B1000000000000000000008B /* ZoomSettingsStore.swift in Sources */,
+				B10000000000000000000096 /* WritingChromeStore.swift in Sources */,
 				B1000000000000000000008C /* ZoomViewportOverlay.swift in Sources */,
 				B1000000000000000000008F /* PageScrollViewAccessor.swift in Sources */,
 				B10000000000000000000090 /* PageBoundLog.swift in Sources */,
@@ -783,6 +794,7 @@
 				B10000000000000000000083 /* PageOverlayHitTestingTests.swift in Sources */,
 				B1000000000000000000008D /* ZoomWindowTests.swift in Sources */,
 				B10000000000000000000095 /* PageNavigationMathTests.swift in Sources */,
+				B10000000000000000000098 /* WritingChromeStoreTests.swift in Sources */,
 				B10000000000000000000073 /* UIImageNormalizedSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

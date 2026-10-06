@@ -1,6 +1,6 @@
 # Development Roadmap — PageBound Notes
 
-**Last updated:** October 5, 2026
+**Last updated:** October 6, 2026
 
 This document is the canonical implementation sequencing guide for PageBound Notes. It expands the high-level development plan in [Section 9 of the Product Spec](Pagebound%20Notes%20Project%20Spec.md#91-phase-0--foundations) into actionable phases with deliverables, exit criteria, and dependencies.
 
@@ -28,7 +28,7 @@ This document is the canonical implementation sequencing guide for PageBound Not
 |-------|------|--------|
 | 0 | Foundations | Complete |
 | 1 | MVP: Local Notebooks and Pagination | Complete |
-| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–4 signed off; Part 5 immersive chrome deferred) |
+| 2 | Tooling, Content Layers, and Zoom | In progress (Parts 1–5 in code; Part 5 device QA pending) |
 | 3 | Import, Backup, and Cloud Export | Not started |
 | 4 | Advanced Features | Not started |
 
@@ -282,14 +282,14 @@ Each phase builds on the previous one. Phases are sequential — complete exit c
 
 **Signed off:** 2026-10-05 (manual device QA and host tests). PencilKit zoom stays at 1×. `PageNavigationController` holds session scale only. Opening the zoom window forces page scale to 1 and disables pinch and pan.
 
-### Phase 2 Part 5 — Immersive Writing Chrome (Deferred)
+### Phase 2 Part 5 — Immersive Writing Chrome
 
-Not required for fit-to-screen. Fit uses the visible area that already exists under the navigation bar and above the thumbnail strip.
+Implemented 2026-10-06. Device QA is still open. See the vault note `Area – QA Phase 2 Part 5 Immersive Writing Chrome`.
 
-- [ ] Expand the page canvas toward the top safe area under a floating tool palette
-- [ ] Optional hide/show for the navigation toolbar and thumbnail strip
-- [ ] Keep add, export, and delete reachable
-- [ ] Recompute fit scale from the larger visible viewport (`PageNavigationMath.fitScale` already takes that size)
+- [x] Expand the page canvas toward the top safe area under a floating tool palette
+- [x] Optional hide/show for the navigation toolbar and thumbnail strip
+- [x] Keep add, export, and delete reachable
+- [x] Recompute fit scale from the larger visible viewport (`PageNavigationMath.scaleAfterViewportChange` adopts the new fit when the page is already fitted; a pinch is kept and clamped)
 
 ### Exit Criteria (Phase 2 overall — not yet complete)
 
@@ -303,7 +303,7 @@ The criteria below apply to the **full Phase 2** milestone. Part 1 (Full Tool Ca
 - Auto-advance can be disabled per book — **Part 3 signed off 2026-09-08**
 - Pages can be added, duplicated, deleted, and reordered via the thumbnail strip — **Part 4 signed off 2026-10-05**
 - Pinch-zoom, two-finger pan, and fit-to-screen — **Part 4 signed off 2026-10-05**
-- Immersive writing chrome — **Part 5, deferred**
+- Immersive writing chrome — **Part 5 implemented 2026-10-06; device QA pending**
 
 ---
 
@@ -453,6 +453,7 @@ Follow this process for all implementation work:
 
 | Date | Change |
 |------|--------|
+| 2026-10-06 | **Phase 2 Part 5 implemented** — immersive writing chrome hides the navigation bar and thumbnail strip, keeps Back and page actions on a floating bar, and refits a fitted page to the larger viewport. Device QA pending. Phase 2 remains in progress. |
 | 2026-10-05 | **Phase 2 Part 4 signed off** — manual device QA and host tests passed (insert, duplicate, reorder, templates, pinch, two-finger pan, fit, zoom-window interaction). Phase 2 remains in progress for Part 5 immersive chrome. |
 | 2026-10-01 | **Phase 2 Part 4 navigation zoom** — outer scroll view owns pinch, two-finger pan, and fit; PencilKit stays 1×; zoom window forces scale 1. Insert, duplicate, reorder, and extra templates recorded as in code. Immersive chrome moved to Phase 2 Part 5. Part 3 recorded as signed off 2026-09-08. Device QA pending for pinch/fit and the September 13 template retest. |
 | 2026-09-01 | **Phase 2 Part 3 (Zoom Window) implemented** — `ZoomWindow` MVVM module, magnified strip, mini preview, blue-zone auto-advance, book-level toggle, return height per template; ADR – Zoom Window Viewport Strategy accepted; device QA pending |

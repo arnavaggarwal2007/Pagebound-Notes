@@ -28,6 +28,54 @@ final class PageNavigationMathTests: XCTestCase {
         XCTAssertEqual(scale, 500 / 400, accuracy: 0.001)
     }
 
+    func testFitScaleIncreasesWhenTheViewportGrowsTaller() {
+        let page = CGSize(width: 800, height: 1000)
+        let shortViewport = PageNavigationMath.fitScale(
+            pageSize: page,
+            viewportSize: CGSize(width: 900, height: 700),
+            padding: 0
+        )
+        let tallViewport = PageNavigationMath.fitScale(
+            pageSize: page,
+            viewportSize: CGSize(width: 900, height: 1100),
+            padding: 0
+        )
+
+        XCTAssertGreaterThan(tallViewport, shortViewport)
+    }
+
+    func testScaleAfterViewportChangeRefitsWhenAlreadyAtFit() {
+        let scale = PageNavigationMath.scaleAfterViewportChange(
+            currentScale: 0.5,
+            newFitScale: 0.8,
+            isAtFit: true
+        )
+        XCTAssertEqual(scale, 0.8, accuracy: 0.001)
+    }
+
+    func testScaleAfterViewportChangeKeepsAPinchInsideTheNewRange() {
+        let kept = PageNavigationMath.scaleAfterViewportChange(
+            currentScale: 2,
+            newFitScale: 0.8,
+            isAtFit: false
+        )
+        XCTAssertEqual(kept, 2, accuracy: 0.001)
+
+        let clampedUp = PageNavigationMath.scaleAfterViewportChange(
+            currentScale: 0.4,
+            newFitScale: 0.8,
+            isAtFit: false
+        )
+        XCTAssertEqual(clampedUp, 0.8, accuracy: 0.001)
+
+        let clampedDown = PageNavigationMath.scaleAfterViewportChange(
+            currentScale: 8,
+            newFitScale: 0.8,
+            isAtFit: false
+        )
+        XCTAssertEqual(clampedDown, PageNavigationMath.maximumScale, accuracy: 0.001)
+    }
+
     func testClampedScaleStopsAtOneAndFour() {
         XCTAssertEqual(PageNavigationMath.clampedScale(0.2, minimum: 1), 1)
         XCTAssertEqual(PageNavigationMath.clampedScale(8, minimum: 1), 4)

@@ -29,7 +29,7 @@ Open questions before implementation:
 11. **Zoom render density:** The zoom `CanvasView` raises `contentScaleFactor` using `cappedRenderingScale(contentScale:screenScale:)` (cap 3×) so SwiftUI `scaleEffect` upscaling stays sharper at high zoom.
 12. **Strip hit isolation + pencil tap:** Magnified strip content is hosted in `ZoomStripHitClip` (UIKit container with bounds-checked `hitTest`). The clip container owns `UIPencilInteraction` so Apple Pencil double-tap reaches `toolSession` reliably outside nested hosting.
 13. **Manual reposition + keep-in-view:** The main-page viewport highlight is draggable (centers viewport on drag). User page panning stays disabled while zoom is open (`.scrollDisabled` never unlocked for keep-in-view). `PageView` holds a non-publishing `PageScrollRuntime` and drives the hosting `UIScrollView` via `setContentOffset` (works while `isScrollEnabled == false`) so highlight mid stays in the upper **usable** band above zoom chrome (~0.22 of height minus `zoomChromeClearance`). Drag updates are throttled on the runtime Task (no `@State` churn). Structured logs use `PageBoundLog` (Zoom/Persistence/Navigation).
-14. **Page navigation zoom (Part 4):** Pinch, two-finger pan, and fit-to-screen belong to an outer `UIScrollView` (`PageCanvasScrollView` / `PageNavigationController`), not to `PKCanvasView`. PencilKit zoom stays locked at 1× so strokes remain in page space for the zoom strip, overlays, and PDF export. The scroll view’s pan gesture requires two touches, so one finger still draws or edits objects. Fit scale is `PageNavigationMath.fitScale` against the current visible bounds (navigation bar and thumbnail strip included); a **Fit Page** toolbar button and a finger double-tap apply it. Session zoom is not persisted. While the zoom window is open, page scale is forced to 1, pinch and pan gestures are disabled, and keep-in-view continues to use `setContentOffset` on that same scroll view. `updatePageContext` still runs before page-size or template changes inside the zoom strip.
+14. **Page navigation zoom (Part 4):** Pinch, two-finger pan, and fit-to-screen belong to an outer `UIScrollView` (`PageCanvasScrollView` / `PageNavigationController`), not to `PKCanvasView`. PencilKit zoom stays locked at 1× so strokes remain in page space for the zoom strip, overlays, and PDF export. The scroll view’s pan gesture requires two touches, so one finger still draws or edits objects. Fit scale is `PageNavigationMath.fitScale` against the current visible bounds (navigation bar and thumbnail strip included); a **Fit Page** toolbar button and a finger double-tap apply it. Session zoom is not persisted. While the zoom window is open, page scale is forced to 1, pinch and pan gestures are disabled, and keep-in-view continues to use `setContentOffset` on that same scroll view. `updatePageContext` still runs before page-size or template changes inside the zoom strip. Phase 2 Part 5 immersive chrome hides the navigation bar and thumbnail strip; fit still uses these bounds, which are then larger, and `scaleAfterViewportChange` refits only while the session scale is still the last fit.
 
 ## Consequences
 
@@ -51,7 +51,8 @@ Open questions before implementation:
 - ADR – PencilKit Integration Strategy
 - ADR – Content Object Layer
 - ADR – Custom Tool Palette
-- Product Spec §4.4, §6.2
+- ADR – Immersive Writing Chrome
+- Product Spec §4.4, §4.5, §6.2
 - UI Guidelines §6.4, §8
 
 ## Change Log
@@ -68,3 +69,4 @@ Open questions before implementation:
 | 2026-09-05 | Seventh remediation: UIKit `setContentOffset` keep-in-view while scroll stays disabled; remove unlock/`scrollTo`/marker; drop PageView viewport animation |
 | 2026-09-05 | Eighth stabilization: non-publishing `PageScrollRuntime` (stop `@State` storm); chrome-aware usable height; leave-book flush; stale thumbnails during load; `PageBoundLog` |
 | 2026-10-01 | Decision 14 fulfilled: outer scroll view owns pinch, two-finger pan, and fit; zoom window forces scale 1 |
+| 2026-10-06 | Decision 14: immersive chrome changes the visible bounds `fitScale` already consumes |

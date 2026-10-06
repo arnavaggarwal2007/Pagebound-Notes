@@ -13,6 +13,21 @@ enum PageNavigationMath {
     /// Matches the zoom-window slider cap so page pinch and the writing strip share an upper bound.
     static let maximumScale: CGFloat = 4
 
+    /// Scales within this distance count as the current fit. Used so a pinch away from fit is kept.
+    static let fitMatchTolerance: CGFloat = 0.01
+
+    /// New scale after the visible area changes. A fitted page adopts the new fit. A pinch is clamped into the new range.
+    static func scaleAfterViewportChange(
+        currentScale: CGFloat,
+        newFitScale: CGFloat,
+        isAtFit: Bool
+    ) -> CGFloat {
+        if isAtFit {
+            return newFitScale
+        }
+        return clampedScale(currentScale, minimum: newFitScale)
+    }
+
     /// Scale that fits the page inside the visible area, including the page padding on each edge.
     /// Values below 1 shrink a page larger than the viewport. Values above 1 grow a smaller page up to the viewport.
     static func fitScale(pageSize: CGSize, viewportSize: CGSize, padding: CGFloat) -> CGFloat {
