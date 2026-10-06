@@ -12,8 +12,8 @@ final class ZoomWindowViewModel: ObservableObject {
     @Published var autoAdvanceEnabled: Bool
     @Published var showInlineTip: Bool
 
-    let pageSize: CGSize
-    let template: Template
+    private(set) var pageSize: CGSize
+    private(set) var template: Template
 
     private let settingsStore: ZoomSettingsStore
     private var settings: ZoomSettings
@@ -186,8 +186,19 @@ final class ZoomWindowViewModel: ObservableObject {
         viewportRect = ZoomViewportMath.clampViewport(next, pageSize: pageSize)
     }
 
+    /// Updates page dimensions / template when reusing this zoom VM across context changes.
+    /// Clamps the current viewport into the new page bounds and resets advance state.
     func updatePageContext(pageSize: CGSize, template: Template) {
+        let sizeChanged = self.pageSize != pageSize
+        let templateChanged = self.template != template
+        guard sizeChanged || templateChanged else { return }
+
+        self.pageSize = pageSize
+        self.template = template
         viewportRect = ZoomViewportMath.clampViewport(viewportRect, pageSize: pageSize)
+        applyStripAspectLockIfNeeded()
+        lastAdvancePointX = nil
+        isAdvanceZoneActive = false
     }
 
     private func processWritingPoint(_ point: CGPoint) {

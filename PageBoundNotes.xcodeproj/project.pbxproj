@@ -116,6 +116,11 @@
 		B1000000000000000000008E /* ZoomStripHitClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008E /* ZoomStripHitClip.swift */; };
 		B1000000000000000000008F /* PageScrollViewAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000000000000000000008F /* PageScrollViewAccessor.swift */; };
 		B10000000000000000000090 /* PageBoundLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000090 /* PageBoundLog.swift */; };
+		B10000000000000000000091 /* TemplatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000091 /* TemplatePickerView.swift */; };
+		B10000000000000000000092 /* PageNavigationMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000092 /* PageNavigationMath.swift */; };
+		B10000000000000000000093 /* PageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000093 /* PageNavigationController.swift */; };
+		B10000000000000000000094 /* PageCanvasScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000094 /* PageCanvasScrollView.swift */; };
+		B10000000000000000000095 /* PageNavigationMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10000000000000000000095 /* PageNavigationMathTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +253,11 @@
 		F1000000000000000000008E /* ZoomStripHitClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomStripHitClip.swift; sourceTree = "<group>"; };
 		F1000000000000000000008F /* PageScrollViewAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageScrollViewAccessor.swift; sourceTree = "<group>"; };
 		F10000000000000000000090 /* PageBoundLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBoundLog.swift; sourceTree = "<group>"; };
+		F10000000000000000000091 /* TemplatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatePickerView.swift; sourceTree = "<group>"; };
+		F10000000000000000000092 /* PageNavigationMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageNavigationMath.swift; sourceTree = "<group>"; };
+		F10000000000000000000093 /* PageNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageNavigationController.swift; sourceTree = "<group>"; };
+		F10000000000000000000094 /* PageCanvasScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCanvasScrollView.swift; sourceTree = "<group>"; };
+		F10000000000000000000095 /* PageNavigationMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageNavigationMathTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +332,7 @@
 				F10000000000000000000082 /* PageInteractionPolicyTests.swift */,
 				F10000000000000000000083 /* PageOverlayHitTestingTests.swift */,
 				F1000000000000000000008D /* ZoomWindowTests.swift */,
+				F10000000000000000000095 /* PageNavigationMathTests.swift */,
 			);
 			path = PageBoundNotesTests;
 			sourceTree = "<group>";
@@ -402,6 +413,7 @@
 				F10000000000000000000074 /* PageObjectHitTesting.swift */,
 				F10000000000000000000079 /* PageOverlayHitTesting.swift */,
 				F10000000000000000000080 /* ObjectDisplayGeometry.swift */,
+				F10000000000000000000092 /* PageNavigationMath.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -492,6 +504,7 @@
 				F1000000000000000000002E /* PageViewModel.swift */,
 				F10000000000000000000033 /* PageView.swift */,
 				F1000000000000000000002F /* TemplateBackgroundView.swift */,
+				F10000000000000000000091 /* TemplatePickerView.swift */,
 				F10000000000000000000030 /* PageFrameView.swift */,
 				F10000000000000000000031 /* CanvasView.swift */,
 				F10000000000000000000032 /* ToolPaletteView.swift */,
@@ -510,6 +523,8 @@
 				F10000000000000000000075 /* SelectedObjectBar.swift */,
 				F1000000000000000000008C /* ZoomViewportOverlay.swift */,
 				F1000000000000000000008F /* PageScrollViewAccessor.swift */,
+				F10000000000000000000093 /* PageNavigationController.swift */,
+				F10000000000000000000094 /* PageCanvasScrollView.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -691,6 +706,10 @@
 				B10000000000000000000037 /* BookWritingSurface.swift in Sources */,
 				B1000000000000000000002C /* PageViewModel.swift in Sources */,
 				B1000000000000000000002D /* TemplateBackgroundView.swift in Sources */,
+				B10000000000000000000091 /* TemplatePickerView.swift in Sources */,
+				B10000000000000000000092 /* PageNavigationMath.swift in Sources */,
+				B10000000000000000000093 /* PageNavigationController.swift in Sources */,
+				B10000000000000000000094 /* PageCanvasScrollView.swift in Sources */,
 				B1000000000000000000002E /* PageFrameView.swift in Sources */,
 				B1000000000000000000002F /* CanvasView.swift in Sources */,
 				B10000000000000000000030 /* ToolPaletteView.swift in Sources */,
@@ -763,6 +782,7 @@
 				B10000000000000000000082 /* PageInteractionPolicyTests.swift in Sources */,
 				B10000000000000000000083 /* PageOverlayHitTestingTests.swift in Sources */,
 				B1000000000000000000008D /* ZoomWindowTests.swift in Sources */,
+				B10000000000000000000095 /* PageNavigationMathTests.swift in Sources */,
 				B10000000000000000000073 /* UIImageNormalizedSizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

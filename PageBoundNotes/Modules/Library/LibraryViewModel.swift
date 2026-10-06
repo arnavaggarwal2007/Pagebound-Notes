@@ -164,7 +164,11 @@ final class LibraryViewModel: ObservableObject {
                 index: 0,
                 templateId: templateId
             )
-            _ = try await dependencies.pageRepository.createPage(firstPage)
+            let createdPage = try await dependencies.pageRepository.createPage(firstPage)
+            let resolvedType = TemplateCatalog.template(for: createdPage.templateId)?.type.rawValue ?? "unknown"
+            PageBoundLog.persistence.info(
+                "Book created id=\(savedBook.id.uuidString, privacy: .public) defaultTemplateId=\(savedBook.defaultTemplateId, privacy: .public) pageTemplateId=\(createdPage.templateId, privacy: .public) resolvedType=\(resolvedType, privacy: .public)"
+            )
             await load()
         } catch {
             errorMessage = error.localizedDescription

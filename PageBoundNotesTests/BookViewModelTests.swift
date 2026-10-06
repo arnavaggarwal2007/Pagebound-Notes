@@ -264,4 +264,65 @@ final class BookViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.thumbnails.count, viewModel.pages.count)
         XCTAssertNotNil(viewModel.thumbnails[viewModel.pages[0].id])
     }
+
+    func testInsertPageAfterCurrentInsertsBetweenPages() async throws {
+        let folder = try await dependencies.libraryRepository.createFolder(Folder(name: "School"))
+        let book = try await dependencies.libraryRepository.createBook(
+            Book(folderId: folder.id, title: "Math", pageSize: .letter)
+        )
+
+        let viewModel = BookViewModel(bookId: book.id, dependencies: dependencies)
+        await viewModel.load()
+        await viewModel.addPage()
+        await viewModel.selectPage(at: 0)
+        let firstId = viewModel.pages[0].id
+        let lastId = viewModel.pages[1].id
+
+        await viewModel.insertPage(after: 0)
+
+        XCTAssertEqual(viewModel.pages.count, 3)
+        XCTAssertEqual(viewModel.pages.map(\.id), [firstId, viewModel.pages[1].id, lastId])
+        XCTAssertEqual(viewModel.currentPageIndex, 1)
+        XCTAssertEqual(viewModel.pages.map(\.index), [0, 1, 2])
+    }
+
+    func testDuplicateCurrentPageInsertsCopyAfterSource() async throws {
+        let folder = try await dependencies.libraryRepository.createFolder(Folder(name: "School"))
+        let book = try await dependencies.libraryRepository.createBook(
+            Book(folderId: folder.id, title: "Math", pageSize: .letter)
+        )
+
+        let viewModel = BookViewModel(bookId: book.id, dependencies: dependencies)
+        await viewModel.load()
+        viewModel.pageViewModel?.drawingDidChange(StrokeSerialization.emptyDrawing())
+        try await viewModel.pageViewModel?.saveImmediately()
+        let sourceId = viewModel.pages[0].id
+
+        await viewModel.duplicateCurrentPage()
+
+        XCTAssertEqual(viewModel.pages.count, 2)
+        XCTAssertEqual(viewModel.currentPageIndex, 1)
+        XCTAssertNotEqual(viewModel.pages[1].id, sourceId)
+        XCTAssertNotNil(viewModel.pages[1].strokeBlobId)
+        XCTAssertNotEqual(viewModel.pages[0].strokeBlobId, viewModel.pages[1].strokeBlobId)
+    }
+
+    func testReorderPagesKeepsSelectionByPageId() async throws {
+        let folder = try await dependencies.libraryRepository.createFolder(Folder(name: "School"))
+        let book = try await dependencies.libraryRepository.createBook(
+            Book(folderId: folder.id, title: "Math", pageSize: .letter)
+        )
+
+        let viewModel = BookViewModel(bookId: book.id, dependencies: dependencies)
+        await viewModel.load()
+        await viewModel.addPage()
+        await viewModel.addPage()
+        await viewModel.selectPage(at: 1)
+        let selectedId = viewModel.pages[1].id
+
+        await viewModel.reorderPages(from: 0, to: 2)
+
+        XCTAssertEqual(viewModel.pages.map(\.index), [0, 1, 2])
+        XCTAssertEqual(viewModel.pages.firstIndex(where: { $0.id == selectedId }), viewModel.currentPageIndex)
+    }
 }

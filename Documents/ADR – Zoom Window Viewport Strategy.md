@@ -29,7 +29,7 @@ Open questions before implementation:
 11. **Zoom render density:** The zoom `CanvasView` raises `contentScaleFactor` using `cappedRenderingScale(contentScale:screenScale:)` (cap 3×) so SwiftUI `scaleEffect` upscaling stays sharper at high zoom.
 12. **Strip hit isolation + pencil tap:** Magnified strip content is hosted in `ZoomStripHitClip` (UIKit container with bounds-checked `hitTest`). The clip container owns `UIPencilInteraction` so Apple Pencil double-tap reaches `toolSession` reliably outside nested hosting.
 13. **Manual reposition + keep-in-view:** The main-page viewport highlight is draggable (centers viewport on drag). User page panning stays disabled while zoom is open (`.scrollDisabled` never unlocked for keep-in-view). `PageView` holds a non-publishing `PageScrollRuntime` and drives the hosting `UIScrollView` via `setContentOffset` (works while `isScrollEnabled == false`) so highlight mid stays in the upper **usable** band above zoom chrome (~0.22 of height minus `zoomChromeClearance`). Drag updates are throttled on the runtime Task (no `@State` churn). Structured logs use `PageBoundLog` (Zoom/Persistence/Navigation).
-14. **Part 4 caution:** General pinch/pan must own outer scroll separately from `zoomModeActive` scroll disable; wire `updatePageContext` before page-size/orientation changes.
+14. **Page navigation zoom (Part 4):** Pinch, two-finger pan, and fit-to-screen belong to an outer `UIScrollView` (`PageCanvasScrollView` / `PageNavigationController`), not to `PKCanvasView`. PencilKit zoom stays locked at 1× so strokes remain in page space for the zoom strip, overlays, and PDF export. The scroll view’s pan gesture requires two touches, so one finger still draws or edits objects. Fit scale is `PageNavigationMath.fitScale` against the current visible bounds (navigation bar and thumbnail strip included); a **Fit Page** toolbar button and a finger double-tap apply it. Session zoom is not persisted. While the zoom window is open, page scale is forced to 1, pinch and pan gestures are disabled, and keep-in-view continues to use `setContentOffset` on that same scroll view. `updatePageContext` still runs before page-size or template changes inside the zoom strip.
 
 ## Consequences
 
@@ -44,7 +44,7 @@ Open questions before implementation:
 
 - Two `PKCanvasView` instances must stay in sync via shared `PKDrawing` binding
 - Read-only overlay compositing in the zoom strip duplicates some page layering
-- General pinch-zoom (Page Management) remains independent and deferred
+- Page pinch and the zoom window must not both own scrolling; the zoom window forces scale 1 while it is open
 
 ## Related
 
@@ -67,3 +67,4 @@ Open questions before implementation:
 | 2026-09-04 | Sixth remediation: layout-valid focus marker (fix `.offset` regression); defer scroll unlock/`scrollTo` off view-update path |
 | 2026-09-05 | Seventh remediation: UIKit `setContentOffset` keep-in-view while scroll stays disabled; remove unlock/`scrollTo`/marker; drop PageView viewport animation |
 | 2026-09-05 | Eighth stabilization: non-publishing `PageScrollRuntime` (stop `@State` storm); chrome-aware usable height; leave-book flush; stale thumbnails during load; `PageBoundLog` |
+| 2026-10-01 | Decision 14 fulfilled: outer scroll view owns pinch, two-finger pan, and fit; zoom window forces scale 1 |

@@ -193,6 +193,8 @@ struct LibraryView: View {
                         .buttonStyle(.borderedProminent)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .accessibilityElement(children: .contain)
+                    .accessibilityIdentifier("empty-folder-state")
                 } else {
                     folderAndBookGrid
                 }
@@ -332,7 +334,8 @@ struct LibraryView: View {
                     templateId: templateId
                 )
             }
-            .presentationDetents([.medium, .large])
+            .presentationDetents([.large])
+            .presentationDragIndicator(.visible)
 
         case .renameFolder(let folder):
             renameSheet(title: String(localized: "Rename Folder"), initial: folder.name) { newName in

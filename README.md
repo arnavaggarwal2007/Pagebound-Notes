@@ -4,7 +4,7 @@
 
 PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combines the page-oriented structure of GoodNotes with the simplicity of Apple Notes, while remaining completely free and local-first. Students can take course notes on ruled pages and export assignment-ready PDFs; anyone can organize content in unlimited folders and books—all without a subscription or custom backend.
 
-**Status:** Phase 2 in progress — **Phase 2 Part 3 (Zoom Window) eighth stabilization September 5, 2026** (device re-QA pending); prior remediations September 2–5; implemented September 1, 2026. Part 2 signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
+**Status:** Phase 2 in progress — Parts 1–3 signed off (Zoom Window manual QA September 8, 2026). Part 4 page management is in code, including pinch, two-finger pan, and fit (device QA pending). Immersive writing chrome is Phase 2 Part 5 and is deferred. Part 2 signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
 
 ---
 
@@ -38,9 +38,11 @@ PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combi
 
 - Fixed physical page sizes (A4, US Letter) with portrait or landscape orientation
 - Visible page borders and optional safe-margin lines for precise PDF export clipping
-- Templates: blank, college ruled, wide ruled, dotted grid
-- Add page at end; delete page with confirmation
+- Templates: blank, college ruled, wide ruled, dotted grid, fine and coarse graph, Cornell notes, music staff, checklist, planner
+- Add page at end or after the current page; duplicate; delete page with confirmation
+- Reorder pages by dragging thumbnails
 - Scrollable thumbnail strip navigation
+- Pinch-to-zoom and two-finger pan on the page (PencilKit stays at 1×). **Fit Page** toolbar control and finger double-tap fit the page in the current visible area. Device QA pending.
 
 #### Handwriting and Tools
 
@@ -78,10 +80,8 @@ PageBound Notes is an iPad-only note-taking app built for Apple Pencil. It combi
 
 | Area | Phase |
 |------|-------|
-| Page insert-between, duplicate, reorder via thumbnail strip | 2 |
-| Additional templates (fine/coarse graph, Cornell, music staff, checklist, planner) | 2 |
-| Pinch-to-zoom, pan, and fit-page-to-screen | 2 |
-| Immersive writing chrome (optional hide/show nav and thumbnail strip) | 2 |
+| Immersive writing chrome (optional hide/show nav and thumbnail strip) | 2 Part 5 |
+| Device QA for Part 4 templates, pinch, two-finger pan, and fit | 2 |
 | Filter by tag or template type | 2+ |
 | PDF import into new books | 3 |
 | Export folder as PDF or zip; `.pbn` backup and restore | 3 |
@@ -237,13 +237,13 @@ Canonical documentation lives **only in this repo** (`Documents/`). The Obsidian
 
 ## Development Status
 
-**Current phase:** Phase 2 in progress — Part 2 (Content Overlays) signed off July 21, 2026; Part 1 signed off July 10, 2026. Phase 1 signed off July 8, 2026.
+**Current phase:** Phase 2 in progress — Parts 1–3 signed off. Part 4 (page management, pinch, two-finger pan, fit) is implemented and awaiting device QA. Part 5 (immersive chrome) is deferred.
 
 | Phase | Summary |
 |-------|---------|
 | **Phase 0** | App shell, domain models, SwiftData persistence, repositories, DI — **complete** |
 | **Phase 1** | MVP: library, paginated pages, basic PencilKit, PDF export — **complete** |
-| **Phase 2** | Full tooling, zoom window with auto-advance, text/images/shapes — **in progress** (Parts 1–3 implemented; Part 3 device QA pending; Page Management next) |
+| **Phase 2** | Full tooling, zoom window, content overlays, page management — **in progress** (Parts 1–3 signed off; Part 4 in code, device QA pending; Part 5 immersive chrome deferred) |
 | **Phase 3** | PDF import, local backup/restore, cloud export |
 | **Phase 4** | Search, handwriting OCR, split view, accessibility |
 

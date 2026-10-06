@@ -13,9 +13,7 @@ final class LibraryNavigationUITests: XCTestCase {
     func testCreateFolderShowsEmptyFolderState() throws {
         createFolder(named: "School")
 
-        let emptyFolderState = app.staticTexts["Empty Folder"]
-        XCTAssertTrue(emptyFolderState.waitForExistence(timeout: 5))
-
+        XCTAssertTrue(waitForEmptyFolderState(timeout: 5))
         let newBookButton = app.buttons["empty-folder-new-book"]
         XCTAssertTrue(newBookButton.waitForExistence(timeout: 3))
         beginBookCreation(via: newBookButton)
@@ -117,11 +115,11 @@ final class LibraryNavigationUITests: XCTestCase {
             tapWhenHittable(app.buttons["Create"])
         }
 
-        XCTAssertTrue(app.staticTexts["Empty Folder"].waitForExistence(timeout: 8))
+        XCTAssertTrue(waitForEmptyFolderState(timeout: 8))
     }
 
     private func createBook(named title: String) {
-        XCTAssertTrue(app.staticTexts["Empty Folder"].waitForExistence(timeout: 5))
+        XCTAssertTrue(waitForEmptyFolderState(timeout: 5))
         openBookCreationSheet()
 
         let titleField = bookTitleField
@@ -130,6 +128,26 @@ final class LibraryNavigationUITests: XCTestCase {
         titleField.typeText(title)
 
         tapWhenHittable(bookCreateConfirmButton)
+    }
+
+    /// Prefers stable accessibility IDs over ContentUnavailableView title StaticText (flaky on cold launch).
+    @discardableResult
+    private func waitForEmptyFolderState(timeout: TimeInterval) -> Bool {
+        let deadline = Date().addingTimeInterval(timeout)
+        let newBookButton = app.buttons["empty-folder-new-book"]
+        let emptyState = app.otherElements["empty-folder-state"]
+
+        while Date() < deadline {
+            if newBookButton.exists || emptyState.exists {
+                return true
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        }
+
+        // Final probes (and diagnostic StaticText fallback).
+        if newBookButton.waitForExistence(timeout: 0.5) { return true }
+        if emptyState.waitForExistence(timeout: 0.5) { return true }
+        return app.staticTexts["Empty Folder"].waitForExistence(timeout: 0.5)
     }
 
     private func openBookCreationSheet() {
